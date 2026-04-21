@@ -4,8 +4,8 @@ use std::io::{Read, Seek, SeekFrom, Write};
 use std::path::{Path, PathBuf};
 
 use crate::axon_format::{
-    checksum32, unix_ms_now, Page, PageType, Superblock, FIRST_DATA_PAGE_ID,
-    SUPERBLOCK_A_PAGE_ID, SUPERBLOCK_B_PAGE_ID,
+    FIRST_DATA_PAGE_ID, Page, PageType, SUPERBLOCK_A_PAGE_ID, SUPERBLOCK_B_PAGE_ID, Superblock,
+    checksum32, unix_ms_now,
 };
 use crate::config::{MAGIC_SNAPSHOT, PAGE_PAYLOAD_SIZE, PAGE_SIZE};
 use crate::error::AxonError;
@@ -166,7 +166,14 @@ impl BrainFile {
         let mut superblock = Superblock::new(3, brain_name.to_string(), mode);
         superblock.brain_meta.updated_unix_ms = unix_ms_now();
         let alloc_payload = [0u8; 32];
-        let alloc_page = Page::new(FIRST_DATA_PAGE_ID, PageType::AllocMap, 1, 0, 0, &alloc_payload)?;
+        let alloc_page = Page::new(
+            FIRST_DATA_PAGE_ID,
+            PageType::AllocMap,
+            1,
+            0,
+            0,
+            &alloc_payload,
+        )?;
         write_raw_page(&mut file, FIRST_DATA_PAGE_ID, &alloc_page.serialize())?;
         write_superblock_slot(&mut file, SUPERBLOCK_A_PAGE_ID, &superblock)?;
         write_superblock_slot(&mut file, SUPERBLOCK_B_PAGE_ID, &superblock)?;
@@ -256,7 +263,9 @@ impl BrainFile {
         let header_size = 32usize;
         let chunk_capacity = PAGE_PAYLOAD_SIZE.saturating_sub(header_size);
         if chunk_capacity == 0 {
-            return Err(AxonError::State("invalid snapshot chunk capacity".to_string()));
+            return Err(AxonError::State(
+                "invalid snapshot chunk capacity".to_string(),
+            ));
         }
         let chunk_count = snapshot_blob.len().div_ceil(chunk_capacity).max(1);
         for chunk_idx in 0..chunk_count {
@@ -307,7 +316,8 @@ impl BrainFile {
                 if payload[0..4] != MAGIC_SNAPSHOT {
                     continue;
                 }
-                let checkpoint_lsn = u64::from_le_bytes(payload[4..12].try_into().unwrap_or([0; 8]));
+                let checkpoint_lsn =
+                    u64::from_le_bytes(payload[4..12].try_into().unwrap_or([0; 8]));
                 let chunk_index = u32::from_le_bytes(payload[12..16].try_into().unwrap_or([0; 4]));
                 let chunk_count = u32::from_le_bytes(payload[16..20].try_into().unwrap_or([0; 4]));
                 let total_len = u32::from_le_bytes(payload[20..24].try_into().unwrap_or([0; 4]));
@@ -316,8 +326,11 @@ impl BrainFile {
                 if payload.len() < checksum_idx + 4 {
                     continue;
                 }
-                let chunk_checksum =
-                    u32::from_le_bytes(payload[checksum_idx..checksum_idx + 4].try_into().unwrap_or([0; 4]));
+                let chunk_checksum = u32::from_le_bytes(
+                    payload[checksum_idx..checksum_idx + 4]
+                        .try_into()
+                        .unwrap_or([0; 4]),
+                );
                 let data_idx = checksum_idx + 4;
                 if payload.len() < data_idx + chunk_len as usize {
                     continue;
@@ -326,10 +339,13 @@ impl BrainFile {
                 if checksum32(&chunk) != chunk_checksum {
                     continue;
                 }
-                checkpoints
-                    .entry(checkpoint_lsn)
-                    .or_default()
-                    .push((chunk_index, chunk_count, total_len, chunk_len, chunk));
+                checkpoints.entry(checkpoint_lsn).or_default().push((
+                    chunk_index,
+                    chunk_count,
+                    total_len,
+                    chunk_len,
+                    chunk,
+                ));
             }
         }
         if let Some((lsn, mut chunks)) = checkpoints.pop_last() {
@@ -349,10 +365,7 @@ impl BrainFile {
         Ok(None)
     }
 
-    pub fn read_journal_after(
-        &mut self,
-        after_lsn: u64,
-    ) -> Result<Vec<MutationRecord>, AxonError> {
+    pub fn read_journal_after(&mut self, after_lsn: u64) -> Result<Vec<MutationRecord>, AxonError> {
         let mut out = Vec::new();
         for status in self.scan_pages()? {
             if status.page_type != PageType::Journal || !status.checksum_ok {
@@ -456,7 +469,11 @@ fn read_raw_page(file: &mut File, page_id: u64) -> Result<[u8; PAGE_SIZE], AxonE
     Ok(out)
 }
 
-fn write_superblock_slot(file: &mut File, slot_page_id: u64, sb: &Superblock) -> Result<(), AxonError> {
+fn write_superblock_slot(
+    file: &mut File,
+    slot_page_id: u64,
+    sb: &Superblock,
+) -> Result<(), AxonError> {
     let mut page = [0u8; PAGE_SIZE];
     let sb_bytes = sb.serialize();
     page[..sb_bytes.len()].copy_from_slice(&sb_bytes);

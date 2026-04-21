@@ -14,7 +14,9 @@ pub fn detect_resource_caps() -> ResourceCaps {
         .unwrap_or(1);
     let ram_total = detect_total_ram_bytes().unwrap_or(RAM_SOFT_CAP_DEFAULT);
     let ram_soft_cap = (ram_total as f64 * 0.35) as u64;
-    let ram_soft_cap = ram_soft_cap.min(RAM_SOFT_CAP_DEFAULT).max(512 * 1024 * 1024);
+    let ram_soft_cap = ram_soft_cap
+        .min(RAM_SOFT_CAP_DEFAULT)
+        .max(512 * 1024 * 1024);
     let vram_soft_cap = VRAM_SOFT_CAP_DEFAULT;
     let disk_soft_cap = detect_free_disk_bytes().unwrap_or(20 * 1024 * 1024 * 1024);
     ResourceCaps {

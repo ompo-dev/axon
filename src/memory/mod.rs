@@ -7,6 +7,7 @@ const TEMP_BETA: f32 = 0.30;
 const TEMP_GAMMA: f32 = 0.20;
 const TEMP_TAU_TICKS: f32 = 10_000.0;
 const TICKS_PER_DAY: u64 = 8_640_000; // 100 Hz * 60 * 60 * 24
+const MAX_PROP_DEPTH: u8 = 4;
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 #[repr(u8)]
@@ -62,6 +63,9 @@ pub struct MemoryNode {
     pub frequency: f32,
     pub salience: f32,
     pub temperature: f32,
+    pub amplitude: f32,
+    pub phase: f32,
+    pub omega: f32,
 }
 
 #[derive(Clone, Debug)]
@@ -75,6 +79,8 @@ pub struct MemoryEdge {
     pub frequency: f32,
     pub salience: f32,
     pub temperature: f32,
+    pub delay: f32,
+    pub confidence: f32,
 }
 
 #[derive(Clone, Debug)]
@@ -82,6 +88,14 @@ pub struct TemporalAnchor {
     pub cue: String,
     pub node_id: u64,
     pub last_rebind_tick: u64,
+}
+
+#[derive(Clone, Debug)]
+pub struct MemoryHypothesis {
+    pub node_id: u64,
+    pub label: String,
+    pub kind: NodeKind,
+    pub score: f32,
 }
 
 #[derive(Clone, Debug)]
@@ -94,6 +108,8 @@ pub struct MemoryState {
     adjacency: HashMap<u64, Vec<usize>>,
     recent_cues: VecDeque<String>,
 }
+
+pub type UnifiedGraph = MemoryState;
 
 impl MemoryState {
     pub fn new() -> Self {
@@ -108,12 +124,7 @@ impl MemoryState {
         }
     }
 
-    pub fn observe_text(
-        &mut self,
-        tick: u64,
-        text: &str,
-        mutations: &mut Vec<MutationRecord>,
-    ) {
+    pub fn observe_text(&mut self, tick: u64, text: &str, mutations: &mut Vec<MutationRecord>) {
         let words = canonical_words(text);
         if words.is_empty() {
             return;
@@ -126,7 +137,8 @@ impl MemoryState {
 
         let mut concept_ids = Vec::with_capacity(words.len());
         for word in &words {
-            let concept_id = self.get_or_create_node(NodeKind::Concept, word, tick, 0.8, mutations);
+            let concept_id =
+                self.get_or_create_node(NodeKind::Concept, word, tick, 0.85, mutations);
             concept_ids.push(concept_id);
             self.link_bidirectional(
                 concept_id,
@@ -146,15 +158,15 @@ impl MemoryState {
                 from,
                 to,
                 EdgeKind::CoActivation,
-                0.06,
+                0.07,
                 tick,
-                0.7,
+                0.75,
                 mutations,
             );
         }
 
         for cue in words.iter().take(2) {
-            let cue_id = self.get_or_create_node(NodeKind::Cue, cue, tick, 0.65, mutations);
+            let cue_id = self.get_or_create_node(NodeKind::Cue, cue, tick, 0.70, mutations);
             if let Some(target) = concept_ids.first().copied() {
                 self.link_directed(
                     cue_id,
@@ -162,7 +174,7 @@ impl MemoryState {
                     EdgeKind::ContextBinding,
                     0.05,
                     tick,
-                    0.6,
+                    0.65,
                     mutations,
                 );
             }
@@ -171,13 +183,8 @@ impl MemoryState {
         let day_bucket = tick / TICKS_PER_DAY;
         for cue in words.iter().filter(|word| is_temporal_cue(word)) {
             let temporal_label = format!("{cue}@{day_bucket}");
-            let temporal_id = self.get_or_create_node(
-                NodeKind::Temporal,
-                &temporal_label,
-                tick,
-                1.0,
-                mutations,
-            );
+            let temporal_id =
+                self.get_or_create_node(NodeKind::Temporal, &temporal_label, tick, 1.0, mutations);
             if let Some(anchor_idx) = self.temporal_anchors.iter().position(|a| a.cue == *cue) {
                 let previous = self.temporal_anchors[anchor_idx].node_id;
                 if previous != temporal_id {
@@ -217,7 +224,7 @@ impl MemoryState {
                     temporal_id,
                     *concept_id,
                     EdgeKind::TemporalBinding,
-                    0.07,
+                    0.08,
                     tick,
                     0.9,
                     mutations,
@@ -228,11 +235,74 @@ impl MemoryState {
         self.decay_to_tick(tick, mutations);
     }
 
+    pub fn ingest_dictionary_entry(
+        &mut self,
+        tick: u64,
+        lemma: &str,
+        definition: &str,
+        mutations: &mut Vec<MutationRecord>,
+    ) -> bool {
+        let canon_lemma = canonical_sentence(lemma);
+        if canon_lemma.is_empty() {
+            return false;
+        }
+
+        let concept_id =
+            self.get_or_create_node(NodeKind::Concept, &canon_lemma, tick, 0.95, mutations);
+        let def_episode_label = format!("def:{canon_lemma}");
+        let def_episode_id =
+            self.get_or_create_node(NodeKind::Episode, &def_episode_label, tick, 0.75, mutations);
+
+        self.link_bidirectional(
+            concept_id,
+            def_episode_id,
+            EdgeKind::ContextBinding,
+            0.10,
+            tick,
+            0.85,
+            mutations,
+        );
+
+        let mut words = canonical_words(definition);
+        words.retain(|w| !w.is_empty() && w != &canon_lemma);
+        let mut inserted_any = false;
+        for word in words.into_iter().take(48) {
+            let related_id =
+                self.get_or_create_node(NodeKind::Concept, &word, tick, 0.7, mutations);
+            self.link_bidirectional(
+                concept_id,
+                related_id,
+                EdgeKind::CoActivation,
+                0.05,
+                tick,
+                0.7,
+                mutations,
+            );
+            self.link_bidirectional(
+                related_id,
+                def_episode_id,
+                EdgeKind::ContextBinding,
+                0.04,
+                tick,
+                0.65,
+                mutations,
+            );
+            inserted_any = true;
+        }
+
+        inserted_any
+    }
+
     pub fn decay_to_tick(&mut self, tick: u64, mutations: &mut Vec<MutationRecord>) {
         for node in &mut self.nodes {
-            let next = temperature_formula(node.last_tick, tick, node.frequency, node.salience);
-            let delta = (next - node.temperature).abs();
-            node.temperature = next;
+            let prev_tick = node.last_tick;
+            let prev_temp = node.temperature;
+            let dt = tick.saturating_sub(prev_tick) as f32;
+            node.temperature = temperature_formula(prev_tick, tick, node.frequency, node.salience);
+            let amp_decay = (-dt / (TEMP_TAU_TICKS * 0.6)).exp();
+            node.amplitude = (node.amplitude * amp_decay + node.temperature * 0.12).clamp(0.0, 1.0);
+            node.phase = wrap_phase(node.phase + node.omega * dt * 0.001);
+            let delta = (node.temperature - prev_temp).abs();
             if delta >= 0.02 {
                 mutations.push(MutationRecord {
                     kind: MutationKind::TempUpdate,
@@ -241,7 +311,7 @@ impl MemoryState {
                     a: node.id as u32,
                     b: node.kind as u32,
                     c: 0,
-                    value: next,
+                    value: node.temperature,
                     extra: delta,
                 });
             }
@@ -249,8 +319,9 @@ impl MemoryState {
 
         let mut pruned = 0usize;
         for edge in &mut self.edges {
-            let next = temperature_formula(edge.last_tick, tick, edge.frequency, edge.salience);
-            edge.temperature = next;
+            let prev_tick = edge.last_tick;
+            edge.temperature = temperature_formula(prev_tick, tick, edge.frequency, edge.salience);
+            edge.confidence = (edge.confidence * 0.999).clamp(0.05, 1.0);
             if edge.temperature < 0.02 && edge.recurrence < 2 {
                 edge.strength *= 0.90;
                 if edge.strength.abs() < 0.005 {
@@ -313,6 +384,7 @@ impl MemoryState {
                     edge.strength *= 0.82;
                     edge.salience *= 0.92;
                     edge.frequency = (edge.frequency + 0.2).min(16.0);
+                    edge.confidence = (edge.confidence * 0.95).max(0.05);
                     edge.last_tick = tick;
                     mutations.push(MutationRecord {
                         kind: MutationKind::LinkWeaken,
@@ -351,13 +423,23 @@ impl MemoryState {
     }
 
     pub fn recall_for_text(&self, text: &str, limit: usize) -> Vec<String> {
-        let cues = canonical_words(text);
-        self.recall_from_cues(&cues, limit)
+        self.rank_hypotheses(text, limit)
+            .into_iter()
+            .map(|entry| entry.label)
+            .collect()
     }
 
     pub fn recall_from_cues(&self, cues: &[String], limit: usize) -> Vec<String> {
+        self.rank_hypotheses(&cues.join(" "), limit)
+            .into_iter()
+            .map(|entry| entry.label)
+            .collect()
+    }
+
+    pub fn rank_hypotheses(&self, text: &str, limit: usize) -> Vec<MemoryHypothesis> {
+        let cues = canonical_words(text);
         let mut seed_ids = Vec::new();
-        for cue in cues {
+        for cue in &cues {
             let key = node_key(NodeKind::Concept, cue);
             if let Some(id) = self.node_index.get(&key).copied() {
                 seed_ids.push(id);
@@ -366,9 +448,17 @@ impl MemoryState {
             if let Some(id) = self.node_index.get(&cue_key).copied() {
                 seed_ids.push(id);
             }
+            if let Some(anchor_id) = self
+                .temporal_anchors
+                .iter()
+                .find(|anchor| anchor.cue == *cue)
+                .map(|anchor| anchor.node_id)
+            {
+                seed_ids.push(anchor_id);
+            }
         }
         if seed_ids.is_empty() {
-            for recent in self.recent_cues.iter().rev().take(3) {
+            for recent in self.recent_cues.iter().rev().take(4) {
                 if let Some(id) = self
                     .node_index
                     .get(&node_key(NodeKind::Concept, recent))
@@ -382,49 +472,89 @@ impl MemoryState {
             return Vec::new();
         }
 
-        let mut scores: HashMap<u64, f32> = HashMap::new();
-        let mut frontier: Vec<(u64, f32, u8)> = seed_ids.iter().map(|id| (*id, 1.0, 0)).collect();
-        while let Some((node_id, energy, depth)) = frontier.pop() {
-            *scores.entry(node_id).or_insert(0.0) += energy;
-            if depth >= 3 || energy < 0.02 {
+        let mut excitation: HashMap<u64, f32> = HashMap::new();
+        let mut inhibition: HashMap<u64, f32> = HashMap::new();
+        let mut frontier: VecDeque<(u64, f32, u8)> =
+            seed_ids.iter().map(|id| (*id, 1.0, 0)).collect();
+
+        while let Some((node_id, energy, depth)) = frontier.pop_front() {
+            let Some(source) = self.node_by_id(node_id) else {
+                continue;
+            };
+
+            if energy >= 0.0 {
+                *excitation.entry(node_id).or_insert(0.0) += energy;
+            } else {
+                *inhibition.entry(node_id).or_insert(0.0) += -energy;
+            }
+
+            if depth >= MAX_PROP_DEPTH {
                 continue;
             }
+            let source_drive =
+                energy.abs() * source.temperature.max(0.05) * source.amplitude.max(0.05);
+            if source_drive < 0.01 {
+                continue;
+            }
+
             let Some(edges) = self.adjacency.get(&node_id) else {
                 continue;
             };
+
             for edge_idx in edges {
                 let Some(edge) = self.edges.get(*edge_idx) else {
                     continue;
                 };
-                if edge.strength == 0.0 || edge.temperature < 0.03 {
+                if edge.temperature < 0.02 || edge.confidence < 0.05 {
                     continue;
                 }
-                let gain = kind_gain(edge.kind);
-                let propagated = energy * edge.strength.max(0.0) * edge.temperature * gain;
-                if propagated < 0.015 {
+                let Some(target) = self.node_by_id(edge.to) else {
+                    continue;
+                };
+                let phase_delta = source.phase - target.phase - edge.delay;
+                let interference = phase_delta.cos();
+                let wave = source_drive
+                    * signed_weight(edge.kind, edge.strength)
+                    * edge.temperature
+                    * edge.confidence
+                    * kind_gain(edge.kind)
+                    * interference;
+                if wave.abs() < 0.008 {
                     continue;
                 }
-                frontier.push((edge.to, propagated * 0.72, depth + 1));
+                frontier.push_back((edge.to, wave * 0.78, depth + 1));
             }
         }
 
-        let mut scored_labels: Vec<(String, f32)> = scores
-            .into_iter()
-            .filter_map(|(node_id, score)| {
-                let node = self.node_by_id(node_id)?;
-                if node.kind == NodeKind::Concept || node.kind == NodeKind::Episode {
-                    Some((node.label.clone(), score * node.temperature.max(0.05)))
-                } else {
-                    None
-                }
-            })
-            .collect();
-        scored_labels.sort_by(|a, b| b.1.total_cmp(&a.1));
+        let mut scored = Vec::new();
+        for node in &self.nodes {
+            if node.kind != NodeKind::Concept && node.kind != NodeKind::Episode {
+                continue;
+            }
+            let e = excitation.get(&node.id).copied().unwrap_or(0.0);
+            let i = inhibition.get(&node.id).copied().unwrap_or(0.0);
+            let score = e - (i * 0.62)
+                + node.temperature * 0.08
+                + node.salience * 0.05
+                + node.amplitude * 0.05;
+            if score > 0.02 {
+                scored.push(MemoryHypothesis {
+                    node_id: node.id,
+                    label: node.label.clone(),
+                    kind: node.kind,
+                    score,
+                });
+            }
+        }
+        scored.sort_by(|a, b| b.score.total_cmp(&a.score));
 
         let mut out = Vec::new();
-        for (label, _) in scored_labels {
-            if !out.iter().any(|existing| existing == &label) {
-                out.push(label);
+        for item in scored {
+            if !out
+                .iter()
+                .any(|existing: &MemoryHypothesis| existing.label == item.label)
+            {
+                out.push(item);
             }
             if out.len() >= limit {
                 break;
@@ -435,7 +565,11 @@ impl MemoryState {
 
     pub fn top_hot_nodes(&self, n: usize) -> Vec<&MemoryNode> {
         let mut refs: Vec<&MemoryNode> = self.nodes.iter().collect();
-        refs.sort_by(|a, b| b.temperature.total_cmp(&a.temperature));
+        refs.sort_by(|a, b| {
+            let sa = a.temperature * 0.7 + a.amplitude * 0.3;
+            let sb = b.temperature * 0.7 + b.amplitude * 0.3;
+            sb.total_cmp(&sa)
+        });
         refs.into_iter().take(n).collect()
     }
 
@@ -465,6 +599,7 @@ impl MemoryState {
         for node in self.nodes.iter_mut().rev().take(8) {
             node.salience = node.salience.max(score);
             node.temperature = node.temperature.max(score);
+            node.amplitude = node.amplitude.max(score * 0.9);
         }
     }
 
@@ -482,9 +617,13 @@ impl MemoryState {
                 node.recurrence = node.recurrence.saturating_add(1);
                 node.frequency = (node.frequency + 1.0).min(64.0);
                 node.salience = node.salience.max(salience);
+                let prev_tick = node.last_tick;
                 node.last_tick = tick;
                 node.temperature =
-                    temperature_formula(node.last_tick, tick, node.frequency, node.salience);
+                    temperature_formula(prev_tick, tick, node.frequency, node.salience);
+                node.amplitude =
+                    ((1.0 - 0.18) * node.amplitude + 0.18 * node.temperature).clamp(0.0, 1.0);
+                node.phase = wrap_phase(node.phase + node.omega * 0.35 + salience * 0.05);
                 mutations.push(MutationRecord {
                     kind: MutationKind::TempUpdate,
                     flags: 0,
@@ -510,6 +649,9 @@ impl MemoryState {
             frequency: 1.0,
             salience,
             temperature: temperature_formula(tick, tick, 1.0, salience),
+            amplitude: salience.clamp(0.1, 1.0),
+            phase: 0.0,
+            omega: base_omega(label),
         };
         self.nodes.push(node);
         self.node_index.insert(key, id);
@@ -546,10 +688,19 @@ impl MemoryState {
                 edge.recurrence = edge.recurrence.saturating_add(1);
                 edge.frequency = (edge.frequency + 1.0).min(64.0);
                 edge.salience = edge.salience.max(salience);
+                let prev_tick = edge.last_tick;
                 edge.last_tick = tick;
-                edge.strength = (edge.strength + strength_delta).clamp(0.0, 1.5);
+                let signed_delta = if kind == EdgeKind::Contrast {
+                    -strength_delta.abs()
+                } else {
+                    strength_delta.abs()
+                };
+                edge.strength = (edge.strength + signed_delta).clamp(-1.5, 1.5);
+                edge.confidence =
+                    (edge.confidence * 0.98 + salience * 0.02 + edge.frequency * 0.001)
+                        .clamp(0.05, 1.0);
                 edge.temperature =
-                    temperature_formula(edge.last_tick, tick, edge.frequency, edge.salience);
+                    temperature_formula(prev_tick, tick, edge.frequency, edge.salience);
                 mutations.push(MutationRecord {
                     kind: MutationKind::LinkStrengthen,
                     flags: 0,
@@ -564,16 +715,23 @@ impl MemoryState {
             return;
         }
 
+        let raw_strength = if kind == EdgeKind::Contrast {
+            -strength_delta.abs()
+        } else {
+            strength_delta.abs()
+        };
         let edge = MemoryEdge {
             from,
             to,
             kind,
-            strength: strength_delta.clamp(0.0, 1.5),
+            strength: raw_strength.clamp(-1.5, 1.5),
             last_tick: tick,
             recurrence: 1,
             frequency: 1.0,
             salience,
             temperature: temperature_formula(tick, tick, 1.0, salience),
+            delay: edge_default_delay(kind),
+            confidence: (0.45 + salience * 0.5).clamp(0.05, 1.0),
         };
         let idx = self.edges.len();
         self.edges.push(edge);
@@ -585,7 +743,7 @@ impl MemoryState {
             a: from as u32,
             b: to as u32,
             c: kind as u32,
-            value: strength_delta,
+            value: raw_strength,
             extra: salience,
         });
     }
@@ -659,11 +817,49 @@ fn is_temporal_cue(word: &str) -> bool {
 fn kind_gain(kind: EdgeKind) -> f32 {
     match kind {
         EdgeKind::CoActivation => 1.00,
-        EdgeKind::TemporalBinding => 1.08,
-        EdgeKind::ContextBinding => 0.94,
-        EdgeKind::Contrast => 0.55,
-        EdgeKind::Correction => 1.20,
+        EdgeKind::TemporalBinding => 1.10,
+        EdgeKind::ContextBinding => 0.95,
+        EdgeKind::Contrast => 0.90,
+        EdgeKind::Correction => 1.25,
     }
+}
+
+fn signed_weight(kind: EdgeKind, weight: f32) -> f32 {
+    match kind {
+        EdgeKind::Contrast => -weight.abs(),
+        _ => weight,
+    }
+}
+
+fn edge_default_delay(kind: EdgeKind) -> f32 {
+    match kind {
+        EdgeKind::CoActivation => 0.02,
+        EdgeKind::TemporalBinding => 0.15,
+        EdgeKind::ContextBinding => 0.06,
+        EdgeKind::Contrast => 0.18,
+        EdgeKind::Correction => 0.10,
+    }
+}
+
+fn base_omega(label: &str) -> f32 {
+    let mut h = 0x811C9DC5u32;
+    for b in label.as_bytes() {
+        h ^= *b as u32;
+        h = h.wrapping_mul(0x01000193);
+    }
+    let norm = (h % 1000) as f32 / 1000.0;
+    0.012 + norm * 0.036
+}
+
+fn wrap_phase(value: f32) -> f32 {
+    let two_pi = std::f32::consts::PI * 2.0;
+    let mut v = value % two_pi;
+    if v > std::f32::consts::PI {
+        v -= two_pi;
+    } else if v < -std::f32::consts::PI {
+        v += two_pi;
+    }
+    v
 }
 
 fn temperature_formula(last_tick: u64, now_tick: u64, frequency: f32, salience: f32) -> f32 {

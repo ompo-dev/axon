@@ -2,7 +2,7 @@ use std::collections::BTreeMap;
 
 use crate::cli::{DumpHeaderArgs, DumpRegionArgs, InspectArgs, VerifyArgs};
 use crate::error::AxonError;
-use crate::storage::{summarize_page_types, BrainFile, PageStatus};
+use crate::storage::{BrainFile, PageStatus, summarize_page_types};
 
 pub fn inspect_brain(args: InspectArgs) -> Result<(), AxonError> {
     let mut brain = BrainFile::open_readonly(&args.brain)?;
@@ -15,7 +15,10 @@ pub fn inspect_brain(args: InspectArgs) -> Result<(), AxonError> {
     println!("regions:");
     for (idx, root) in brain.superblock.region_roots.iter().enumerate() {
         if root.page_count > 0 {
-            println!("  region[{idx}] root={} pages={}", root.root_page_id, root.page_count);
+            println!(
+                "  region[{idx}] root={} pages={}",
+                root.root_page_id, root.page_count
+            );
         }
     }
     println!("page type counts:");
@@ -29,7 +32,10 @@ pub fn inspect_brain(args: InspectArgs) -> Result<(), AxonError> {
 
 pub fn dump_header(args: DumpHeaderArgs) -> Result<(), AxonError> {
     let brain = BrainFile::open_readonly(&args.brain)?;
-    println!("magic: {}", String::from_utf8_lossy(&brain.superblock.magic));
+    println!(
+        "magic: {}",
+        String::from_utf8_lossy(&brain.superblock.magic)
+    );
     println!("version: {}", brain.superblock.version);
     println!("generation: {}", brain.superblock.generation);
     println!("page_size: {}", brain.superblock.page_size);
@@ -40,8 +46,14 @@ pub fn dump_header(args: DumpHeaderArgs) -> Result<(), AxonError> {
     println!("name: {}", brain.superblock.brain_meta.name);
     println!("language: {}", brain.superblock.brain_meta.language);
     println!("mode: {}", brain.superblock.brain_meta.mode);
-    println!("created_unix_ms: {}", brain.superblock.brain_meta.created_unix_ms);
-    println!("updated_unix_ms: {}", brain.superblock.brain_meta.updated_unix_ms);
+    println!(
+        "created_unix_ms: {}",
+        brain.superblock.brain_meta.created_unix_ms
+    );
+    println!(
+        "updated_unix_ms: {}",
+        brain.superblock.brain_meta.updated_unix_ms
+    );
     Ok(())
 }
 
@@ -52,10 +64,7 @@ pub fn dump_region(args: DumpRegionArgs) -> Result<(), AxonError> {
     let filtered: Vec<PageStatus> = statuses
         .into_iter()
         .filter(|status| match normalized.as_str() {
-            "semantic" => matches!(
-                status.page_type.to_string().as_str(),
-                "CONCEPT" | "META"
-            ),
+            "semantic" => matches!(status.page_type.to_string().as_str(), "CONCEPT" | "META"),
             "memory" => status.page_type.to_string() == "EPISODE",
             "cortex" => matches!(
                 status.page_type.to_string().as_str(),
@@ -70,11 +79,7 @@ pub fn dump_region(args: DumpRegionArgs) -> Result<(), AxonError> {
         println!("no pages found for region '{}'", args.region);
         return Ok(());
     }
-    println!(
-        "region '{}' pages (count={}):",
-        args.region,
-        filtered.len()
-    );
+    println!("region '{}' pages (count={}):", args.region, filtered.len());
     for status in filtered.iter().take(64) {
         println!(
             "  page={} type={} payload={} gen={} lsn=[{},{}] checksum_ok={}",

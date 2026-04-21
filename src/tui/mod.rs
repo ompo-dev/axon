@@ -103,6 +103,7 @@ pub enum PatchOp {
     MoveCursor { row: usize, col: usize },
     WriteText(String),
     ClearLine,
+    ClearToEnd,
     SetStyle(&'static str),
     HideCursor,
     ShowCursor,
@@ -132,36 +133,36 @@ impl TerminalRenderer {
     ) -> Result<(), io::Error> {
         if !self.entered_alt {
             self.enter_alt_screen()?;
+            self.entered_alt = true;
         }
         let (width, height) = terminal_size();
         let lines = build_lines(snapshot, gpu, width as usize, height as usize);
         let mut ops = Vec::new();
-        if !self.entered_alt {
-            ops.push(PatchOp::HideCursor);
-        }
         let max = self.prev_lines.len().max(lines.len());
         for row in 0..max {
-            let old = self.prev_lines.get(row);
-            let new = lines.get(row);
+            let old = self.prev_lines.get(row).map(|s| s.as_str()).unwrap_or("");
+            let new = lines.get(row).map(|s| s.as_str()).unwrap_or("");
             if old == new {
                 continue;
             }
-            ops.push(PatchOp::MoveCursor { row, col: 0 });
-            ops.push(PatchOp::ClearLine);
-            if let Some(content) = new {
-                ops.push(PatchOp::WriteText(content.clone()));
+            let prefix = shared_prefix_chars(old, new);
+            ops.push(PatchOp::MoveCursor { row, col: prefix });
+            let suffix = &new.chars().skip(prefix).collect::<String>();
+            if !suffix.is_empty() {
+                ops.push(PatchOp::WriteText(suffix.to_string()));
             }
+            ops.push(PatchOp::ClearToEnd);
         }
         let input_row = lines.len().saturating_sub(1);
-        let cursor_col = 2usize.saturating_add(snapshot.input_cursor);
+        let cursor_col = 2usize
+            .saturating_add(snapshot.input_cursor)
+            .min(width.saturating_sub(1) as usize);
         ops.push(PatchOp::MoveCursor {
             row: input_row,
             col: cursor_col,
         });
-        ops.push(PatchOp::ShowCursor);
         self.apply_patch_ops(&ops)?;
         self.prev_lines = lines;
-        self.entered_alt = true;
         Ok(())
     }
 
@@ -216,6 +217,9 @@ impl TerminalRenderer {
                 }
                 PatchOp::ClearLine => {
                     out.write_all(b"\x1b[2K")?;
+                }
+                PatchOp::ClearToEnd => {
+                    out.write_all(b"\x1b[K")?;
                 }
                 PatchOp::SetStyle(style) => {
                     out.write_all(style.as_bytes())?;
@@ -355,7 +359,7 @@ fn build_lines(
     let mut lines = Vec::new();
     lines.push(trim_to_width(
         &format!(
-            "AXON v3.1 | mode={:?} | run={:?} | tick={} | backend={} | frame={}",
+            "AXON v3.2 | mode={:?} | run={:?} | tick={} | backend={} | frame={}",
             snapshot.mode, snapshot.run_mode, snapshot.tick, gpu, snapshot.frame_id
         ),
         width,
@@ -363,14 +367,20 @@ fn build_lines(
     lines.push(trim_to_width(
         &format!(
             "brain={} | pending_mutations={} | input_queue={} | tick_latency={}us",
-            snapshot.brain_path, snapshot.pending_mutations, snapshot.pending_input, snapshot.latency_us
+            snapshot.brain_path,
+            snapshot.pending_mutations,
+            snapshot.pending_input,
+            snapshot.latency_us
         ),
         width,
     ));
     lines.push(trim_to_width(
         &format!(
             "spawn={} merge={} prune={} | status: {}",
-            snapshot.spawn_count, snapshot.merge_count, snapshot.prune_count, snapshot.status_message
+            snapshot.spawn_count,
+            snapshot.merge_count,
+            snapshot.prune_count,
+            snapshot.status_message
         ),
         width,
     ));
@@ -415,7 +425,11 @@ fn build_lines(
         lines.push("-".repeat(width.min(80)));
         lines.push("Slash suggestions:".to_string());
         for (idx, item) in snapshot.slash_suggestions.iter().take(6).enumerate() {
-            let marker = if idx == snapshot.slash_selected { '>' } else { ' ' };
+            let marker = if idx == snapshot.slash_selected {
+                '>'
+            } else {
+                ' '
+            };
             lines.push(trim_to_width(
                 &format!("{marker} {} - {}", item.command, item.description),
                 width,
@@ -450,6 +464,19 @@ fn trim_to_width(input: &str, width: usize) -> String {
     out
 }
 
+fn shared_prefix_chars(a: &str, b: &str) -> usize {
+    let mut out = 0usize;
+    let mut a_iter = a.chars();
+    let mut b_iter = b.chars();
+    loop {
+        match (a_iter.next(), b_iter.next()) {
+            (Some(x), Some(y)) if x == y => out += 1,
+            _ => break,
+        }
+    }
+    out
+}
+
 fn decode_key_event(first: u8, reader: &mut dyn Read) -> Option<KeyCode> {
     match first {
         0x03 => Some(KeyCode::CtrlC),
@@ -464,7 +491,9 @@ fn decode_key_event(first: u8, reader: &mut dyn Read) -> Option<KeyCode> {
                 Some(KeyCode::Char(byte as char))
             }
         }
-        byte => decode_utf8(byte, reader).map(KeyCode::Char).or(Some(KeyCode::Unknown)),
+        byte => decode_utf8(byte, reader)
+            .map(KeyCode::Char)
+            .or(Some(KeyCode::Unknown)),
     }
 }
 
@@ -678,19 +707,13 @@ impl Drop for TerminalModeGuard {
         unsafe {
             if !self.input_handle.is_null() {
                 unsafe extern "system" {
-                    fn SetConsoleMode(
-                        hConsoleHandle: *mut core::ffi::c_void,
-                        dwMode: u32,
-                    ) -> i32;
+                    fn SetConsoleMode(hConsoleHandle: *mut core::ffi::c_void, dwMode: u32) -> i32;
                 }
                 let _ = SetConsoleMode(self.input_handle, self.original_input_mode);
             }
             if !self.output_handle.is_null() {
                 unsafe extern "system" {
-                    fn SetConsoleMode(
-                        hConsoleHandle: *mut core::ffi::c_void,
-                        dwMode: u32,
-                    ) -> i32;
+                    fn SetConsoleMode(hConsoleHandle: *mut core::ffi::c_void, dwMode: u32) -> i32;
                 }
                 let _ = SetConsoleMode(self.output_handle, self.original_output_mode);
             }

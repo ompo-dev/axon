@@ -25,7 +25,6 @@ use crate::tui::{
 struct RuntimeShared {
     brain: BrainState,
     memory: MemoryState,
-    semantic: SemanticState,
     ui_mode: UiMode,
     running: bool,
     use_gpu: bool,
@@ -66,11 +65,13 @@ pub fn run_tui(args: TuiArgs) -> Result<(), AxonError> {
         loaded.brain.mode = args.mode;
     }
     if let Some(dict_path) = args.dict.as_ref() {
-        let inserted = loaded.semantic.ingest_txt_file(dict_path)?;
+        let mut semantic = SemanticState::new();
+        let inserted = semantic.ingest_txt_file(dict_path)?;
         if inserted > 0 {
-            seed_brain_from_semantic(
-                &mut loaded.brain,
-                &loaded.semantic,
+            ingest_semantic_into_memory(
+                &mut loaded.memory,
+                &semantic,
+                loaded.brain.tick,
                 &mut loaded.pending_mutations,
             );
         }
@@ -80,7 +81,6 @@ pub fn run_tui(args: TuiArgs) -> Result<(), AxonError> {
     let shared = Arc::new(Mutex::new(RuntimeShared {
         brain: loaded.brain,
         memory: loaded.memory,
-        semantic: loaded.semantic,
         ui_mode: UiMode::Chat,
         running: true,
         use_gpu: gpu_backend.available,
@@ -131,17 +131,18 @@ pub fn run_tui(args: TuiArgs) -> Result<(), AxonError> {
 pub fn run_ingest(args: IngestArgs) -> Result<(), AxonError> {
     let mut brain_file = BrainFile::open_or_create(&args.brain, true, "brain", 1)?;
     let mut loaded = load_state(&mut brain_file, RunMode::Stochastic)?;
-    let inserted = loaded.semantic.ingest_txt_file(&args.dict)?;
-    seed_brain_from_semantic(
-        &mut loaded.brain,
-        &loaded.semantic,
+    let mut semantic = SemanticState::new();
+    let inserted = semantic.ingest_txt_file(&args.dict)?;
+    ingest_semantic_into_memory(
+        &mut loaded.memory,
+        &semantic,
+        loaded.brain.tick,
         &mut loaded.pending_mutations,
     );
     persist_all(
         &mut brain_file,
         &loaded.brain,
         &loaded.memory,
-        &loaded.semantic,
         &mut loaded.pending_mutations,
         &mut loaded.last_lsn,
     )?;
@@ -165,7 +166,6 @@ pub fn run_compact(args: CompactArgs) -> Result<(), AxonError> {
         &mut target,
         &loaded.brain,
         &loaded.memory,
-        &loaded.semantic,
         &mut loaded.pending_mutations,
         &mut loaded.last_lsn,
     )?;
@@ -188,7 +188,10 @@ fn compact_temp_path(path: &PathBuf) -> PathBuf {
     temp
 }
 
-fn run_tick_loop(shared: Arc<Mutex<RuntimeShared>>, input_rx: Receiver<InputEvent>) -> Result<(), AxonError> {
+fn run_tick_loop(
+    shared: Arc<Mutex<RuntimeShared>>,
+    input_rx: Receiver<InputEvent>,
+) -> Result<(), AxonError> {
     let tick_interval = Duration::from_millis(TICK_MILLIS);
     loop {
         let started = Instant::now();
@@ -203,13 +206,8 @@ fn run_tick_loop(shared: Arc<Mutex<RuntimeShared>>, input_rx: Receiver<InputEven
             let input_changed = drain_input_events(&mut state, &input_rx);
             let mut mutations = Vec::new();
             let use_gpu = state.use_gpu;
-            let RuntimeShared {
-                brain,
-                memory,
-                semantic,
-                ..
-            } = &mut *state;
-            let emitted = brain.step(memory, semantic, &mut mutations, use_gpu);
+            let RuntimeShared { brain, memory, .. } = &mut *state;
+            let emitted = brain.step(memory, &mut mutations, use_gpu);
 
             state.pending_bytes = state
                 .pending_bytes
@@ -302,7 +300,8 @@ fn handle_key_event(state: &mut RuntimeShared, code: KeyCode) {
         KeyCode::Down => {
             if slash_visible(state) {
                 if !state.slash_suggestions.is_empty() {
-                    state.slash_selected = (state.slash_selected + 1) % state.slash_suggestions.len();
+                    state.slash_selected =
+                        (state.slash_selected + 1) % state.slash_suggestions.len();
                 }
             } else {
                 history_next(state);
@@ -350,11 +349,15 @@ fn submit_line(state: &mut RuntimeShared, mut line: String) {
     if line.starts_with('/') {
         if let Some(command) = tui::parse_inline_command(&line) {
             apply_command(state, command);
-        } else if let Some(selected) = state.slash_suggestions.get(state.slash_selected).cloned() {
-            if let Some(command) = tui::parse_inline_command(&selected.command) {
-                apply_command(state, command);
+        } else if line == "/" {
+            if let Some(selected) = state.slash_suggestions.get(state.slash_selected).cloned() {
+                if let Some(command) = tui::parse_inline_command(&selected.command) {
+                    apply_command(state, command);
+                } else {
+                    state.status_message = format!("comando invalido: {}", selected.command);
+                }
             } else {
-                state.status_message = format!("comando invalido: {}", line);
+                state.status_message = "comando desconhecido: /".to_string();
             }
         } else {
             state.status_message = format!("comando desconhecido: {}", line);
@@ -422,7 +425,7 @@ fn spawn_persist_thread(
         loop {
             thread::sleep(Duration::from_millis(50));
             let mut maybe_records = Vec::new();
-            let mut maybe_snapshot = None::<(BrainState, MemoryState, SemanticState, u64)>;
+            let mut maybe_snapshot = None::<(BrainState, MemoryState, u64)>;
             let mut lsn_begin = 0u64;
             let mut lsn_end = 0u64;
             let should_break;
@@ -449,15 +452,13 @@ fn spawn_persist_thread(
                     last_checkpoint.elapsed() >= Duration::from_millis(CHECKPOINT_MILLIS);
                 let checkpoint_due_size = journal_since_checkpoint >= CHECKPOINT_JOURNAL_BYTES;
                 let checkpoint_forced = state.force_checkpoint;
-                let should_checkpoint =
-                    checkpoint_forced || checkpoint_due_time || checkpoint_due_size || !state.running;
+                let should_checkpoint = checkpoint_forced
+                    || checkpoint_due_time
+                    || checkpoint_due_size
+                    || !state.running;
                 if should_checkpoint {
-                    maybe_snapshot = Some((
-                        state.brain.clone(),
-                        state.memory.clone(),
-                        state.semantic.clone(),
-                        state.brain.tick,
-                    ));
+                    maybe_snapshot =
+                        Some((state.brain.clone(), state.memory.clone(), state.brain.tick));
                     state.force_checkpoint = false;
                     state.render_dirty = true;
                 }
@@ -479,10 +480,10 @@ fn spawn_persist_thread(
                 }
             }
 
-            if let Some((brain, memory, semantic, checkpoint_lsn)) = maybe_snapshot {
+            if let Some((brain, memory, checkpoint_lsn)) = maybe_snapshot {
                 if let Ok(mut file) = storage.lock() {
-                    refresh_region_roots(&mut file, &brain, &memory, &semantic);
-                    let snapshot = encode_snapshot(&brain, &memory, &semantic);
+                    refresh_region_roots(&mut file, &brain, &memory);
+                    let snapshot = encode_snapshot(&brain, &memory);
                     let generation = file.superblock.generation.saturating_add(1);
                     if file
                         .write_snapshot(generation, checkpoint_lsn, &snapshot)
@@ -503,16 +504,18 @@ fn spawn_persist_thread(
 }
 
 fn spawn_telemetry_thread(shared: Arc<Mutex<RuntimeShared>>) -> thread::JoinHandle<()> {
-    thread::spawn(move || loop {
-        thread::sleep(Duration::from_secs(1));
-        let mut guard = match shared.lock() {
-            Ok(guard) => guard,
-            Err(_) => break,
-        };
-        if !guard.running && guard.ticks_last_second == 0 {
-            break;
+    thread::spawn(move || {
+        loop {
+            thread::sleep(Duration::from_secs(1));
+            let mut guard = match shared.lock() {
+                Ok(guard) => guard,
+                Err(_) => break,
+            };
+            if !guard.running && guard.ticks_last_second == 0 {
+                break;
+            }
+            guard.ticks_last_second = 0;
         }
-        guard.ticks_last_second = 0;
     })
 }
 
@@ -579,34 +582,22 @@ fn build_render_snapshot(state: &RuntimeShared) -> RenderSnapshot {
         })
         .collect();
 
-    let mut top_concepts: Vec<ConceptView> = state
-        .semantic
-        .top_concepts(8)
-        .into_iter()
-        .map(|c| ConceptView {
-            id: c.id,
-            lemma: c.lemma.clone(),
-            stability: c.stability,
-            connectivity: c.connectivity,
-        })
-        .collect();
-    if top_concepts.len() < 8 {
-        for node in state.memory.top_hot_nodes(24) {
-            if node.kind != NodeKind::Concept {
-                continue;
-            }
-            if top_concepts.iter().any(|c| c.lemma == node.label) {
-                continue;
-            }
-            top_concepts.push(ConceptView {
-                id: node.id as u32,
-                lemma: node.label.clone(),
-                stability: node.temperature,
-                connectivity: node.salience,
-            });
-            if top_concepts.len() >= 8 {
-                break;
-            }
+    let mut top_concepts: Vec<ConceptView> = Vec::new();
+    for node in state.memory.top_hot_nodes(32) {
+        if node.kind != NodeKind::Concept {
+            continue;
+        }
+        if top_concepts.iter().any(|c| c.lemma == node.label) {
+            continue;
+        }
+        top_concepts.push(ConceptView {
+            id: node.id as u32,
+            lemma: node.label.clone(),
+            stability: node.temperature,
+            connectivity: node.amplitude,
+        });
+        if top_concepts.len() >= 8 {
+            break;
         }
     }
 
@@ -637,7 +628,6 @@ fn build_render_snapshot(state: &RuntimeShared) -> RenderSnapshot {
 struct LoadedState {
     brain: BrainState,
     memory: MemoryState,
-    semantic: SemanticState,
     pending_mutations: Vec<MutationRecord>,
     last_lsn: u64,
 }
@@ -663,11 +653,18 @@ fn load_state(file: &mut BrainFile, requested_mode: RunMode) -> Result<LoadedSta
     if let Some(max_tick) = journal_records.iter().map(|r| r.tick).max() {
         last_lsn = last_lsn.max(max_tick);
     }
+    let mut pending_mutations = Vec::new();
+    let has_concepts = memory
+        .nodes
+        .iter()
+        .any(|node| node.kind == NodeKind::Concept);
+    if !has_concepts && !semantic.concepts.is_empty() {
+        ingest_semantic_into_memory(&mut memory, &semantic, brain.tick, &mut pending_mutations);
+    }
     Ok(LoadedState {
         brain,
         memory,
-        semantic,
-        pending_mutations: Vec::new(),
+        pending_mutations,
         last_lsn,
     })
 }
@@ -719,26 +716,22 @@ fn replay_mutations(brain: &mut BrainState, memory: &mut MemoryState, records: &
     brain.last_input_char = last_char;
 }
 
-fn seed_brain_from_semantic(
-    brain: &mut BrainState,
+fn ingest_semantic_into_memory(
+    memory: &mut MemoryState,
     semantic: &SemanticState,
+    tick: u64,
     pending_mutations: &mut Vec<MutationRecord>,
 ) {
+    let mut local_tick = tick;
     for concept in &semantic.concepts {
+        local_tick = local_tick.saturating_add(1);
         if !concept.canonical.is_empty() {
-            brain.queue_user_text(&concept.canonical);
-        }
-        for ch in concept.canonical.chars() {
-            pending_mutations.push(MutationRecord {
-                kind: MutationKind::SemanticLink,
-                flags: 0,
-                tick: brain.tick,
-                a: concept.id,
-                b: ch as u32,
-                c: 0,
-                value: concept.stability,
-                extra: concept.connectivity,
-            });
+            let _ = memory.ingest_dictionary_entry(
+                local_tick,
+                &concept.canonical,
+                &concept.definition,
+                pending_mutations,
+            );
         }
     }
 }
@@ -747,13 +740,18 @@ fn persist_all(
     file: &mut BrainFile,
     brain: &BrainState,
     memory: &MemoryState,
-    semantic: &SemanticState,
     pending_mutations: &mut Vec<MutationRecord>,
     last_lsn: &mut u64,
 ) -> Result<(), AxonError> {
     if !pending_mutations.is_empty() {
-        let lsn_begin = pending_mutations.first().map(|r| r.tick).unwrap_or(*last_lsn);
-        let lsn_end = pending_mutations.last().map(|r| r.tick).unwrap_or(*last_lsn);
+        let lsn_begin = pending_mutations
+            .first()
+            .map(|r| r.tick)
+            .unwrap_or(*last_lsn);
+        let lsn_end = pending_mutations
+            .last()
+            .map(|r| r.tick)
+            .unwrap_or(*last_lsn);
         file.write_journal_records(
             file.superblock.generation.saturating_add(1),
             lsn_begin,
@@ -764,8 +762,8 @@ fn persist_all(
         pending_mutations.clear();
     }
 
-    refresh_region_roots(file, brain, memory, semantic);
-    let blob = encode_snapshot(brain, memory, semantic);
+    refresh_region_roots(file, brain, memory);
+    let blob = encode_snapshot(brain, memory);
     file.write_snapshot(
         file.superblock.generation.saturating_add(1),
         (*last_lsn).max(brain.tick),
@@ -776,12 +774,7 @@ fn persist_all(
     Ok(())
 }
 
-fn refresh_region_roots(
-    file: &mut BrainFile,
-    brain: &BrainState,
-    memory: &MemoryState,
-    semantic: &SemanticState,
-) {
+fn refresh_region_roots(file: &mut BrainFile, brain: &BrainState, memory: &MemoryState) {
     let assembly_count = brain.assemblies.len() as u64;
     let edge_csr_count = brain.csr.weights.len() as u64;
     let edge_delta_count = brain.delta_edges.len() as u64;
@@ -790,7 +783,11 @@ fn refresh_region_roots(
         .iter()
         .filter(|node| node.kind == NodeKind::Episode)
         .count() as u64;
-    let concept_count = semantic.concepts.len() as u64;
+    let concept_count = memory
+        .nodes
+        .iter()
+        .filter(|node| node.kind == NodeKind::Concept)
+        .count() as u64;
 
     let roots = &mut file.superblock.region_roots;
     roots[1].page_count = assembly_count;
@@ -831,13 +828,14 @@ fn mode_from_u8(mode: u8, fallback: RunMode) -> RunMode {
     }
 }
 
-fn encode_snapshot(brain: &BrainState, memory: &MemoryState, semantic: &SemanticState) -> Vec<u8> {
+fn encode_snapshot(brain: &BrainState, memory: &MemoryState) -> Vec<u8> {
     let mut writer = BinaryWriter::new();
     writer.put_u32(0x42534E50);
-    writer.put_u16(2);
+    writer.put_u16(3);
     writer.put_u8(mode_to_u8(brain.mode));
     writer.put_u8(0);
     writer.put_u64(brain.tick);
+    writer.put_u64(brain.tick); // journal_tail / commit hint
     writer.put_u32(brain.last_input_char.map(|c| c as u32).unwrap_or(0));
 
     writer.put_u32(brain.assemblies.len() as u32);
@@ -881,6 +879,9 @@ fn encode_snapshot(brain: &BrainState, memory: &MemoryState, semantic: &Semantic
         writer.put_f32(node.frequency);
         writer.put_f32(node.salience);
         writer.put_f32(node.temperature);
+        writer.put_f32(node.amplitude);
+        writer.put_f32(node.phase);
+        writer.put_f32(node.omega);
         writer.put_string(&node.label);
     }
 
@@ -897,6 +898,8 @@ fn encode_snapshot(brain: &BrainState, memory: &MemoryState, semantic: &Semantic
         writer.put_f32(edge.frequency);
         writer.put_f32(edge.salience);
         writer.put_f32(edge.temperature);
+        writer.put_f32(edge.delay);
+        writer.put_f32(edge.confidence);
     }
 
     writer.put_u32(memory.temporal_anchors.len() as u32);
@@ -906,16 +909,7 @@ fn encode_snapshot(brain: &BrainState, memory: &MemoryState, semantic: &Semantic
         writer.put_u64(anchor.last_rebind_tick);
     }
 
-    writer.put_u32(semantic.concepts.len() as u32);
-    for concept in &semantic.concepts {
-        writer.put_u32(concept.id);
-        writer.put_string(&concept.lemma);
-        writer.put_string(&concept.canonical);
-        writer.put_string(&concept.definition);
-        writer.put_u32(concept.recurrence);
-        writer.put_f32(concept.connectivity);
-        writer.put_f32(concept.stability);
-    }
+    writer.put_u32(0);
     writer.into_inner()
 }
 
@@ -926,16 +920,187 @@ fn decode_snapshot(
     let mut reader = BinaryReader::new(bytes);
     let magic = reader.get_u32()?;
     if magic != 0x42534E50 {
-        return Err(AxonError::InvalidFormat("snapshot magic mismatch".to_string()));
+        return Err(AxonError::InvalidFormat(
+            "snapshot magic mismatch".to_string(),
+        ));
     }
     let version = reader.get_u16()?;
     match version {
         1 => decode_snapshot_v1(&mut reader, requested_mode),
         2 => decode_snapshot_v2(&mut reader, requested_mode),
+        3 => decode_snapshot_v3(&mut reader, requested_mode),
         other => Err(AxonError::InvalidFormat(format!(
             "unsupported snapshot version {other}"
         ))),
     }
+}
+
+fn decode_snapshot_v3(
+    reader: &mut BinaryReader<'_>,
+    requested_mode: RunMode,
+) -> Result<(BrainState, MemoryState, SemanticState), AxonError> {
+    let mode_u8 = reader.get_u8()?;
+    let _reserved = reader.get_u8()?;
+    let mut brain = BrainState::new(mode_from_u8(mode_u8, requested_mode), DEFAULT_RANDOM_SEED);
+    brain.tick = reader.get_u64()?;
+    let _journal_tail = reader.get_u64()?;
+    let last_input = reader.get_u32()?;
+    brain.last_input_char = if last_input == 0 {
+        None
+    } else {
+        char::from_u32(last_input)
+    };
+
+    let assemblies = reader.get_u32()? as usize;
+    for _ in 0..assemblies {
+        let id = reader.get_u32()?;
+        let symbol_raw = reader.get_u32()?;
+        let symbol = if symbol_raw == 0 {
+            None
+        } else {
+            char::from_u32(symbol_raw)
+        };
+        let activation = reader.get_f32()?;
+        let stability = reader.get_f32()?;
+        let support_count = reader.get_u32()?;
+        let novelty = reader.get_f32()?;
+        let last_tick = reader.get_u64()?;
+        brain.ensure_assembly_capacity(id as usize + 1);
+        if brain.assemblies.len() <= id as usize {
+            continue;
+        }
+        brain.assemblies[id as usize].id = id;
+        brain.assemblies[id as usize].symbol = symbol;
+        brain.assemblies[id as usize].activation = activation;
+        brain.assemblies[id as usize].stability = stability;
+        brain.assemblies[id as usize].support_count = support_count;
+        brain.assemblies[id as usize].novelty = novelty;
+        brain.assemblies[id as usize].last_tick = last_tick;
+        brain.activations[id as usize] = activation;
+        if let Some(ch) = symbol {
+            brain.char_nodes.insert(ch as u32, id);
+        }
+    }
+
+    let edge_count = reader.get_u32()? as usize;
+    brain.delta_edges.clear();
+    for _ in 0..edge_count {
+        brain.delta_edges.push(DeltaEdge {
+            from: reader.get_u32()?,
+            to: reader.get_u32()?,
+            weight: reader.get_f32()?,
+            utility: reader.get_f32()?,
+            weak_ticks: reader.get_u32()?,
+        });
+    }
+
+    let char_count = reader.get_u32()? as usize;
+    for _ in 0..char_count {
+        brain
+            .char_frequency
+            .insert(reader.get_u32()?, reader.get_u64()?);
+    }
+    let transition_count = reader.get_u32()? as usize;
+    for _ in 0..transition_count {
+        let from = reader.get_u32()?;
+        let to = reader.get_u32()?;
+        let count = reader.get_u64()?;
+        brain.transitions.insert((from, to), count);
+    }
+
+    let mut memory = MemoryState::new();
+    let node_count = reader.get_u32()? as usize;
+    for _ in 0..node_count {
+        let id = reader.get_u64()?;
+        let kind = NodeKind::from_u8(reader.get_u8()?).unwrap_or(NodeKind::Concept);
+        let _reserved0 = reader.get_u8()?;
+        let _reserved1 = reader.get_u16()?;
+        let last_tick = reader.get_u64()?;
+        let recurrence = reader.get_u32()?;
+        let frequency = reader.get_f32()?;
+        let salience = reader.get_f32()?;
+        let temperature = reader.get_f32()?;
+        let amplitude = reader.get_f32()?;
+        let phase = reader.get_f32()?;
+        let omega = reader.get_f32()?;
+        let label = reader.get_string()?;
+        memory.nodes.push(MemoryNode {
+            id,
+            kind,
+            label,
+            last_tick,
+            recurrence,
+            frequency,
+            salience,
+            temperature,
+            amplitude,
+            phase,
+            omega,
+        });
+    }
+
+    let memory_edge_count = reader.get_u32()? as usize;
+    for _ in 0..memory_edge_count {
+        let from = reader.get_u64()?;
+        let to = reader.get_u64()?;
+        let kind = EdgeKind::from_u8(reader.get_u8()?).unwrap_or(EdgeKind::CoActivation);
+        let _reserved0 = reader.get_u8()?;
+        let _reserved1 = reader.get_u16()?;
+        let last_tick = reader.get_u64()?;
+        let recurrence = reader.get_u32()?;
+        let strength = reader.get_f32()?;
+        let frequency = reader.get_f32()?;
+        let salience = reader.get_f32()?;
+        let temperature = reader.get_f32()?;
+        let delay = reader.get_f32()?;
+        let confidence = reader.get_f32()?;
+        memory.edges.push(MemoryEdge {
+            from,
+            to,
+            kind,
+            strength,
+            last_tick,
+            recurrence,
+            frequency,
+            salience,
+            temperature,
+            delay,
+            confidence,
+        });
+    }
+
+    let anchor_count = reader.get_u32()? as usize;
+    for _ in 0..anchor_count {
+        memory.temporal_anchors.push(TemporalAnchor {
+            cue: reader.get_string()?,
+            node_id: reader.get_u64()?,
+            last_rebind_tick: reader.get_u64()?,
+        });
+    }
+    memory.rebuild_indexes();
+
+    let mut semantic = SemanticState::new();
+    let concept_count = reader.get_u32()? as usize;
+    for _ in 0..concept_count {
+        let id = reader.get_u32()?;
+        let lemma = reader.get_string()?;
+        let canonical = reader.get_string()?;
+        let definition = reader.get_string()?;
+        let recurrence = reader.get_u32()?;
+        let connectivity = reader.get_f32()?;
+        let stability = reader.get_f32()?;
+        if semantic.add_or_update_concept(&lemma, &definition) {
+            if let Some(concept) = semantic.concepts.last_mut() {
+                concept.id = id;
+                concept.canonical = canonical;
+                concept.recurrence = recurrence;
+                concept.connectivity = connectivity;
+                concept.stability = stability;
+            }
+        }
+    }
+
+    Ok((brain, memory, semantic))
 }
 
 fn decode_snapshot_v2(
@@ -998,7 +1163,9 @@ fn decode_snapshot_v2(
 
     let char_count = reader.get_u32()? as usize;
     for _ in 0..char_count {
-        brain.char_frequency.insert(reader.get_u32()?, reader.get_u64()?);
+        brain
+            .char_frequency
+            .insert(reader.get_u32()?, reader.get_u64()?);
     }
     let transition_count = reader.get_u32()? as usize;
     for _ in 0..transition_count {
@@ -1030,6 +1197,9 @@ fn decode_snapshot_v2(
             frequency,
             salience,
             temperature,
+            amplitude: temperature.clamp(0.05, 1.0),
+            phase: 0.0,
+            omega: 0.02,
         });
     }
 
@@ -1056,6 +1226,8 @@ fn decode_snapshot_v2(
             frequency,
             salience,
             temperature,
+            delay: 0.0,
+            confidence: 0.5,
         });
     }
 
@@ -1147,7 +1319,9 @@ fn decode_snapshot_v1(
 
     let char_count = reader.get_u32()? as usize;
     for _ in 0..char_count {
-        brain.char_frequency.insert(reader.get_u32()?, reader.get_u64()?);
+        brain
+            .char_frequency
+            .insert(reader.get_u32()?, reader.get_u64()?);
     }
     let transition_count = reader.get_u32()? as usize;
     for _ in 0..transition_count {
@@ -1197,7 +1371,8 @@ fn slash_visible(state: &RuntimeShared) -> bool {
 }
 
 fn refresh_slash(state: &mut RuntimeShared) {
-    state.slash_suggestions = tui::filter_slash_suggestions(&state.input_buffer, &state.slash_catalog);
+    state.slash_suggestions =
+        tui::filter_slash_suggestions(&state.input_buffer, &state.slash_catalog);
     if state.slash_selected >= state.slash_suggestions.len() {
         state.slash_selected = 0;
     }
@@ -1257,7 +1432,12 @@ fn push_history(state: &mut RuntimeShared, line: &str) {
     if line.is_empty() {
         return;
     }
-    if state.history.last().map(|last| last == line).unwrap_or(false) {
+    if state
+        .history
+        .last()
+        .map(|last| last == line)
+        .unwrap_or(false)
+    {
         return;
     }
     state.history.push(line.to_string());

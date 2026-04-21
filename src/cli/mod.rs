@@ -100,7 +100,12 @@ impl Cli {
                 brain: parse_required_path(rest, "--brain")?,
             }),
             "--help" | "-h" | "help" => return Err(AxonError::Parse(usage())),
-            _ => return Err(AxonError::Parse(format!("unknown command '{cmd}'\n{}", usage()))),
+            _ => {
+                return Err(AxonError::Parse(format!(
+                    "unknown command '{cmd}'\n{}",
+                    usage()
+                )));
+            }
         };
         Ok(Self { command })
     }
@@ -116,7 +121,7 @@ fn parse_tui(args: &[String]) -> Result<TuiArgs, AxonError> {
         Some(other) => {
             return Err(AxonError::Parse(format!(
                 "invalid --mode '{other}', expected deterministic|stochastic"
-            )))
+            )));
         }
     };
     Ok(TuiArgs {

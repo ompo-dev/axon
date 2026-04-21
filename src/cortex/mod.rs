@@ -1,8 +1,7 @@
 use std::collections::{HashMap, VecDeque};
 
 use crate::cli::RunMode;
-use crate::memory::MemoryState;
-use crate::semantic::SemanticState;
+use crate::memory::{MemoryHypothesis, MemoryState, NodeKind};
 use crate::storage::{MutationKind, MutationRecord};
 
 #[derive(Clone, Debug)]
@@ -119,7 +118,6 @@ impl BrainState {
     pub fn step(
         &mut self,
         memory: &mut MemoryState,
-        semantic: &mut SemanticState,
         outgoing_mutations: &mut Vec<MutationRecord>,
         use_gpu: bool,
     ) -> Option<char> {
@@ -131,7 +129,7 @@ impl BrainState {
             stimulus_idx = Some(idx);
             if canonical != '\n' {
                 self.recent_user_buffer.push(canonical);
-                if self.recent_user_buffer.len() > 256 {
+                if self.recent_user_buffer.len() > 512 {
                     self.recent_user_buffer.remove(0);
                 }
             }
@@ -155,11 +153,10 @@ impl BrainState {
             if canonical == '\n' {
                 let message = self.recent_user_buffer.trim().to_string();
                 if !message.is_empty() {
-                    semantic.reinforce_from_context(&message);
                     memory.observe_text(self.tick, &message, outgoing_mutations);
                     self.plan_response(memory);
                 } else {
-                    self.emit_response_text("...\n");
+                    self.emit_response_text("pode enviar uma frase?\n");
                 }
                 self.recent_user_buffer.clear();
                 self.last_input_char = None;
@@ -168,7 +165,7 @@ impl BrainState {
             }
         }
 
-        self.propagate_field(stimulus_idx, semantic, use_gpu);
+        self.propagate_field(stimulus_idx, use_gpu);
         self.apply_plasticity(outgoing_mutations);
         self.apply_structural_rules(outgoing_mutations);
         memory.decay_to_tick(self.tick, outgoing_mutations);
@@ -232,7 +229,7 @@ impl BrainState {
         self.emit_response_text(&feedback);
     }
 
-    fn propagate_field(&mut self, stimulus_idx: Option<usize>, semantic: &SemanticState, _use_gpu: bool) {
+    fn propagate_field(&mut self, stimulus_idx: Option<usize>, _use_gpu: bool) {
         if self.assemblies.is_empty() {
             return;
         }
@@ -265,12 +262,12 @@ impl BrainState {
 
         let lambda = 0.15_f32;
         for i in 0..n {
-            let symbol_boost = self.assemblies[i]
-                .symbol
-                .map(|ch| semantic.concept_boost_for_char(ch))
-                .unwrap_or(0.0);
-            let inhibition = if self.activations[i].abs() > 0.8 { 0.12 } else { 0.03 };
-            let raw = drive[i] + symbol_boost - inhibition;
+            let inhibition = if self.activations[i].abs() > 0.8 {
+                0.12
+            } else {
+                0.03
+            };
+            let raw = drive[i] - inhibition;
             let next = (1.0 - lambda) * self.activations[i] + lambda * raw.tanh();
             self.activations[i] = next.clamp(-1.0, 1.0);
             self.assemblies[i].activation = self.activations[i];
@@ -279,7 +276,8 @@ impl BrainState {
                 .clamp(0.0, 1.0);
             self.assemblies[i].last_tick = self.tick;
             if self.activations[i].abs() > 0.2 {
-                self.assemblies[i].support_count = self.assemblies[i].support_count.saturating_add(1);
+                self.assemblies[i].support_count =
+                    self.assemblies[i].support_count.saturating_add(1);
             }
         }
     }
@@ -424,7 +422,9 @@ impl BrainState {
             last_tick: self.tick,
         });
         self.activations.push(0.0);
-        self.csr.row_ptr.push(self.csr.row_ptr.last().copied().unwrap_or(0));
+        self.csr
+            .row_ptr
+            .push(self.csr.row_ptr.last().copied().unwrap_or(0));
         id
     }
 
@@ -448,91 +448,81 @@ impl BrainState {
         if !self.pending_output.is_empty() {
             return;
         }
-        let recalls = memory.recall_for_text(&self.recent_user_buffer, 4);
-        if !recalls.is_empty() {
-            let mut response = String::from("entendi: ");
-            response.push_str(&recalls.join(" | "));
-            response.push('\n');
-            self.emit_response_text(&response);
+        let hypotheses = memory.rank_hypotheses(&self.recent_user_buffer, 6);
+        if hypotheses.is_empty() {
+            self.emit_response_text("pode detalhar melhor?\n");
             return;
         }
-        let mut planned = String::new();
-        let mut current = self
-            .recent_user_buffer
-            .chars()
-            .next()
-            .unwrap_or_else(|| self.pick_fallback_char());
-        let target_len = (self.recent_user_buffer.len().clamp(8, 96) as f32 * 0.8) as usize;
-        let target_len = target_len.max(8);
-        for _ in 0..target_len {
-            let next = self.pick_associated_char(current);
-            planned.push(next);
-            current = next;
+
+        let choice_idx = self.pick_hypothesis_index(&hypotheses);
+        let picked = hypotheses
+            .get(choice_idx)
+            .cloned()
+            .unwrap_or_else(|| hypotheses[0].clone());
+
+        if picked.score < 0.10 {
+            self.emit_response_text("tenho mais de uma leitura, pode especificar um pouco?\n");
+            return;
         }
-        planned.push('\n');
-        self.emit_response_text(&planned);
+
+        let response = self.build_associative_response(&picked, &hypotheses);
+        self.emit_response_text(&response);
     }
 
-    fn pick_associated_char(&mut self, current: char) -> char {
-        let current_key = current as u32;
-        let mut candidates: Vec<(char, u64)> = self
-            .transitions
-            .iter()
-            .filter_map(|(&(from, to), &count)| {
-                if from == current_key {
-                    char::from_u32(to).map(|ch| (ch, count))
-                } else {
-                    None
-                }
-            })
-            .collect();
-        if candidates.is_empty() {
-            return self.pick_fallback_char();
-        }
-        candidates.sort_by(|a, b| b.1.cmp(&a.1));
+    fn pick_hypothesis_index(&mut self, hypotheses: &[MemoryHypothesis]) -> usize {
         match self.mode {
-            RunMode::Deterministic => candidates[0].0,
+            RunMode::Deterministic => 0,
             RunMode::Stochastic => {
-                let total: u64 = candidates.iter().map(|(_, w)| *w).sum();
-                if total == 0 {
-                    return candidates[0].0;
+                let mut weights = Vec::with_capacity(hypotheses.len());
+                for item in hypotheses {
+                    weights.push(item.score.max(0.0) + 0.01);
                 }
-                let mut r = self.rng.next_u64() % total;
-                for (ch, w) in candidates {
-                    if r < w {
-                        return ch;
+                let total: f32 = weights.iter().sum();
+                if total <= 0.0 {
+                    return 0;
+                }
+                let mut r = (self.rng.next_u64() as f64 / u64::MAX as f64) as f32 * total;
+                for (idx, w) in weights.iter().enumerate() {
+                    if r <= *w {
+                        return idx;
                     }
-                    r -= w;
+                    r -= *w;
                 }
-                self.pick_fallback_char()
+                0
             }
         }
     }
 
-    fn pick_fallback_char(&mut self) -> char {
-        if self.char_frequency.is_empty() {
-            return 'a';
-        }
-        let mut chars: Vec<(u32, u64)> = self
-            .char_frequency
-            .iter()
-            .map(|(code, count)| (*code, *count))
-            .collect();
-        chars.sort_by(|a, b| b.1.cmp(&a.1));
-        match self.mode {
-            RunMode::Deterministic => char::from_u32(chars[0].0).unwrap_or('a'),
-            RunMode::Stochastic => {
-                let total: u64 = chars.iter().map(|(_, n)| *n).sum();
-                let mut r = self.rng.next_u64() % total.max(1);
-                for (code, n) in chars {
-                    if r < n {
-                        return char::from_u32(code).unwrap_or('a');
-                    }
-                    r -= n;
-                }
-                'a'
+    fn build_associative_response(
+        &self,
+        picked: &MemoryHypothesis,
+        hypotheses: &[MemoryHypothesis],
+    ) -> String {
+        let mut out = String::new();
+        match picked.kind {
+            NodeKind::Episode => {
+                out.push_str("linha dominante: ");
+                out.push_str(&picked.label);
+            }
+            _ => {
+                out.push_str("associacao dominante: ");
+                out.push_str(&picked.label);
             }
         }
+        if hypotheses.len() > 1 {
+            let mut alts = Vec::new();
+            for alt in hypotheses.iter().skip(1).take(2) {
+                if alt.label != picked.label {
+                    alts.push(alt.label.clone());
+                }
+            }
+            if !alts.is_empty() {
+                out.push_str(" | alternativas: ");
+                out.push_str(&alts.join(" | "));
+            }
+        }
+        out.push('\n');
+        out
     }
 
     pub fn top_active_assemblies(&self, n: usize) -> Vec<&Assembly> {
