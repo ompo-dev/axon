@@ -20,6 +20,12 @@ pub enum MutationKind {
     Prune = 5,
     Merge = 6,
     SemanticLink = 7,
+    TempUpdate = 8,
+    LinkCreate = 9,
+    LinkStrengthen = 10,
+    LinkWeaken = 11,
+    TemporalRebind = 12,
+    CorrectionApplied = 13,
 }
 
 impl MutationKind {
@@ -32,6 +38,12 @@ impl MutationKind {
             5 => Some(Self::Prune),
             6 => Some(Self::Merge),
             7 => Some(Self::SemanticLink),
+            8 => Some(Self::TempUpdate),
+            9 => Some(Self::LinkCreate),
+            10 => Some(Self::LinkStrengthen),
+            11 => Some(Self::LinkWeaken),
+            12 => Some(Self::TemporalRebind),
+            13 => Some(Self::CorrectionApplied),
             _ => None,
         }
     }
@@ -241,7 +253,7 @@ impl BrainFile {
         checkpoint_lsn: u64,
         snapshot_blob: &[u8],
     ) -> Result<(), AxonError> {
-        let header_size = 28usize;
+        let header_size = 32usize;
         let chunk_capacity = PAGE_PAYLOAD_SIZE.saturating_sub(header_size);
         if chunk_capacity == 0 {
             return Err(AxonError::State("invalid snapshot chunk capacity".to_string()));

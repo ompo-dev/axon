@@ -68,6 +68,7 @@ pub struct BrainState {
     pub char_nodes: HashMap<u32, u32>,
     pub char_frequency: HashMap<u32, u64>,
     pub transitions: HashMap<(u32, u32), u64>,
+    pub last_input_char: Option<char>,
     pub pending_input: VecDeque<char>,
     pub pending_output: VecDeque<char>,
     pub recent_user_buffer: String,
@@ -88,6 +89,7 @@ impl BrainState {
             char_nodes: HashMap::new(),
             char_frequency: HashMap::new(),
             transitions: HashMap::new(),
+            last_input_char: None,
             pending_input: VecDeque::new(),
             pending_output: VecDeque::new(),
             recent_user_buffer: String::new(),
@@ -123,15 +125,15 @@ impl BrainState {
     ) -> Option<char> {
         self.tick = self.tick.saturating_add(1);
         let mut stimulus_idx: Option<usize> = None;
-        let mut consumed_char = None;
         if let Some(ch) = self.pending_input.pop_front() {
-            consumed_char = Some(ch);
             let canonical = canonical_char(ch);
             let idx = self.ensure_symbol_node(canonical) as usize;
             stimulus_idx = Some(idx);
-            self.recent_user_buffer.push(canonical);
-            if self.recent_user_buffer.len() > 256 {
-                self.recent_user_buffer.remove(0);
+            if canonical != '\n' {
+                self.recent_user_buffer.push(canonical);
+                if self.recent_user_buffer.len() > 256 {
+                    self.recent_user_buffer.remove(0);
+                }
             }
             outgoing_mutations.push(MutationRecord {
                 kind: MutationKind::InputChar,
@@ -144,28 +146,32 @@ impl BrainState {
                 extra: 0.0,
             });
             *self.char_frequency.entry(canonical as u32).or_insert(0) += 1;
-            if let Some(prev) = self.recent_user_buffer.chars().rev().nth(1) {
+            if let Some(prev) = self.last_input_char {
                 *self
                     .transitions
                     .entry((prev as u32, canonical as u32))
                     .or_insert(0) += 1;
             }
-            let salience = if canonical == '\n' { 0.5 } else { 1.0 };
-            memory.push_input(self.tick, canonical, salience);
             if canonical == '\n' {
-                semantic.reinforce_from_context(&self.recent_user_buffer);
-                self.plan_response();
+                let message = self.recent_user_buffer.trim().to_string();
+                if !message.is_empty() {
+                    semantic.reinforce_from_context(&message);
+                    memory.observe_text(self.tick, &message, outgoing_mutations);
+                    self.plan_response(memory);
+                } else {
+                    self.emit_response_text("...\n");
+                }
                 self.recent_user_buffer.clear();
+                self.last_input_char = None;
+            } else {
+                self.last_input_char = Some(canonical);
             }
         }
 
         self.propagate_field(stimulus_idx, semantic, use_gpu);
         self.apply_plasticity(outgoing_mutations);
         self.apply_structural_rules(outgoing_mutations);
-        memory.decay(1);
-        if !self.recent_user_buffer.is_empty() {
-            memory.reinforce_overlap(&self.recent_user_buffer);
-        }
+        memory.decay_to_tick(self.tick, outgoing_mutations);
 
         let emitted = if let Some(ch) = self.pending_output.pop_front() {
             self.stats.emitted_chars = self.stats.emitted_chars.saturating_add(1);
@@ -211,10 +217,19 @@ impl BrainState {
             }
         }
 
-        if consumed_char == Some('\n') {
-            self.recent_user_buffer.clear();
-        }
         emitted
+    }
+
+    pub fn apply_correction(
+        &mut self,
+        memory: &mut MemoryState,
+        wrong: &str,
+        correct: &str,
+        outgoing_mutations: &mut Vec<MutationRecord>,
+    ) {
+        memory.apply_correction(self.tick, wrong, correct, outgoing_mutations);
+        let feedback = format!("corrigido: '{}' -> '{}'\n", wrong.trim(), correct.trim());
+        self.emit_response_text(&feedback);
     }
 
     fn propagate_field(&mut self, stimulus_idx: Option<usize>, semantic: &SemanticState, _use_gpu: bool) {
@@ -429,8 +444,16 @@ impl BrainState {
         self.delta_edges.len() - 1
     }
 
-    fn plan_response(&mut self) {
+    fn plan_response(&mut self, memory: &MemoryState) {
         if !self.pending_output.is_empty() {
+            return;
+        }
+        let recalls = memory.recall_for_text(&self.recent_user_buffer, 4);
+        if !recalls.is_empty() {
+            let mut response = String::from("entendi: ");
+            response.push_str(&recalls.join(" | "));
+            response.push('\n');
+            self.emit_response_text(&response);
             return;
         }
         let mut planned = String::new();
@@ -447,9 +470,7 @@ impl BrainState {
             current = next;
         }
         planned.push('\n');
-        for ch in planned.chars() {
-            self.pending_output.push_back(ch);
-        }
+        self.emit_response_text(&planned);
     }
 
     fn pick_associated_char(&mut self, current: char) -> char {
@@ -529,6 +550,12 @@ impl BrainState {
     pub fn set_delta_edge_weight(&mut self, from: u32, to: u32, weight: f32) {
         let idx = self.find_or_create_delta_edge(from, to);
         self.delta_edges[idx].weight = weight;
+    }
+
+    fn emit_response_text(&mut self, text: &str) {
+        for ch in text.chars() {
+            self.pending_output.push_back(ch);
+        }
     }
 }
 
