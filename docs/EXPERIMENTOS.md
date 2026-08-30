@@ -16,7 +16,7 @@ O binário executa quatro experimentos com um gerador determinístico interno.
 Cinco execuções independentes da suíte produziram o mesmo relatório:
 
 ```text
-SHA-256: BB701DA593B1697BF2B60456BCBDBC5346F4183F2FAC6E6EEAB850BBC0C6B0EB
+SHA-256: 56F85CF9BC1CD38146CEF14714A37BD64905C3B541CF4CC99C07AA566467E8BB
 ```
 
 ## Hipóteses e protocolo
@@ -76,3 +76,21 @@ de forma implícita.
 
 Enquanto essas rodadas não forem concluídas, os resultados são evidência de
 design para protótipos, não leis computacionais estabelecidas.
+
+## V5/Ω — rodada inicial
+
+A V5/Ω possui laboratório separado (`cargo run --bin axon_v5_lab`) e mantém a
+mesma restrição: perfis de custo e backends físicos são `Declared`, não
+`Measured`. A rodada confirma contratos de ProgramCell, população de mundos,
+intervenção ativa, rollback, localidade, Thought JIT e roteamento por precisão.
+
+| Métrica | Resultado |
+|---|---:|
+| ProgramCell em holdout / compressão | 100% / 2,0× |
+| Famílias de mundo retidas / intervenção discriminativa | 3/3 / sim |
+| Rollback / rota lógica após coativação | exato / 8 → 0 |
+| Thought JIT: compilação e deoptimization | sim / sim |
+| Backend de verificação / similaridade | CPU exato / HDC aproximado |
+
+O relatório completo, escopo e falsificações pendentes estão em
+`docs/V5_OMEGA.md`.

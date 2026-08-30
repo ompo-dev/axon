@@ -259,3 +259,23 @@ tempo; isso exige instrumentação de runtime e benchmarks comparativos antes de
 qualquer alegação de 10x, 100x ou 1000x. Codecs multimodais, handles zero-copy,
 world model, homeostase, garbage collector e currículo permanecem fases
 seguintes, guiadas por métricas e não por suposições.
+
+## V5/Ω experimental: cognição multi-substrato orientada a informação
+
+Arquivos: `src/core_v5/` e `src/experiments/v5_omega.rs`.
+
+A V5/Ω mantém V3/V4 como referência e continua isolada do runtime estável. Ela
+transforma a proposta de economia cognitiva em contratos testáveis: custos têm
+proveniência (`Declared` ou `Measured`), o scheduler escolhe utilidade por custo
+de compute/movimento/store/erase, ProgramCells só são promovidas após compressão
+e holdout, e toda alteração reversível preserva `before`, `after` e provenance.
+
+Também há uma população de modelos de mundo com diversidade estrutural e um
+planejador de intervenções que separa previsões concorrentes sem receber a
+classe-oráculo. O profiler compila trajetórias verificadas para macros
+cognitivas e deotimiza sob guard inválido. O compilador físico é apenas uma
+interface declarativa: operações exatas não podem ir para backend aproximado;
+similaridade pode receber perfil HDC/analógico no futuro.
+
+Nenhum dos custos V5 é telemetria física nesta fase. Resultados, limites e
+comandos reproduzíveis estão em `docs/V5_OMEGA.md`.

@@ -7,11 +7,13 @@ mod control;
 mod factorized;
 mod hypercell;
 mod jump;
+mod v5_omega;
 
 pub use control::{ControlReport, ResourceTotals};
 pub use factorized::GeneralizationReport;
 pub use hypercell::HypercellReport;
 pub use jump::JumpReport;
+pub use v5_omega::V5OmegaReport;
 
 /// Resultado completo de uma rodada do laboratório sintético.
 #[derive(Clone, Debug, PartialEq)]
@@ -20,6 +22,7 @@ pub struct ScientificReport {
     pub generalization: GeneralizationReport,
     pub jump: JumpReport,
     pub control: ControlReport,
+    pub v5_omega: V5OmegaReport,
 }
 
 /// Executa hipóteses pequenas, determinísticas e falsificáveis.
@@ -33,6 +36,7 @@ pub fn run_scientific_suite() -> ScientificReport {
         generalization: factorized::run(),
         jump: jump::run(),
         control: control::run(),
+        v5_omega: v5_omega::run(),
     }
 }
 
@@ -73,7 +77,24 @@ impl ScientificReport {
 - Mutações protegidas bifurcadas: {protected_forks}/{protected_mutations};\n\
   rollbacks exatos: {rollbacks}/{protected_mutations}.\n\
 - Conclusão: são estimativas declaradas de estratégia, não medição física; a\n\
-  próxima etapa exige instrumentação de bytes, tempo e energia no runtime real.\n",
+  próxima etapa exige instrumentação de bytes, tempo e energia no runtime real.\n\
+\n## 5. V5/Ω: programas, mundos e custo de informação
+\
+- ProgramCell induzido em holdout: {v5_program_accuracy:.1}%; compressão: {v5_compression:.1}x.
+\
+- Famílias estruturais preservadas: {v5_families}; intervenção ativa selecionada: {v5_intervention}.
+\
+- Rollback reversível exato: {v5_rollback}; conceitos ativos/dormentes: {v5_active}/{v5_dormant}.
+\
+- Custo lógico de rota antes/depois de coativação: {v5_route_before}/{v5_route_after}.
+\
+- Thought JIT compilou/deotimizou: {v5_jit_compiled}/{v5_jit_deoptimized}.
+\
+- Verificação exata em backend digital: {v5_exact}; similaridade em backend aproximado: {v5_approximate}.
+\
+- Conclusão: os custos e backends nesta etapa são declarados; a V5 valida
+\
+  contratos de seleção e reversibilidade, não eficiência física de chip.\n",
             hyper_trials = self.hypercell.trials,
             hyper_dimension = self.hypercell.dimension,
             dense_exact = self.hypercell.dense_exact_recovery * 100.0,
@@ -102,6 +123,19 @@ impl ScientificReport {
             protected_forks = self.control.protected_forks,
             protected_mutations = self.control.protected_mutations,
             rollbacks = self.control.rollback_successes,
+            v5_program_accuracy = self.v5_omega.program_holdout_accuracy * 100.0,
+            v5_compression = self.v5_omega.compression_ratio,
+            v5_families = self.v5_omega.population_families_retained,
+            v5_intervention = self.v5_omega.active_intervention_selected,
+            v5_rollback = self.v5_omega.reversible_rollback_exact,
+            v5_active = self.v5_omega.active_concepts,
+            v5_dormant = self.v5_omega.dormant_concepts,
+            v5_route_before = self.v5_omega.route_cost_before,
+            v5_route_after = self.v5_omega.route_cost_after,
+            v5_jit_compiled = self.v5_omega.thought_macro_compiled,
+            v5_jit_deoptimized = self.v5_omega.thought_macro_deoptimized,
+            v5_exact = self.v5_omega.exact_backend_is_digital,
+            v5_approximate = self.v5_omega.similarity_backend_is_approximate,
         );
         markdown.replace("\\\\n\\\\", "\\n")
     }
@@ -134,6 +168,17 @@ mod tests {
             report.control.rollback_successes,
             report.control.protected_mutations
         );
+        assert_eq!(report.v5_omega.program_holdout_accuracy, 1.0);
+        assert!(report.v5_omega.compression_ratio > 1.0);
+        assert_eq!(report.v5_omega.population_families_retained, 3);
+        assert!(report.v5_omega.active_intervention_selected);
+        assert!(report.v5_omega.reversible_rollback_exact);
+        assert!(report.v5_omega.active_concepts < report.v5_omega.dormant_concepts);
+        assert!(report.v5_omega.route_cost_after < report.v5_omega.route_cost_before);
+        assert!(report.v5_omega.thought_macro_compiled);
+        assert!(report.v5_omega.thought_macro_deoptimized);
+        assert!(report.v5_omega.exact_backend_is_digital);
+        assert!(report.v5_omega.similarity_backend_is_approximate);
     }
 
     #[test]
