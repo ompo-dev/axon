@@ -1,1 +1,12 @@
 /target
+
+# Python bytecode and local runtime artifacts
+__pycache__/
+*.py[cod]
+*.pkl
+*.pkl.*
+*.log
+*.tmp
+
+# Local stream produced by plataforma/servidor.py
+plataforma/stream.txt
