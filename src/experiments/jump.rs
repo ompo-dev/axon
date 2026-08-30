@@ -26,33 +26,28 @@ pub(super) fn run() -> JumpReport {
             let source = format!("a-{serial}-{kind:?}");
             let target = format!("b-{serial}-{kind:?}");
             let obvious = CausalModel::with_direct_cause(source.clone(), target.clone(), 256);
-            baseline_correct += u32::from(kind == WorldKind::Direct);
+            let contradiction = intervention_evidence(kind, &source, &target);
+            let adapted_choice = if obvious.counterfactual_loss(&contradiction) == 0 {
+                ModelClass::Direct
+            } else {
+                ModelClass::Other
+            };
+            baseline_correct += u32::from(adapted_choice == kind.into());
 
             // Sem intervenção, todos os mundos exibem a mesma correlação. O
             // avaliador recebe somente essa evidência, nunca o tipo verdadeiro.
             let observation_only =
                 Contradiction::between(source.clone(), target.clone()).with_shared_observations(8);
-            let observational_islands =
-                engine.reframe(&obvious, &observation_only, &NegativeArchive::default());
-            observation_only_correct +=
-                u32::from(engine.best(&observational_islands).is_some_and(|island| {
-                    kind == WorldKind::Reverse
-                        && island.proposal.kind == ReframeKind::ReverseCausality
-                }));
+            let (observational_choice, _) = select_model(&engine, &obvious, &observation_only);
+            observation_only_correct += u32::from(observational_choice == kind.into());
 
-            if kind == WorldKind::Direct {
-                reframe_correct += 1;
-                continue;
-            }
-
-            let contradiction = intervention_evidence(kind, &source, &target);
-            let islands = engine.reframe(&obvious, &contradiction, &NegativeArchive::default());
-            candidates_evaluated += islands.len() as u32;
-            reframe_correct += u32::from(
-                engine
-                    .best(&islands)
-                    .is_some_and(|island| island.proposal.kind == expected_kind(kind)),
-            );
+            // O tipo do mundo é usado apenas para gerar as observações do
+            // simulador. A decisão é tomada exclusivamente pela perda
+            // contrafactual do modelo atual e, se necessário, pela seleção de
+            // hipóteses do AbductiveEngine.
+            let (selected, evaluated) = select_model(&engine, &obvious, &contradiction);
+            candidates_evaluated += evaluated;
+            reframe_correct += u32::from(selected == kind.into());
         }
     }
 
@@ -74,12 +69,43 @@ enum WorldKind {
     Latent,
 }
 
-fn expected_kind(kind: WorldKind) -> ReframeKind {
-    match kind {
-        WorldKind::Direct => ReframeKind::RemovePremise,
-        WorldKind::Reverse => ReframeKind::ReverseCausality,
-        WorldKind::Latent => ReframeKind::IntroduceLatentCause,
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+enum ModelClass {
+    Direct,
+    Reverse,
+    Latent,
+    Other,
+}
+
+impl From<WorldKind> for ModelClass {
+    fn from(kind: WorldKind) -> Self {
+        match kind {
+            WorldKind::Direct => Self::Direct,
+            WorldKind::Reverse => Self::Reverse,
+            WorldKind::Latent => Self::Latent,
+        }
     }
+}
+
+fn select_model(
+    engine: &AbductiveEngine,
+    current: &CausalModel,
+    evidence: &Contradiction,
+) -> (ModelClass, u32) {
+    if current.counterfactual_loss(evidence) == 0 {
+        return (ModelClass::Direct, 0);
+    }
+
+    let islands = engine.reframe(current, evidence, &NegativeArchive::default());
+    let choice =
+        engine
+            .best(&islands)
+            .map_or(ModelClass::Other, |island| match island.proposal.kind {
+                ReframeKind::ReverseCausality => ModelClass::Reverse,
+                ReframeKind::IntroduceLatentCause => ModelClass::Latent,
+                _ => ModelClass::Other,
+            });
+    (choice, islands.len() as u32)
 }
 
 fn intervention_evidence(kind: WorldKind, source: &str, target: &str) -> Contradiction {
@@ -92,5 +118,48 @@ fn intervention_evidence(kind: WorldKind, source: &str, target: &str) -> Contrad
         WorldKind::Latent => base
             .with_counterfactual(Counterfactual::expect(source, target, false))
             .with_counterfactual(Counterfactual::expect(target, source, false)),
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn direct_world_is_retained_without_reframe() {
+        let model = CausalModel::with_direct_cause("a", "b", 256);
+        let evidence = intervention_evidence(WorldKind::Direct, "a", "b");
+
+        assert_eq!(
+            select_model(&AbductiveEngine::default(), &model, &evidence),
+            (ModelClass::Direct, 0)
+        );
+    }
+
+    #[test]
+    fn observation_only_cannot_identify_a_structural_alternative() {
+        let model = CausalModel::with_direct_cause("a", "b", 256);
+        let observation = Contradiction::between("a", "b").with_shared_observations(8);
+
+        assert_eq!(
+            select_model(&AbductiveEngine::default(), &model, &observation),
+            (ModelClass::Direct, 0)
+        );
+    }
+
+    #[test]
+    fn interventions_are_required_to_select_reverse_or_latent_models() {
+        let engine = AbductiveEngine::default();
+
+        for (world, expected) in [
+            (WorldKind::Reverse, ModelClass::Reverse),
+            (WorldKind::Latent, ModelClass::Latent),
+        ] {
+            let model = CausalModel::with_direct_cause("a", "b", 256);
+            let evidence = intervention_evidence(world, "a", "b");
+
+            assert!(model.counterfactual_loss(&evidence) > 0);
+            assert_eq!(select_model(&engine, &model, &evidence), (expected, 9));
+        }
     }
 }

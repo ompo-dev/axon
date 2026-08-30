@@ -121,6 +121,7 @@ mod tests {
         assert!(report.generalization.lookup_holdout_accuracy < 0.60);
         assert!(report.jump.reframe_intervention_accuracy > 0.99);
         assert!(report.jump.direct_adaptation_intervention_accuracy < 0.40);
+        assert!(report.jump.observational_only_identification_accuracy < 0.40);
         assert!(
             report.control.scheduled_estimated_use.microjoules
                 < report.control.always_deliberate_estimated_use.microjoules
