@@ -14,8 +14,10 @@ axon; a posição (permute) é a fase. Working memory = superposição com recê
 
 Roda: python cerebro_contexto.py   (numpy; usa vsa_core.py)
 """
+from copy import deepcopy
+
 import numpy as np
-from vsa_core import D, bind, bundle, permute, cos, ItemMemory
+from vsa_core import D, RNG, bind, bundle, permute, cos, ItemMemory
 
 K = 3                                          # tamanho da janela de contexto (ordem-n)
 
@@ -115,18 +117,23 @@ def demo():
 
 
 def _selftest():
-    b = ContextBrain(k=3)
-    # aprende uma frase e a reproduz a partir do contexto
-    b.perceive("a b c d a b c d a b c d".split())
-    g = b.generate(["a", "b"], 3)
-    assert g[:2] == ["a", "b"] and "c" in g, g
-    # contexto importa: prever de (a,b) tende a 'c'
-    p, _ = b.predict(["a", "b"])
-    assert p == "c", p
-    # aprende novo sem esquecer o antigo
-    b.perceive("x y z x y z x y z".split())
-    assert b.predict(["a", "b"])[0] == "c"          # não esqueceu
-    assert b.predict(["x", "y"])[0] == "z"          # aprendeu o novo
+    original_rng_state = deepcopy(RNG.bit_generator.state)
+    try:
+        RNG.bit_generator.state = np.random.default_rng(42).bit_generator.state
+        b = ContextBrain(k=3)
+        # aprende uma frase e a reproduz a partir do contexto
+        b.perceive("a b c d a b c d a b c d".split())
+        g = b.generate(["a", "b"], 3)
+        assert g[:2] == ["a", "b"] and "c" in g, g
+        # contexto importa: prever de (a,b) tende a 'c'
+        p, _ = b.predict(["a", "b"])
+        assert p == "c", p
+        # aprende novo sem esquecer o antigo
+        b.perceive("x y z x y z x y z".split())
+        assert b.predict(["a", "b"])[0] == "c"          # não esqueceu
+        assert b.predict(["x", "y"])[0] == "z"          # aprendeu o novo
+    finally:
+        RNG.bit_generator.state = original_rng_state
     print("[selftest] ok (contexto prevê k-grama; gera; aprende novo sem esquecer)")
 
 

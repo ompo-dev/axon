@@ -162,3 +162,100 @@ No `load_state`:
 - Linux ainda usa fallback de input por linha (sem raw mode completo).
 - Diversos warnings de `dead_code` ainda existem.
 - Path de GPU ainda e de deteccao, nao de execucao numerica acelerada completa.
+
+## Núcleo cognitivo V3 experimental
+
+Arquivos: `src/core_v3/`.
+
+O núcleo V3 é um simulador isolado: não altera o loop atual, a TUI ou o formato
+`.axon`. A integração só começa depois de benchmarks que comprovem seus
+invariantes.
+
+Substratos:
+
+1. `SemanticMesh`: fatos composicionais (`sujeito`, `relação`, `objeto`) com
+   assinatura hiperdimensional ternária.
+2. `DynamicField`: células dendríticas com ramos semântico, temporal, causal,
+   visual e linguístico. Só o ramo compatível com o evento muda.
+3. `EpisodicStore`: log imutável por API de eventos importantes, recuperado por
+   assinatura para preservar detalhes exatos fora do estado ativo.
+
+Fluxo:
+
+```text
+entrada já codificada -> AdaptiveEventCodec -> SalienceGate
+                                             -> DynamicField + EpisodicStore
+                     -> silêncio, se valor cognitivo baixo
+```
+
+O `AdaptiveEventCodec` é uma fronteira tipada, não um modelo de linguagem ou
+de visão completo: recebe assinatura semântica de um encoder externo e mantém
+resíduos multimodais em escalas independentes (byte, fonema, morfema, palavra,
+frase, conceito e intenção). Só resíduos acima de um limiar esparso são
+roteados. A experiência episódica indexa a assinatura semântica, enquanto os
+detalhes específicos da modalidade continuam separados.
+
+`SalienceGate` usa erro de previsão, relevância para objetivo, incerteza,
+ganho de informação, novidade e custo. Portanto um evento previsível, mas
+importante, ainda pode acordar o núcleo.
+
+O `DynamicField` preserva `eligibility traces` por ramo. Um `CreditPacket`
+válido aplica recompensa e erro de previsão exclusivamente a ramos que ficaram
+elegíveis — ou a uma célula endereçada — e ajusta sua plasticidade local; não
+há taxa de aprendizado global nem backpropagação pelo núcleo inteiro.
+
+`REFRAME` é separado de adaptação local. O motor abductivo gera ilhas de
+hipóteses independentes — remover premissa, inverter causalidade, introduzir
+mediador/causa latente, fundir/separar conceitos, criar relação/operador ou
+expandir dimensionalidade — e as elimina por testes contrafactuais. Hipóteses
+refutadas entram no `NegativeArchive` para não serem repetidas.
+
+O `ThoughtCompiler` transforma uma trajetória repetidamente bem-sucedida em
+`Circuit`, mas exige guards de contexto: condição inválida faz `Deoptimized`
+e devolve a execução ao caminho deliberativo.
+
+O `run_jump_benchmark()` atual é sintético e determinístico. Ele apenas prova
+que intervenções podem falsificar `A -> B` e selecionar uma causa latente;
+não demonstra descoberta científica geral nem superioridade sobre LLMs.
+
+## NEXUS V4 experimental: plano de controle cognitivo
+
+Arquivos: `src/core_v4/`.
+
+A V4 preserva a V3 como referência e introduz o plano de controle da proposta
+NEXUS, ainda sem integrar o loop, a TUI ou o formato `.axon` estáveis.
+
+```text
+request + sinais + capacidades disponíveis + candidatos
+                         ↓
+                 CognitiveScheduler
+                         ↓
+      estratégia + nível + orçamento máximo permitido
+```
+
+O scheduler não inventa uma ferramenta ou caminho de raciocínio: cada
+`CandidateStrategy` declara capacidades necessárias, confiança esperada e
+orçamento em eventos, bytes movidos e microjoules estimados. Candidatos sem
+capacidade disponível ou acima do orçamento são rejeitados antes da escolha.
+Ele privilegia uma resolução cognitiva baixa quando ela já é suficiente e só
+autoriza `REFRAME` quando a evidência combina resíduo estruturado, persistência,
+novidade e baixo ganho de adaptação.
+Quando esse limiar é atingido, uma estratégia `REFRAME` viável tem precedência;
+`Ask` só é fallback se não houver um `REFRAME` dentro das capacidades e do
+orçamento declarados.
+
+O quarto substrato, `ProceduralFabric`, compila apenas caminhos repetidamente
+verificados e mantém guards. Um guard inválido devolve a execução ao caminho
+geral por deoptimization.
+
+`MemoryFirewall` e `ReversibleJournal` definem a proteção inicial para
+aprendizado contínuo: conhecimento `Protected` recebe uma hipótese em ramo
+separado, nunca alteração in-place; o journal preserva `before` e `after` para
+rollback exato pela integração futura com os stores reais.
+
+Os contadores da V4 ainda são **estimativas declaradas pelos candidatos**, não
+medição de hardware. Portanto ela não demonstra economia de bytes, joules ou
+tempo; isso exige instrumentação de runtime e benchmarks comparativos antes de
+qualquer alegação de 10x, 100x ou 1000x. Codecs multimodais, handles zero-copy,
+world model, homeostase, garbage collector e currículo permanecem fases
+seguintes, guiadas por métricas e não por suposições.

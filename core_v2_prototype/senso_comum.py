@@ -18,8 +18,10 @@ Mecanismo VSA:
 
 Roda: python senso_comum.py   (numpy; usa vsa_core.py)
 """
+from copy import deepcopy
+
 import numpy as np
-from vsa_core import D, bind, bundle, cos, ItemMemory
+from vsa_core import D, RNG, bind, bundle, cos, ItemMemory
 
 
 class ConceptSpace:
@@ -110,21 +112,26 @@ def demo():
 
 
 def _selftest():
-    cs = ConceptSpace()
-    cs.learn_example("cadeira", ["assento", "pernas", "encosto"])
-    cs.learn_example("banco", ["assento", "pernas"])
-    cs.learn_example("mesa", ["tampo", "superficie"])
-    # objeto = cadeira base -> mais típico de cadeira
-    assert cs.classify(["assento", "pernas", "encosto"])[0][0] == "cadeira"
-    # sem encosto -> desliza p/ banco
-    assert cs.classify(["assento", "pernas"])[0][0] == "banco"
-    # tipicidade é graduada (valor real, não 0/1)
-    sims = dict(cs.classify(["assento", "pernas", "encosto"]))
-    assert 0.0 < sims["banco"] < sims["cadeira"]
-    # aprender move o protótipo (acumulador cresce)
-    a0 = cs.acc["cadeira"].copy()
-    cs.learn_example("cadeira", ["assento", "pernas", "encosto", "rodas"])
-    assert not np.array_equal(a0, cs.acc["cadeira"])
+    original_rng_state = deepcopy(RNG.bit_generator.state)
+    try:
+        RNG.bit_generator.state = np.random.default_rng(42).bit_generator.state
+        cs = ConceptSpace()
+        cs.learn_example("cadeira", ["assento", "pernas", "encosto"])
+        cs.learn_example("banco", ["assento", "pernas"])
+        cs.learn_example("mesa", ["tampo", "superficie"])
+        # objeto = cadeira base -> mais típico de cadeira
+        assert cs.classify(["assento", "pernas", "encosto"])[0][0] == "cadeira"
+        # sem encosto -> desliza p/ banco
+        assert cs.classify(["assento", "pernas"])[0][0] == "banco"
+        # tipicidade é graduada (valor real, não 0/1)
+        sims = dict(cs.classify(["assento", "pernas", "encosto"]))
+        assert 0.0 < sims["banco"] < sims["cadeira"]
+        # aprender move o protótipo (acumulador cresce)
+        a0 = cs.acc["cadeira"].copy()
+        cs.learn_example("cadeira", ["assento", "pernas", "encosto", "rodas"])
+        assert not np.array_equal(a0, cs.acc["cadeira"])
+    finally:
+        RNG.bit_generator.state = original_rng_state
     print("[selftest] ok (classificação graduada; desliza s/ encosto; protótipo se move)")
 
 
