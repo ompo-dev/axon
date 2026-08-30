@@ -302,3 +302,18 @@ ou o próprio verificador.
 Os dados atuais são determinísticos e usam `BTreeMap` com custo declarado.
 Não há persistência V6, inferência multi-modal, paralelismo, hardware ou
 alegação de economia física. Resultados e comandos estão em `docs/V6_OMEGA.md`.
+
+## V6-X / Ψ-IR experimental: realização física sem hardware presumido
+
+Arquivos: `src/core_v6/physical.rs` e `src/experiments/v6x_physics.rs`.
+
+A V6-X introduz `REALIZE`: a Ω-IR especifica a operação, precisão e latência;
+o `PhysicalCompiler` seleciona uma realização elegível. O custo inclui o
+Boundary Tax de encode, movimento, compute, decode, verificação, resfriamento,
+calibração e desgaste. Perfis de origem `Declared` e `Measured` não competem.
+
+`UNCOMPUTE` é seletivo: depois de comprometer o resultado, um scratch lógico
+reversível pode ser restaurado; porém `ERASE` continua a vencer quando custa
+menos ou quando não há reversibilidade válida. CPU, p-bit, analógico,
+fotônica e quantum são somente perfis testados em laboratório — não drivers
+nem medições de eficiência física. Detalhes em `docs/V6_X.md`.

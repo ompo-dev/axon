@@ -33,7 +33,7 @@ ativa de experimento usa apenas desacordo entre previsões e custo declarado.
 Cinco execuções independentes produziram o mesmo relatório:
 
 ```text
-SHA-256: 0EFBBF9F67E0251C0747426E19B5BA103FCC792DE929F6F3B938630D3B7A99AD
+SHA-256: D247F632130A42A38E0B4A8DF826EF9DDC548AA66A1A0963EE86FDF8721F76FA
 ```
 
 ## Resultados do corte V6.0

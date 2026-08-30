@@ -9,6 +9,7 @@ mod hypercell;
 mod jump;
 mod v5_omega;
 mod v6_omega;
+mod v6x_physics;
 
 pub use control::{ControlReport, ResourceTotals};
 pub use factorized::GeneralizationReport;
@@ -16,6 +17,7 @@ pub use hypercell::HypercellReport;
 pub use jump::JumpReport;
 pub use v5_omega::V5OmegaReport;
 pub use v6_omega::V6OmegaReport;
+pub use v6x_physics::V6XPhysicsReport;
 
 /// Resultado completo de uma rodada do laboratório sintético.
 #[derive(Clone, Debug, PartialEq)]
@@ -26,6 +28,7 @@ pub struct ScientificReport {
     pub control: ControlReport,
     pub v5_omega: V5OmegaReport,
     pub v6_omega: V6OmegaReport,
+    pub v6_x: V6XPhysicsReport,
 }
 
 /// Executa hipóteses pequenas, determinísticas e falsificáveis.
@@ -41,6 +44,7 @@ pub fn run_scientific_suite() -> ScientificReport {
         control: control::run(),
         v5_omega: v5_omega::run(),
         v6_omega: v6_omega::run(),
+        v6_x: v6x_physics::run(),
     }
 }
 
@@ -161,6 +165,16 @@ impl ScientificReport {
             self.v6_omega.negative_knowledge_retained,
             self.v6_omega.patch_is_safely_limited,
         );
+        let markdown = format!(
+            "{markdown}\n## 7. V6-X / Ψ-IR: realização física auditável\n- Prova exata digital: {}; Boundary Tax bloqueou p-bit falso-barato: {}; p-bit co-localizado para sampling: {}.\n- Proveniência mista recusada: {}; UNCOMPUTE válido/barato: {}; ERASE quando mais barato: {}; custos declarados: {}.\n- Conclusão: são planos declarados de realização, não medições de hardware físico.\n",
+            self.v6_x.exact_verification_uses_digital,
+            self.v6_x.boundary_tax_rejects_false_pbit_win,
+            self.v6_x.pbit_sampling_selected_when_colocated,
+            self.v6_x.mixed_cost_provenance_rejected,
+            self.v6_x.uncompute_selected_when_valid_and_cheaper,
+            self.v6_x.erase_selected_when_uncompute_is_costlier,
+            self.v6_x.all_selected_costs_are_declared,
+        );
         markdown.replace("\\\\n\\\\", "\\n")
     }
 }
@@ -217,6 +231,13 @@ mod tests {
         assert!(report.v6_omega.active_experiment_selected);
         assert!(report.v6_omega.negative_knowledge_retained);
         assert!(report.v6_omega.patch_is_safely_limited);
+        assert!(report.v6_x.exact_verification_uses_digital);
+        assert!(report.v6_x.boundary_tax_rejects_false_pbit_win);
+        assert!(report.v6_x.pbit_sampling_selected_when_colocated);
+        assert!(report.v6_x.mixed_cost_provenance_rejected);
+        assert!(report.v6_x.uncompute_selected_when_valid_and_cheaper);
+        assert!(report.v6_x.erase_selected_when_uncompute_is_costlier);
+        assert!(report.v6_x.all_selected_costs_are_declared);
     }
 
     #[test]

@@ -11,6 +11,7 @@ mod learning;
 mod ledger;
 mod message;
 mod metrics;
+mod physical;
 mod program;
 mod runtime;
 mod validation;
@@ -32,6 +33,11 @@ pub use message::{
     CognitiveMessage, MessageDisposition, MessagePayload, MessageScheduler, SchedulerTier,
 };
 pub use metrics::CognitiveMetrics;
+pub use physical::{
+    CleanupAction, CleanupOption, CleanupPlan, PhysicalBackend, PhysicalCompiler, PhysicalCost,
+    PhysicalCostUnit, PhysicalOperation, PhysicalOperationKind, PhysicalPlan, PhysicalProfile,
+    PhysicalStateKind, PrecisionRequirement, RealizationError, ReversibleScratch,
+};
 pub use program::{
     Guard, OpCode, Program, ProgramDispatch, ProgramLibrary, ProgramStats, ProgramStatus,
     ProgramVm, ReasoningTrace, TraceStep, Value, ValueType, VmOutcome,
@@ -53,5 +59,6 @@ mod tests {
         let _ = ProgramVm;
         let _ = LearnabilityGate;
         let _ = ValidationKernel;
+        let _ = PhysicalCompiler;
     }
 }

@@ -16,7 +16,7 @@ O binário executa quatro experimentos com um gerador determinístico interno.
 Cinco execuções independentes da suíte produziram o mesmo relatório:
 
 ```text
-SHA-256: 4B01141344094663239BB97F3DF863690654CAD6D31CE149A6A58516367813BE
+SHA-256: 51376BA2E69E985F137880B8A2F6CF23F28915FFCDB64990C09ABFD6466CE72A
 ```
 
 ## Hipóteses e protocolo
@@ -112,10 +112,33 @@ Learnability Gate, conhecimento negativo e limite de patch pelo kernel.
 Cinco execuções independentes de `axon_v6_lab` tiveram saída idêntica:
 
 ```text
-SHA-256: 0EFBBF9F67E0251C0747426E19B5BA103FCC792DE929F6F3B938630D3B7A99AD
+SHA-256: D247F632130A42A38E0B4A8DF826EF9DDC548AA66A1A0963EE86FDF8721F76FA
 ```
 
 Ela prova apenas esses contratos determinísticos. `BTreeMap`, 64 bytes lógicos
 por entrada e `CostVector::Declared` não são banco de dados, telemetria de RAM,
 medição de energia ou benchmark de escala. O escopo completo e as próximas
 falsificações estão em `docs/V6_OMEGA.md`.
+
+## V6-X / Ψ-IR — Physics Compiler em simulação
+
+Execute:
+
+```powershell
+cargo test
+cargo run --bin axon_v6x_lab
+```
+
+O laboratório valida que operação exata permanece digital; custo de conversão
+impede escolher um p-bit aparentemente barato; sampling aproximado pode usar
+p-bit co-localizado; custos `Declared`/`Measured` mistos são recusados; e
+`UNCOMPUTE` só vence quando é válido e mais barato que `ERASE`.
+
+Cinco execuções produziram o mesmo relatório:
+
+```text
+SHA-256: 6CA5DF539F8A1E4BBFDF2CA7B882C7A399211D3A9173617AEC30DF53BD79A20F
+```
+
+São perfis e custos abstratos declarados, não medições de chip, energia,
+quantum advantage ou hardware analógico. O escopo está em `docs/V6_X.md`.
