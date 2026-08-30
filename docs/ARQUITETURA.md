@@ -279,3 +279,26 @@ similaridade pode receber perfil HDC/analógico no futuro.
 
 Nenhum dos custos V5 é telemetria física nesta fase. Resultados, limites e
 comandos reproduzíveis estão em `docs/V5_OMEGA.md`.
+
+## V6/Ω6 experimental: Factors, ledger e programas verificáveis
+
+Arquivos: `src/core_v6/` e `src/experiments/v6_omega.rs`.
+
+A V6 mantém os núcleos V3–V5 como referências isoladas e implementa o primeiro
+corte da Factor Fabric. Um `Factor` declara representação, dependências,
+domínio de validade, proveniência e metadados de aprendizado. Mensagens de
+baixa prioridade são suprimidas localmente; as restantes passam por filas
+local/regional/global e ativam somente o Factor destino dentro de orçamento
+explícito de operações e bytes.
+
+O `EpistemicLedger` nunca sobrescreve uma crença: mantém revisões e conflitos
+locais, escolhe por domínio válido, especificidade e custo, e guarda caminhos
+refutados como conhecimento negativo. O VM executa uma Ω-IR segura e promove
+somente traços verificados; guards inválidos causam deoptimization. O
+`LearnabilityGate` separa resolver, adaptar, buscar evidência e pedir
+`REFRAME`. O `ValidationKernel` impede que patches alterem kernel, benchmarks
+ou o próprio verificador.
+
+Os dados atuais são determinísticos e usam `BTreeMap` com custo declarado.
+Não há persistência V6, inferência multi-modal, paralelismo, hardware ou
+alegação de economia física. Resultados e comandos estão em `docs/V6_OMEGA.md`.

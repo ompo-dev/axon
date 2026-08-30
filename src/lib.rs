@@ -3,4 +3,5 @@
 pub mod core_v3;
 pub mod core_v4;
 pub mod core_v5;
+pub mod core_v6;
 pub mod experiments;

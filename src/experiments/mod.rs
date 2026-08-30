@@ -8,12 +8,14 @@ mod factorized;
 mod hypercell;
 mod jump;
 mod v5_omega;
+mod v6_omega;
 
 pub use control::{ControlReport, ResourceTotals};
 pub use factorized::GeneralizationReport;
 pub use hypercell::HypercellReport;
 pub use jump::JumpReport;
 pub use v5_omega::V5OmegaReport;
+pub use v6_omega::V6OmegaReport;
 
 /// Resultado completo de uma rodada do laboratório sintético.
 #[derive(Clone, Debug, PartialEq)]
@@ -23,6 +25,7 @@ pub struct ScientificReport {
     pub jump: JumpReport,
     pub control: ControlReport,
     pub v5_omega: V5OmegaReport,
+    pub v6_omega: V6OmegaReport,
 }
 
 /// Executa hipóteses pequenas, determinísticas e falsificáveis.
@@ -37,6 +40,7 @@ pub fn run_scientific_suite() -> ScientificReport {
         jump: jump::run(),
         control: control::run(),
         v5_omega: v5_omega::run(),
+        v6_omega: v6_omega::run(),
     }
 }
 
@@ -137,6 +141,26 @@ impl ScientificReport {
             v5_exact = self.v5_omega.exact_backend_is_digital,
             v5_approximate = self.v5_omega.similarity_backend_is_approximate,
         );
+        let markdown = format!(
+            "{markdown}\n## 6. V6/Ω6: Factors, ledger e execução adaptativa\n- Fatos indexados/one-shot retido: {}/{}; working set local: {} Factor; ABR: {:.4}.\n- Supersessão nova/histórico: {}/{}; domínio barato/abrangente: {}/{}.\n- Mensagens suprimidas/processadas: {}/{}; Thought JIT compilou/deotimizou/equivalente: {}/{}/{}.\n- Learnability Gate completo/experimento ativo: {}/{}; conhecimento negativo/patch limitado: {}/{}.\n- Conclusão: a V6 valida contratos determinísticos para Factors, trabalho ativo, conhecimento versionado e programas verificáveis; não mede hardware ou escalabilidade industrial.\n",
+            self.v6_omega.facts_stored,
+            self.v6_omega.one_shot_fact_retained,
+            self.v6_omega.active_factors_for_local_query,
+            self.v6_omega.active_byte_ratio,
+            self.v6_omega.supersession_current_is_new,
+            self.v6_omega.supersession_history_len,
+            self.v6_omega.cheap_domain_model_selected,
+            self.v6_omega.broad_domain_model_selected,
+            self.v6_omega.messages_suppressed,
+            self.v6_omega.messages_processed,
+            self.v6_omega.jit_compiled,
+            self.v6_omega.jit_deoptimized,
+            self.v6_omega.jit_equivalent_result,
+            self.v6_omega.learnability_gate_complete,
+            self.v6_omega.active_experiment_selected,
+            self.v6_omega.negative_knowledge_retained,
+            self.v6_omega.patch_is_safely_limited,
+        );
         markdown.replace("\\\\n\\\\", "\\n")
     }
 }
@@ -179,6 +203,20 @@ mod tests {
         assert!(report.v5_omega.thought_macro_deoptimized);
         assert!(report.v5_omega.exact_backend_is_digital);
         assert!(report.v5_omega.similarity_backend_is_approximate);
+        assert!(report.v6_omega.one_shot_fact_retained);
+        assert!(report.v6_omega.active_byte_ratio < 0.01);
+        assert!(report.v6_omega.supersession_current_is_new);
+        assert!(report.v6_omega.cheap_domain_model_selected);
+        assert!(report.v6_omega.broad_domain_model_selected);
+        assert_eq!(report.v6_omega.messages_suppressed, 1);
+        assert_eq!(report.v6_omega.messages_processed, 1);
+        assert!(report.v6_omega.jit_compiled);
+        assert!(report.v6_omega.jit_deoptimized);
+        assert!(report.v6_omega.jit_equivalent_result);
+        assert!(report.v6_omega.learnability_gate_complete);
+        assert!(report.v6_omega.active_experiment_selected);
+        assert!(report.v6_omega.negative_knowledge_retained);
+        assert!(report.v6_omega.patch_is_safely_limited);
     }
 
     #[test]

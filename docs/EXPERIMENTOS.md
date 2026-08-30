@@ -16,7 +16,7 @@ O binário executa quatro experimentos com um gerador determinístico interno.
 Cinco execuções independentes da suíte produziram o mesmo relatório:
 
 ```text
-SHA-256: 56F85CF9BC1CD38146CEF14714A37BD64905C3B541CF4CC99C07AA566467E8BB
+SHA-256: 4B01141344094663239BB97F3DF863690654CAD6D31CE149A6A58516367813BE
 ```
 
 ## Hipóteses e protocolo
@@ -94,3 +94,28 @@ intervenção ativa, rollback, localidade, Thought JIT e roteamento por precisã
 
 O relatório completo, escopo e falsificações pendentes estão em
 `docs/V5_OMEGA.md`.
+
+## V6/Ω6 — primeiro corte de integração experimental
+
+Execute:
+
+```powershell
+cargo test --lib core_v6
+cargo run --bin axon_v6_lab
+```
+
+Esta rodada verifica 257 fatos sintéticos com retenção one-shot, um working set
+de 1 Factor (ABR lógico de 0,0039), supersessão de duas revisões, escolha de
+modelo por domínio/custo, supressão local de mensagem, JIT com deoptimization,
+Learnability Gate, conhecimento negativo e limite de patch pelo kernel.
+
+Cinco execuções independentes de `axon_v6_lab` tiveram saída idêntica:
+
+```text
+SHA-256: 0EFBBF9F67E0251C0747426E19B5BA103FCC792DE929F6F3B938630D3B7A99AD
+```
+
+Ela prova apenas esses contratos determinísticos. `BTreeMap`, 64 bytes lógicos
+por entrada e `CostVector::Declared` não são banco de dados, telemetria de RAM,
+medição de energia ou benchmark de escala. O escopo completo e as próximas
+falsificações estão em `docs/V6_OMEGA.md`.
