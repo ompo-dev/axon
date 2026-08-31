@@ -184,3 +184,24 @@ O sweep usa 1.000.000 Factors materializados e separa construção, paridade
 semântica e execução cronometrada. Custos do semiring continuam declarados;
 tempo de CPU local não é apresentado como energia. Escopo, resultados e limites:
 `docs/AXON_LAMBDA.md`.
+
+## AXON-Λ² — grafos gerais restritos e Auto-LIFT certificado
+
+Este corte mede a primeira generalização verificável: DAGs e SCCs classificados
+por estrutura, fingerprint de dependências, e um Auto-LIFT exato que descobre
+Sources exchangeable de um `max` comutativo antes de comprimir. A cor é somente
+candidata; o certificado é obrigatório.
+
+```powershell
+cargo test --lib core_lambda
+cargo test --bin axon_lambda_squared_physical_sweep
+cargo run --bin axon_lambda_squared_lab
+cargo run --release --bin axon_lambda_squared_physical_sweep -- --runs 3 --factors 1000000
+```
+
+No host local, o sweep materializou 1.000.001 Factors, descobriu e certificou
+uma classe de 1.000.000 Sources em 78,757 ms p50, preservou os checksums em
+8/8 UNLIFTs, e mediu 9,351 ms p50 para full contra 4 ns p50 para o caminho
+lifted já certificado. O custo da descoberta é separado e o escopo não inclui
+automorfismos gerais, LIFT aproximado, energia ou hardware especializado.
+Detalhes e limitações: `docs/AXON_LAMBDA_SQUARED.md`.

@@ -1,9 +1,15 @@
 //! AXON-Λ: kernel matemático independente do backend para contratos, deltas e quotients.
 
+mod autolift;
 mod contract;
 mod cost;
 mod fabric;
+mod general;
 mod quotient;
+
+pub use autolift::{
+    AutoLiftError, CertifiedAutoLift, LiftCertificate, LiftedClass as AutoLiftedClass, LocalUnlift,
+};
 
 pub use contract::{
     ContractedMorphism, DecisionCertificate, MorphismImplementation, RealizationError,
@@ -12,6 +18,11 @@ pub use contract::{
 pub use cost::{CostError, CostVector, CostWeights, ParetoFrontier};
 pub use fabric::{
     AdaptiveMode, ChainFabric, CognitiveSlice, Demand, EvidenceDelta, FabricError, QueryResult,
+};
+pub use general::{
+    DependencyFingerprint, FixpointCertificate, GeneralFactor, GeneralGraph, GeneralRule,
+    GraphDelta, GraphError, GraphEvaluation, GraphQueryResult, GraphSlice, StructuralMode,
+    VersionedDependency,
 };
 pub use quotient::{LiftedClass, LiftedPopulation, QuotientError};
 
@@ -316,6 +327,162 @@ mod tests {
                 .unwrap()
                 .replace("\r\n", "\n"),
             canonical_conformance_journal()
+        );
+    }
+
+    #[test]
+    fn lambda_squared_delta_matches_full_for_a_dag_and_carries_dependencies() {
+        let graph = general::GeneralGraph::new(vec![
+            general::GeneralFactor::source(2),
+            general::GeneralFactor::affine(0, 3, 1),
+            general::GeneralFactor::affine(1, 5, 2),
+            general::GeneralFactor::max(vec![1, 2], -10),
+            general::GeneralFactor::source(88),
+        ])
+        .unwrap();
+
+        let full = graph
+            .full_query(3, general::GraphDelta::replace_source(0, 7))
+            .unwrap();
+        let incremental = graph
+            .query(3, general::GraphDelta::replace_source(0, 7))
+            .unwrap();
+
+        assert_eq!(incremental.mode, general::StructuralMode::DeltaPropagation);
+        assert_eq!(incremental.value, full.value);
+        assert!(
+            graph
+                .delta_overlay_matches_full(general::GraphDelta::replace_source(0, 7))
+                .unwrap()
+        );
+        assert!(
+            incremental.dependency.validates(
+                graph.graph_digest(),
+                &graph
+                    .revisions_after(general::GraphDelta::replace_source(0, 7))
+                    .unwrap()
+            )
+        );
+    }
+
+    #[test]
+    fn lambda_squared_classifies_monotone_and_contractive_sccs_and_falls_back_safely() {
+        let monotone = general::GeneralGraph::new(vec![
+            general::GeneralFactor::source(5),
+            general::GeneralFactor::max(vec![0, 2], 0),
+            general::GeneralFactor::max(vec![1], 0),
+        ])
+        .unwrap();
+        let monotone_result = monotone
+            .query(2, general::GraphDelta::replace_source(0, 9))
+            .unwrap();
+        assert_eq!(
+            monotone_result.mode,
+            general::StructuralMode::MonotoneFixpoint
+        );
+        assert_eq!(monotone_result.value, 9);
+        assert!(
+            monotone_result
+                .fixpoints
+                .iter()
+                .any(|certificate| certificate.residual_max == 0)
+        );
+
+        let contractive = general::GeneralGraph::new(vec![
+            general::GeneralFactor::source(0),
+            general::GeneralFactor::contractive_half(vec![0, 2], 64),
+            general::GeneralFactor::contractive_half(vec![1], 64),
+        ])
+        .unwrap();
+        let contractive_result = contractive
+            .query(2, general::GraphDelta::replace_source(0, 32))
+            .unwrap();
+        assert_eq!(
+            contractive_result.mode,
+            general::StructuralMode::ContractiveFixpoint
+        );
+        assert_eq!(contractive_result.value, 63);
+        assert!(contractive_result.fixpoints.iter().any(|certificate| {
+            certificate.lipschitz_numerator == Some(1)
+                && certificate.lipschitz_denominator == Some(2)
+                && certificate.residual_max == 0
+        }));
+
+        let negative_contractive = general::GeneralGraph::new(vec![
+            general::GeneralFactor::source(-5),
+            general::GeneralFactor::contractive_half(vec![0, 2], -4),
+            general::GeneralFactor::contractive_half(vec![1], -4),
+        ])
+        .unwrap();
+        let negative_result = negative_contractive
+            .query(2, general::GraphDelta::replace_source(0, -5))
+            .unwrap();
+        assert_eq!(
+            negative_result.mode,
+            general::StructuralMode::ContractiveFixpoint
+        );
+        assert_eq!(negative_result.value, -4);
+        assert!(
+            negative_result
+                .fixpoints
+                .iter()
+                .any(|certificate| certificate.residual_max == 0)
+        );
+
+        let opaque_cycle = general::GeneralGraph::new(vec![
+            general::GeneralFactor::opaque_constant(vec![1], 17),
+            general::GeneralFactor::opaque_constant(vec![0], 23),
+        ])
+        .unwrap();
+        let fallback = opaque_cycle.evaluate().unwrap();
+        assert_eq!(fallback.mode, general::StructuralMode::FullFallback);
+        assert_eq!(fallback.values, vec![17, 23]);
+    }
+
+    #[test]
+    fn lambda_squared_auto_lift_requires_a_certificate_and_unlifts_only_the_changed_member() {
+        let graph = general::GeneralGraph::new(vec![
+            general::GeneralFactor::source(7),
+            general::GeneralFactor::source(7),
+            general::GeneralFactor::source(7),
+            general::GeneralFactor::source(7),
+            general::GeneralFactor::source(7),
+            general::GeneralFactor::source(7),
+            general::GeneralFactor::source(2),
+            general::GeneralFactor::max(vec![0, 1, 2, 3, 4, 5, 6], -10),
+        ])
+        .unwrap();
+        let lift = autolift::CertifiedAutoLift::discover(&graph).unwrap();
+
+        assert_eq!(lift.classes().len(), 1);
+        assert_eq!(lift.classes()[0].members.len(), 6);
+        assert!(lift.verify(&graph));
+        assert_eq!(
+            lift.lifted_max(&graph, 7).unwrap(),
+            graph.base_value(7).unwrap()
+        );
+
+        let unlift = lift.unlift(2, 99).unwrap();
+        let full = graph
+            .full_query(7, general::GraphDelta::replace_source(2, 99))
+            .unwrap();
+        assert_eq!(unlift.lifted_max(&lift, &graph, 7).unwrap(), full.value);
+        assert_eq!(unlift.specialized_members(), 1);
+        assert_eq!(unlift.remaining_members(), 5);
+        assert_eq!(unlift.member(), 2);
+
+        let non_commutative = general::GeneralGraph::new(vec![
+            general::GeneralFactor::source(7),
+            general::GeneralFactor::source(7),
+            general::GeneralFactor::affine(0, 1, 0),
+            general::GeneralFactor::affine(1, 1, 0),
+        ])
+        .unwrap();
+        assert!(
+            autolift::CertifiedAutoLift::discover(&non_commutative)
+                .unwrap()
+                .classes()
+                .is_empty()
         );
     }
 }

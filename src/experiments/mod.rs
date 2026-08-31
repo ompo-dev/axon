@@ -8,6 +8,7 @@ mod factorized;
 mod hypercell;
 mod jump;
 mod lambda_kernel;
+mod lambda_squared;
 mod v5_omega;
 mod v6_omega;
 mod v6x_physics;
@@ -19,6 +20,7 @@ pub use factorized::GeneralizationReport;
 pub use hypercell::HypercellReport;
 pub use jump::JumpReport;
 pub use lambda_kernel::LambdaKernelReport;
+pub use lambda_squared::LambdaSquaredReport;
 pub use v5_omega::V5OmegaReport;
 pub use v6_omega::V6OmegaReport;
 pub use v6x_physics::V6XPhysicsReport;
@@ -38,6 +40,7 @@ pub struct ScientificReport {
     pub v7_morphogenic: V7MorphogenicReport,
     pub v7_x: V7XContractiveReport,
     pub lambda: LambdaKernelReport,
+    pub lambda_squared: LambdaSquaredReport,
 }
 
 /// Executa hipóteses pequenas, determinísticas e falsificáveis.
@@ -57,6 +60,7 @@ pub fn run_scientific_suite() -> ScientificReport {
         v7_morphogenic: v7_morphogenic::run(),
         v7_x: v7x_contractive::run(),
         lambda: lambda_kernel::run(),
+        lambda_squared: lambda_squared::run(),
     }
 }
 
@@ -236,6 +240,17 @@ impl ScientificReport {
             self.lambda.lifted_classes,
             self.lambda.canonical_journal_available,
         );
+        let markdown = format!(
+            "{markdown}\n## 11. AXON-Λ²: cálculo de grafo geral restrito\n- DAG delta/full e fingerprint: {}/{}; SCC monotônica/contractiva certificadas: {}/{}.\n- Ciclo opaco cai para full: {}; Auto-LIFT certificado/classes: {}/{}; UNLIFT local exato: {}.\n- Conclusão: Auto-LIFT cobre somente Sources exchangeable alimentando `max` comutativo; cor igual não é tomada como prova de equivalência.\n",
+            self.lambda_squared.dag_delta_matches_full,
+            self.lambda_squared.dag_dependency_certificate_valid,
+            self.lambda_squared.monotone_scc_certified,
+            self.lambda_squared.contractive_scc_certified,
+            self.lambda_squared.opaque_cycle_falls_back_to_full,
+            self.lambda_squared.auto_lift_verified,
+            self.lambda_squared.auto_lift_classes,
+            self.lambda_squared.unlift_matches_full,
+        );
         markdown.replace("\\\\n\\\\", "\\n")
     }
 }
@@ -313,6 +328,9 @@ mod tests {
         assert!(report.lambda.local_matches_full);
         assert!(report.lambda.global_full_selected);
         assert!(report.lambda.overlay_matches_full_state);
+        assert!(report.lambda_squared.dag_delta_matches_full);
+        assert!(report.lambda_squared.contractive_scc_certified);
+        assert!(report.lambda_squared.auto_lift_verified);
     }
 
     #[test]

@@ -351,3 +351,22 @@ materializado por overlay esparso, e o custo multiobjetivo permanece em fronteir
 Pareto declarada. `LIFT` neste corte agrupa somente valores explicitamente
 iguais; descoberta de simetria, DAGs gerais, e-graphs e Lean permanecem
 falsificações futuras. Detalhes e medição física: `docs/AXON_LAMBDA.md`.
+
+## AXON-Λ² experimental: cálculo estrutural certificado
+
+Arquivos: `src/core_lambda/general.rs`, `src/core_lambda/autolift.rs`,
+`src/experiments/lambda_squared.rs` e os binários `axon_lambda_squared_*`.
+
+AXON-Λ² adiciona um grafo dirigido materializado e calcula SCCs antes de
+escolher uma estratégia. Um DAG com Rules deriváveis pode usar
+`DeltaPropagation`; SCCs de `max` usam fixpoint monotônico; SCCs de
+`ContractiveHalf` emitem certificado com `L=1/2`; uma classe opaca conhecida
+cai para `FullFallback`. Uma classe cíclica não suportada é recusada em vez de
+produzir resultado não certificado.
+
+O primeiro Auto-LIFT é propositalmente conservador. Colour refinement encontra
+somente candidatos e um certificado verifica Sources indistinguíveis que
+alimentam um `max` comutativo. UNLIFT separa apenas o membro alterado. Todo
+resultado traz um fingerprint das dependências e revisões do goal. Isso não é
+detecção geral de automorfismos, LIFT aproximado, Derivative JIT ou um runtime
+concorrente. Resultados e limites: `docs/AXON_LAMBDA_SQUARED.md`.
