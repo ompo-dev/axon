@@ -331,3 +331,23 @@ deltas; `CognitiveCapitalRuntime` promove somente uma regra que conferiu com a
 execução interpretada. Os quatro cortes são imutáveis e experimentais, sem
 integração ainda ao runtime estável. A medição real e os limites estão em
 `docs/V7_X_CONTRACTIVE.md`.
+
+## AXON-Λ experimental: especificação e cone cognitivo
+
+Arquivos: `src/core_lambda/`, `src/experiments/lambda_kernel.rs` e os binários
+`axon_lambda_*`.
+
+AXON-Λ introduz uma camada semântica independente de backend. Um
+`ContractedMorphism` declara identidade, assinatura, digest da regra,
+precondições, garantias, erro e força de verificação. Uma realização pode
+substituir outra apenas por refinamento; custo não compensa perda semântica ou
+um certificado de decisão quebrado.
+
+No primeiro domínio executável — cadeias de Factors afins materializadas — o
+runtime separa o cone de demanda `B_g` do cone de mudança `F_Δ` e executa a
+interseção ativa. Uma cascata que atravessa o goal ainda seleciona
+`FullRecompute`. O caminho delta é verificado contra o estado inteiro
+materializado por overlay esparso, e o custo multiobjetivo permanece em fronteira
+Pareto declarada. `LIFT` neste corte agrupa somente valores explicitamente
+iguais; descoberta de simetria, DAGs gerais, e-graphs e Lean permanecem
+falsificações futuras. Detalhes e medição física: `docs/AXON_LAMBDA.md`.

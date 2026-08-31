@@ -163,3 +163,24 @@ lógicos quando o executável declara explicitamente esse limite; eles não são
 apresentados como alocação física integral. Resultados, checksums, limites e
 falsificações pendentes: `docs/V7_MORPHOGENESIS.md` e
 `docs/V7_X_CONTRACTIVE.md`.
+
+## AXON-Λ — contratos e Demand × Delta
+
+O corte AXON-Λ mantém Rust como uma realização de uma especificação semântica
+restrita. Ele testa refinamento contratual, custo Pareto declarado, o cone
+`B_g ∩ F_Δ`, fallback explícito de delta para recomputação global, quotient
+exato (`LIFT`) e um micro-journal igual entre Rust e Python.
+
+```powershell
+cargo test --lib core_lambda
+cargo test --bin axon_lambda_physical_sweep
+cargo run --bin axon_lambda_lab
+cargo run --bin axon_lambda_conformance
+python tools/axon_lambda_conformance.py
+cargo run --release --bin axon_lambda_physical_sweep -- --runs 3 --factors 1000000 --chain-len 1000
+```
+
+O sweep usa 1.000.000 Factors materializados e separa construção, paridade
+semântica e execução cronometrada. Custos do semiring continuam declarados;
+tempo de CPU local não é apresentado como energia. Escopo, resultados e limites:
+`docs/AXON_LAMBDA.md`.

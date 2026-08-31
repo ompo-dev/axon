@@ -7,6 +7,7 @@ mod control;
 mod factorized;
 mod hypercell;
 mod jump;
+mod lambda_kernel;
 mod v5_omega;
 mod v6_omega;
 mod v6x_physics;
@@ -17,6 +18,7 @@ pub use control::{ControlReport, ResourceTotals};
 pub use factorized::GeneralizationReport;
 pub use hypercell::HypercellReport;
 pub use jump::JumpReport;
+pub use lambda_kernel::LambdaKernelReport;
 pub use v5_omega::V5OmegaReport;
 pub use v6_omega::V6OmegaReport;
 pub use v6x_physics::V6XPhysicsReport;
@@ -35,6 +37,7 @@ pub struct ScientificReport {
     pub v6_x: V6XPhysicsReport,
     pub v7_morphogenic: V7MorphogenicReport,
     pub v7_x: V7XContractiveReport,
+    pub lambda: LambdaKernelReport,
 }
 
 /// Executa hipóteses pequenas, determinísticas e falsificáveis.
@@ -53,6 +56,7 @@ pub fn run_scientific_suite() -> ScientificReport {
         v6_x: v6x_physics::run(),
         v7_morphogenic: v7_morphogenic::run(),
         v7_x: v7x_contractive::run(),
+        lambda: lambda_kernel::run(),
     }
 }
 
@@ -215,6 +219,23 @@ impl ScientificReport {
             self.v7_x.capital_familiar_cost,
             self.v7_x.verified_reusable_structures,
         );
+        let markdown = format!(
+            "{markdown}\n## 10. AXON-Λ: contratos, light cone e quotient\n- Refinamento/certificado: {}/{}; cone local B/F/A: {}/{}/{}; paridade e delta: {}/{}.\n- Cascata global A/paridade/full: {}/{}/{}; estado inteiro via overlay: {}.\n- LIFT exato/classes: {}/{}; journal de conformance disponível: {}.\n- Conclusão: a hipótese vale apenas para Factors afins em cadeia; o sweep físico mede 1M de nós materializados separadamente.\n",
+            self.lambda.contract_refinement_preserved,
+            self.lambda.unsafe_approximate_rejected,
+            self.lambda.local_demanded_factors,
+            self.lambda.local_changed_factors,
+            self.lambda.local_active_factors,
+            self.lambda.local_matches_full,
+            self.lambda.local_delta_selected,
+            self.lambda.global_active_factors,
+            self.lambda.global_matches_full,
+            self.lambda.global_full_selected,
+            self.lambda.overlay_matches_full_state,
+            self.lambda.lifted_sum_matches_individual_sum,
+            self.lambda.lifted_classes,
+            self.lambda.canonical_journal_available,
+        );
         markdown.replace("\\\\n\\\\", "\\n")
     }
 }
@@ -289,6 +310,9 @@ mod tests {
         assert!(report.v7_x.transactional_remorph_preserves_protected_facts);
         assert!(report.v7_x.cow_branch_values_preserved);
         assert_eq!(report.v7_x.capital_capability_accuracy, 1.0);
+        assert!(report.lambda.local_matches_full);
+        assert!(report.lambda.global_full_selected);
+        assert!(report.lambda.overlay_matches_full_state);
     }
 
     #[test]
