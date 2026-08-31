@@ -1,12 +1,17 @@
 //! AXON-UIC: small, executable primitives for certified adaptive cognition.
 
 pub mod capability;
+pub mod delta;
 pub mod morphology;
 pub mod refinement;
 pub mod runtime;
 pub mod structure;
 
 pub use capability::{Authority, Capability, CapabilityGate, Effect, Feasibility, GateFailure};
+pub use delta::{
+    ChangeSupport, CostEstimate, DeltaClass, ExecutionStrategy, IncrementalizabilityAnalyzer,
+    OperatorKind, PointUpdate, SumState, coalesce_adjacent_last_writes,
+};
 pub use morphology::{Morphology, MorphologyError, Region, RemorphPolicy, SemanticContract};
 pub use refinement::{
     CostPrices, DecisionCertificate, DecisionError, Interval, PhysicalCost, Refinement,
@@ -35,6 +40,86 @@ mod tests {
 
         assert!(refined.is_subset_of(&coarse));
         assert_eq!(refined.budget(), 3);
+    }
+
+    #[test]
+    fn analyzer_classifies_exact_delta_and_global_fallback() {
+        let sum = IncrementalizabilityAnalyzer::analyze(OperatorKind::Sum);
+        let sort = IncrementalizabilityAnalyzer::analyze(OperatorKind::Sort);
+
+        assert_eq!(sum.class(), DeltaClass::Constant);
+        assert!(sum.exact());
+        assert!(sum.supports_coalescing());
+        assert_eq!(sort.class(), DeltaClass::Global);
+        assert!(!sort.exact());
+        assert_eq!(
+            sort.select(
+                ChangeSupport::new(1, 1).unwrap(),
+                CostEstimate::new(u64::MAX, 0, 0, 0)
+            ),
+            ExecutionStrategy::Full
+        );
+    }
+
+    #[test]
+    fn selector_uses_delta_only_below_measured_crossover() {
+        let contract = IncrementalizabilityAnalyzer::analyze(OperatorKind::Sum);
+        let costs = CostEstimate::new(100, 10, 1, 0);
+
+        assert_eq!(
+            contract.select(ChangeSupport::new(1, 100).unwrap(), costs),
+            ExecutionStrategy::Delta
+        );
+        assert_eq!(
+            contract.select(ChangeSupport::new(90, 100).unwrap(), costs),
+            ExecutionStrategy::Full
+        );
+        assert_eq!(contract.crossover_support(100, costs), Some(89));
+    }
+
+    #[test]
+    fn sum_delta_and_coalesced_delta_match_full_recomputation() {
+        let state = SumState::try_from_values(vec![4, 8, 15, 16]).unwrap();
+        let updates = [
+            PointUpdate::new(1, 12),
+            PointUpdate::new(1, 20),
+            PointUpdate::new(3, 23),
+        ];
+
+        let full = state.full_after(&updates).unwrap();
+        let delta = state.apply_delta(&updates).unwrap();
+        let (coalesced, applied) = state.apply_coalesced(&updates).unwrap();
+
+        assert_eq!(full, delta);
+        assert_eq!(full, coalesced);
+        assert_eq!(applied, 2);
+    }
+
+    #[test]
+    fn adjacent_event_coalescing_keeps_only_last_write_in_each_run() {
+        let events = [
+            PointUpdate::new(1, 2),
+            PointUpdate::new(1, 3),
+            PointUpdate::new(2, 4),
+            PointUpdate::new(1, 5),
+        ];
+
+        assert_eq!(
+            coalesce_adjacent_last_writes(&events),
+            vec![
+                PointUpdate::new(1, 3),
+                PointUpdate::new(2, 4),
+                PointUpdate::new(1, 5),
+            ]
+        );
+    }
+
+    #[test]
+    fn delta_rejects_invalid_change_support_and_index() {
+        assert!(ChangeSupport::new(5, 4).is_err());
+        let state = SumState::try_from_values(vec![1]).unwrap();
+
+        assert!(state.apply_delta(&[PointUpdate::new(1, 2)]).is_err());
     }
 
     #[test]

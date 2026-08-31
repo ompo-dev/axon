@@ -1,0 +1,32 @@
+{
+  "name": "axon-uic-delta-algebra",
+  "date": "2026-08-31",
+  "command": "cargo run --release --bin axon-uic-delta-sweep -- --mib 64 --runs 5 --max-updates 8000000",
+  "host": {
+    "os": "Windows x86_64",
+    "cpu": "13th Gen Intel(R) Core(TM) i7-13650HX",
+    "physical_cores": 14,
+    "logical_processors": 20,
+    "ram_bytes": 16886128640
+  },
+  "workload": {
+    "vector_mib": 64,
+    "runs_per_point": 5,
+    "event_run_length": 4,
+    "operator": "SUM modular u64",
+    "parity": "exact"
+  },
+  "points": [
+    { "events": 1, "final_writes": 1, "support_percent": 0.000012, "full_raw_p50_ms": 3.645, "full_coalesced_p50_ms": 3.51, "delta_raw_p50_ms": 0.000001, "delta_coalesced_p50_ms": 0.000028, "selected": "Delta" },
+    { "events": 16, "final_writes": 4, "support_percent": 0.000048, "full_raw_p50_ms": 3.706, "full_coalesced_p50_ms": 3.656, "delta_raw_p50_ms": 0.000007, "delta_coalesced_p50_ms": 0.000039, "selected": "Delta" },
+    { "events": 256, "final_writes": 64, "support_percent": 0.000763, "full_raw_p50_ms": 3.378, "full_coalesced_p50_ms": 3.341, "delta_raw_p50_ms": 0.000121, "delta_coalesced_p50_ms": 0.00024, "selected": "Delta" },
+    { "events": 4096, "final_writes": 1024, "support_percent": 0.012207, "full_raw_p50_ms": 3.663, "full_coalesced_p50_ms": 3.327, "delta_raw_p50_ms": 0.002304, "delta_coalesced_p50_ms": 0.003607, "selected": "Delta" },
+    { "events": 65536, "final_writes": 16384, "support_percent": 0.195312, "full_raw_p50_ms": 3.636, "full_coalesced_p50_ms": 3.635, "delta_raw_p50_ms": 0.115863, "delta_coalesced_p50_ms": 0.150687, "selected": "Delta" },
+    { "events": 262144, "final_writes": 65536, "support_percent": 0.78125, "full_raw_p50_ms": 4.101, "full_coalesced_p50_ms": 4.129, "delta_raw_p50_ms": 0.82985, "delta_coalesced_p50_ms": 0.763575, "selected": "Delta" },
+    { "events": 1000000, "final_writes": 250000, "support_percent": 2.980232, "full_raw_p50_ms": 5.565, "full_coalesced_p50_ms": 6.297, "delta_raw_p50_ms": 4.1411, "delta_coalesced_p50_ms": 3.3603, "selected": "Delta" },
+    { "events": 2000000, "final_writes": 500000, "support_percent": 5.960464, "full_raw_p50_ms": 7.625, "full_coalesced_p50_ms": 8.913, "delta_raw_p50_ms": 8.0758, "delta_coalesced_p50_ms": 6.7334, "selected": "Delta" },
+    { "events": 4000000, "final_writes": 1000000, "support_percent": 11.920929, "full_raw_p50_ms": 11.597, "full_coalesced_p50_ms": 14.867, "delta_raw_p50_ms": 15.6026, "delta_coalesced_p50_ms": 13.8148, "selected": "Full" },
+    { "events": 8000000, "final_writes": 2000000, "support_percent": 23.841858, "full_raw_p50_ms": 19.755, "full_coalesced_p50_ms": 27.299, "delta_raw_p50_ms": 30.7257, "delta_coalesced_p50_ms": 28.1179, "selected": "Full" }
+  ],
+  "largest_point_final_checksum": "3A8AA3E313AB7EAC"
+}

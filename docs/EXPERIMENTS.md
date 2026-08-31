@@ -30,3 +30,27 @@ cargo run --release --bin axon-uic-bench -- --mib 64 --queries 20 --runs 5
 ```
 
 Repetir depois de mudanças que afetem `ExecutionSlice`, acumuladores, parsing do benchmark ou contratos de fallback. Registrar hardware, comando e todos os números no commit que alterar baseline.
+
+## Delta Algebra response curve
+
+Binário: `axon-uic-delta-sweep`.
+
+O analisador reconhece somente famílias declaradas no código: `SUM`, `COUNT` e `XOR` têm delta exato constante; `SORT` é global e seleciona `Full`. Ele não infere nem prova `ΔF` para programas arbitrários.
+
+Workload local:
+
+1. Vetor físico de `u64` com `--mib` MiB.
+2. Stream determinístico de 1 a 8.000.000 eventos; cada chave recebe quatro escritas adjacentes.
+3. Mede quatro caminhos: `Full`, `Full+coalesce`, `Delta` e `Delta+coalesce`.
+4. `coalesce` é incluído na janela medida e conserva somente a última escrita de cada rajada adjacente.
+5. Para pontos pequenos, Delta repete batches até um milhão de eventos e normaliza por batch. Valor muda por epoch; não mede repetição de no-op.
+6. Primeiro batch precisa igualar checksum de `Full`; no fim, cada acumulador Delta é relido por checksum exato. Falha encerra sweep.
+7. Escolha reportada compara menor p50 de `Full`/`Full+coalesce` contra menor p50 de `Delta`/`Delta+coalesce`. O contrato ainda força `Full` quando não existe delta exato.
+
+Janela exclui cópia inicial do vetor e soma inicial do acumulador Delta. Inclui aplicação de eventos, coalescência quando usada e checksum `Full`. `Logical reads` conta somente leitura algorítmica da redução; não mede tráfego de DRAM, alocação ou energia.
+
+Comando:
+
+```powershell
+cargo run --release --bin axon-uic-delta-sweep -- --mib 64 --runs 5 --max-updates 8000000
+```
