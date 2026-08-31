@@ -1,6 +1,16 @@
 [package]
-name = "axon"
+name = "axon-uic"
 version = "0.1.0"
 edition = "2024"
+description = "AXON Universal Intelligence Calculus — certified adaptive cognition"
+license = "MIT"
+
+[[bin]]
+name = "axon-uic"
+path = "src/main.rs"
+
+[[bin]]
+name = "axon-uic-bench"
+path = "src/bin/axon_uic_bench.rs"
 
 [dependencies]

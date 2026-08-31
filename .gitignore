@@ -1,15 +1,6 @@
-/target
-
-# Python bytecode and local runtime artifacts
-__pycache__/
-*.py[cod]
-*.pkl
-*.pkl.*
-*.log
-*.tmp
-
-# Local Axon brain images
+/target/
 *.axon
-
-# Local stream produced by plataforma/servidor.py
-plataforma/stream.txt
+*.axrun
+.env
+.env.*
+*.log

@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-08-31",
+  "benchmark": "AXON-UIC Demand×Delta physical sweep",
+  "host": {
+    "os": "Windows",
+    "architecture": "x86_64",
+    "cpu": "13th Gen Intel(R) Core(TM) i7-13650HX",
+    "cores": 14,
+    "logical_processors": 20,
+    "ram_bytes": 16886128640
+  },
+  "command": "cargo run --release --bin axon-uic-bench -- --mib 64 --queries 20 --runs 5",
+  "protocol": {
+    "physical_mib_per_engine": 64,
+    "queries_per_workload": 20,
+    "warmups": 2,
+    "measured_runs": 5,
+    "delta_calibration_batches": 10000,
+    "first_batch_trace_parity": true,
+    "final_delta_accumulator_checked_against_exact_sum": true
+  },
+  "results": {
+    "full_p50_ms": 65.738,
+    "full_p95_ms": 70.487,
+    "delta_normalized_p50_ms": 0.000027,
+    "delta_normalized_p95_ms": 0.000029,
+    "normalized_p50_ratio": 2434748.15,
+    "full_logical_reads_bytes": 1342177280,
+    "delta_logical_reads_bytes": 320,
+    "final_checksum": "2E5C00BF16482DC0"
+  },
+  "limits": [
+    "Measures only sum-under-point-update on this local CPU/RAM.",
+    "Does not measure energy, GPU, DRAM traffic, retrieval quality, LIFT generality, CEGAR generality, or AGI."
+  ]
+}
