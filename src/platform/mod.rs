@@ -1,4 +1,5 @@
 use crate::config::{MAX_CPU_THREADS, RAM_SOFT_CAP_DEFAULT, VRAM_SOFT_CAP_DEFAULT};
+use crate::system_info::detect_total_ram_bytes;
 
 #[derive(Clone, Debug)]
 pub struct ResourceCaps {
@@ -25,64 +26,6 @@ pub fn detect_resource_caps() -> ResourceCaps {
         vram_soft_cap,
         disk_soft_cap,
     }
-}
-
-#[cfg(target_os = "windows")]
-fn detect_total_ram_bytes() -> Option<u64> {
-    #[repr(C)]
-    struct MemoryStatusEx {
-        dwLength: u32,
-        dwMemoryLoad: u32,
-        ullTotalPhys: u64,
-        ullAvailPhys: u64,
-        ullTotalPageFile: u64,
-        ullAvailPageFile: u64,
-        ullTotalVirtual: u64,
-        ullAvailVirtual: u64,
-        ullAvailExtendedVirtual: u64,
-    }
-    unsafe extern "system" {
-        fn GlobalMemoryStatusEx(lpBuffer: *mut MemoryStatusEx) -> i32;
-    }
-    unsafe {
-        let mut info = MemoryStatusEx {
-            dwLength: std::mem::size_of::<MemoryStatusEx>() as u32,
-            dwMemoryLoad: 0,
-            ullTotalPhys: 0,
-            ullAvailPhys: 0,
-            ullTotalPageFile: 0,
-            ullAvailPageFile: 0,
-            ullTotalVirtual: 0,
-            ullAvailVirtual: 0,
-            ullAvailExtendedVirtual: 0,
-        };
-        let ok = GlobalMemoryStatusEx(&mut info as *mut MemoryStatusEx);
-        if ok == 0 {
-            None
-        } else {
-            Some(info.ullTotalPhys)
-        }
-    }
-}
-
-#[cfg(target_os = "linux")]
-fn detect_total_ram_bytes() -> Option<u64> {
-    let raw = std::fs::read_to_string("/proc/meminfo").ok()?;
-    for line in raw.lines() {
-        if let Some(rest) = line.strip_prefix("MemTotal:") {
-            let kb = rest
-                .split_whitespace()
-                .next()
-                .and_then(|v| v.parse::<u64>().ok())?;
-            return Some(kb * 1024);
-        }
-    }
-    None
-}
-
-#[cfg(not(any(target_os = "windows", target_os = "linux")))]
-fn detect_total_ram_bytes() -> Option<u64> {
-    None
 }
 
 fn detect_free_disk_bytes() -> Option<u64> {

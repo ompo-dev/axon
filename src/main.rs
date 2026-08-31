@@ -10,6 +10,7 @@ mod platform;
 mod runtime;
 mod semantic;
 mod storage;
+mod system_info;
 mod tui;
 
 use std::process;
