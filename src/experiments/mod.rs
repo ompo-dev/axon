@@ -11,6 +11,7 @@ mod v5_omega;
 mod v6_omega;
 mod v6x_physics;
 mod v7_morphogenic;
+mod v7x_contractive;
 
 pub use control::{ControlReport, ResourceTotals};
 pub use factorized::GeneralizationReport;
@@ -20,6 +21,7 @@ pub use v5_omega::V5OmegaReport;
 pub use v6_omega::V6OmegaReport;
 pub use v6x_physics::V6XPhysicsReport;
 pub use v7_morphogenic::V7MorphogenicReport;
+pub use v7x_contractive::V7XContractiveReport;
 
 /// Resultado completo de uma rodada do laboratório sintético.
 #[derive(Clone, Debug, PartialEq)]
@@ -32,6 +34,7 @@ pub struct ScientificReport {
     pub v6_omega: V6OmegaReport,
     pub v6_x: V6XPhysicsReport,
     pub v7_morphogenic: V7MorphogenicReport,
+    pub v7_x: V7XContractiveReport,
 }
 
 /// Executa hipóteses pequenas, determinísticas e falsificáveis.
@@ -49,6 +52,7 @@ pub fn run_scientific_suite() -> ScientificReport {
         v6_omega: v6_omega::run(),
         v6_x: v6x_physics::run(),
         v7_morphogenic: v7_morphogenic::run(),
+        v7_x: v7x_contractive::run(),
     }
 }
 
@@ -192,6 +196,25 @@ impl ScientificReport {
             self.v7_morphogenic.q16g,
             self.v7_morphogenic.minimum_seed_rejected,
         );
+        let markdown = format!(
+            "{markdown}\n## 9. V7-X: contratos, memória semântica, COW e capital\n- REALIZE preservou certificado/recusou aproximado instável: {}/{}; execução escolhida: {:?}.\n- Envelope semântico: {} pontos; recall protegido sob todos os budgets: {}.\n- Remorph transacional preservou fatos protegidos: {}; COW em {} mundos: {:.1}x de redução lógica; branches preservados: {}.\n- Capital: capability {:.1}%; custo primeiro/familiar: {}/{}; estruturas verificadas: {}.\n- Conclusão: são contratos e experimentos determinísticos; o sweep físico mede cópias, consultas e repetição no host, mas não prova inteligência geral.\n",
+            self.v7_x.certificate_preserved,
+            self.v7_x.approximate_rejected_when_unstable,
+            self.v7_x.selected_implementation,
+            self.v7_x.semantic_envelope.len(),
+            self.v7_x
+                .semantic_envelope
+                .iter()
+                .all(|point| point.protected_recall == 1.0),
+            self.v7_x.transactional_remorph_preserves_protected_facts,
+            self.v7_x.worlds_tested,
+            self.v7_x.cow_storage_ratio,
+            self.v7_x.cow_branch_values_preserved,
+            self.v7_x.capital_capability_accuracy * 100.0,
+            self.v7_x.capital_first_cost,
+            self.v7_x.capital_familiar_cost,
+            self.v7_x.verified_reusable_structures,
+        );
         markdown.replace("\\\\n\\\\", "\\n")
     }
 }
@@ -261,6 +284,11 @@ mod tests {
         assert!(report.v7_morphogenic.high_memory_expands_programs);
         assert!(report.v7_morphogenic.high_memory_expands_candidate_worlds);
         assert!(report.v7_morphogenic.minimum_seed_rejected);
+        assert!(report.v7_x.certificate_preserved);
+        assert!(report.v7_x.approximate_rejected_when_unstable);
+        assert!(report.v7_x.transactional_remorph_preserves_protected_facts);
+        assert!(report.v7_x.cow_branch_values_preserved);
+        assert_eq!(report.v7_x.capital_capability_accuracy, 1.0);
     }
 
     #[test]

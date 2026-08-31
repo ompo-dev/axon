@@ -317,3 +317,17 @@ reversível pode ser restaurado; porém `ERASE` continua a vencer quando custa
 menos ou quando não há reversibilidade válida. CPU, p-bit, analógico,
 fotônica e quantum são somente perfis testados em laboratório — não drivers
 nem medições de eficiência física. Detalhes em `docs/V6_X.md`.
+
+## V7/V7-X experimental: morfogênese com contratos
+
+Arquivos: `src/core_v7/`, `src/core_v7x/` e os laboratórios correspondentes.
+
+V7 compila um plano de memória com regiões ativas/arquivadas e força remorph
+quando o plano deixa de caber. V7-X torna quatro propriedades explícitas:
+`ContractedFactor` só troca de implementação quando preserva contrato e
+certificado de decisão; `SemanticVirtualMemory` constrói um shadow e verifica
+fatos protegidos antes do commit; `VersionedWorld` compartilha base e mantém
+deltas; `CognitiveCapitalRuntime` promove somente uma regra que conferiu com a
+execução interpretada. Os quatro cortes são imutáveis e experimentais, sem
+integração ainda ao runtime estável. A medição real e os limites estão em
+`docs/V7_X_CONTRACTIVE.md`.

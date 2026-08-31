@@ -142,3 +142,24 @@ SHA-256: 6CA5DF539F8A1E4BBFDF2CA7B882C7A399211D3A9173617AEC30DF53BD79A20F
 
 São perfis e custos abstratos declarados, não medições de chip, energia,
 quantum advantage ou hardware analógico. O escopo está em `docs/V6_X.md`.
+
+## V7 e V7-X — morfogênese contratada
+
+V7 mede a compilação de corpos cognitivos sob orçamento de memória; V7-X troca
+`Q(M)` por um envelope de capacidade no corpus determinístico, contratos de
+decisão, remorph transacional, worlds copy-on-write e custo de tarefa familiar.
+
+Execute:
+
+```powershell
+cargo run --bin axon_v7_lab
+cargo run --bin axon_v7x_lab
+cargo run --release --bin axon_v7_morphogenic_sweep -- --runs 3 --touch-cap-mib 64
+cargo run --release --bin axon_v7x_physical_sweep -- --runs 3 --world-kib 32
+```
+
+Os sweeps fazem medição real de CPU e RAM limitada. Planos de 4/16 GiB são
+lógicos quando o executável declara explicitamente esse limite; eles não são
+apresentados como alocação física integral. Resultados, checksums, limites e
+falsificações pendentes: `docs/V7_MORPHOGENESIS.md` e
+`docs/V7_X_CONTRACTIVE.md`.
