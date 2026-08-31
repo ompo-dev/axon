@@ -10,6 +10,7 @@ mod jump;
 mod v5_omega;
 mod v6_omega;
 mod v6x_physics;
+mod v7_morphogenic;
 
 pub use control::{ControlReport, ResourceTotals};
 pub use factorized::GeneralizationReport;
@@ -18,6 +19,7 @@ pub use jump::JumpReport;
 pub use v5_omega::V5OmegaReport;
 pub use v6_omega::V6OmegaReport;
 pub use v6x_physics::V6XPhysicsReport;
+pub use v7_morphogenic::V7MorphogenicReport;
 
 /// Resultado completo de uma rodada do laboratório sintético.
 #[derive(Clone, Debug, PartialEq)]
@@ -29,6 +31,7 @@ pub struct ScientificReport {
     pub v5_omega: V5OmegaReport,
     pub v6_omega: V6OmegaReport,
     pub v6_x: V6XPhysicsReport,
+    pub v7_morphogenic: V7MorphogenicReport,
 }
 
 /// Executa hipóteses pequenas, determinísticas e falsificáveis.
@@ -45,6 +48,7 @@ pub fn run_scientific_suite() -> ScientificReport {
         v5_omega: v5_omega::run(),
         v6_omega: v6_omega::run(),
         v6_x: v6x_physics::run(),
+        v7_morphogenic: v7_morphogenic::run(),
     }
 }
 
@@ -175,6 +179,19 @@ impl ScientificReport {
             self.v6_x.erase_selected_when_uncompute_is_costlier,
             self.v6_x.all_selected_costs_are_declared,
         );
+        let markdown = format!(
+            "{markdown}\n## 8. V7: Morphogenic Resource Runtime\n- Orcamentos testados: {}; determinismo: {}; qualidade monotona: {}.\n- 64 MiB arquiva mais do que executa: {}; 16 GiB expande ProgramCache/CandidateWorlds: {}/{}.\n- Q(64 MiB): {:.3}; Q(512 MiB): {:.3}; Q(16 GiB): {:.3}; seed minimo recusado: {}.\n- Conclusao: valida alocacao cognitiva sob memoria; corpo, idioma e ferramentas ainda sao compiladores futuros.\n",
+            self.v7_morphogenic.budgets_tested,
+            self.v7_morphogenic.same_seed_is_deterministic,
+            self.v7_morphogenic.quality_is_monotonic,
+            self.v7_morphogenic.low_memory_archives_more_than_it_runs,
+            self.v7_morphogenic.high_memory_expands_programs,
+            self.v7_morphogenic.high_memory_expands_candidate_worlds,
+            self.v7_morphogenic.q64,
+            self.v7_morphogenic.q512,
+            self.v7_morphogenic.q16g,
+            self.v7_morphogenic.minimum_seed_rejected,
+        );
         markdown.replace("\\\\n\\\\", "\\n")
     }
 }
@@ -238,6 +255,12 @@ mod tests {
         assert!(report.v6_x.uncompute_selected_when_valid_and_cheaper);
         assert!(report.v6_x.erase_selected_when_uncompute_is_costlier);
         assert!(report.v6_x.all_selected_costs_are_declared);
+        assert!(report.v7_morphogenic.same_seed_is_deterministic);
+        assert!(report.v7_morphogenic.quality_is_monotonic);
+        assert!(report.v7_morphogenic.low_memory_archives_more_than_it_runs);
+        assert!(report.v7_morphogenic.high_memory_expands_programs);
+        assert!(report.v7_morphogenic.high_memory_expands_candidate_worlds);
+        assert!(report.v7_morphogenic.minimum_seed_rejected);
     }
 
     #[test]
