@@ -72,13 +72,13 @@ consulta altera um Source e usa UNLIFT local.
 
 | Medida | Resultado observado |
 |---|---:|
-| Construção do grafo materializado, p50 | 239,953 ms |
-| Descoberta + certificação Auto-LIFT, p50 | 78,757 ms |
+| Construção do grafo materializado, p50 | 236,311 ms |
+| Descoberta + certificação Auto-LIFT, p50 | 80,218 ms |
 | Classe certificada | 1 classe com 1.000.000 membros |
 | Paridade | 8/8 alterações; checksum full/lifted `36BE58649AF3366A` idêntico |
-| Baseline full, p50 / p95 | 9,351 ms / 11,221 ms |
-| Auto-LIFT + UNLIFT, p50 / p95 | 4 ns / 9 ns |
-| Razão observada por consulta | 2.337.816× |
+| Baseline full, p50 / p95 | 9,398 ms / 10,154 ms |
+| Auto-LIFT + UNLIFT, p50 / p95 | 4 ns / 5 ns |
+| Razão observada por consulta | 2.349.425× |
 | Break-even da descoberta | ~9 consultas |
 | SER lógico de leituras | 99,999700% |
 
@@ -91,6 +91,10 @@ separadamente.
 O valor de poucos nanossegundos é uma média por chamada de lotes com 100.000
 iterações, para reduzir a granularidade do relógio. Ele mede este caminho O(1)
 em cache nesse host, não é uma garantia de latência de produto.
+
+Uma SCC sem semântica suportada não impede a construção nem acorda um goal
+desconectado: a avaliação é lazy por cone. Se esse ciclo entrar no cone pedido,
+o kernel recusa a execução em vez de fabricar um resultado.
 
 ## Interpretação correta
 

@@ -131,12 +131,24 @@ pub struct VersionedDependency {
 
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct DependencyFingerprint {
-    pub goal: usize,
-    pub graph_digest: u64,
-    pub dependencies: Vec<VersionedDependency>,
+    goal: usize,
+    graph_digest: u64,
+    dependencies: Vec<VersionedDependency>,
 }
 
 impl DependencyFingerprint {
+    pub const fn goal(&self) -> usize {
+        self.goal
+    }
+
+    pub const fn graph_digest(&self) -> u64 {
+        self.graph_digest
+    }
+
+    pub fn dependencies(&self) -> &[VersionedDependency] {
+        &self.dependencies
+    }
+
     pub fn validates(&self, graph_digest: u64, revisions: &[u64]) -> bool {
         self.graph_digest == graph_digest
             && self.dependencies.iter().all(|dependency| {
@@ -251,7 +263,6 @@ pub struct GeneralGraph {
     components: Vec<Component>,
     component_order: Vec<usize>,
     topological_rank: Vec<usize>,
-    base_values: Vec<i64>,
     graph_digest: u64,
 }
 
@@ -271,17 +282,14 @@ impl GeneralGraph {
             }
         }
         let graph_digest = digest_graph(&factors);
-        let mut graph = Self {
+        Ok(Self {
             factors,
             dependents,
             components,
             component_order,
             topological_rank,
-            base_values: Vec::new(),
             graph_digest,
-        };
-        graph.base_values = graph.evaluate_with_delta(None)?.values;
-        Ok(graph)
+        })
     }
 
     pub fn factors(&self) -> &[GeneralFactor] {
@@ -297,10 +305,9 @@ impl GeneralGraph {
     }
 
     pub fn base_value(&self, factor: usize) -> Result<i64, GraphError> {
-        self.base_values
-            .get(factor)
-            .copied()
-            .ok_or(GraphError::InvalidGoal)
+        self.validate_goal(factor)?;
+        let required = self.backward_set(factor);
+        Ok(self.evaluate_required(&required, None)?.values[factor])
     }
 
     pub fn revisions_after(&self, delta: GraphDelta) -> Result<Vec<u64>, GraphError> {
@@ -311,7 +318,7 @@ impl GeneralGraph {
     }
 
     pub fn evaluate(&self) -> Result<GraphEvaluation, GraphError> {
-        self.evaluate_with_delta(None)
+        self.evaluate_with_delta(None, None)
     }
 
     /// Referência semântica total para o benchmark: materializa o estado inteiro,
@@ -319,7 +326,16 @@ impl GeneralGraph {
     pub fn full_value_after(&self, goal: usize, delta: GraphDelta) -> Result<i64, GraphError> {
         self.validate_goal(goal)?;
         self.validate_delta(delta)?;
-        Ok(self.evaluate_with_delta(Some(delta))?.values[goal])
+        let required = self.backward_set(goal);
+        Ok(self.evaluate_required(&required, Some(delta))?.values[goal])
+    }
+
+    /// Baseline físico sem planejamento por objetivo: materializa todos os
+    /// Factors para que a janela cronometrada compare execução, não construção
+    /// de cone/fingerprint, contra um quotient previamente certificado.
+    pub fn full_evaluation_after(&self, delta: GraphDelta) -> Result<GraphEvaluation, GraphError> {
+        self.validate_delta(delta)?;
+        self.evaluate_with_delta(None, Some(delta))
     }
 
     pub fn full_query(
@@ -329,8 +345,8 @@ impl GeneralGraph {
     ) -> Result<GraphQueryResult, GraphError> {
         self.validate_goal(goal)?;
         self.validate_delta(delta)?;
-        let slice = self.slice_sets(goal, delta.factor).2;
-        let evaluation = self.evaluate_with_delta(Some(delta))?;
+        let (backward, _, slice) = self.slice_sets(goal, delta.factor);
+        let evaluation = self.evaluate_required(&backward, Some(delta))?;
         Ok(GraphQueryResult {
             value: evaluation.values[goal],
             mode: StructuralMode::FullFallback,
@@ -344,11 +360,12 @@ impl GeneralGraph {
         self.validate_goal(goal)?;
         self.validate_delta(delta)?;
         let (backward, forward, slice) = self.slice_sets(goal, delta.factor);
+        let base_values = self.evaluate_required(&backward, None)?.values;
         let mode = self.select_mode(&backward, &forward, &slice);
         let dependency = self.fingerprint(goal, delta)?;
         if mode == StructuralMode::Reuse {
             return Ok(GraphQueryResult {
-                value: self.base_values[goal],
+                value: base_values[goal],
                 mode,
                 slice,
                 dependency,
@@ -357,14 +374,14 @@ impl GeneralGraph {
         }
         if mode == StructuralMode::DeltaPropagation {
             return Ok(GraphQueryResult {
-                value: self.delta_value(goal, delta, &backward, &forward)?,
+                value: self.delta_value(goal, delta, &backward, &forward, &base_values)?,
                 mode,
                 slice,
                 dependency,
                 fixpoints: Vec::new(),
             });
         }
-        let evaluation = self.evaluate_with_delta(Some(delta))?;
+        let evaluation = self.evaluate_required(&backward, Some(delta))?;
         Ok(GraphQueryResult {
             value: evaluation.values[goal],
             mode,
@@ -387,14 +404,12 @@ impl GeneralGraph {
         {
             return Ok(false);
         }
-        let overlay = self.delta_overlay(delta, &forward)?;
-        let full = self.evaluate_with_delta(Some(delta))?;
+        let required = self.required_for(&forward);
+        let base_values = self.evaluate_required(&required, None)?.values;
+        let overlay = self.delta_overlay(delta, &forward, &base_values)?;
+        let full = self.evaluate_required(&required, Some(delta))?;
         Ok(forward.into_iter().all(|factor| {
-            overlay
-                .get(&factor)
-                .copied()
-                .unwrap_or(self.base_values[factor])
-                == full.values[factor]
+            overlay.get(&factor).copied().unwrap_or(base_values[factor]) == full.values[factor]
         }))
     }
 
@@ -456,6 +471,15 @@ impl GeneralGraph {
             pending.extend(self.dependents[factor].iter().copied());
         }
         visited
+    }
+
+    fn required_for(&self, factors: &BTreeSet<usize>) -> BTreeSet<usize> {
+        factors
+            .iter()
+            .fold(BTreeSet::new(), |mut required, factor| {
+                required.extend(self.backward_set(*factor));
+                required
+            })
     }
 
     fn select_mode(
@@ -528,16 +552,17 @@ impl GeneralGraph {
         delta: GraphDelta,
         backward: &BTreeSet<usize>,
         forward: &BTreeSet<usize>,
+        base_values: &[i64],
     ) -> Result<i64, GraphError> {
         let active = backward
             .intersection(forward)
             .copied()
             .collect::<BTreeSet<_>>();
-        let overlay = self.delta_overlay(delta, &active)?;
+        let overlay = self.delta_overlay(delta, &active, base_values)?;
         overlay
             .get(&goal)
             .copied()
-            .or_else(|| self.base_values.get(goal).copied())
+            .or_else(|| base_values.get(goal).copied())
             .ok_or(GraphError::InvalidGoal)
     }
 
@@ -545,6 +570,7 @@ impl GeneralGraph {
         &self,
         delta: GraphDelta,
         active: &BTreeSet<usize>,
+        base_values: &[i64],
     ) -> Result<BTreeMap<usize, i64>, GraphError> {
         let mut ordered = active.iter().copied().collect::<Vec<_>>();
         ordered.sort_unstable_by_key(|factor| self.topological_rank[*factor]);
@@ -553,12 +579,7 @@ impl GeneralGraph {
             let inputs = self.factors[factor]
                 .inputs
                 .iter()
-                .map(|input| {
-                    overlay
-                        .get(input)
-                        .copied()
-                        .unwrap_or(self.base_values[*input])
-                })
+                .map(|input| overlay.get(input).copied().unwrap_or(base_values[*input]))
                 .collect::<Vec<_>>();
             let value = evaluate_rule(
                 &self.factors[factor].rule,
@@ -571,8 +592,18 @@ impl GeneralGraph {
         Ok(overlay)
     }
 
+    fn evaluate_required(
+        &self,
+        required: &BTreeSet<usize>,
+        delta: Option<GraphDelta>,
+    ) -> Result<GraphEvaluation, GraphError> {
+        let filter = (required.len() < self.factors.len()).then_some(required);
+        self.evaluate_with_delta(filter, delta)
+    }
+
     fn evaluate_with_delta(
         &self,
+        required: Option<&BTreeSet<usize>>,
         delta: Option<GraphDelta>,
     ) -> Result<GraphEvaluation, GraphError> {
         if let Some(delta) = delta {
@@ -583,6 +614,11 @@ impl GeneralGraph {
         let mut mode = StructuralMode::FullFallback;
         for component_index in &self.component_order {
             let component = &self.components[*component_index];
+            if required
+                .is_some_and(|needed| !component.iter().any(|factor| needed.contains(factor)))
+            {
+                continue;
+            }
             match self.classify_component(component) {
                 ComponentClass::Acyclic => {
                     let factor = component.first();

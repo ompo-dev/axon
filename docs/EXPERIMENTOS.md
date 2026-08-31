@@ -200,8 +200,8 @@ cargo run --release --bin axon_lambda_squared_physical_sweep -- --runs 3 --facto
 ```
 
 No host local, o sweep materializou 1.000.001 Factors, descobriu e certificou
-uma classe de 1.000.000 Sources em 78,757 ms p50, preservou os checksums em
-8/8 UNLIFTs, e mediu 9,351 ms p50 para full contra 4 ns p50 para o caminho
+uma classe de 1.000.000 Sources em 80,218 ms p50, preservou os checksums em
+8/8 UNLIFTs, e mediu 9,398 ms p50 para full contra 4 ns p50 para o caminho
 lifted já certificado. O custo da descoberta é separado e o escopo não inclui
 automorfismos gerais, LIFT aproximado, energia ou hardware especializado.
 Detalhes e limitações: `docs/AXON_LAMBDA_SQUARED.md`.

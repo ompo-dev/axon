@@ -440,6 +440,33 @@ mod tests {
     }
 
     #[test]
+    fn lambda_squared_uses_mathematical_floor_and_does_not_wake_an_irrelevant_unsupported_scc() {
+        let negative = general::GeneralGraph::new(vec![
+            general::GeneralFactor::source(-9),
+            general::GeneralFactor::contractive_half(vec![0], 2),
+        ])
+        .unwrap();
+        assert_eq!(negative.base_value(1).unwrap(), -4);
+
+        let isolated_unsupported_cycle = general::GeneralGraph::new(vec![
+            general::GeneralFactor::source(3),
+            general::GeneralFactor::affine(0, 2, 1),
+            general::GeneralFactor::affine(3, 1, 0),
+            general::GeneralFactor::affine(2, 1, 0),
+        ])
+        .unwrap();
+        let safe_query = isolated_unsupported_cycle
+            .query(1, general::GraphDelta::replace_source(0, 5))
+            .unwrap();
+        assert_eq!(safe_query.mode, general::StructuralMode::DeltaPropagation);
+        assert_eq!(safe_query.value, 11);
+        assert_eq!(
+            isolated_unsupported_cycle.evaluate(),
+            Err(general::GraphError::UnsupportedCycle)
+        );
+    }
+
+    #[test]
     fn lambda_squared_auto_lift_requires_a_certificate_and_unlifts_only_the_changed_member() {
         let graph = general::GeneralGraph::new(vec![
             general::GeneralFactor::source(7),

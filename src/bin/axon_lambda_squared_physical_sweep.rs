@@ -13,6 +13,7 @@ use axon::system_info::detect_total_ram_bytes;
 
 const DEFAULT_FACTORS: usize = 1_000_000;
 const MAX_RUNS: usize = 10;
+const MAX_FACTORS: usize = 2_000_000;
 const WARMUPS: usize = 2;
 const SAMPLES: usize = 15;
 const FULL_ITERATIONS: usize = 3;
@@ -58,7 +59,7 @@ impl Options {
                 _ => usage(),
             }
         }
-        if result.factors < 2 {
+        if !(2..=MAX_FACTORS).contains(&result.factors) {
             usage();
         }
         result
@@ -74,7 +75,9 @@ fn parse_positive(value: &str) -> usize {
 }
 
 fn usage() -> ! {
-    eprintln!("uso: axon_lambda_squared_physical_sweep [--runs 1..10] [--factors N >= 2]");
+    eprintln!(
+        "uso: axon_lambda_squared_physical_sweep [--runs 1..10] [--factors 2..{MAX_FACTORS}]"
+    );
     std::process::exit(2);
 }
 
@@ -83,7 +86,7 @@ fn ensure_safe_allocation(factors: usize) {
     // índice de cores e buffers de avaliação. Não é medição de RSS.
     let estimated = u64::try_from(factors)
         .ok()
-        .and_then(|value| value.checked_mul(256))
+        .and_then(|value| value.checked_mul(512))
         .unwrap_or_else(|| usage());
     let cap = detect_total_ram_bytes()
         .map(|bytes| bytes / 4)
@@ -113,7 +116,10 @@ struct RoundReport {
 
 fn run_round(factors: usize, round: usize) -> RoundReport {
     let built = Instant::now();
-    let (graph, goal) = exchangeable_graph(factors);
+    let (graph, goal) = exchangeable_graph(factors).unwrap_or_else(|message| {
+        eprintln!("não foi possível reservar o workload: {message}");
+        std::process::exit(2);
+    });
     let graph_build_ns = built.elapsed().as_nanos();
 
     let discovered = Instant::now();
@@ -126,8 +132,9 @@ fn run_round(factors: usize, round: usize) -> RoundReport {
     let full_work = || {
         measure(FULL_ITERATIONS, |index| {
             graph
-                .full_value_after(goal, black_box(updates[index % updates.len()]))
+                .full_evaluation_after(black_box(updates[index % updates.len()]))
                 .expect("validated full query")
+                .values[goal]
         })
     };
     let lifted_work = || {
@@ -161,19 +168,27 @@ fn run_round(factors: usize, round: usize) -> RoundReport {
     }
 }
 
-fn exchangeable_graph(factors: usize) -> (GeneralGraph, usize) {
-    let mut definitions = Vec::with_capacity(factors + 1);
-    let mut inputs = Vec::with_capacity(factors);
+fn exchangeable_graph(factors: usize) -> Result<(GeneralGraph, usize), String> {
+    let factor_capacity = factors
+        .checked_add(1)
+        .ok_or_else(|| "factor count overflow".to_owned())?;
+    let mut definitions = Vec::new();
+    definitions
+        .try_reserve_exact(factor_capacity)
+        .map_err(|_| "Factor definitions allocation failed".to_owned())?;
+    let mut inputs = Vec::new();
+    inputs
+        .try_reserve_exact(factors)
+        .map_err(|_| "input edge allocation failed".to_owned())?;
     for factor in 0..factors {
         definitions.push(GeneralFactor::source(7));
         inputs.push(factor);
     }
     definitions.push(GeneralFactor::max(inputs, i64::MIN));
     let goal = factors;
-    (
-        GeneralGraph::new(definitions).expect("fixed exchangeable graph"),
-        goal,
-    )
+    GeneralGraph::new(definitions)
+        .map(|graph| (graph, goal))
+        .map_err(|error| error.to_string())
 }
 
 fn updates(factors: usize, round: usize) -> Vec<GraphDelta> {
@@ -195,8 +210,9 @@ fn parity_checksums(
         (0xA80C_1A0B_7EED_u64, 0xA80C_1A0B_7EED_u64, true),
         |(full_checksum, lifted_checksum, equal), (index, update)| {
             let full = graph
-                .full_value_after(goal, *update)
-                .expect("valid full value");
+                .full_evaluation_after(*update)
+                .expect("valid full value")
+                .values[goal];
             let lifted = lift
                 .unlift(update.factor, update.replacement_value)
                 .expect("valid local UNLIFT")
@@ -368,7 +384,7 @@ fn host_metadata() -> String {
                 "-NoProfile",
                 "-NonInteractive",
                 "-Command",
-                "(Get-CimInstance Win32_Processor | Select-Object -First 1 -ExpandProperty Name).Trim()",
+                "$job = Start-Job { (Get-CimInstance Win32_Processor | Select-Object -First 1 -ExpandProperty Name).Trim() }; $done = Wait-Job -Job $job -Timeout 2; if ($null -ne $done) { Receive-Job -Job $job }; Remove-Job -Job $job -Force",
             ],
         )
         .unwrap_or_else(|| "CPU indisponível".into());
@@ -413,7 +429,7 @@ mod tests {
 
     #[test]
     fn certified_auto_lift_matches_full_after_a_local_specialization() {
-        let (graph, goal) = exchangeable_graph(10_000);
+        let (graph, goal) = exchangeable_graph(10_000).unwrap();
         let lift = CertifiedAutoLift::discover(&graph).unwrap();
         let delta = GraphDelta::replace_source(19, 99);
         let lifted = lift.unlift(delta.factor, delta.replacement_value).unwrap();
