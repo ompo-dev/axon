@@ -15,6 +15,6 @@ Correção: `hybrid_total = Σ shard_total`, com soma modular `u64`. Cada round 
 
 `Hybrid Oracle` pré-compila o mesmo plano antes do timer e mede somente o executor. É um limite diagnóstico, não resultado fim a fim: o custo de sua pré-compilação é publicado separadamente. `ChangeFabric` tenta manter esse plano durante ingestão; mede sempre `ingest + query`, nunca apenas query.
 
-Em 64 MiB / 30 rodadas, Oracle perdeu para Delta bruto no p50 (`1.593` contra `1.495 ms`), logo política local ainda não é uma vitória robusta. Hybrid fim a fim ficou em `4.308 ms`: `Adaptation Tax = 2.08×` e `Oracle Gap = 2.70×`. Change Fabric ficou em `9.284 ms`; sua ingestão de `7.594 ms` produz `Adaptation Tax = 4.51×`. Ela foi rejeitada para este workload, embora preserve paridade.
+Em 64 MiB / 30 rodadas com seis ordens permutadas, Raw Delta teve p50 `1.331 ms`; Oracle teve `1.393 ms`. `StrategyEvidence` usou pares por rodada e retornou `Inconclusive`: p50 não basta para refutar ou promover porque as rodadas não concordam. Portanto não há Meta-JIT para Hybrid. Hybrid fim a fim ficou em `3.875 ms`: `Adaptation Tax = 2.14×` e `Oracle Gap = 2.78×`. Change Fabric ficou em `9.858 ms`; sua ingestão de `8.284 ms` produz `Adaptation Tax = 5.31×`. Ela continua dominada neste workload, embora preserve paridade.
 
 Limite: classificador usa regra morfológica determinística, não curva online aprendida; `ChangeSet` deve vir ordenado por shard; coalescência exige `FinalStateOnly`; não há árvore hierárquica, `DeltaForge`, síntese de estado auxiliar nem prova para outros operadores.

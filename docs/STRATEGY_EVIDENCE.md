@@ -14,4 +14,6 @@ No último caso não há promoção nem refutação. É necessário medir novame
 
 Para o Hybrid/Change Fabric anterior, a conclusão continua limitada a `SUM mod u64`, 64 MiB, stream canônico por shard e `FinalStateOnly`. `WorkloadSignature` também guarda shard count, layout do stream, razão query/ingestão, versão do protocolo, métrica e identificador de hardware. O identificador deve descrever CPU e hierarquia de memória medida. Qualquer diferença reabre a decisão.
 
+No sweep de 2026-09-01 com guard `i7-13650HX-16GiB`, pares Raw Delta/Oracle não tiveram sinal unânime. Mesmo com `OracleHeadroom = -471 bp` no p50, estado ficou `Inconclusive` e `MetaJit` retornou `None`. Essa é a política correta: p50 pior não autoriza matar uma família quando amostras pareadas ainda se cruzam.
+
 `MetaJit` não executa estratégia nem substitui benchmark. Ele só guarda uma decisão já suportada por evidência e retorna `None` quando a assinatura não é exatamente a mesma.

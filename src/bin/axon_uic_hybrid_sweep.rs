@@ -4,11 +4,19 @@ use std::mem::size_of;
 use std::ops::Range;
 use std::time::{Duration, Instant};
 
-use axon_uic::{ObservationFrontier, PointUpdate, coalesce_adjacent_at_frontier};
+use axon_uic::{
+    MeasurementContext, MetaJit, ObservationFrontier, OperatorKind, PointUpdate, StrategyEvidence,
+    StrategyKey, StrategyMetric, UpdateLayout, WorkloadSignature, coalesce_adjacent_at_frontier,
+};
 
 mod hybrid_fabric;
+mod hybrid_metrics;
+mod hybrid_round;
 
-use hybrid_fabric::run_fabric_hybrid;
+use hybrid_metrics::{
+    CompilerTiming, HybridMeasurement, Measurement, OracleMeasurement, duration_samples_nanos,
+};
+use hybrid_round::run_round;
 
 #[cfg(test)]
 use hybrid_fabric::{build_change_fabric, execute_fabric_hybrid};
@@ -24,10 +32,11 @@ const SPARSE_SHARD: usize = DUPLICATE_SHARD + 1;
 const DUPLICATE_RUN: usize = 4;
 const SPARSE_UPDATES: usize = 1_024;
 
-#[derive(Clone, Copy)]
+#[derive(Clone)]
 struct Config {
     mib: usize,
     runs: usize,
+    hardware_id: String,
 }
 
 impl Default for Config {
@@ -35,6 +44,7 @@ impl Default for Config {
         Self {
             mib: DEFAULT_MIB,
             runs: DEFAULT_RUNS,
+            hardware_id: "unprofiled".to_owned(),
         }
     }
 }
@@ -101,35 +111,6 @@ struct CompiledChanges<'a> {
     shard_words: usize,
 }
 
-#[derive(Clone, Copy)]
-struct CompilerTiming {
-    total: Duration,
-    validate_and_index: Duration,
-    classify_and_materialize: Duration,
-}
-
-#[derive(Clone, Copy)]
-struct Measurement {
-    duration: Duration,
-    total: u64,
-}
-
-#[derive(Clone, Copy)]
-struct HybridMeasurement {
-    duration: Duration,
-    compiler: CompilerTiming,
-    execution: Duration,
-    verification: Duration,
-    total: u64,
-}
-
-#[derive(Clone, Copy)]
-struct OracleMeasurement {
-    execution: Duration,
-    verification: Duration,
-    total: u64,
-}
-
 fn main() {
     match parse_args() {
         Ok(config) => {
@@ -140,7 +121,9 @@ fn main() {
         }
         Err(message) => {
             eprintln!("{message}");
-            eprintln!("usage: axon-uic-hybrid-sweep [--mib 1..256] [--runs 1..30]");
+            eprintln!(
+                "usage: axon-uic-hybrid-sweep [--mib 1..256] [--runs 1..30] [--hardware-id ID]"
+            );
             std::process::exit(2);
         }
     }
@@ -159,6 +142,7 @@ fn parse_args() -> Result<Config, String> {
         match flag.as_str() {
             "--mib" => config.mib = parse_bounded(&value, 1, MAX_MIB, "--mib")?,
             "--runs" => config.runs = parse_bounded(&value, 1, MAX_RUNS, "--runs")?,
+            "--hardware-id" => config.hardware_id = value,
             _ => return Err(format!("unknown option: {flag}")),
         }
     }
@@ -188,6 +172,23 @@ fn run(config: Config) -> Result<(), String> {
             .map_err(|error| format!("cannot coalesce final-state workload: {error:?}"))?
             .len();
     let (template, template_timing) = compile_changes_timed(&updates, words, shard_words)?;
+    let workload = WorkloadSignature::new(
+        OperatorKind::Sum,
+        words,
+        SHARD_COUNT,
+        updates.len(),
+        final_updates,
+        ObservationFrontier::FinalStateOnly,
+        MeasurementContext::new(
+            &config.hardware_id,
+            UpdateLayout::CanonicalShardOrdered,
+            1,
+            StrategyMetric::Latency,
+            1,
+        )
+        .map_err(|error| format!("invalid measurement context: {error:?}"))?,
+    )
+    .map_err(|error| format!("invalid workload signature: {error:?}"))?;
 
     println!("# AXON-UIC Hybrid Recompute physical sweep");
     println!(
@@ -199,6 +200,7 @@ fn run(config: Config) -> Result<(), String> {
         shard_words * size_of::<u64>() / 1024,
         config.runs
     );
+    println!("hardware guard: {}", workload.context().hardware_id());
     println!(
         "mixed changes: {} raw events, {} final writes; plan SKIP {}, RAW_DELTA {}, COALESCED_DELTA {}, FULL_LOCAL {}",
         updates.len(),
@@ -234,23 +236,8 @@ fn run(config: Config) -> Result<(), String> {
     let mut checksum = 0_u64;
 
     for round in 0..config.runs {
-        let (full, delta, coalesced, hybrid, oracle, fabric) = if round % 2 == 0 {
-            let full = run_full_global(&seed, &updates)?;
-            let delta = run_delta_global(&seed, &updates)?;
-            let coalesced = run_coalesced_global(&seed, &updates)?;
-            let hybrid = run_hybrid(&seed, &updates, shard_words)?;
-            let oracle = run_hybrid_oracle(&seed, &template)?;
-            let fabric = run_fabric_hybrid(&seed, &updates, shard_words)?;
-            (full, delta, coalesced, hybrid, oracle, fabric)
-        } else {
-            let fabric = run_fabric_hybrid(&seed, &updates, shard_words)?;
-            let oracle = run_hybrid_oracle(&seed, &template)?;
-            let hybrid = run_hybrid(&seed, &updates, shard_words)?;
-            let coalesced = run_coalesced_global(&seed, &updates)?;
-            let delta = run_delta_global(&seed, &updates)?;
-            let full = run_full_global(&seed, &updates)?;
-            (full, delta, coalesced, hybrid, oracle, fabric)
-        };
+        let (full, delta, coalesced, hybrid, oracle, fabric) =
+            run_round(round, &seed, &updates, shard_words, &template)?;
         if full.total != delta.total
             || full.total != coalesced.total
             || full.total != hybrid.total
@@ -291,6 +278,14 @@ fn run(config: Config) -> Result<(), String> {
         fabric_verification_samples.push(fabric.verification);
     }
 
+    let oracle_evidence = StrategyEvidence::from_paired_samples(
+        workload,
+        StrategyKey::RawDelta,
+        &duration_samples_nanos(&delta_samples),
+        StrategyKey::HybridShard,
+        &duration_samples_nanos(&oracle_samples),
+    )
+    .map_err(|error| format!("cannot build paired Oracle evidence: {error:?}"))?;
     let full_p50 = percentile(full_samples, 50);
     let delta_p50 = percentile(delta_samples, 50);
     let coalesced_p50 = percentile(coalesced_samples, 50);
@@ -384,6 +379,12 @@ fn run(config: Config) -> Result<(), String> {
         milliseconds(fabric_verification_p50)
     );
     println!("| Exact final checksum | {checksum:016X} |");
+    println!(
+        "| Paired Oracle evidence, Hybrid vs Raw Delta | {:?}; headroom {} bp; Meta-JIT {:?} |",
+        oracle_evidence.status(),
+        oracle_evidence.oracle_headroom_basis_points(),
+        MetaJit::from_evidence(&oracle_evidence).map(|jit| jit.select(oracle_evidence.domain()))
+    );
     println!(
         "\nLimit: one SUM workload with fixed 64-way shards and a deterministic morphology rule. This does not learn thresholds or synthesize maintenance state."
     );

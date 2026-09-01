@@ -22,4 +22,8 @@ path = "src/bin/axon_uic_delta_sweep.rs"
 name = "axon-uic-hybrid-sweep"
 path = "src/bin/axon_uic_hybrid_sweep.rs"
 
+[[bin]]
+name = "axon-uic-deltaforge-sum"
+path = "src/bin/axon_uic_deltaforge_sum.rs"
+
 [dependencies]

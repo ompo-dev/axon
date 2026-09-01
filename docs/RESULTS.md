@@ -60,25 +60,43 @@ Limite: prova apenas `SUM` modular de `u64` sob escrita pontual local e última 
 Command:
 
 ```powershell
-cargo run --release --bin axon-uic-hybrid-sweep -- --mib 64 --runs 30
+cargo run --release --bin axon-uic-hybrid-sweep -- --mib 64 --runs 30 --hardware-id i7-13650HX-16GiB
 ```
 
 Workload: 64 shards de 1 MiB; oito shards densos usam `FULL_LOCAL`, um shard usa Delta coalescido, um usa Delta bruto e 54 usam `SKIP`. Todas as 30 rodadas tiveram paridade exata e checksum `8D35C7539911D6CB`.
 
 | Caminho | p50 ms |
 |---|---:|
-| Full global | 5.175 |
-| Delta bruto global | 1.495 |
-| Delta coalescido global | 5.125 |
-| Hybrid fim a fim | 4.308 |
-| Hybrid Oracle, executor pré-compilado | 1.593 |
-| Compiler Hybrid | 2.853 |
-| `validate + index` | 1.666 |
-| `classify + materialize` | 1.125 |
-| Change Fabric, ingestão + query | 9.284 |
-| Change Fabric, ingestão | 7.594 |
-| Change Fabric, query | 1.685 |
+| Full global | 4.240 |
+| Delta bruto global | 1.331 |
+| Delta coalescido global | 4.772 |
+| Hybrid fim a fim | 3.875 |
+| Hybrid Oracle, executor pré-compilado | 1.393 |
+| Compiler Hybrid | 2.642 |
+| `validate + index` | 1.618 |
+| `classify + materialize` | 1.031 |
+| Change Fabric, ingestão + query | 9.858 |
+| Change Fabric, ingestão | 8.284 |
+| Change Fabric, query | 1.560 |
 
-Oracle perde para Delta bruto no p50 (`0.94×`): política local ainda não tem vitória robusta neste workload. Hybrid fim a fim perde para Delta porque `Adaptation Tax` é `2.08×` e `Oracle Gap` é `2.70×`.
+Oracle perde para Delta bruto no p50 (`0.96×`), mas os 30 pares se cruzam. `StrategyEvidence` classificou Hybrid como `Inconclusive`, com headroom de `-471 bp`; não há Meta-JIT nem refutação formal neste domínio. Hybrid fim a fim perde para Delta porque `Adaptation Tax` é `2.14×` e `Oracle Gap` é `2.78×`.
 
-Change Fabric foi rejeitado neste regime: custo de ingestão gera `Adaptation Tax` de `4.51×`, e lifecycle ficou `0.16×` do Delta bruto. Esse resultado é útil: mover planejamento para ingestão não cria ganho se a manutenção custa mais do que a compilação que elimina. Verificação exata foi medida fora dos timers: Hybrid `3.602 ms`, Oracle `3.581 ms`, Fabric `3.772 ms`.
+Change Fabric continua dominado neste regime: custo de ingestão gera `Adaptation Tax` de `5.31×`, e lifecycle ficou `0.13×` do Delta bruto. Esse resultado é útil: mover planejamento para ingestão não cria ganho se a manutenção custa mais que a compilação que elimina. Verificação exata foi medida fora dos timers: Hybrid `3.085 ms`, Oracle `3.127 ms`, Fabric `3.179 ms`.
+
+## DeltaForge-SUM
+
+Command:
+
+```powershell
+cargo run --release --bin axon-uic-deltaforge-sum -- --mib 64 --runs 15
+```
+
+Mesmo host, vetor de 64 MiB. `DeltaForge` recebeu apenas `FoldSpec::AddModU64`, derivou `CommutativeGroup`, `ModularTotal` e `SubtractOldThenAddNew` em `0.001500 ms` fora das amostras. As 45 execuções tiveram paridade exata; maior checksum: `6C45776C2F16B041`.
+
+| Escritas finais | Full p50 ms | Raw Delta p50 ms | Forge p50 ms | Forge / Raw |
+|---:|---:|---:|---:|---:|
+| 1,024 | 14.221 | 11.049 | 11.304 | 0.98× |
+| 1,000,000 | 16.846 | 14.972 | 15.241 | 0.98× |
+| 4,000,000 | 24.666 | 26.755 | 27.313 | 0.98× |
+
+Resultado: synthesis restrita passou correção, mas plano derivado não supera updater manual nesta realização; fica cerca de 2% pior no p50. Full recupera vantagem no ponto denso. Checker do Forge custa `23.155 / 26.238 / 38.215 ms` p50, fora do timer: serve para shadow/promoção, não hot path. Isto não demonstra descoberta geral, aprendizado, nem prova formal.

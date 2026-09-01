@@ -3,6 +3,7 @@
 pub mod capability;
 pub mod change;
 pub mod delta;
+pub mod delta_forge;
 pub mod morphology;
 pub mod refinement;
 pub mod runtime;
@@ -18,6 +19,10 @@ pub use delta::{
     ChangeSupport, CostEstimate, DeltaClass, ExecutionStrategy, IncrementalizabilityAnalyzer,
     ObservationFrontier, OperatorKind, PointUpdate, SumState, coalesce_adjacent_at_frontier,
     coalesce_adjacent_last_writes,
+};
+pub use delta_forge::{
+    AlgebraicClass, DeltaCertificate, DeltaForge, DerivedSumPlan, FoldSpec, ForgeError,
+    MaintenanceState, UpdateRule,
 };
 pub use morphology::{Morphology, MorphologyError, Region, RemorphPolicy, SemanticContract};
 pub use refinement::{
@@ -475,6 +480,24 @@ mod tests {
         .unwrap();
 
         assert_eq!(jit.select(&changed_hardware), None);
+        let changed_layout = WorkloadSignature::new(
+            OperatorKind::Sum,
+            16,
+            1,
+            4,
+            4,
+            ObservationFrontier::FinalStateOnly,
+            MeasurementContext::new(
+                "i7-13650HX",
+                UpdateLayout::Arbitrary,
+                1,
+                StrategyMetric::Latency,
+                1,
+            )
+            .unwrap(),
+        )
+        .unwrap();
+        assert_eq!(jit.select(&changed_layout), None);
         assert!(CostInterval::from_samples(&[]).is_err());
         assert!(
             StrategyEvidence::from_paired_samples(

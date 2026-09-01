@@ -33,15 +33,15 @@ impl CostInterval {
     }
 
     pub fn from_samples(samples: &[u64]) -> Result<Self, StrategyError> {
-        let (&first, rest) = samples.split_first().ok_or(StrategyError::EmptySamples)?;
-        let mut ordered = Vec::with_capacity(samples.len());
-        ordered.push(first);
-        ordered.extend_from_slice(rest);
+        let mut ordered = samples.to_vec();
+        if ordered.is_empty() {
+            return Err(StrategyError::EmptySamples);
+        }
         ordered.sort_unstable();
         Ok(Self {
             p50: ordered[(ordered.len() - 1) / 2],
-            lower: first.min(*ordered.first().expect("nonempty samples")),
-            upper: *ordered.last().expect("nonempty samples"),
+            lower: ordered[0],
+            upper: ordered[ordered.len() - 1],
             samples: ordered.len(),
         })
     }

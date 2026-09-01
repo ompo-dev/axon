@@ -1,0 +1,46 @@
+{
+  "name": "axon-uic-deltaforge-sum",
+  "date": "2026-09-01",
+  "command": "cargo run --release --bin axon-uic-deltaforge-sum -- --mib 64 --runs 15",
+  "host": {
+    "os": "Windows x86_64",
+    "cpu": "13th Gen Intel(R) Core(TM) i7-13650HX",
+    "physical_cores": 14,
+    "logical_processors": 20,
+    "ram_bytes": 16886128640
+  },
+  "workload": {
+    "vector_mib": 64,
+    "fold_spec": "AddModU64",
+    "certificate": {
+      "algebra": "CommutativeGroup",
+      "maintenance_state": "ModularTotal",
+      "update_rule": "SubtractOldThenAddNew"
+    },
+    "exact_parity": true,
+    "runs_per_point": 15,
+    "all_samples_ms": {
+      "1024": {
+        "full": [13.417, 13.765, 15.807, 14.017, 13.752, 15.087, 14.261, 14.613, 13.353, 14.530, 13.995, 14.221, 14.355, 14.171, 14.702],
+        "raw_delta": [10.706, 10.143, 11.551, 10.958, 10.585, 11.356, 11.314, 11.922, 11.397, 10.471, 10.492, 11.049, 10.927, 11.628, 11.266],
+        "forged_delta": [10.793, 10.562, 11.315, 11.388, 11.116, 11.304, 11.427, 11.345, 11.518, 11.119, 10.971, 11.379, 11.118, 10.127, 11.447]
+      },
+      "1000000": {
+        "full": [17.343, 17.026, 16.337, 16.405, 17.017, 16.008, 17.085, 15.911, 16.596, 17.244, 16.538, 17.289, 16.846, 19.672, 16.191],
+        "raw_delta": [14.972, 14.281, 14.554, 16.097, 15.066, 15.984, 15.280, 14.334, 13.969, 15.204, 14.796, 14.467, 14.275, 15.569, 15.123],
+        "forged_delta": [15.883, 15.303, 15.240, 14.310, 15.066, 14.603, 15.577, 14.354, 15.241, 16.729, 13.883, 15.258, 15.416, 15.294, 13.804]
+      },
+      "4000000": {
+        "full": [25.078, 26.849, 24.666, 24.445, 23.875, 26.101, 24.267, 24.878, 24.787, 24.471, 24.165, 24.243, 25.009, 24.891, 24.116],
+        "raw_delta": [25.076, 28.811, 26.863, 26.168, 27.209, 26.004, 26.755, 31.216, 26.692, 27.447, 26.079, 26.605, 26.747, 29.089, 28.210],
+        "forged_delta": [25.636, 26.800, 27.313, 26.255, 28.221, 26.664, 27.684, 25.895, 29.691, 26.549, 29.592, 28.251, 27.626, 27.036, 28.458]
+      }
+    }
+  },
+  "p50_ms": {
+    "1024": { "full": 14.221, "raw_delta": 11.049, "forged_delta": 11.304, "raw_verify": 3.037, "forged_verify": 23.155 },
+    "1000000": { "full": 16.846, "raw_delta": 14.972, "forged_delta": 15.241, "raw_verify": 3.017, "forged_verify": 26.238 },
+    "4000000": { "full": 24.666, "raw_delta": 26.755, "forged_delta": 27.313, "raw_verify": 2.998, "forged_verify": 38.215 }
+  },
+  "result": "Restricted SUM derivation is exact, but forged execution is about 2% slower than manual Raw Delta. Full wins at the dense point; certificate checking stays outside hot execution."
+}

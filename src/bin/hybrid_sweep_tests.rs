@@ -36,6 +36,22 @@ fn hybrid_matches_all_global_paths() {
 }
 
 #[test]
+fn permuted_round_measures_every_path_with_exact_parity() {
+    let shard_words = 128;
+    let seed = build_data(shard_words * SHARD_COUNT).unwrap();
+    let updates = build_mixed_updates(shard_words).unwrap();
+    let template = compile_final(&updates, seed.len(), shard_words).unwrap();
+    let (full, delta, coalesced, hybrid, oracle, fabric) =
+        run_round(3, &seed, &updates, shard_words, &template).unwrap();
+
+    assert_eq!(full.total, delta.total);
+    assert_eq!(full.total, coalesced.total);
+    assert_eq!(full.total, hybrid.total);
+    assert_eq!(full.total, oracle.total);
+    assert_eq!(full.total, fabric.total);
+}
+
+#[test]
 fn oracle_executor_matches_all_global_paths() {
     let shard_words = 128;
     let seed = build_data(shard_words * SHARD_COUNT).unwrap();

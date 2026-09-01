@@ -60,13 +60,25 @@ cargo run --release --bin axon-uic-delta-sweep -- --mib 64 --runs 5 --max-update
 Binário: `axon-uic-hybrid-sweep`.
 
 ```powershell
-cargo run --release --bin axon-uic-hybrid-sweep -- --mib 64 --runs 30
+cargo run --release --bin axon-uic-hybrid-sweep -- --mib 64 --runs 30 --hardware-id <cpu-ram-profile>
 ```
 
 Workload: 64 shards de 1 MiB; oito shards densos usam `FULL_LOCAL`, um shard usa Delta coalescido, um usa Delta bruto e 54 usam `SKIP`. Toda rodada exige paridade exata entre Full, Delta, Delta coalescido, Hybrid, Oracle e Change Fabric.
 
-Hybrid fim a fim inclui validação, índice, classificação, coalescência e execução. Oracle usa o mesmo plano pré-compilado, mas executa-o fora desse custo somente como diagnóstico; nunca é comparado como headline contra Full/Delta. Change Fabric cria esse plano durante a ingestão e reporta `ingest + query`, para não deslocar custo de compilação.
+Hybrid fim a fim inclui validação, índice, classificação, coalescência e execução. Oracle usa o mesmo plano pré-compilado, mas executa-o fora desse custo somente como diagnóstico; nunca é comparado como headline contra Full/Delta. Change Fabric cria esse plano durante a ingestão e reporta `ingest + query`, para não deslocar custo de compilação. Cada rodada percorre uma das seis ordens de execução determinísticas permutadas.
 
-Métricas: `Adaptation Tax = compiler / executor`, `Oracle Gap = Hybrid fim a fim / Oracle` e `Change Fabric Adaptation Tax = ingest / query`. A verificação por checksum é medida fora de todos os timers de execução e publicada separadamente.
+Métricas: `Adaptation Tax = compiler / executor`, `Oracle Gap = Hybrid fim a fim / Oracle` e `Change Fabric Adaptation Tax = ingest / query`. A verificação por checksum é medida fora de todos os timers de execução e publicada separadamente. `StrategyEvidence` recebe amostras pareadas Raw Delta/Oracle; só registra `Supported` ou `LatencyDominated` quando todos os pares concordam, senão não cria `MetaJit`.
 
-Limite: stream é canônico e ordenado por shard; coalescência exige `FinalStateOnly`; `SUM u64` favorece incrementalização. Não há árvore hierárquica, modelo online de custo, `DeltaForge` ou síntese de estado auxiliar.
+Limite: stream é canônico e ordenado por shard; coalescência exige `FinalStateOnly`; `SUM u64` favorece incrementalização. Este sweep não usa árvore hierárquica, modelo online de custo ou DeltaForge.
+
+## DeltaForge-SUM
+
+Binário: `axon-uic-deltaforge-sum`.
+
+```powershell
+cargo run --release --bin axon-uic-deltaforge-sum -- --mib 64 --runs 15
+```
+
+Entrada é somente `FoldSpec::AddModU64`. Forge deriva `CommutativeGroup`, cache `ModularTotal` e regra `SubtractOldThenAddNew`; não recebe updater. Cada ponto mede três caminhos com ordem determinística permutada em seis ordens: Full, updater Raw manual e plano derivado. Os três materializam mesmo `ReplaceDelta` canônico; Full refaz fold, Raw/Forge partem de total inicial mantido. Verificação exata fica fora do timer; Forge também executa checker de certificado fora do timer.
+
+O benchmark cobre 1.024, 1.000.000 e 4.000.000 replacements únicos que cabem no vetor. Registra todos os samples no baseline. Não mede inferência de álgebras arbitrárias, síntese de estado auxiliar para `MIN`, prova formal, transferência ou aprendizado.

@@ -1,13 +1,14 @@
 {
   "name": "axon-uic-hybrid-recompute",
   "date": "2026-09-01",
-  "command": "cargo run --release --bin axon-uic-hybrid-sweep -- --mib 64 --runs 30",
+  "command": "cargo run --release --bin axon-uic-hybrid-sweep -- --mib 64 --runs 30 --hardware-id i7-13650HX-16GiB",
   "host": {
     "os": "Windows x86_64",
     "cpu": "13th Gen Intel(R) Core(TM) i7-13650HX",
     "physical_cores": 14,
     "logical_processors": 20,
-    "ram_bytes": 16886128640
+    "ram_bytes": 16886128640,
+    "measurement_guard": "i7-13650HX-16GiB"
   },
   "workload": {
     "vector_mib": 64,
@@ -26,31 +27,47 @@
   "protocol": {
     "runs": 30,
     "headline": "Hybrid compile-on-query end-to-end; Oracle is diagnostic only.",
-    "oracle_precompile_once_ms": 3.181,
-    "verification_outside_execution_timer": true
+    "oracle_precompile_once_ms": 3.288,
+    "verification_outside_execution_timer": true,
+    "path_order": "six deterministic permutations",
+    "paired_oracle_evidence": {
+      "baseline": "raw_delta_global",
+      "candidate": "hybrid_oracle_executor_only",
+      "status": "Inconclusive",
+      "oracle_headroom_basis_points": -471,
+      "meta_jit": null
+    }
+  },
+  "all_samples_ms": {
+    "full_global": [4.444, 4.143, 4.170, 4.601, 4.368, 4.429, 4.152, 4.273, 4.174, 4.438, 4.696, 4.687, 4.158, 4.106, 4.210, 4.929, 4.240, 4.048, 4.232, 4.169, 5.486, 5.168, 4.661, 4.095, 4.940, 5.089, 4.296, 4.186, 4.109, 4.148],
+    "raw_delta_global": [1.705, 1.301, 1.263, 1.648, 1.295, 1.442, 1.331, 1.301, 1.313, 1.233, 1.280, 1.348, 1.279, 1.367, 1.374, 1.277, 1.256, 1.285, 1.349, 1.613, 2.091, 1.552, 1.315, 1.339, 1.334, 1.627, 1.360, 1.274, 1.302, 1.500],
+    "coalesced_delta_global": [4.801, 4.372, 4.445, 5.238, 5.729, 4.772, 4.702, 4.719, 4.578, 4.374, 4.861, 5.734, 4.956, 5.057, 5.122, 5.624, 4.574, 4.768, 4.511, 4.926, 5.264, 5.132, 4.489, 4.496, 4.995, 5.433, 4.527, 4.460, 4.865, 4.691],
+    "hybrid_compile_on_query": [3.683, 3.765, 3.716, 4.211, 4.365, 5.997, 4.212, 4.498, 3.636, 3.857, 3.802, 3.728, 4.104, 3.928, 3.633, 4.068, 4.141, 5.581, 3.815, 3.675, 5.353, 5.647, 3.875, 4.037, 3.747, 5.285, 3.855, 3.732, 3.792, 4.214],
+    "hybrid_oracle_executor_only": [1.436, 1.280, 1.390, 1.335, 1.336, 2.126, 1.384, 1.686, 1.424, 1.326, 1.522, 1.329, 1.312, 1.539, 1.318, 1.434, 1.393, 1.484, 1.500, 1.330, 2.525, 1.590, 1.339, 1.474, 1.357, 1.840, 1.614, 1.272, 1.301, 1.426],
+    "change_fabric_lifecycle": [9.350, 9.215, 9.744, 11.759, 10.584, 9.721, 9.981, 9.257, 9.519, 9.330, 9.982, 9.860, 9.865, 9.965, 10.142, 9.629, 9.416, 10.482, 9.461, 9.940, 11.626, 9.858, 9.629, 9.988, 9.924, 9.194, 9.765, 10.776, 9.665, 10.151]
   },
   "p50_ms": {
-    "full_global": 5.175,
-    "raw_delta_global": 1.495,
-    "coalesced_delta_global": 5.125,
-    "hybrid_compile_on_query": 4.308,
-    "hybrid_oracle_executor_only": 1.593,
-    "hybrid_compiler": 2.853,
-    "hybrid_validate_and_index": 1.666,
-    "hybrid_classify_and_materialize": 1.125,
-    "hybrid_execution_after_compile": 1.371,
-    "change_fabric_lifecycle": 9.284,
-    "change_fabric_ingest": 7.594,
-    "change_fabric_query": 1.685
+    "full_global": 4.240,
+    "raw_delta_global": 1.331,
+    "coalesced_delta_global": 4.772,
+    "hybrid_compile_on_query": 3.875,
+    "hybrid_oracle_executor_only": 1.393,
+    "hybrid_compiler": 2.642,
+    "hybrid_validate_and_index": 1.618,
+    "hybrid_classify_and_materialize": 1.031,
+    "hybrid_execution_after_compile": 1.235,
+    "change_fabric_lifecycle": 9.858,
+    "change_fabric_ingest": 8.284,
+    "change_fabric_query": 1.560
   },
   "derived": {
-    "hybrid_vs_best_global": 0.35,
-    "hybrid_adaptation_tax": 2.08,
-    "hybrid_oracle_gap": 2.70,
-    "oracle_vs_raw_delta": 0.94,
-    "change_fabric_adaptation_tax": 4.51,
-    "change_fabric_lifecycle_vs_raw_delta": 0.16
+    "hybrid_vs_best_global": 0.34,
+    "hybrid_adaptation_tax": 2.14,
+    "hybrid_oracle_gap": 2.78,
+    "oracle_vs_raw_delta": 0.96,
+    "change_fabric_adaptation_tax": 5.31,
+    "change_fabric_lifecycle_vs_raw_delta": 0.13
   },
   "final_checksum": "8D35C7539911D6CB",
-  "result": "Oracle is not a robust win over Raw Delta; Change Fabric loses once ingest cost is included."
+  "result": "Paired Oracle evidence is inconclusive, so Hybrid gets neither promotion nor refutation. Change Fabric loses once ingest cost is included."
 }
