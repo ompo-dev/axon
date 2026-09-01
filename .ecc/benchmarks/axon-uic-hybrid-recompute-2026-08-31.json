@@ -1,0 +1,35 @@
+{
+  "name": "axon-uic-hybrid-recompute",
+  "date": "2026-09-01",
+  "command": "cargo run --release --bin axon-uic-hybrid-sweep -- --mib 64 --runs 5",
+  "host": {
+    "os": "Windows x86_64",
+    "cpu": "13th Gen Intel(R) Core(TM) i7-13650HX",
+    "physical_cores": 14,
+    "logical_processors": 20,
+    "ram_bytes": 16886128640
+  },
+  "workload": {
+    "vector_mib": 64,
+    "shards": 64,
+    "shard_mib": 1,
+    "raw_events": 1115136,
+    "final_writes": 1065984,
+    "plans": {
+      "skip": 54,
+      "raw_delta": 1,
+      "coalesced_delta": 1,
+      "full_local": 8
+    },
+    "exact_parity": true
+  },
+  "p50_ms": {
+    "full_global": 4.278,
+    "raw_delta_global": 1.433,
+    "coalesced_delta_global": 4.693,
+    "hybrid_end_to_end": 3.071,
+    "hybrid_compiler": 2.028
+  },
+  "final_checksum": "8D35C7539911D6CB",
+  "result": "Hybrid beats Full global but not raw Delta global in this contiguous workload."
+}

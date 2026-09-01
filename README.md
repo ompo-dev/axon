@@ -10,6 +10,7 @@ Rebuild limpo da AXON como **Universal Intelligence Calculus**: um núcleo Rust 
 | Calcular só `needed ∩ changed` | `ExecutionSlice` | cone backward do objetivo intersectado com delta forward |
 | Escolher Delta ou Full por contrato e custo | `IncrementalizabilityAnalyzer`, `CostEstimate` | `SUM`/`COUNT`/`XOR` locais são exatos; `SORT` usa Full |
 | Comprimir rajadas de escrita | `coalesce_adjacent_last_writes` | última escrita adjacente preserva estado final |
+| Recomputar só shard denso | `axon-uic-hybrid-sweep` | combina `SKIP`, Delta, Delta coalescido e `FULL_LOCAL` |
 | Quocientar estrutura equivalente | `LiftCertificate` | LIFT exato para classe de fontes idênticas; fora dela usa fallback |
 | Preservar comportamento | `AbstractionContract`, `SemanticContract` | limite de erro explícito; remorph exige contrato igual |
 | Preferir descrição física barata | `PhysicalCost`, `CostPrices` | refinamentos disputam custo de latência, bytes e energia |
@@ -26,6 +27,7 @@ cargo test --all-targets
 cargo run --bin axon-uic
 cargo run --release --bin axon-uic-bench -- --mib 64 --queries 20 --runs 5
 cargo run --release --bin axon-uic-delta-sweep -- --mib 64 --runs 5 --max-updates 8000000
+cargo run --release --bin axon-uic-hybrid-sweep -- --mib 64 --runs 5
 ```
 
-Resultados e protocolo: [docs/EXPERIMENTS.md](docs/EXPERIMENTS.md), [docs/RESULTS.md](docs/RESULTS.md). Contratos e limites: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), [docs/DELTA_ALGEBRA.md](docs/DELTA_ALGEBRA.md).
+Resultados e protocolo: [docs/EXPERIMENTS.md](docs/EXPERIMENTS.md), [docs/RESULTS.md](docs/RESULTS.md). Contratos e limites: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), [docs/DELTA_ALGEBRA.md](docs/DELTA_ALGEBRA.md), [docs/HYBRID_RECOMPUTE.md](docs/HYBRID_RECOMPUTE.md).

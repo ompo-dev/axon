@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "recorded_at": "2026-08-31",
+  "recorded_at": "2026-09-01",
   "benchmark": "AXON-UIC Demand×Delta physical sweep",
   "host": {
     "os": "Windows",
@@ -17,15 +17,19 @@
     "warmups": 2,
     "measured_runs": 5,
     "delta_calibration_batches": 10000,
+    "timing_unit": "one batch of 20 queries for both Full and Delta",
     "first_batch_trace_parity": true,
     "final_delta_accumulator_checked_against_exact_sum": true
   },
   "results": {
-    "full_p50_ms": 65.738,
-    "full_p95_ms": 70.487,
-    "delta_normalized_p50_ms": 0.000027,
-    "delta_normalized_p95_ms": 0.000029,
-    "normalized_p50_ratio": 2434748.15,
+    "full_batch_p50_ms": 57.115,
+    "full_batch_p95_ms": 58.701,
+    "delta_batch_p50_ms": 0.000030,
+    "delta_batch_p95_ms": 0.000031,
+    "full_per_query_p50_ns": 2855755.0,
+    "delta_per_query_p50_ns": 1.5,
+    "batch_p50_ratio": 1903836.67,
+    "per_query_p50_ratio": 1903836.67,
     "full_logical_reads_bytes": 1342177280,
     "delta_logical_reads_bytes": 320,
     "final_checksum": "2E5C00BF16482DC0"

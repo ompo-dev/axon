@@ -23,6 +23,13 @@ pub enum ExecutionStrategy {
     Full,
 }
 
+/// Coalescing is valid only when no observer can distinguish overwritten events.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum ObservationFrontier {
+    FinalStateOnly,
+    IntermediateObserved,
+}
+
 /// Cost model learned from a response curve or supplied by a physical backend.
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct CostEstimate {
@@ -172,6 +179,17 @@ pub fn coalesce_adjacent_last_writes(updates: &[PointUpdate]) -> Vec<PointUpdate
     output
 }
 
+/// Coalesces adjacent last writes only after the observation frontier is closed.
+pub fn coalesce_adjacent_at_frontier(
+    updates: &[PointUpdate],
+    frontier: ObservationFrontier,
+) -> Result<Vec<PointUpdate>, DeltaError> {
+    match frontier {
+        ObservationFrontier::FinalStateOnly => Ok(coalesce_adjacent_last_writes(updates)),
+        ObservationFrontier::IntermediateObserved => Err(DeltaError::ObservationNotClosed),
+    }
+}
+
 impl PointUpdate {
     pub const fn new(index: usize, value: u64) -> Self {
         Self { index, value }
@@ -190,6 +208,7 @@ impl PointUpdate {
 pub enum DeltaError {
     InvalidSupport,
     IndexOutOfBounds(usize),
+    ObservationNotClosed,
 }
 
 /// Exact modular-`u64` sum state. Updates return fresh state, preserving prior versions.
@@ -236,7 +255,14 @@ impl SumState {
     }
 
     /// Last-write coalescing is exact for final-state queries: overwritten updates disappear.
-    pub fn apply_coalesced(&self, updates: &[PointUpdate]) -> Result<(Self, usize), DeltaError> {
+    pub fn apply_coalesced(
+        &self,
+        updates: &[PointUpdate],
+        frontier: ObservationFrontier,
+    ) -> Result<(Self, usize), DeltaError> {
+        if frontier == ObservationFrontier::IntermediateObserved {
+            return Err(DeltaError::ObservationNotClosed);
+        }
         let mut latest = BTreeMap::new();
         for update in updates {
             if update.index() >= self.values.len() {

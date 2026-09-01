@@ -108,7 +108,7 @@ fn run(config: Config) -> Result<(), String> {
     for index in 0..config.runs {
         let round = run_round(&seed, config.queries, index % 2 == 1)?;
         println!(
-            "run {:02}: full {:>9.3} ms; delta {:>9.6} ms; first-batch parity true",
+            "run {:02}: full batch {:>9.3} ms; delta batch {:>9.6} ms; first-batch parity true",
             index + 1,
             milliseconds(round.full),
             milliseconds(round.delta)
@@ -122,7 +122,10 @@ fn run(config: Config) -> Result<(), String> {
     let full_p95 = percentile(rounds.iter().map(|round| round.full).collect(), 95);
     let delta_p50 = percentile(delta, 50);
     let delta_p95 = percentile(rounds.iter().map(|round| round.delta).collect(), 95);
-    let speedup = full_p50.as_nanos() as f64 / delta_p50.as_nanos().max(1) as f64;
+    let full_per_query_ns = per_query_nanoseconds(full_p50, config.queries);
+    let delta_per_query_ns = per_query_nanoseconds(delta_p50, config.queries);
+    let batch_speedup = speedup(full_p50, delta_p50);
+    let per_query_speedup = full_per_query_ns / delta_per_query_ns;
     let full_bytes = physical_bytes as u128 * config.queries as u128;
     let delta_bytes = 2_u128 * size_of::<u64>() as u128 * config.queries as u128;
     let checksum = rounds.first().map(|round| round.checksum).unwrap_or(0);
@@ -130,16 +133,28 @@ fn run(config: Config) -> Result<(), String> {
     println!("\n| Metric | Result |");
     println!("|---|---:|");
     println!(
-        "| Full p50 / p95 | {:.3} / {:.3} ms |",
+        "| Full batch p50 / p95 | {:.3} / {:.3} ms |",
         milliseconds(full_p50),
         milliseconds(full_p95)
     );
     println!(
-        "| Delta p50 / p95, normalized | {:.6} / {:.6} ms |",
+        "| Delta batch p50 / p95 | {:.6} / {:.6} ms |",
         milliseconds(delta_p50),
         milliseconds(delta_p95)
     );
-    println!("| Observed speedup p50, normalized | {:.2}x |", speedup);
+    println!(
+        "| Full per query p50 (derived from {} queries) | {:.3} ns |",
+        config.queries, full_per_query_ns
+    );
+    println!(
+        "| Delta per query p50 (derived from {} queries) | {:.3} ns |",
+        config.queries, delta_per_query_ns
+    );
+    println!("| Observed batch speedup p50 | {:.2}x |", batch_speedup);
+    println!(
+        "| Observed per-query speedup p50 | {:.2}x |",
+        per_query_speedup
+    );
     println!(
         "| Logical reads per run, full / delta | {} / {} bytes |",
         full_bytes, delta_bytes
@@ -290,6 +305,14 @@ fn milliseconds(duration: Duration) -> f64 {
     duration.as_secs_f64() * 1_000.0
 }
 
+fn per_query_nanoseconds(duration: Duration, queries: usize) -> f64 {
+    duration.as_secs_f64() * 1_000_000_000.0 / queries as f64
+}
+
+fn speedup(full: Duration, delta: Duration) -> f64 {
+    full.as_nanos() as f64 / delta.as_nanos().max(1) as f64
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -312,5 +335,17 @@ mod tests {
         ];
 
         assert_eq!(percentile(values, 50), Duration::from_nanos(2));
+    }
+
+    #[test]
+    fn batch_and_per_query_speedups_are_equivalent() {
+        let full = Duration::from_nanos(2_000);
+        let delta = Duration::from_nanos(20);
+        let full_per_query = per_query_nanoseconds(full, 20);
+        let delta_per_query = per_query_nanoseconds(delta, 20);
+
+        assert_eq!(full_per_query, 100.0);
+        assert_eq!(delta_per_query, 1.0);
+        assert_eq!(speedup(full, delta), full_per_query / delta_per_query);
     }
 }

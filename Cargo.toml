@@ -17,4 +17,8 @@ path = "src/bin/axon_uic_bench.rs"
 name = "axon-uic-delta-sweep"
 path = "src/bin/axon_uic_delta_sweep.rs"
 
+[[bin]]
+name = "axon-uic-hybrid-sweep"
+path = "src/bin/axon_uic_hybrid_sweep.rs"
+
 [dependencies]

@@ -10,7 +10,8 @@ pub mod structure;
 pub use capability::{Authority, Capability, CapabilityGate, Effect, Feasibility, GateFailure};
 pub use delta::{
     ChangeSupport, CostEstimate, DeltaClass, ExecutionStrategy, IncrementalizabilityAnalyzer,
-    OperatorKind, PointUpdate, SumState, coalesce_adjacent_last_writes,
+    ObservationFrontier, OperatorKind, PointUpdate, SumState, coalesce_adjacent_at_frontier,
+    coalesce_adjacent_last_writes,
 };
 pub use morphology::{Morphology, MorphologyError, Region, RemorphPolicy, SemanticContract};
 pub use refinement::{
@@ -88,7 +89,9 @@ mod tests {
 
         let full = state.full_after(&updates).unwrap();
         let delta = state.apply_delta(&updates).unwrap();
-        let (coalesced, applied) = state.apply_coalesced(&updates).unwrap();
+        let (coalesced, applied) = state
+            .apply_coalesced(&updates, ObservationFrontier::FinalStateOnly)
+            .unwrap();
 
         assert_eq!(full, delta);
         assert_eq!(full, coalesced);
@@ -111,6 +114,25 @@ mod tests {
                 PointUpdate::new(2, 4),
                 PointUpdate::new(1, 5),
             ]
+        );
+    }
+
+    #[test]
+    fn coalescing_refuses_visible_intermediate_events() {
+        let updates = [PointUpdate::new(1, 2), PointUpdate::new(1, 3)];
+        let state = SumState::try_from_values(vec![0, 0]).unwrap();
+
+        assert!(
+            coalesce_adjacent_at_frontier(&updates, ObservationFrontier::FinalStateOnly).is_ok()
+        );
+        assert!(
+            coalesce_adjacent_at_frontier(&updates, ObservationFrontier::IntermediateObserved)
+                .is_err()
+        );
+        assert!(
+            state
+                .apply_coalesced(&updates, ObservationFrontier::IntermediateObserved)
+                .is_err()
         );
     }
 

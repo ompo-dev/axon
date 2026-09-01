@@ -12,9 +12,9 @@ Workload real em CPU/RAM local:
 4. Delta atualiza soma exata com `old` e `new`, sem reler vetor inteiro.
 5. Compara trace e checksum final em toda rodada. Divergência encerra benchmark.
 6. Faz duas warmups e mede 1–10 rodadas, alternando ordem full/delta.
-7. Delta mede 10.000 batches e normaliza tempo para uma sequência de queries. Isso evita vender resolução de relógio como performance. Primeiro batch é comparado ao trace full; depois do batch final, soma exata do vetor verifica acumulador delta completo.
+7. Delta mede 10.000 batches e normaliza para **um batch completo de `--queries` updates**, igual ao caminho Full. Saída também deriva ns por query dos dois batches; ambas razões de speedup precisam coincidir. Primeiro batch é comparado ao trace Full; depois do batch final, soma exata do vetor verifica acumulador Delta completo.
 
-Janela medida exclui criação/cópia inicial dos vetores e soma inicial do caminho delta. Inclui execução completa de cada sequência de queries. Reporta p50, p95, speedup p50 e bytes lógicos lidos.
+Janela medida exclui criação/cópia inicial dos vetores e soma inicial do caminho Delta. Inclui execução completa de cada batch de queries. Reporta p50/p95 batch, derivação por query, as duas razões e bytes lógicos lidos.
 
 ## Como interpretar
 
