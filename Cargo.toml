@@ -2,6 +2,7 @@
 name = "axon-uic"
 version = "0.1.0"
 edition = "2024"
+autobins = false
 description = "AXON Universal Intelligence Calculus — certified adaptive cognition"
 license = "MIT"
 

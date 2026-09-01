@@ -54,3 +54,19 @@ Comando:
 ```powershell
 cargo run --release --bin axon-uic-delta-sweep -- --mib 64 --runs 5 --max-updates 8000000
 ```
+
+## Hybrid Oracle e Change Fabric
+
+Binário: `axon-uic-hybrid-sweep`.
+
+```powershell
+cargo run --release --bin axon-uic-hybrid-sweep -- --mib 64 --runs 30
+```
+
+Workload: 64 shards de 1 MiB; oito shards densos usam `FULL_LOCAL`, um shard usa Delta coalescido, um usa Delta bruto e 54 usam `SKIP`. Toda rodada exige paridade exata entre Full, Delta, Delta coalescido, Hybrid, Oracle e Change Fabric.
+
+Hybrid fim a fim inclui validação, índice, classificação, coalescência e execução. Oracle usa o mesmo plano pré-compilado, mas executa-o fora desse custo somente como diagnóstico; nunca é comparado como headline contra Full/Delta. Change Fabric cria esse plano durante a ingestão e reporta `ingest + query`, para não deslocar custo de compilação.
+
+Métricas: `Adaptation Tax = compiler / executor`, `Oracle Gap = Hybrid fim a fim / Oracle` e `Change Fabric Adaptation Tax = ingest / query`. A verificação por checksum é medida fora de todos os timers de execução e publicada separadamente.
+
+Limite: stream é canônico e ordenado por shard; coalescência exige `FinalStateOnly`; `SUM u64` favorece incrementalização. Não há árvore hierárquica, modelo online de custo, `DeltaForge` ou síntese de estado auxiliar.

@@ -60,18 +60,25 @@ Limite: prova apenas `SUM` modular de `u64` sob escrita pontual local e última 
 Command:
 
 ```powershell
-cargo run --release --bin axon-uic-hybrid-sweep -- --mib 64 --runs 5
+cargo run --release --bin axon-uic-hybrid-sweep -- --mib 64 --runs 30
 ```
 
-Workload: 64 shards de 1 MiB; oito shards densos usam `FULL_LOCAL`, um shard usa Delta coalescido, um usa Delta bruto e 54 usam `SKIP`. O compilador valida e indexa `ChangeSet` ordenado por shard, e esse tempo entra no caminho híbrido.
+Workload: 64 shards de 1 MiB; oito shards densos usam `FULL_LOCAL`, um shard usa Delta coalescido, um usa Delta bruto e 54 usam `SKIP`. Todas as 30 rodadas tiveram paridade exata e checksum `8D35C7539911D6CB`.
 
 | Caminho | p50 ms |
 |---|---:|
-| Full global | 4.278 |
-| Delta bruto global | 1.433 |
-| Delta coalescido global | 4.693 |
-| Hybrid por shard, fim a fim | 3.071 |
-| Parcela compilador Hybrid | 2.028 |
-| Checksum exato | `8D35C7539911D6CB` |
+| Full global | 5.175 |
+| Delta bruto global | 1.495 |
+| Delta coalescido global | 5.125 |
+| Hybrid fim a fim | 4.308 |
+| Hybrid Oracle, executor pré-compilado | 1.593 |
+| Compiler Hybrid | 2.853 |
+| `validate + index` | 1.666 |
+| `classify + materialize` | 1.125 |
+| Change Fabric, ingestão + query | 9.284 |
+| Change Fabric, ingestão | 7.594 |
+| Change Fabric, query | 1.685 |
 
-Resultado negativo importante: Hybrid venceu Full global, mas perdeu para Delta bruto global neste layout contíguo (`0.47×` contra melhor caminho global). Portanto não há alegação de que shardização domina Delta; representação e custo de compilação precisam pagar rent.
+Oracle perde para Delta bruto no p50 (`0.94×`): política local ainda não tem vitória robusta neste workload. Hybrid fim a fim perde para Delta porque `Adaptation Tax` é `2.08×` e `Oracle Gap` é `2.70×`.
+
+Change Fabric foi rejeitado neste regime: custo de ingestão gera `Adaptation Tax` de `4.51×`, e lifecycle ficou `0.16×` do Delta bruto. Esse resultado é útil: mover planejamento para ingestão não cria ganho se a manutenção custa mais do que a compilação que elimina. Verificação exata foi medida fora dos timers: Hybrid `3.602 ms`, Oracle `3.581 ms`, Fabric `3.772 ms`.

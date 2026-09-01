@@ -13,6 +13,8 @@ Entrada é `ChangeSet` indexado por shard: eventos precisam chegar ordenados por
 
 Correção: `hybrid_total = Σ shard_total`, com soma modular `u64`. Cada round exige igualdade contra Full global, Delta bruto e Delta coalescido; checksum final do vetor verifica o acumulador híbrido.
 
-Resultado atual: Hybrid supera Full global, mas perde para Delta bruto porque Delta já é barato para as escritas contíguas deste workload e compilação custa 2.028 ms p50. Isso é o resultado esperado de uma arquitetura que mede rent: não promover Hybrid sem vantagem medida.
+`Hybrid Oracle` pré-compila o mesmo plano antes do timer e mede somente o executor. É um limite diagnóstico, não resultado fim a fim: o custo de sua pré-compilação é publicado separadamente. `ChangeFabric` tenta manter esse plano durante ingestão; mede sempre `ingest + query`, nunca apenas query.
 
-Limite: classificador usa regra morfológica determinística, não curva online aprendida; `ChangeSet` deve vir ordenado por shard; não há `DeltaForge`, síntese de estado auxiliar nem prova para outros operadores.
+Em 64 MiB / 30 rodadas, Oracle perdeu para Delta bruto no p50 (`1.593` contra `1.495 ms`), logo política local ainda não é uma vitória robusta. Hybrid fim a fim ficou em `4.308 ms`: `Adaptation Tax = 2.08×` e `Oracle Gap = 2.70×`. Change Fabric ficou em `9.284 ms`; sua ingestão de `7.594 ms` produz `Adaptation Tax = 4.51×`. Ela foi rejeitada para este workload, embora preserve paridade.
+
+Limite: classificador usa regra morfológica determinística, não curva online aprendida; `ChangeSet` deve vir ordenado por shard; coalescência exige `FinalStateOnly`; não há árvore hierárquica, `DeltaForge`, síntese de estado auxiliar nem prova para outros operadores.

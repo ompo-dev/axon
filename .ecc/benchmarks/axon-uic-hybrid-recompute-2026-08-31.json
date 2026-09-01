@@ -1,7 +1,7 @@
 {
   "name": "axon-uic-hybrid-recompute",
   "date": "2026-09-01",
-  "command": "cargo run --release --bin axon-uic-hybrid-sweep -- --mib 64 --runs 5",
+  "command": "cargo run --release --bin axon-uic-hybrid-sweep -- --mib 64 --runs 30",
   "host": {
     "os": "Windows x86_64",
     "cpu": "13th Gen Intel(R) Core(TM) i7-13650HX",
@@ -23,13 +23,34 @@
     },
     "exact_parity": true
   },
+  "protocol": {
+    "runs": 30,
+    "headline": "Hybrid compile-on-query end-to-end; Oracle is diagnostic only.",
+    "oracle_precompile_once_ms": 3.181,
+    "verification_outside_execution_timer": true
+  },
   "p50_ms": {
-    "full_global": 4.278,
-    "raw_delta_global": 1.433,
-    "coalesced_delta_global": 4.693,
-    "hybrid_end_to_end": 3.071,
-    "hybrid_compiler": 2.028
+    "full_global": 5.175,
+    "raw_delta_global": 1.495,
+    "coalesced_delta_global": 5.125,
+    "hybrid_compile_on_query": 4.308,
+    "hybrid_oracle_executor_only": 1.593,
+    "hybrid_compiler": 2.853,
+    "hybrid_validate_and_index": 1.666,
+    "hybrid_classify_and_materialize": 1.125,
+    "hybrid_execution_after_compile": 1.371,
+    "change_fabric_lifecycle": 9.284,
+    "change_fabric_ingest": 7.594,
+    "change_fabric_query": 1.685
+  },
+  "derived": {
+    "hybrid_vs_best_global": 0.35,
+    "hybrid_adaptation_tax": 2.08,
+    "hybrid_oracle_gap": 2.70,
+    "oracle_vs_raw_delta": 0.94,
+    "change_fabric_adaptation_tax": 4.51,
+    "change_fabric_lifecycle_vs_raw_delta": 0.16
   },
   "final_checksum": "8D35C7539911D6CB",
-  "result": "Hybrid beats Full global but not raw Delta global in this contiguous workload."
+  "result": "Oracle is not a robust win over Raw Delta; Change Fabric loses once ingest cost is included."
 }

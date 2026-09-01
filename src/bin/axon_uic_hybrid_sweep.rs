@@ -1,14 +1,22 @@
 use std::env;
 use std::hint::black_box;
 use std::mem::size_of;
+use std::ops::Range;
 use std::time::{Duration, Instant};
 
 use axon_uic::{ObservationFrontier, PointUpdate, coalesce_adjacent_at_frontier};
 
+mod hybrid_fabric;
+
+use hybrid_fabric::run_fabric_hybrid;
+
+#[cfg(test)]
+use hybrid_fabric::{build_change_fabric, execute_fabric_hybrid};
+
 const DEFAULT_MIB: usize = 64;
 const DEFAULT_RUNS: usize = 5;
 const MAX_MIB: usize = 256;
-const MAX_RUNS: usize = 10;
+const MAX_RUNS: usize = 30;
 const SHARD_COUNT: usize = 64;
 const DENSE_SHARDS: usize = 8;
 const DUPLICATE_SHARD: usize = DENSE_SHARDS;
@@ -56,6 +64,15 @@ impl PlanCounts {
             ShardStrategy::FullLocal => self.full_local += 1,
         }
     }
+
+    fn remove(&mut self, strategy: ShardStrategy) {
+        match strategy {
+            ShardStrategy::Skip => self.skip -= 1,
+            ShardStrategy::RawDelta => self.raw_delta -= 1,
+            ShardStrategy::CoalescedDelta => self.coalesced_delta -= 1,
+            ShardStrategy::FullLocal => self.full_local -= 1,
+        }
+    }
 }
 
 enum ChangeStorage<'a> {
@@ -80,6 +97,15 @@ struct CompiledShard<'a> {
 struct CompiledChanges<'a> {
     shards: Vec<CompiledShard<'a>>,
     counts: PlanCounts,
+    words: usize,
+    shard_words: usize,
+}
+
+#[derive(Clone, Copy)]
+struct CompilerTiming {
+    total: Duration,
+    validate_and_index: Duration,
+    classify_and_materialize: Duration,
 }
 
 #[derive(Clone, Copy)]
@@ -91,7 +117,16 @@ struct Measurement {
 #[derive(Clone, Copy)]
 struct HybridMeasurement {
     duration: Duration,
-    compile: Duration,
+    compiler: CompilerTiming,
+    execution: Duration,
+    verification: Duration,
+    total: u64,
+}
+
+#[derive(Clone, Copy)]
+struct OracleMeasurement {
+    execution: Duration,
+    verification: Duration,
     total: u64,
 }
 
@@ -105,7 +140,7 @@ fn main() {
         }
         Err(message) => {
             eprintln!("{message}");
-            eprintln!("usage: axon-uic-hybrid-sweep [--mib 1..256] [--runs 1..10]");
+            eprintln!("usage: axon-uic-hybrid-sweep [--mib 1..256] [--runs 1..30]");
             std::process::exit(2);
         }
     }
@@ -152,7 +187,7 @@ fn run(config: Config) -> Result<(), String> {
         coalesce_adjacent_at_frontier(&updates, ObservationFrontier::FinalStateOnly)
             .map_err(|error| format!("cannot coalesce final-state workload: {error:?}"))?
             .len();
-    let template = compile_changes(&updates, words, shard_words)?;
+    let (template, template_timing) = compile_changes_timed(&updates, words, shard_words)?;
 
     println!("# AXON-UIC Hybrid Recompute physical sweep");
     println!(
@@ -174,7 +209,11 @@ fn run(config: Config) -> Result<(), String> {
         template.counts.full_local
     );
     println!(
-        "protocol: hybrid timing includes validation, run indexing, coalescing, classification and local execution; clones and maintained initial sums stay outside every timed path."
+        "protocol: headline Hybrid measures compile-on-query plus execution; Oracle executes same plan precompiled once outside its timer. Clones, maintained initial sums and exact verification stay outside every timed path."
+    );
+    println!(
+        "oracle setup: one precompilation {:.3} ms outside all Oracle samples; it is diagnostic, never the end-to-end headline.",
+        milliseconds(template_timing.total)
     );
 
     let mut full_samples = Vec::with_capacity(config.runs);
@@ -182,41 +221,74 @@ fn run(config: Config) -> Result<(), String> {
     let mut coalesced_samples = Vec::with_capacity(config.runs);
     let mut hybrid_samples = Vec::with_capacity(config.runs);
     let mut compile_samples = Vec::with_capacity(config.runs);
+    let mut validate_and_index_samples = Vec::with_capacity(config.runs);
+    let mut classify_and_materialize_samples = Vec::with_capacity(config.runs);
+    let mut hybrid_execution_samples = Vec::with_capacity(config.runs);
+    let mut hybrid_verification_samples = Vec::with_capacity(config.runs);
+    let mut oracle_samples = Vec::with_capacity(config.runs);
+    let mut oracle_verification_samples = Vec::with_capacity(config.runs);
+    let mut fabric_samples = Vec::with_capacity(config.runs);
+    let mut fabric_ingest_samples = Vec::with_capacity(config.runs);
+    let mut fabric_execution_samples = Vec::with_capacity(config.runs);
+    let mut fabric_verification_samples = Vec::with_capacity(config.runs);
     let mut checksum = 0_u64;
 
     for round in 0..config.runs {
-        let (full, delta, coalesced, hybrid) = if round % 2 == 0 {
+        let (full, delta, coalesced, hybrid, oracle, fabric) = if round % 2 == 0 {
             let full = run_full_global(&seed, &updates)?;
             let delta = run_delta_global(&seed, &updates)?;
             let coalesced = run_coalesced_global(&seed, &updates)?;
             let hybrid = run_hybrid(&seed, &updates, shard_words)?;
-            (full, delta, coalesced, hybrid)
+            let oracle = run_hybrid_oracle(&seed, &template)?;
+            let fabric = run_fabric_hybrid(&seed, &updates, shard_words)?;
+            (full, delta, coalesced, hybrid, oracle, fabric)
         } else {
+            let fabric = run_fabric_hybrid(&seed, &updates, shard_words)?;
+            let oracle = run_hybrid_oracle(&seed, &template)?;
             let hybrid = run_hybrid(&seed, &updates, shard_words)?;
             let coalesced = run_coalesced_global(&seed, &updates)?;
             let delta = run_delta_global(&seed, &updates)?;
             let full = run_full_global(&seed, &updates)?;
-            (full, delta, coalesced, hybrid)
+            (full, delta, coalesced, hybrid, oracle, fabric)
         };
-        if full.total != delta.total || full.total != coalesced.total || full.total != hybrid.total
+        if full.total != delta.total
+            || full.total != coalesced.total
+            || full.total != hybrid.total
+            || full.total != oracle.total
+            || full.total != fabric.total
         {
             return Err(format!("exact parity failure in round {}", round + 1));
         }
         println!(
-            "run {:02}: full {:>8.3} ms; delta {:>8.3} ms; coal {:>8.3} ms; hybrid {:>8.3} ms (compile {:>8.3} ms); parity true",
+            "run {:02}: full {:>8.3} ms; delta {:>8.3} ms; coal {:>8.3} ms; hybrid {:>8.3} ms (compile {:>8.3} ms, execute {:>8.3} ms); oracle {:>8.3} ms; fabric {:>8.3} ms (ingest {:>8.3} ms, execute {:>8.3} ms); parity true",
             round + 1,
             milliseconds(full.duration),
             milliseconds(delta.duration),
             milliseconds(coalesced.duration),
             milliseconds(hybrid.duration),
-            milliseconds(hybrid.compile)
+            milliseconds(hybrid.compiler.total),
+            milliseconds(hybrid.execution),
+            milliseconds(oracle.execution),
+            milliseconds(fabric.duration),
+            milliseconds(fabric.ingest),
+            milliseconds(fabric.execution),
         );
         checksum = full.total;
         full_samples.push(full.duration);
         delta_samples.push(delta.duration);
         coalesced_samples.push(coalesced.duration);
         hybrid_samples.push(hybrid.duration);
-        compile_samples.push(hybrid.compile);
+        compile_samples.push(hybrid.compiler.total);
+        validate_and_index_samples.push(hybrid.compiler.validate_and_index);
+        classify_and_materialize_samples.push(hybrid.compiler.classify_and_materialize);
+        hybrid_execution_samples.push(hybrid.execution);
+        hybrid_verification_samples.push(hybrid.verification);
+        oracle_samples.push(oracle.execution);
+        oracle_verification_samples.push(oracle.verification);
+        fabric_samples.push(fabric.duration);
+        fabric_ingest_samples.push(fabric.ingest);
+        fabric_execution_samples.push(fabric.execution);
+        fabric_verification_samples.push(fabric.verification);
     }
 
     let full_p50 = percentile(full_samples, 50);
@@ -224,8 +296,18 @@ fn run(config: Config) -> Result<(), String> {
     let coalesced_p50 = percentile(coalesced_samples, 50);
     let hybrid_p50 = percentile(hybrid_samples, 50);
     let compile_p50 = percentile(compile_samples, 50);
+    let validate_and_index_p50 = percentile(validate_and_index_samples, 50);
+    let classify_and_materialize_p50 = percentile(classify_and_materialize_samples, 50);
+    let hybrid_execution_p50 = percentile(hybrid_execution_samples, 50);
+    let hybrid_verification_p50 = percentile(hybrid_verification_samples, 50);
+    let oracle_p50 = percentile(oracle_samples, 50);
+    let oracle_verification_p50 = percentile(oracle_verification_samples, 50);
+    let fabric_p50 = percentile(fabric_samples, 50);
+    let fabric_ingest_p50 = percentile(fabric_ingest_samples, 50);
+    let fabric_execution_p50 = percentile(fabric_execution_samples, 50);
+    let fabric_verification_p50 = percentile(fabric_verification_samples, 50);
     let best_global = full_p50.min(delta_p50).min(coalesced_p50);
-    println!("\n| Path | p50 ms |");
+    println!("\n| Metric | p50 ms |");
     println!("|---|---:|");
     println!("| Full global | {:.3} |", milliseconds(full_p50));
     println!("| Raw Delta global | {:.3} |", milliseconds(delta_p50));
@@ -234,16 +316,72 @@ fn run(config: Config) -> Result<(), String> {
         milliseconds(coalesced_p50)
     );
     println!(
-        "| Hybrid per shard, end-to-end | {:.3} |",
+        "| Hybrid compile-on-query, end-to-end | {:.3} |",
         milliseconds(hybrid_p50)
     );
     println!(
-        "| Hybrid compiler portion | {:.3} |",
+        "| Hybrid Oracle executor only (diagnostic) | {:.3} |",
+        milliseconds(oracle_p50)
+    );
+    println!(
+        "| Hybrid compiler, total | {:.3} |",
         milliseconds(compile_p50)
     );
     println!(
+        "| Compiler validate + index | {:.3} |",
+        milliseconds(validate_and_index_p50)
+    );
+    println!(
+        "| Compiler classify + materialize | {:.3} |",
+        milliseconds(classify_and_materialize_p50)
+    );
+    println!(
+        "| Hybrid execution after compile | {:.3} |",
+        milliseconds(hybrid_execution_p50)
+    );
+    println!(
+        "| Change Fabric lifecycle, ingest + query | {:.3} |",
+        milliseconds(fabric_p50)
+    );
+    println!(
+        "| Change Fabric ingest | {:.3} |",
+        milliseconds(fabric_ingest_p50)
+    );
+    println!(
+        "| Change Fabric query execution | {:.3} |",
+        milliseconds(fabric_execution_p50)
+    );
+    println!("\n| Derived metric | Result |");
+    println!("|---|---:|");
+    println!(
         "| Hybrid vs best global | {:.2}x |",
         speedup(best_global, hybrid_p50)
+    );
+    println!(
+        "| Adaptation Tax, compiler / hybrid execution | {:.2}x |",
+        duration_ratio(compile_p50, hybrid_execution_p50)
+    );
+    println!(
+        "| Oracle Gap, on-query Hybrid / Oracle | {:.2}x |",
+        duration_ratio(hybrid_p50, oracle_p50)
+    );
+    println!(
+        "| Oracle executor vs Raw Delta | {:.2}x |",
+        duration_ratio(delta_p50, oracle_p50)
+    );
+    println!(
+        "| Change Fabric Adaptation Tax, ingest / query | {:.2}x |",
+        duration_ratio(fabric_ingest_p50, fabric_execution_p50)
+    );
+    println!(
+        "| Change Fabric lifecycle vs Raw Delta | {:.2}x |",
+        duration_ratio(delta_p50, fabric_p50)
+    );
+    println!(
+        "| Exact verification outside timer, Hybrid / Oracle / Fabric | {:.3} / {:.3} / {:.3} |",
+        milliseconds(hybrid_verification_p50),
+        milliseconds(oracle_verification_p50),
+        milliseconds(fabric_verification_p50)
     );
     println!("| Exact final checksum | {checksum:016X} |");
     println!(
@@ -303,13 +441,57 @@ fn build_mixed_updates(shard_words: usize) -> Result<Vec<PointUpdate>, String> {
     Ok(updates)
 }
 
-fn compile_changes<'a>(
+fn compile_changes_timed<'a>(
     updates: &'a [PointUpdate],
     words: usize,
     shard_words: usize,
-) -> Result<CompiledChanges<'a>, String> {
-    let mut counts = PlanCounts::default();
-    let mut shards = Vec::with_capacity(SHARD_COUNT);
+) -> Result<(CompiledChanges<'a>, CompilerTiming), String> {
+    compile_changes_timed_at_frontier(
+        updates,
+        words,
+        shard_words,
+        ObservationFrontier::FinalStateOnly,
+    )
+}
+
+fn compile_changes_timed_at_frontier<'a>(
+    updates: &'a [PointUpdate],
+    words: usize,
+    shard_words: usize,
+    frontier: ObservationFrontier,
+) -> Result<(CompiledChanges<'a>, CompilerTiming), String> {
+    if shard_words == 0
+        || shard_words
+            .checked_mul(SHARD_COUNT)
+            .filter(|&expected_words| expected_words == words)
+            .is_none()
+    {
+        return Err("compiled change set requires an exact fixed-shard shape".to_owned());
+    }
+    let started = Instant::now();
+    let phase_started = Instant::now();
+    let ranges = validate_and_index_changes(updates, words, shard_words)?;
+    let validate_and_index = phase_started.elapsed();
+    let phase_started = Instant::now();
+    let compiled = materialize_changes(updates, ranges, words, shard_words, frontier)?;
+    let classify_and_materialize = phase_started.elapsed();
+
+    Ok((
+        compiled,
+        CompilerTiming {
+            total: started.elapsed(),
+            validate_and_index,
+            classify_and_materialize,
+        },
+    ))
+}
+
+fn validate_and_index_changes(
+    updates: &[PointUpdate],
+    words: usize,
+    shard_words: usize,
+) -> Result<Vec<Range<usize>>, String> {
+    let mut ranges = Vec::with_capacity(SHARD_COUNT);
     let mut cursor = 0;
     for shard in 0..SHARD_COUNT {
         let start = cursor;
@@ -326,37 +508,68 @@ fn compile_changes<'a>(
             }
             cursor += 1;
         }
-        let raw = &updates[start..cursor];
+        ranges.push(start..cursor);
+    }
+    if cursor != updates.len() {
+        return Err("shard-indexed change set must be ordered by shard".to_owned());
+    }
+    Ok(ranges)
+}
+
+fn materialize_changes<'a>(
+    updates: &'a [PointUpdate],
+    ranges: Vec<Range<usize>>,
+    words: usize,
+    shard_words: usize,
+    frontier: ObservationFrontier,
+) -> Result<CompiledChanges<'a>, String> {
+    let mut counts = PlanCounts::default();
+    let mut shards = Vec::with_capacity(SHARD_COUNT);
+    for range in ranges {
+        let raw = &updates[range];
         let has_adjacent_duplicates = raw
             .windows(2)
             .any(|pair| pair[0].index() == pair[1].index());
         let storage = if has_adjacent_duplicates {
             ChangeStorage::Owned(
-                coalesce_adjacent_at_frontier(raw, ObservationFrontier::FinalStateOnly)
+                coalesce_adjacent_at_frontier(raw, frontier)
                     .map_err(|error| format!("cannot coalesce final-state shard: {error:?}"))?,
             )
         } else {
             ChangeStorage::Borrowed(raw)
         };
-        let strategy = if storage.as_slice().is_empty() {
-            ShardStrategy::Skip
-        } else if storage.as_slice().len().saturating_mul(2) >= shard_words {
-            ShardStrategy::FullLocal
-        } else if has_adjacent_duplicates {
-            ShardStrategy::CoalescedDelta
-        } else {
-            ShardStrategy::RawDelta
-        };
+        let strategy = select_strategy(storage.as_slice(), has_adjacent_duplicates, shard_words);
         counts.record(strategy);
         shards.push(CompiledShard {
             strategy,
             updates: storage,
         });
     }
-    if cursor != updates.len() {
-        return Err("shard-indexed change set must be ordered by shard".to_owned());
+    if shards.len() != SHARD_COUNT {
+        return Err("compiled change set must contain every shard".to_owned());
     }
-    Ok(CompiledChanges { shards, counts })
+    Ok(CompiledChanges {
+        shards,
+        counts,
+        words,
+        shard_words,
+    })
+}
+
+fn select_strategy(
+    updates: &[PointUpdate],
+    has_adjacent_duplicates: bool,
+    shard_words: usize,
+) -> ShardStrategy {
+    if updates.is_empty() {
+        ShardStrategy::Skip
+    } else if updates.len().saturating_mul(2) >= shard_words {
+        ShardStrategy::FullLocal
+    } else if has_adjacent_duplicates {
+        ShardStrategy::CoalescedDelta
+    } else {
+        ShardStrategy::RawDelta
+    }
 }
 
 fn run_full_global(seed: &[u64], updates: &[PointUpdate]) -> Result<Measurement, String> {
@@ -403,35 +616,84 @@ fn run_hybrid(
     let mut data = clone_data(seed)?;
     let mut shard_totals: Vec<_> = data.chunks_exact(shard_words).map(checksum).collect();
     let started = Instant::now();
-    let compiled = compile_changes(updates, data.len(), shard_words)?;
-    let compile = started.elapsed();
+    let (compiled, compiler) = compile_changes_timed(updates, data.len(), shard_words)?;
+    let execution_started = Instant::now();
+    let total = execute_compiled_hybrid(&mut data, &mut shard_totals, &compiled)?;
+    black_box(total);
+    let execution = execution_started.elapsed();
+    let duration = started.elapsed();
+    let verification_started = Instant::now();
+    verify_total(&data, total)?;
+    let verification = verification_started.elapsed();
+    Ok(HybridMeasurement {
+        duration,
+        compiler,
+        execution,
+        verification,
+        total,
+    })
+}
+
+fn run_hybrid_oracle(
+    seed: &[u64],
+    compiled: &CompiledChanges<'_>,
+) -> Result<OracleMeasurement, String> {
+    if seed.len() != compiled.words {
+        return Err("precompiled plan shape does not match seed".to_owned());
+    }
+    let mut data = clone_data(seed)?;
+    let mut shard_totals: Vec<_> = data
+        .chunks_exact(compiled.shard_words)
+        .map(checksum)
+        .collect();
+    let execution_started = Instant::now();
+    let total = execute_compiled_hybrid(&mut data, &mut shard_totals, compiled)?;
+    black_box(total);
+    let execution = execution_started.elapsed();
+    let verification_started = Instant::now();
+    verify_total(&data, total)?;
+    let verification = verification_started.elapsed();
+    Ok(OracleMeasurement {
+        execution,
+        verification,
+        total,
+    })
+}
+
+fn execute_compiled_hybrid(
+    data: &mut [u64],
+    shard_totals: &mut [u64],
+    compiled: &CompiledChanges<'_>,
+) -> Result<u64, String> {
+    let expected_words = compiled
+        .shard_words
+        .checked_mul(compiled.shards.len())
+        .ok_or_else(|| "precompiled plan shape overflow".to_owned())?;
+    if compiled.words != expected_words
+        || data.len() != compiled.words
+        || shard_totals.len() != compiled.shards.len()
+    {
+        return Err("precompiled plan shape does not match execution state".to_owned());
+    }
     for (shard, change) in compiled.shards.iter().enumerate() {
-        let start = shard * shard_words;
-        let end = start + shard_words;
+        let start = shard * compiled.shard_words;
+        let end = start + compiled.shard_words;
         match change.strategy {
             ShardStrategy::Skip => {}
             ShardStrategy::RawDelta | ShardStrategy::CoalescedDelta => {
                 shard_totals[shard] =
-                    apply_delta(&mut data, change.updates.as_slice(), shard_totals[shard])?;
+                    apply_delta(data, change.updates.as_slice(), shard_totals[shard])?;
             }
             ShardStrategy::FullLocal => {
-                apply_updates(&mut data, change.updates.as_slice())?;
+                apply_updates(data, change.updates.as_slice())?;
                 shard_totals[shard] = checksum(&data[start..end]);
             }
         }
     }
-    let total = shard_totals
+    Ok(shard_totals
         .iter()
         .copied()
-        .fold(0_u64, |sum, value| sum.wrapping_add(value));
-    black_box(total);
-    let duration = started.elapsed();
-    verify_total(&data, total)?;
-    Ok(HybridMeasurement {
-        duration,
-        compile,
-        total,
-    })
+        .fold(0_u64, |sum, value| sum.wrapping_add(value)))
 }
 
 fn clone_data(source: &[u64]) -> Result<Vec<u64>, String> {
@@ -499,50 +761,10 @@ fn speedup(baseline: Duration, candidate: Duration) -> f64 {
     baseline.as_nanos() as f64 / candidate.as_nanos().max(1) as f64
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn compiler_selects_all_four_local_strategies() {
-        let shard_words = 128;
-        let updates = build_mixed_updates(shard_words).unwrap();
-        let compiled = compile_changes(&updates, shard_words * SHARD_COUNT, shard_words).unwrap();
-
-        assert_eq!(compiled.counts.full_local, DENSE_SHARDS);
-        assert_eq!(compiled.counts.coalesced_delta, 1);
-        assert_eq!(compiled.counts.raw_delta, 1);
-        assert_eq!(compiled.counts.skip, SHARD_COUNT - DENSE_SHARDS - 2);
-    }
-
-    #[test]
-    fn hybrid_matches_all_global_paths() {
-        let shard_words = 128;
-        let seed = build_data(shard_words * SHARD_COUNT).unwrap();
-        let updates = build_mixed_updates(shard_words).unwrap();
-        let full = run_full_global(&seed, &updates).unwrap();
-        let delta = run_delta_global(&seed, &updates).unwrap();
-        let coalesced = run_coalesced_global(&seed, &updates).unwrap();
-        let hybrid = run_hybrid(&seed, &updates, shard_words).unwrap();
-
-        assert_eq!(full.total, delta.total);
-        assert_eq!(full.total, coalesced.total);
-        assert_eq!(full.total, hybrid.total);
-    }
-
-    #[test]
-    fn compiler_rejects_out_of_bounds_updates() {
-        let update = PointUpdate::new(128, 1);
-
-        assert!(compile_changes(&[update], 128, 2).is_err());
-    }
-
-    #[test]
-    fn compiler_rejects_unordered_shards_and_cli_rejects_bad_bounds() {
-        let updates = [PointUpdate::new(4, 1), PointUpdate::new(2, 2)];
-
-        assert!(compile_changes(&updates, 128, 2).is_err());
-        assert!(parse_bounded("0", 1, 10, "--runs").is_err());
-        assert!(parse_bounded("11", 1, 10, "--runs").is_err());
-    }
+fn duration_ratio(numerator: Duration, denominator: Duration) -> f64 {
+    numerator.as_nanos() as f64 / denominator.as_nanos().max(1) as f64
 }
+
+#[cfg(test)]
+#[path = "hybrid_sweep_tests.rs"]
+mod hybrid_sweep_tests;
