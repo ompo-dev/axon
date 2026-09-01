@@ -5,6 +5,7 @@ pub mod delta;
 pub mod morphology;
 pub mod refinement;
 pub mod runtime;
+pub mod strategy;
 pub mod structure;
 
 pub use capability::{Authority, Capability, CapabilityGate, Effect, Feasibility, GateFailure};
@@ -19,6 +20,10 @@ pub use refinement::{
     RefinementSet, select_refinement,
 };
 pub use runtime::{CheckedExecution, ExecutionMode, OptimizationFailure, run_checked};
+pub use strategy::{
+    CostInterval, MeasurementContext, MetaJit, StrategyEvidence, StrategyKey, StrategyMetric,
+    StrategyStatus, UpdateLayout, WorkloadSignature,
+};
 pub use structure::{AbstractionContract, ExecutionSlice, LiftCertificate};
 
 #[cfg(test)]
@@ -32,6 +37,17 @@ mod tests {
 
     fn decision<const N: usize>(utilities: [(&str, Interval); N]) -> DecisionCertificate {
         DecisionCertificate::try_from_utilities(utilities).expect("test action names are unique")
+    }
+
+    fn context() -> MeasurementContext {
+        MeasurementContext::new(
+            "i7-13650HX",
+            UpdateLayout::CanonicalShardOrdered,
+            1,
+            StrategyMetric::Latency,
+            1,
+        )
+        .unwrap()
     }
 
     #[test]
@@ -345,5 +361,125 @@ mod tests {
         assert_eq!(failed.value(), &42);
         assert_eq!(mismatched.mode(), ExecutionMode::ExactFallback);
         assert_eq!(mismatched.value(), &42);
+    }
+
+    #[test]
+    fn oracle_dominance_refutes_hybrid_only_inside_its_measured_domain() {
+        let workload = WorkloadSignature::new(
+            OperatorKind::Sum,
+            8_388_608,
+            64,
+            1_115_136,
+            1_065_984,
+            ObservationFrontier::FinalStateOnly,
+            context(),
+        )
+        .unwrap();
+        let evidence = StrategyEvidence::from_oracle(
+            workload.clone(),
+            StrategyKey::RawDelta,
+            CostInterval::new(1_490, 1_500).unwrap(),
+            StrategyKey::HybridShard,
+            CostInterval::new(1_590, 1_600).unwrap(),
+        );
+
+        assert_eq!(evidence.status(), StrategyStatus::LatencyDominated);
+        assert!(evidence.oracle_headroom_basis_points() < 0);
+
+        let jit = MetaJit::from_evidence(&evidence).unwrap();
+        assert_eq!(jit.select(&workload), Some(StrategyKey::RawDelta));
+        assert_eq!(
+            jit.select(
+                &WorkloadSignature::new(
+                    OperatorKind::Sum,
+                    8_388_608,
+                    64,
+                    1_115_136,
+                    1_065_984,
+                    ObservationFrontier::IntermediateObserved,
+                    context(),
+                )
+                .unwrap()
+            ),
+            None
+        );
+    }
+
+    #[test]
+    fn overlapping_cost_intervals_do_not_create_a_meta_jit_reflex() {
+        let workload = WorkloadSignature::new(
+            OperatorKind::Sum,
+            16,
+            1,
+            4,
+            4,
+            ObservationFrontier::FinalStateOnly,
+            context(),
+        )
+        .unwrap();
+        let evidence = StrategyEvidence::from_oracle(
+            workload,
+            StrategyKey::RawDelta,
+            CostInterval::new(10, 20).unwrap(),
+            StrategyKey::HybridShard,
+            CostInterval::new(15, 25).unwrap(),
+        );
+
+        assert_eq!(evidence.status(), StrategyStatus::Inconclusive);
+        assert!(MetaJit::from_evidence(&evidence).is_none());
+    }
+
+    #[test]
+    fn meta_jit_reopens_when_measurement_context_changes() {
+        let context = context();
+        let workload = WorkloadSignature::new(
+            OperatorKind::Sum,
+            16,
+            1,
+            4,
+            4,
+            ObservationFrontier::FinalStateOnly,
+            context,
+        )
+        .unwrap();
+        let evidence = StrategyEvidence::from_paired_samples(
+            workload.clone(),
+            StrategyKey::RawDelta,
+            &[10, 11, 12],
+            StrategyKey::HybridShard,
+            &[20, 21, 22],
+        )
+        .unwrap();
+        let jit = MetaJit::from_evidence(&evidence).unwrap();
+        let changed_hardware = WorkloadSignature::new(
+            OperatorKind::Sum,
+            16,
+            1,
+            4,
+            4,
+            ObservationFrontier::FinalStateOnly,
+            MeasurementContext::new(
+                "other-cpu",
+                UpdateLayout::CanonicalShardOrdered,
+                1,
+                StrategyMetric::Latency,
+                1,
+            )
+            .unwrap(),
+        )
+        .unwrap();
+
+        assert_eq!(jit.select(&changed_hardware), None);
+        assert!(CostInterval::from_samples(&[]).is_err());
+        assert!(
+            StrategyEvidence::from_paired_samples(
+                workload,
+                StrategyKey::RawDelta,
+                &[10],
+                StrategyKey::HybridShard,
+                &[20, 21],
+            )
+            .is_err()
+        );
     }
 }

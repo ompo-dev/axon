@@ -9,6 +9,7 @@ Rebuild limpo da AXON como **Universal Intelligence Calculus**: um núcleo Rust 
 | Refinar só até decidir | `RefinementSet`, `DecisionCertificate` | resultado só contrai; ação para quando limites não se sobrepõem |
 | Calcular só `needed ∩ changed` | `ExecutionSlice` | cone backward do objetivo intersectado com delta forward |
 | Escolher Delta ou Full por contrato e custo | `IncrementalizabilityAnalyzer`, `CostEstimate` | `SUM`/`COUNT`/`XOR` locais são exatos; `SORT` usa Full |
+| Reusar decisão física já medida | `StrategyEvidence`, `MetaJit` | estratégia só vira reflexo com intervalos não sobrepostos no mesmo domínio |
 | Comprimir rajadas de escrita | `coalesce_adjacent_last_writes` | última escrita adjacente preserva estado final |
 | Medir adaptação local | `axon-uic-hybrid-sweep` | compara Hybrid fim a fim, Oracle pré-compilado e Change Fabric com ingestão contabilizada |
 | Quocientar estrutura equivalente | `LiftCertificate` | LIFT exato para classe de fontes idênticas; fora dela usa fallback |
