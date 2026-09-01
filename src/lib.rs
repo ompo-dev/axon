@@ -1,5 +1,6 @@
 //! AXON-UIC: small, executable primitives for certified adaptive cognition.
 
+pub mod benchmark;
 pub mod capability;
 pub mod change;
 pub mod delta;
@@ -10,6 +11,7 @@ pub mod runtime;
 pub mod strategy;
 pub mod structure;
 
+pub use benchmark::{BenchContract, BenchContractError, BenchPhase};
 pub use capability::{Authority, Capability, CapabilityGate, Effect, Feasibility, GateFailure};
 pub use change::{
     ChangeError, ChangeStructure, IncrementalOp, ModularU64, Replace, ReplaceDelta, SumFold,

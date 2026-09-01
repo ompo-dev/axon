@@ -88,15 +88,15 @@ Change Fabric continua dominado neste regime: custo de ingestão gera `Adaptatio
 Command:
 
 ```powershell
-cargo run --release --bin axon-uic-deltaforge-sum -- --mib 64 --runs 15
+cargo run --release --bin axon-uic-deltaforge-sum -- --mib 64 --runs 15 --hardware-id i7-13650HX-16GiB
 ```
 
-Mesmo host, vetor de 64 MiB. `DeltaForge` recebeu apenas `FoldSpec::AddModU64`, derivou `CommutativeGroup`, `ModularTotal` e `SubtractOldThenAddNew` em `0.001500 ms` fora das amostras. As 45 execuções tiveram paridade exata; maior checksum: `6C45776C2F16B041`.
+Mesmo host, vetor de 64 MiB. `DeltaForge` recebeu apenas `FoldSpec::AddModU64`, derivou `CommutativeGroup`, `ModularTotal` e `SubtractOldThenAddNew`; referência medida em `0.002100 ms`. As 45 execuções tiveram paridade exata; maior checksum: `6C45776C2F16B041`.
 
-| Escritas finais | Full p50 ms | Raw Delta p50 ms | Forge p50 ms | Forge / Raw |
-|---:|---:|---:|---:|---:|
-| 1,024 | 14.221 | 11.049 | 11.304 | 0.98× |
-| 1,000,000 | 16.846 | 14.972 | 15.241 | 0.98× |
-| 4,000,000 | 24.666 | 26.755 | 27.313 | 0.98× |
+| Escritas finais | Full HOT / LIFECYCLE p50 ms | Raw HOT / LIFECYCLE p50 ms | Forge HOT / LIFECYCLE p50 ms | Raw×Forge HOT |
+|---:|---:|---:|---:|---|
+| 1,024 | 17.537 / 34.085 | 12.554 / 38.454 | 11.430 / 63.165 | inconclusiva, +895 bp |
+| 1,000,000 | 20.812 / 45.213 | 17.426 / 50.878 | 17.933 / 82.546 | inconclusiva, -290 bp |
+| 4,000,000 | 34.499 / 90.093 | 39.147 / 103.818 | 37.749 / 157.986 | inconclusiva, +357 bp |
 
-Resultado: synthesis restrita passou correção, mas plano derivado não supera updater manual nesta realização; fica cerca de 2% pior no p50. Full recupera vantagem no ponto denso. Checker do Forge custa `23.155 / 26.238 / 38.215 ms` p50, fora do timer: serve para shadow/promoção, não hot path. Isto não demonstra descoberta geral, aprendizado, nem prova formal.
+`HOT` mede somente execução. `LIFECYCLE` soma as fases registradas da mesma rodada: geração do `ReplaceDelta`, reserva, inicialização, síntese, checker, execução, validação e teardown. `ingestion` e `planning` são zero neste batch e aparecem explicitamente. Em 4.000.000 escritas, o checker do Forge foi `56.495 ms` p50, explicando o lifecycle maior. Embora o p50 HOT do Forge seja menor em dois pontos, os pares se cruzam; não há promoção de estratégia. O resultado demonstra derivação restrita e correção sob contrato, não descoberta geral, aprendizado ou prova formal.

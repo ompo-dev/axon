@@ -76,9 +76,13 @@ Limite: stream é canônico e ordenado por shard; coalescência exige `FinalStat
 Binário: `axon-uic-deltaforge-sum`.
 
 ```powershell
-cargo run --release --bin axon-uic-deltaforge-sum -- --mib 64 --runs 15
+cargo run --release --bin axon-uic-deltaforge-sum -- --mib 64 --runs 15 --hardware-id i7-13650HX-16GiB
 ```
 
-Entrada é somente `FoldSpec::AddModU64`. Forge deriva `CommutativeGroup`, cache `ModularTotal` e regra `SubtractOldThenAddNew`; não recebe updater. Cada ponto mede três caminhos com ordem determinística permutada em seis ordens: Full, updater Raw manual e plano derivado. Os três materializam mesmo `ReplaceDelta` canônico; Full refaz fold, Raw/Forge partem de total inicial mantido. Verificação exata fica fora do timer; Forge também executa checker de certificado fora do timer.
+Entrada é somente `FoldSpec::AddModU64`. Forge deriva `CommutativeGroup`, cache `ModularTotal` e regra `SubtractOldThenAddNew`; não recebe updater. Cada ponto mede três caminhos com ordem determinística permutada em seis ordens: Full, updater Raw manual e plano derivado. O comando físico registrado usa `--hardware-id i7-13650HX-16GiB`.
 
-O benchmark cobre 1.024, 1.000.000 e 4.000.000 replacements únicos que cabem no vetor. Registra todos os samples no baseline. Não mede inferência de álgebras arbitrárias, síntese de estado auxiliar para `MIN`, prova formal, transferência ou aprendizado.
+Este binário usa `BenchContract` protocolo `2`. Cada rodada gera o mesmo `ReplaceDelta` canônico, reserva/copia estado de transação, executa o caminho e o descarta. `HOT` mede somente `execution`; `LIFECYCLE` inclui geração, inicialização, síntese quando há Forge, checker, reserva, execução, validação exata e teardown. `ingestion` e `planning` são explicitamente zero neste batch. Consulte [BENCH_CONTRACT.md](BENCH_CONTRACT.md) para as fronteiras completas.
+
+Raw e Forge recebem conteúdo de `ReplaceDelta` deterministicamente idêntico no mesmo round. `StrategyEvidence` compara os HOTs pareados e só permite promoção quando todos os pares concordam. Portanto, um p50 favorável ao Forge isoladamente não é promoção.
+
+O benchmark cobre 1.024, 1.000.000 e 4.000.000 replacements únicos que cabem no vetor. Registra todos os HOT/LIFECYCLE samples no baseline. Não mede inferência de álgebras arbitrárias, síntese de estado auxiliar para `MIN`, prova formal, transferência ou aprendizado.

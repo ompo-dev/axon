@@ -10,6 +10,7 @@ Rebuild limpo da AXON como **Universal Intelligence Calculus**: um núcleo Rust 
 | Calcular só `needed ∩ changed` | `ExecutionSlice` | cone backward do objetivo intersectado com delta forward |
 | Escolher Delta ou Full por contrato e custo | `IncrementalizabilityAnalyzer`, `CostEstimate` | `SUM`/`COUNT`/`XOR` locais são exatos; `SORT` usa Full |
 | Reusar decisão física já medida | `StrategyEvidence`, `MetaJit` | estratégia só vira reflexo com intervalos não sobrepostos no mesmo domínio |
+| Comparar custo sem esconder fronteira | `BenchContract` | `HOT = execution`; `LIFECYCLE` soma todas as fases medidas da mesma rodada |
 | Comprimir rajadas de escrita | `coalesce_adjacent_last_writes` | última escrita adjacente preserva estado final |
 | Medir adaptação local | `axon-uic-hybrid-sweep` | compara Hybrid fim a fim, Oracle pré-compilado e Change Fabric com ingestão contabilizada |
 | Derivar delta declarado e checá-lo | `DeltaForge`, `DerivedSumPlan` | `fold(Add mod u64)` deriva cache/regra; `MIN` é recusado |
@@ -33,4 +34,4 @@ cargo run --release --bin axon-uic-hybrid-sweep -- --mib 64 --runs 30 --hardware
 cargo run --release --bin axon-uic-deltaforge-sum -- --mib 64 --runs 15
 ```
 
-Resultados e protocolo: [docs/EXPERIMENTS.md](docs/EXPERIMENTS.md), [docs/RESULTS.md](docs/RESULTS.md). Contratos e limites: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), [docs/DELTA_ALGEBRA.md](docs/DELTA_ALGEBRA.md), [docs/DELTAFORGE.md](docs/DELTAFORGE.md), [docs/HYBRID_RECOMPUTE.md](docs/HYBRID_RECOMPUTE.md).
+Resultados e protocolo: [docs/EXPERIMENTS.md](docs/EXPERIMENTS.md), [docs/RESULTS.md](docs/RESULTS.md). Contratos e limites: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), [docs/BENCH_CONTRACT.md](docs/BENCH_CONTRACT.md), [docs/DELTA_ALGEBRA.md](docs/DELTA_ALGEBRA.md), [docs/DELTAFORGE.md](docs/DELTAFORGE.md), [docs/HYBRID_RECOMPUTE.md](docs/HYBRID_RECOMPUTE.md).

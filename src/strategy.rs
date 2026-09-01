@@ -4,6 +4,7 @@ use crate::{ObservationFrontier, OperatorKind};
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum StrategyKey {
     RawDelta,
+    ForgedDelta,
     FullRecompute,
     CoalescedDelta,
     HybridShard,

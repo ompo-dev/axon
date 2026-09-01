@@ -1,13 +1,15 @@
 {
   "name": "axon-uic-deltaforge-sum",
   "date": "2026-09-01",
-  "command": "cargo run --release --bin axon-uic-deltaforge-sum -- --mib 64 --runs 15",
+  "protocol_version": 2,
+  "command": "cargo run --release --bin axon-uic-deltaforge-sum -- --mib 64 --runs 15 --hardware-id i7-13650HX-16GiB",
   "host": {
     "os": "Windows x86_64",
     "cpu": "13th Gen Intel(R) Core(TM) i7-13650HX",
     "physical_cores": 14,
     "logical_processors": 20,
-    "ram_bytes": 16886128640
+    "ram_bytes": 16886128640,
+    "hardware_id": "i7-13650HX-16GiB"
   },
   "workload": {
     "vector_mib": 64,
@@ -19,28 +21,49 @@
     },
     "exact_parity": true,
     "runs_per_point": 15,
+    "hot_definition": "execution",
+    "lifecycle_definition": "checked sum of all BenchContract phases for one round",
     "all_samples_ms": {
       "1024": {
-        "full": [13.417, 13.765, 15.807, 14.017, 13.752, 15.087, 14.261, 14.613, 13.353, 14.530, 13.995, 14.221, 14.355, 14.171, 14.702],
-        "raw_delta": [10.706, 10.143, 11.551, 10.958, 10.585, 11.356, 11.314, 11.922, 11.397, 10.471, 10.492, 11.049, 10.927, 11.628, 11.266],
-        "forged_delta": [10.793, 10.562, 11.315, 11.388, 11.116, 11.304, 11.427, 11.345, 11.518, 11.119, 10.971, 11.379, 11.118, 10.127, 11.447]
+        "full_hot": [17.295, 17.840, 15.385, 19.441, 19.226, 14.940, 18.114, 18.405, 15.656, 17.537, 17.577, 14.720, 17.823, 15.730, 14.843],
+        "full_lifecycle": [39.502, 38.749, 33.121, 36.988, 36.909, 33.925, 35.149, 34.195, 32.108, 33.056, 34.085, 31.284, 35.144, 31.730, 32.762],
+        "raw_hot": [13.874, 14.253, 12.554, 13.942, 15.322, 12.417, 12.118, 11.963, 11.504, 12.721, 10.465, 12.915, 10.931, 13.938, 12.087],
+        "raw_lifecycle": [42.654, 41.148, 41.289, 42.494, 41.558, 38.454, 35.733, 40.809, 35.427, 37.519, 35.081, 38.211, 38.653, 38.294, 37.066],
+        "forged_hot": [13.946, 14.018, 16.217, 12.394, 12.789, 11.574, 11.047, 12.739, 11.430, 10.144, 10.565, 10.319, 10.567, 11.207, 11.400],
+        "forged_lifecycle": [77.584, 70.700, 72.740, 71.733, 69.596, 64.039, 63.165, 61.623, 67.419, 59.405, 61.101, 62.523, 57.502, 57.779, 59.966]
       },
       "1000000": {
-        "full": [17.343, 17.026, 16.337, 16.405, 17.017, 16.008, 17.085, 15.911, 16.596, 17.244, 16.538, 17.289, 16.846, 19.672, 16.191],
-        "raw_delta": [14.972, 14.281, 14.554, 16.097, 15.066, 15.984, 15.280, 14.334, 13.969, 15.204, 14.796, 14.467, 14.275, 15.569, 15.123],
-        "forged_delta": [15.883, 15.303, 15.240, 14.310, 15.066, 14.603, 15.577, 14.354, 15.241, 16.729, 13.883, 15.258, 15.416, 15.294, 13.804]
+        "full_hot": [17.413, 24.058, 20.236, 20.812, 20.170, 19.712, 25.416, 24.272, 21.996, 20.970, 18.144, 21.625, 21.548, 17.767, 18.151],
+        "full_lifecycle": [43.167, 45.936, 45.028, 42.665, 44.230, 46.601, 55.822, 49.904, 50.356, 46.104, 44.550, 44.262, 48.924, 45.213, 45.185],
+        "raw_hot": [17.689, 17.435, 17.425, 17.426, 17.375, 16.751, 18.654, 17.025, 17.985, 18.552, 15.452, 15.514, 19.450, 23.394, 16.682],
+        "raw_lifecycle": [51.528, 45.958, 48.249, 48.594, 46.469, 47.773, 50.878, 55.447, 62.262, 51.278, 48.987, 52.863, 57.888, 68.621, 47.632],
+        "forged_hot": [17.601, 17.611, 18.309, 18.080, 15.720, 15.961, 21.507, 26.863, 22.874, 17.933, 15.892, 18.371, 22.501, 17.443, 16.930],
+        "forged_lifecycle": [89.583, 78.947, 77.953, 75.914, 79.460, 83.690, 82.546, 101.919, 97.742, 79.579, 83.528, 76.153, 87.439, 89.085, 82.082]
       },
       "4000000": {
-        "full": [25.078, 26.849, 24.666, 24.445, 23.875, 26.101, 24.267, 24.878, 24.787, 24.471, 24.165, 24.243, 25.009, 24.891, 24.116],
-        "raw_delta": [25.076, 28.811, 26.863, 26.168, 27.209, 26.004, 26.755, 31.216, 26.692, 27.447, 26.079, 26.605, 26.747, 29.089, 28.210],
-        "forged_delta": [25.636, 26.800, 27.313, 26.255, 28.221, 26.664, 27.684, 25.895, 29.691, 26.549, 29.592, 28.251, 27.626, 27.036, 28.458]
+        "full_hot": [37.288, 33.315, 32.213, 32.616, 30.546, 34.414, 33.081, 34.499, 38.336, 55.107, 45.677, 39.061, 44.760, 37.314, 28.511],
+        "full_lifecycle": [90.620, 80.663, 81.396, 77.919, 82.499, 87.994, 91.698, 84.829, 90.806, 111.589, 106.211, 90.785, 104.499, 90.093, 79.726],
+        "raw_hot": [50.188, 39.147, 30.723, 42.724, 42.002, 36.011, 41.264, 37.972, 33.458, 38.862, 38.088, 39.635, 34.365, 49.363, 41.876],
+        "raw_lifecycle": [111.613, 93.591, 94.009, 107.428, 106.730, 100.269, 108.497, 95.691, 96.046, 106.487, 103.818, 108.126, 103.193, 102.823, 107.164],
+        "forged_hot": [36.631, 34.249, 34.411, 38.936, 33.642, 37.749, 34.963, 32.932, 41.049, 46.158, 39.096, 32.643, 38.146, 50.747, 47.854],
+        "forged_lifecycle": [157.986, 147.201, 158.582, 146.157, 143.267, 154.298, 139.737, 155.347, 166.361, 199.894, 163.899, 148.455, 162.740, 183.819, 179.618]
       }
     }
   },
   "p50_ms": {
-    "1024": { "full": 14.221, "raw_delta": 11.049, "forged_delta": 11.304, "raw_verify": 3.037, "forged_verify": 23.155 },
-    "1000000": { "full": 16.846, "raw_delta": 14.972, "forged_delta": 15.241, "raw_verify": 3.017, "forged_verify": 26.238 },
-    "4000000": { "full": 24.666, "raw_delta": 26.755, "forged_delta": 27.313, "raw_verify": 2.998, "forged_verify": 38.215 }
+    "1024": { "full_hot": 17.537, "full_lifecycle": 34.085, "raw_hot": 12.554, "raw_lifecycle": 38.454, "forged_hot": 11.430, "forged_lifecycle": 63.165 },
+    "1000000": { "full_hot": 20.812, "full_lifecycle": 45.213, "raw_hot": 17.426, "raw_lifecycle": 50.878, "forged_hot": 17.933, "forged_lifecycle": 82.546 },
+    "4000000": { "full_hot": 34.499, "full_lifecycle": 90.093, "raw_hot": 39.147, "raw_lifecycle": 103.818, "forged_hot": 37.749, "forged_lifecycle": 157.986 }
   },
-  "result": "Restricted SUM derivation is exact, but forged execution is about 2% slower than manual Raw Delta. Full wins at the dense point; certificate checking stays outside hot execution."
+  "largest_point_phase_p50_ms": {
+    "full": { "input_generation": 30.0922, "initialization": 13.15, "synthesis": 0.0, "verification": 0.0, "allocation": 0.025, "ingestion": 0.0, "planning": 0.0, "execution": 34.499, "result_validation": 0.0, "teardown": 9.1463 },
+    "raw": { "input_generation": 32.6469, "initialization": 17.6221, "synthesis": 0.0, "verification": 0.0, "allocation": 0.0197, "ingestion": 0.0, "planning": 0.0, "execution": 39.147, "result_validation": 4.5742, "teardown": 7.9403 },
+    "forged": { "input_generation": 30.2515, "initialization": 18.4022, "synthesis": 0.0001, "verification": 56.4949, "allocation": 0.0222, "ingestion": 0.0, "planning": 0.0, "execution": 37.7488, "result_validation": 4.7918, "teardown": 8.511 }
+  },
+  "paired_hot_evidence": {
+    "1024": { "status": "Inconclusive", "forge_headroom_basis_points": 895 },
+    "1000000": { "status": "Inconclusive", "forge_headroom_basis_points": -290 },
+    "4000000": { "status": "Inconclusive", "forge_headroom_basis_points": 357 }
+  },
+  "result": "Restricted SUM derivation is exact. The BenchContract separates HOT from LIFECYCLE, and all paired Raw-versus-Forge HOT decisions are inconclusive; no physical strategy is promoted. Forge lifecycle remains slower because certificate checking is explicit."
 }

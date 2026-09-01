@@ -12,8 +12,14 @@
 
 O escopo é uma gramática declarada de um operador. Não é descoberta cega de programas, theorem prover, nem aprendizado. O checker é executável, não prova formal.
 
-## Resultado físico inicial
+## Resultado físico com BenchContract
 
-Em 64 MiB e 15 rodadas por ponto, todas as 45 comparações Full/Raw/Forge tiveram paridade exata. Cada janela temporizada inclui `VectorU64::apply` imutável, portanto compara custo total de materializar mudança mais fold, não atualização isolada de cache. Forge ficou `~2%` atrás do updater manual em todos os p50; portanto a derivação está semanticamente correta, mas não merece promoção como otimização física nesta realização. Em 4.000.000 writes, Full venceu os dois deltas porque materializar `ReplaceDelta` e atualizar cada entrada passou a custar mais que recomputar a soma.
+Em 64 MiB e 15 rodadas por ponto, todas as 45 comparações Full/Raw/Forge tiveram paridade exata. O protocolo `2` separa `HOT` de `LIFECYCLE`; por isso estes valores não devem ser comparados em valor absoluto ao protocolo anterior.
 
-O checker completo custa muito mais que execução e fica fora do timer. Ele é gate de shadow/promoção, nunca verificação por update em hot path.
+| Escritas finais | Raw HOT p50 ms | Forge HOT p50 ms | Raw LIFECYCLE p50 ms | Forge LIFECYCLE p50 ms | Evidência pareada HOT |
+|---:|---:|---:|---:|---:|---|
+| 1.024 | 12.554 | 11.430 | 38.454 | 63.165 | inconclusiva |
+| 1.000.000 | 17.426 | 17.933 | 50.878 | 82.546 | inconclusiva |
+| 4.000.000 | 39.147 | 37.749 | 103.818 | 157.986 | inconclusiva |
+
+O Forge tem p50 HOT menor em dois pontos, mas as 15 rodadas pareadas se cruzam em todos eles. Logo `StrategyEvidence` não promove `ForgedDelta`; não existe Meta-JIT nem alegação de ganho físico. Em lifecycle ele perde claramente, pois o checker concreto custa no maior ponto p50 `56.495 ms`; ele é gate de shadow/promoção, nunca verificação por update no hot path.
