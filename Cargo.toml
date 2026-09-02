@@ -11,6 +11,10 @@ name = "axon-uic"
 path = "src/main.rs"
 
 [[bin]]
+name = "axon"
+path = "src/bin/axon.rs"
+
+[[bin]]
 name = "axon-uic-bench"
 path = "src/bin/axon_uic_bench.rs"
 
@@ -25,5 +29,9 @@ path = "src/bin/axon_uic_hybrid_sweep.rs"
 [[bin]]
 name = "axon-uic-deltaforge-sum"
 path = "src/bin/axon_uic_deltaforge_sum.rs"
+
+[[bin]]
+name = "axon-uic-deltaforge-avg"
+path = "src/bin/axon_uic_deltaforge_avg.rs"
 
 [dependencies]

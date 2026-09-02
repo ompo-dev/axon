@@ -23,3 +23,9 @@ Em 64 MiB e 15 rodadas por ponto, todas as 45 comparações Full/Raw/Forge tiver
 | 4.000.000 | 39.147 | 37.749 | 103.818 | 157.986 | inconclusiva |
 
 O Forge tem p50 HOT menor em dois pontos, mas as 15 rodadas pareadas se cruzam em todos eles. Logo `StrategyEvidence` não promove `ForgedDelta`; não existe Meta-JIT nem alegação de ganho físico. Em lifecycle ele perde claramente, pois o checker concreto custa no maior ponto p50 `56.495 ms`; ele é gate de shadow/promoção, nunca verificação por update no hot path.
+
+## DeltaForge-AVG
+
+`FoldSpec::AverageExactU64` agora deriva `DerivedAveragePlan`. O cache é criado pelo artifact como `(sum: u128, count: usize)`; o chamador não pode fornecer um `sum` ou `count` arbitrário. A saída é `ExactAverage`, uma fração sem arredondamento. A regra de atualização é `SubtractOldThenAddNewPreserveCount` e o certificado é checado contra o fold completo.
+
+`MIN` continua recusado. Não é correto reutilizar a regra de AVG/SUM para ele: o mínimo exige estado auxiliar diferente (por exemplo, contagem/estrutura dos candidatos), que ainda não foi derivado nem certificado.

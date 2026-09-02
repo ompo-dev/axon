@@ -11,6 +11,8 @@
 | `allocation` | reservas de memória da transação |
 | `ingestion` | manutenção ao receber eventos |
 | `planning` | seleção/materialização de plano |
+| `artifact_load` | leitura e reconstrução de capability persistida |
+| `artifact_persist` | criação e publicação sincronizada do artifact persistente |
 | `execution` | aplicação do plano ao estado preparado |
 | `result_validation` | comparação independente com resultado exato |
 | `teardown` | descarte do estado temporário da transação |
@@ -32,6 +34,6 @@
 
 ## Implementação inicial
 
-`axon-uic-deltaforge-sum` é o primeiro binário convertido, usando protocolo `2`. Ele reconstrói o `ReplaceDelta` por rodada, separa reserva de cópia, mede síntese e checker do Forge, e valida cada resultado exatamente. `ingestion` e `planning` são zero porque este é um batch direto com regra já declarada; não são custo oculto.
+`axon-uic-deltaforge-sum` foi o primeiro binário convertido. `axon-uic-deltaforge-avg` também mede criação persistente e reload de artifact: cria um arquivo temporário por rodada, chama `sync_all` antes de publicar e mede o reload da mesma capability. `ingestion` e `planning` são zero porque estes são batches diretos com regra já declarada; não são custo oculto.
 
 Os binários legados continuam com seus próprios protocolos até serem migrados. Seus números absolutos não são comparáveis aos números `BenchContract` do DeltaForge.

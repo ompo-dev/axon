@@ -13,13 +13,15 @@ pub enum BenchPhase {
     Allocation,
     Ingestion,
     Planning,
+    ArtifactLoad,
+    ArtifactPersist,
     Execution,
     ResultValidation,
     Teardown,
 }
 
 impl BenchPhase {
-    pub const ALL: [Self; 10] = [
+    pub const ALL: [Self; 12] = [
         Self::InputGeneration,
         Self::Initialization,
         Self::Synthesis,
@@ -27,6 +29,8 @@ impl BenchPhase {
         Self::Allocation,
         Self::Ingestion,
         Self::Planning,
+        Self::ArtifactLoad,
+        Self::ArtifactPersist,
         Self::Execution,
         Self::ResultValidation,
         Self::Teardown,
@@ -41,9 +45,11 @@ impl BenchPhase {
             Self::Allocation => 4,
             Self::Ingestion => 5,
             Self::Planning => 6,
-            Self::Execution => 7,
-            Self::ResultValidation => 8,
-            Self::Teardown => 9,
+            Self::ArtifactLoad => 7,
+            Self::ArtifactPersist => 8,
+            Self::Execution => 9,
+            Self::ResultValidation => 10,
+            Self::Teardown => 11,
         }
     }
 
@@ -56,6 +62,8 @@ impl BenchPhase {
             Self::Allocation => "allocation",
             Self::Ingestion => "ingestion",
             Self::Planning => "planning",
+            Self::ArtifactLoad => "artifact_load",
+            Self::ArtifactPersist => "artifact_persist",
             Self::Execution => "execution",
             Self::ResultValidation => "result_validation",
             Self::Teardown => "teardown",
@@ -68,6 +76,145 @@ pub enum BenchContractError {
     DurationOverflow,
 }
 
+/// Explicit costs of a capability that can be installed and used repeatedly.
+///
+/// Creation is charged exactly once. Each entry in `steady_state` is one
+/// independently measured reuse of that installed artifact. Invalidation is
+/// explicit so it cannot disappear from an amortized claim.
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct ArtifactLifetime {
+    cold_create: BenchContract,
+    steady_state: Vec<BenchContract>,
+    invalidation: BenchContract,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum ArtifactLifetimeError {
+    EmptySteadyState,
+    ZeroUses,
+    UseUnavailable(usize),
+    DurationOverflow,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum BreakEven {
+    AtUses(usize),
+    NotReached,
+}
+
+impl ArtifactLifetime {
+    pub fn try_new(
+        cold_create: BenchContract,
+        steady_state: Vec<BenchContract>,
+        invalidation: BenchContract,
+    ) -> Result<Self, ArtifactLifetimeError> {
+        if steady_state.is_empty() {
+            return Err(ArtifactLifetimeError::EmptySteadyState);
+        }
+        Ok(Self {
+            cold_create,
+            steady_state,
+            invalidation,
+        })
+    }
+
+    pub fn cold_create(&self) -> Result<Duration, ArtifactLifetimeError> {
+        self.cold_create.lifecycle().map_err(map_contract_error)
+    }
+
+    pub fn hot(&self, use_index: usize) -> Result<Duration, ArtifactLifetimeError> {
+        self.steady_state_contract(use_index)
+            .map(BenchContract::hot)
+    }
+
+    pub fn lifecycle_one(&self, use_index: usize) -> Result<Duration, ArtifactLifetimeError> {
+        let uses = use_index
+            .checked_add(1)
+            .ok_or(ArtifactLifetimeError::UseUnavailable(use_index))?;
+        self.total_for_uses(uses)
+    }
+
+    /// The cost after installation, excluding creation and invalidation.
+    pub fn steady_state(&self, uses: usize) -> Result<Duration, ArtifactLifetimeError> {
+        self.total_steady_state(uses)
+    }
+
+    /// Creation once, measured uses, and invalidation once.
+    pub fn amortized(&self, uses: usize) -> Result<Duration, ArtifactLifetimeError> {
+        self.total_for_uses(uses)
+    }
+
+    pub fn invalidation(&self) -> Result<Duration, ArtifactLifetimeError> {
+        self.invalidation.lifecycle().map_err(map_contract_error)
+    }
+
+    /// Finds the first measured use count where the candidate is strictly
+    /// cheaper. It is a deterministic cost calculation, not statistical
+    /// promotion; use `StrategyEvidence` for paired physical claims.
+    pub fn first_break_even_against(
+        &self,
+        baseline: &Self,
+        max_uses: usize,
+    ) -> Result<BreakEven, ArtifactLifetimeError> {
+        if max_uses == 0 {
+            return Err(ArtifactLifetimeError::ZeroUses);
+        }
+        self.require_uses(max_uses)?;
+        baseline.require_uses(max_uses)?;
+        for uses in 1..=max_uses {
+            if self.total_for_uses(uses)? < baseline.total_for_uses(uses)? {
+                return Ok(BreakEven::AtUses(uses));
+            }
+        }
+        Ok(BreakEven::NotReached)
+    }
+
+    fn total_for_uses(&self, uses: usize) -> Result<Duration, ArtifactLifetimeError> {
+        let cold_create = self.cold_create()?;
+        let steady_state = self.total_steady_state(uses)?;
+        let invalidation = self.invalidation()?;
+        add_duration(add_duration(cold_create, steady_state)?, invalidation)
+    }
+
+    fn total_steady_state(&self, uses: usize) -> Result<Duration, ArtifactLifetimeError> {
+        self.require_uses(uses)?;
+        self.steady_state
+            .iter()
+            .take(uses)
+            .try_fold(Duration::ZERO, |total, contract| {
+                add_duration(total, contract.lifecycle().map_err(map_contract_error)?)
+            })
+    }
+
+    fn require_uses(&self, uses: usize) -> Result<(), ArtifactLifetimeError> {
+        if uses == 0 {
+            return Err(ArtifactLifetimeError::ZeroUses);
+        }
+        if uses > self.steady_state.len() {
+            return Err(ArtifactLifetimeError::UseUnavailable(uses));
+        }
+        Ok(())
+    }
+
+    fn steady_state_contract(
+        &self,
+        use_index: usize,
+    ) -> Result<&BenchContract, ArtifactLifetimeError> {
+        self.steady_state
+            .get(use_index)
+            .ok_or(ArtifactLifetimeError::UseUnavailable(use_index + 1))
+    }
+}
+
+fn add_duration(left: Duration, right: Duration) -> Result<Duration, ArtifactLifetimeError> {
+    left.checked_add(right)
+        .ok_or(ArtifactLifetimeError::DurationOverflow)
+}
+
+const fn map_contract_error(_: BenchContractError) -> ArtifactLifetimeError {
+    ArtifactLifetimeError::DurationOverflow
+}
+
 /// A comparable timing record with a fixed boundary vocabulary.
 ///
 /// `HOT` is exactly the `Execution` phase. `LIFECYCLE` is the checked sum of
@@ -75,13 +222,13 @@ pub enum BenchContractError {
 /// other in a comparison.
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct BenchContract {
-    durations: [Duration; 10],
+    durations: [Duration; 12],
 }
 
 impl BenchContract {
     pub const fn empty() -> Self {
         Self {
-            durations: [Duration::ZERO; 10],
+            durations: [Duration::ZERO; 12],
         }
     }
 

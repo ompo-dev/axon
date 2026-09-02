@@ -1,17 +1,26 @@
 //! AXON-UIC: small, executable primitives for certified adaptive cognition.
 
+pub mod artifact_store;
 pub mod benchmark;
 pub mod capability;
 pub mod change;
+pub mod cli;
 pub mod delta;
 pub mod delta_forge;
 pub mod morphology;
 pub mod refinement;
 pub mod runtime;
+pub mod solver;
 pub mod strategy;
 pub mod structure;
+pub mod task;
 
-pub use benchmark::{BenchContract, BenchContractError, BenchPhase};
+pub use artifact_store::{ArtifactStatus, ArtifactStore, ArtifactStoreError, InstalledArtifact};
+
+pub use benchmark::{
+    ArtifactLifetime, ArtifactLifetimeError, BenchContract, BenchContractError, BenchPhase,
+    BreakEven,
+};
 pub use capability::{Authority, Capability, CapabilityGate, Effect, Feasibility, GateFailure};
 pub use change::{
     ChangeError, ChangeStructure, IncrementalOp, ModularU64, Replace, ReplaceDelta, SumFold,
@@ -23,8 +32,9 @@ pub use delta::{
     coalesce_adjacent_last_writes,
 };
 pub use delta_forge::{
-    AlgebraicClass, DeltaCertificate, DeltaForge, DerivedSumPlan, FoldSpec, ForgeError,
-    MaintenanceState, UpdateRule,
+    AlgebraicClass, AverageCache, DeltaCertificate, DeltaForge, DerivedArtifact,
+    DerivedAveragePlan, DerivedSumPlan, ExactAverage, FoldSpec, ForgeError, MaintenanceState,
+    UpdateRule,
 };
 pub use morphology::{Morphology, MorphologyError, Region, RemorphPolicy, SemanticContract};
 pub use refinement::{
@@ -32,11 +42,13 @@ pub use refinement::{
     RefinementSet, select_refinement,
 };
 pub use runtime::{CheckedExecution, ExecutionMode, OptimizationFailure, run_checked};
+pub use solver::{ArtifactOutcome, SolveError, SolveReceipt, solve_task};
 pub use strategy::{
     CostInterval, MeasurementContext, MetaJit, StrategyEvidence, StrategyKey, StrategyMetric,
     StrategyStatus, UpdateLayout, WorkloadSignature,
 };
 pub use structure::{AbstractionContract, ExecutionSlice, LiftCertificate};
+pub use task::{AxonTask, TaskError};
 
 #[cfg(test)]
 mod tests {

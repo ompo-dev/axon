@@ -54,7 +54,7 @@ struct PointResult {
 struct PathResult {
     hot: Duration,
     lifecycle: Duration,
-    phases: [Duration; 10],
+    phases: [Duration; 12],
 }
 
 #[derive(Clone, Copy)]
@@ -450,7 +450,7 @@ fn aggregate_samples(samples: Vec<Measurement>) -> Result<PathResult, String> {
             .collect::<Result<Vec<_>, _>>()?,
         50,
     );
-    let mut phases = [Duration::ZERO; 10];
+    let mut phases = [Duration::ZERO; 12];
     for (index, phase) in BenchPhase::ALL.iter().enumerate() {
         phases[index] = percentile(
             samples

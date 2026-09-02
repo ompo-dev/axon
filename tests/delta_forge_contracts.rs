@@ -1,5 +1,6 @@
 use axon_uic::{
-    ChangeStructure, DeltaForge, FoldSpec, ForgeError, MaintenanceState, UpdateRule, VectorU64,
+    ChangeStructure, DeltaForge, DerivedArtifact, ExactAverage, FoldSpec, ForgeError,
+    MaintenanceState, UpdateRule, VectorU64,
 };
 
 #[test]
@@ -34,4 +35,32 @@ fn forge_refuses_minimum_until_auxiliary_state_is_derived() {
         DeltaForge::synthesize(FoldSpec::MinU64),
         Err(ForgeError::UnsupportedFold(FoldSpec::MinU64))
     );
+}
+
+#[test]
+fn forge_derives_exact_average_state_without_being_given_sum_and_count() {
+    let artifact = DeltaForge::synthesize_capability(FoldSpec::AverageExactU64).unwrap();
+    let vector = VectorU64;
+    let before = vec![2, 4, 9];
+    let after = vec![2, 10, 9];
+    let change = vector.diff(&after, &before).unwrap();
+
+    let DerivedArtifact::Average(plan) = artifact else {
+        panic!("average spec must derive an average artifact");
+    };
+    let (old_average, cache) = plan.full(&before).unwrap();
+    let (next_average, next_cache) = plan.delta(&change, &cache).unwrap();
+
+    assert_eq!(old_average, ExactAverage::new(15, 3).unwrap());
+    assert_eq!(next_average, ExactAverage::new(21, 3).unwrap());
+    assert_eq!(next_cache, plan.full(&after).unwrap().1);
+    assert_eq!(
+        plan.certificate().maintenance_state(),
+        MaintenanceState::ExactSumAndCount
+    );
+    assert_eq!(
+        plan.certificate().update_rule(),
+        UpdateRule::SubtractOldThenAddNewPreserveCount
+    );
+    assert!(plan.check(&before, &change).is_ok());
 }

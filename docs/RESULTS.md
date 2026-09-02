@@ -100,3 +100,21 @@ Mesmo host, vetor de 64 MiB. `DeltaForge` recebeu apenas `FoldSpec::AddModU64`, 
 | 4,000,000 | 34.499 / 90.093 | 39.147 / 103.818 | 37.749 / 157.986 | inconclusiva, +357 bp |
 
 `HOT` mede somente execução. `LIFECYCLE` soma as fases registradas da mesma rodada: geração do `ReplaceDelta`, reserva, inicialização, síntese, checker, execução, validação e teardown. `ingestion` e `planning` são zero neste batch e aparecem explicitamente. Em 4.000.000 escritas, o checker do Forge foi `56.495 ms` p50, explicando o lifecycle maior. Embora o p50 HOT do Forge seja menor em dois pontos, os pares se cruzam; não há promoção de estratégia. O resultado demonstra derivação restrita e correção sob contrato, não descoberta geral, aprendizado ou prova formal.
+
+## DeltaForge-AVG com artifact persistente
+
+Command executado neste host:
+
+```powershell
+cargo run --release --bin axon-uic-deltaforge-avg -- --mib 64 --runs 15
+```
+
+Foram 15 rodadas em cada um dos três pontos: 45 pares Full/AVG reutilizado, todos com paridade exata. Cada rodada cria um artifact em diretório temporário, escreve e sincroniza o arquivo antes de publicar; depois faz reload do mesmo artifact. Portanto `artifact_persist` e `artifact_load` são custos reais de filesystem neste PC, não tempo de uma função constante otimizada pelo compilador.
+
+| Escritas finais | Full HOT / LIFECYCLE p50 ms | AVG reutilizado HOT / LIFECYCLE p50 ms | Persistir artifact p50 ms | Break-even medido |
+|---:|---:|---:|---:|---|
+| 1.024 | 14.962 / 25.588 | 10.551 / 65.434 | 1.490 | não atingido em 15 usos |
+| 1.000.000 | 17.898 / 33.823 | 15.743 / 81.401 | 1.542 | não atingido em 15 usos |
+| 4.000.000 | 26.827 / 58.035 | 28.096 / 121.153 | 1.469 | não atingido em 15 usos |
+
+No maior ponto, o reload do artifact foi `0.818 ms` p50; a verificação do certificado custou `51.989 ms` p50 e a validação independente `4.622 ms`. Por isso o caminho reutilizado tem HOT menor nos dois primeiros tamanhos, mas perde em lifecycle em todos. A decisão correta é **não promover** esse artifact para o hot path ainda. A hipótese de engenharia fica clara: o checker precisa tornar-se um gate amortizado/shadow ou ganhar uma prova incremental, sem remover a garantia de correção. Este resultado não mede aprendizagem, descoberta ou generalização; mede somente a capability AVG declarada sob este protocolo.
