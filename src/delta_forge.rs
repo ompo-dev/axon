@@ -2,6 +2,9 @@ use std::fmt;
 
 use crate::{ChangeError, ChangeStructure, IncrementalOp, ReplaceDelta, SumFold, VectorU64};
 
+pub const KERNEL_SEMANTICS_VERSION: u16 = 1;
+pub const SEMANTIC_ARTIFACT_VERSION: u16 = 1;
+
 /// Input grammar is intentionally small: an operator declaration, never an updater callback.
 #[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub enum FoldSpec {
@@ -72,6 +75,19 @@ impl DeltaCertificate {
     pub const fn update_rule(self) -> UpdateRule {
         self.update_rule
     }
+
+    pub const fn identifier(self) -> &'static str {
+        match self.fold {
+            FoldSpec::AddModU64 => "add_mod_replace_v1",
+            FoldSpec::AverageExactU64 => "average_exact_replace_v1",
+            FoldSpec::MinU64 => "unsupported",
+        }
+    }
+
+    pub fn from_identifier(capability: FoldSpec, identifier: &str) -> Option<Self> {
+        let certificate = DeltaForge::certificate_for(capability).ok()?;
+        (certificate.identifier() == identifier).then_some(certificate)
+    }
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
@@ -100,6 +116,370 @@ impl fmt::Display for ForgeError {
 }
 
 impl std::error::Error for ForgeError {}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum ArithmeticSemantics {
+    ModularU64,
+    ExactU128,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum ChangeSemantics {
+    ReplaceFinalState,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct RuntimeGuards {
+    arithmetic: ArithmeticSemantics,
+    change: ChangeSemantics,
+    requires_nonempty_input: bool,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum RuntimeGuardError {
+    EmptyInput,
+}
+
+impl RuntimeGuards {
+    pub const fn for_capability(capability: FoldSpec) -> Self {
+        match capability {
+            FoldSpec::AddModU64 => Self {
+                arithmetic: ArithmeticSemantics::ModularU64,
+                change: ChangeSemantics::ReplaceFinalState,
+                requires_nonempty_input: false,
+            },
+            FoldSpec::AverageExactU64 => Self {
+                arithmetic: ArithmeticSemantics::ExactU128,
+                change: ChangeSemantics::ReplaceFinalState,
+                requires_nonempty_input: true,
+            },
+            FoldSpec::MinU64 => Self {
+                arithmetic: ArithmeticSemantics::ExactU128,
+                change: ChangeSemantics::ReplaceFinalState,
+                requires_nonempty_input: false,
+            },
+        }
+    }
+
+    pub const fn arithmetic(self) -> ArithmeticSemantics {
+        self.arithmetic
+    }
+
+    pub const fn change(self) -> ChangeSemantics {
+        self.change
+    }
+
+    pub const fn identifier(self) -> &'static str {
+        match (self.arithmetic, self.requires_nonempty_input) {
+            (ArithmeticSemantics::ModularU64, false) => "modular_u64_replace_final_v1",
+            (ArithmeticSemantics::ExactU128, true) => "exact_u128_replace_nonempty_final_v1",
+            (ArithmeticSemantics::ExactU128, false) => "exact_u128_replace_final_v1",
+            (ArithmeticSemantics::ModularU64, true) => "unsupported",
+        }
+    }
+
+    pub fn from_identifier(capability: FoldSpec, identifier: &str) -> Option<Self> {
+        let guards = Self::for_capability(capability);
+        (guards.identifier() == identifier).then_some(guards)
+    }
+
+    pub fn validate_values(self, values: &[u64]) -> Result<(), RuntimeGuardError> {
+        if self.requires_nonempty_input && values.is_empty() {
+            return Err(RuntimeGuardError::EmptyInput);
+        }
+        Ok(())
+    }
+}
+
+impl fmt::Display for RuntimeGuardError {
+    fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            Self::EmptyInput => formatter.write_str("exact average requires at least one value"),
+        }
+    }
+}
+
+impl std::error::Error for RuntimeGuardError {}
+
+/// Stable integrity identifier for a verified semantic artifact. It deliberately detects
+/// accidental corruption and version drift; it is not a cryptographic signature.
+#[derive(Clone, Copy, Debug, Eq, Hash, PartialEq)]
+pub struct SemanticArtifactHash(u64);
+
+impl SemanticArtifactHash {
+    pub const fn value(self) -> u64 {
+        self.0
+    }
+
+    pub fn from_hex(value: &str) -> Option<Self> {
+        (value.len() == 16
+            && value
+                .bytes()
+                .all(|byte| byte.is_ascii_digit() || byte.is_ascii_uppercase()))
+        .then(|| u64::from_str_radix(value, 16).ok().map(Self))
+        .flatten()
+    }
+}
+
+impl fmt::Display for SemanticArtifactHash {
+    fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(formatter, "{:016X}", self.0)
+    }
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum SemanticArtifactError {
+    Forge(ForgeError),
+    KernelVersion(u16),
+    SemanticVersion(u16),
+    CertificateMismatch,
+    GuardsMismatch,
+    SealMismatch,
+}
+
+impl fmt::Display for SemanticArtifactError {
+    fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            Self::Forge(error) => write!(formatter, "cannot derive semantics: {error}"),
+            Self::KernelVersion(version) => write!(
+                formatter,
+                "semantic artifact requires kernel version {version}, expected {KERNEL_SEMANTICS_VERSION}"
+            ),
+            Self::SemanticVersion(version) => write!(
+                formatter,
+                "semantic artifact uses version {version}, expected {SEMANTIC_ARTIFACT_VERSION}"
+            ),
+            Self::CertificateMismatch => {
+                formatter.write_str("semantic certificate does not match capability")
+            }
+            Self::GuardsMismatch => formatter.write_str("runtime guards do not match capability"),
+            Self::SealMismatch => {
+                formatter.write_str("semantic artifact seal does not match content")
+            }
+        }
+    }
+}
+
+impl std::error::Error for SemanticArtifactError {
+    fn source(&self) -> Option<&(dyn std::error::Error + 'static)> {
+        match self {
+            Self::Forge(error) => Some(error),
+            Self::KernelVersion(_)
+            | Self::SemanticVersion(_)
+            | Self::CertificateMismatch
+            | Self::GuardsMismatch
+            | Self::SealMismatch => None,
+        }
+    }
+}
+
+/// Immutable proof-carrying capability. Verification replays a fixed algebraic certificate and
+/// validates this content seal; it never scans a caller's dataset.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct SemanticArtifact {
+    capability: FoldSpec,
+    certificate: DeltaCertificate,
+    guards: RuntimeGuards,
+    kernel_version: u16,
+    semantic_version: u16,
+    hash: SemanticArtifactHash,
+}
+
+impl SemanticArtifact {
+    pub fn synthesize(capability: FoldSpec) -> Result<Self, SemanticArtifactError> {
+        let certificate =
+            DeltaForge::certificate_for(capability).map_err(SemanticArtifactError::Forge)?;
+        let guards = RuntimeGuards::for_capability(capability);
+        let artifact = Self {
+            capability,
+            certificate,
+            guards,
+            kernel_version: KERNEL_SEMANTICS_VERSION,
+            semantic_version: SEMANTIC_ARTIFACT_VERSION,
+            hash: SemanticArtifactHash::from_content(
+                capability,
+                certificate,
+                guards,
+                KERNEL_SEMANTICS_VERSION,
+                SEMANTIC_ARTIFACT_VERSION,
+            ),
+        };
+        artifact.verify()?;
+        Ok(artifact)
+    }
+
+    pub fn from_record(
+        capability: FoldSpec,
+        certificate: DeltaCertificate,
+        guards: RuntimeGuards,
+        kernel_version: u16,
+        semantic_version: u16,
+        hash: SemanticArtifactHash,
+    ) -> Result<Self, SemanticArtifactError> {
+        let artifact = Self {
+            capability,
+            certificate,
+            guards,
+            kernel_version,
+            semantic_version,
+            hash,
+        };
+        artifact.verify()?;
+        Ok(artifact)
+    }
+
+    pub fn verify(self) -> Result<(), SemanticArtifactError> {
+        if self.kernel_version != KERNEL_SEMANTICS_VERSION {
+            return Err(SemanticArtifactError::KernelVersion(self.kernel_version));
+        }
+        if self.semantic_version != SEMANTIC_ARTIFACT_VERSION {
+            return Err(SemanticArtifactError::SemanticVersion(
+                self.semantic_version,
+            ));
+        }
+        if self.certificate
+            != DeltaForge::certificate_for(self.capability).map_err(SemanticArtifactError::Forge)?
+        {
+            return Err(SemanticArtifactError::CertificateMismatch);
+        }
+        if self.guards != RuntimeGuards::for_capability(self.capability) {
+            return Err(SemanticArtifactError::GuardsMismatch);
+        }
+        (self.hash
+            == SemanticArtifactHash::from_content(
+                self.capability,
+                self.certificate,
+                self.guards,
+                self.kernel_version,
+                self.semantic_version,
+            ))
+        .then_some(())
+        .ok_or(SemanticArtifactError::SealMismatch)
+    }
+
+    pub const fn capability(self) -> FoldSpec {
+        self.capability
+    }
+
+    pub const fn certificate(self) -> DeltaCertificate {
+        self.certificate
+    }
+
+    pub const fn guards(self) -> RuntimeGuards {
+        self.guards
+    }
+
+    pub const fn kernel_version(self) -> u16 {
+        self.kernel_version
+    }
+
+    pub const fn semantic_version(self) -> u16 {
+        self.semantic_version
+    }
+
+    pub const fn hash(self) -> SemanticArtifactHash {
+        self.hash
+    }
+}
+
+impl SemanticArtifactHash {
+    const fn from_content(
+        capability: FoldSpec,
+        certificate: DeltaCertificate,
+        guards: RuntimeGuards,
+        kernel_version: u16,
+        semantic_version: u16,
+    ) -> Self {
+        let mut hash = 0xcbf2_9ce4_8422_2325_u64;
+        hash = fnv1a(hash, capability.as_str().as_bytes());
+        hash = fnv1a(hash, certificate.identifier().as_bytes());
+        hash = fnv1a(hash, guards.identifier().as_bytes());
+        hash = fnv1a(hash, &kernel_version.to_le_bytes());
+        hash = fnv1a(hash, &semantic_version.to_le_bytes());
+        Self(hash)
+    }
+}
+
+const fn fnv1a(mut hash: u64, bytes: &[u8]) -> u64 {
+    let mut index = 0;
+    while index < bytes.len() {
+        hash ^= bytes[index] as u64;
+        hash = hash.wrapping_mul(0x0000_0100_0000_01B3);
+        index += 1;
+    }
+    hash
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum CertificateStatus {
+    Verified,
+    Cached,
+}
+
+impl CertificateStatus {
+    pub const fn as_str(self) -> &'static str {
+        match self {
+            Self::Verified => "verified",
+            Self::Cached => "cached",
+        }
+    }
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum PhysicalBackend {
+    Interpreter,
+}
+
+impl PhysicalBackend {
+    pub const fn as_str(self) -> &'static str {
+        match self {
+            Self::Interpreter => "interpreter",
+        }
+    }
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum PhysicalEvidence {
+    Unmeasured,
+}
+
+impl PhysicalEvidence {
+    pub const fn as_str(self) -> &'static str {
+        match self {
+            Self::Unmeasured => "unmeasured",
+        }
+    }
+}
+
+/// Replaceable execution choice. It references semantic content but never determines truth.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct PhysicalRealization {
+    semantic_hash: SemanticArtifactHash,
+    backend: PhysicalBackend,
+    evidence: PhysicalEvidence,
+}
+
+impl PhysicalRealization {
+    pub const fn interpreter(semantic_hash: SemanticArtifactHash) -> Self {
+        Self {
+            semantic_hash,
+            backend: PhysicalBackend::Interpreter,
+            evidence: PhysicalEvidence::Unmeasured,
+        }
+    }
+
+    pub const fn semantic_hash(self) -> SemanticArtifactHash {
+        self.semantic_hash
+    }
+
+    pub const fn backend(self) -> PhysicalBackend {
+        self.backend
+    }
+
+    pub const fn evidence(self) -> PhysicalEvidence {
+        self.evidence
+    }
+}
 
 /// A derived program for `fold(Add mod u64)`. It owns no mutable state.
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
@@ -259,15 +639,10 @@ pub enum DerivedArtifact {
 pub struct DeltaForge;
 
 impl DeltaForge {
-    pub const fn synthesize(spec: FoldSpec) -> Result<DerivedSumPlan, ForgeError> {
+    pub fn synthesize(spec: FoldSpec) -> Result<DerivedSumPlan, ForgeError> {
         match spec {
             FoldSpec::AddModU64 => Ok(DerivedSumPlan {
-                certificate: DeltaCertificate {
-                    fold: FoldSpec::AddModU64,
-                    algebra: AlgebraicClass::CommutativeGroup,
-                    maintenance_state: MaintenanceState::ModularTotal,
-                    update_rule: UpdateRule::SubtractOldThenAddNew,
-                },
+                certificate: Self::certificate_for(FoldSpec::AddModU64)?,
                 fold: SumFold,
             }),
             FoldSpec::AverageExactU64 | FoldSpec::MinU64 => Err(ForgeError::UnsupportedFold(spec)),
@@ -276,20 +651,33 @@ impl DeltaForge {
 
     /// Derives the complete artifact, including required auxiliary state, from a capability
     /// declaration. This is intentionally separate from the legacy SUM-only convenience API.
-    pub const fn synthesize_capability(spec: FoldSpec) -> Result<DerivedArtifact, ForgeError> {
+    pub fn synthesize_capability(spec: FoldSpec) -> Result<DerivedArtifact, ForgeError> {
         match spec {
             FoldSpec::AddModU64 => match Self::synthesize(FoldSpec::AddModU64) {
                 Ok(plan) => Ok(DerivedArtifact::Sum(plan)),
                 Err(error) => Err(error),
             },
             FoldSpec::AverageExactU64 => Ok(DerivedArtifact::Average(DerivedAveragePlan {
-                certificate: DeltaCertificate {
-                    fold: FoldSpec::AverageExactU64,
-                    algebra: AlgebraicClass::CommutativeGroupWithInvariantCardinality,
-                    maintenance_state: MaintenanceState::ExactSumAndCount,
-                    update_rule: UpdateRule::SubtractOldThenAddNewPreserveCount,
-                },
+                certificate: Self::certificate_for(FoldSpec::AverageExactU64)?,
             })),
+            FoldSpec::MinU64 => Err(ForgeError::UnsupportedFold(FoldSpec::MinU64)),
+        }
+    }
+
+    fn certificate_for(spec: FoldSpec) -> Result<DeltaCertificate, ForgeError> {
+        match spec {
+            FoldSpec::AddModU64 => Ok(DeltaCertificate {
+                fold: FoldSpec::AddModU64,
+                algebra: AlgebraicClass::CommutativeGroup,
+                maintenance_state: MaintenanceState::ModularTotal,
+                update_rule: UpdateRule::SubtractOldThenAddNew,
+            }),
+            FoldSpec::AverageExactU64 => Ok(DeltaCertificate {
+                fold: FoldSpec::AverageExactU64,
+                algebra: AlgebraicClass::CommutativeGroupWithInvariantCardinality,
+                maintenance_state: MaintenanceState::ExactSumAndCount,
+                update_rule: UpdateRule::SubtractOldThenAddNewPreserveCount,
+            }),
             FoldSpec::MinU64 => Err(ForgeError::UnsupportedFold(FoldSpec::MinU64)),
         }
     }

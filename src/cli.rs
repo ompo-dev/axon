@@ -59,9 +59,13 @@ pub fn solve_command(arguments: &[String]) -> Result<String, CliError> {
         }
     };
     Ok(format!(
-        "task={}\nartifact={}\nartifact_path={}\nresult={outcome}",
+        "task={}\nartifact={}\nsemantic_hash={}\ncertificate={}\nphysical_backend={}\nphysical_evidence={}\nartifact_path={}\nresult={outcome}",
         receipt.task_name(),
         receipt.artifact_status().as_str(),
+        receipt.semantic_hash(),
+        receipt.certificate_status().as_str(),
+        receipt.physical().backend().as_str(),
+        receipt.physical().evidence().as_str(),
         receipt.artifact_path().display()
     ))
 }

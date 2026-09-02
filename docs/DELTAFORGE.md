@@ -26,6 +26,12 @@ O Forge tem p50 HOT menor em dois pontos, mas as 15 rodadas pareadas se cruzam e
 
 ## DeltaForge-AVG
 
-`FoldSpec::AverageExactU64` agora deriva `DerivedAveragePlan`. O cache é criado pelo artifact como `(sum: u128, count: usize)`; o chamador não pode fornecer um `sum` ou `count` arbitrário. A saída é `ExactAverage`, uma fração sem arredondamento. A regra de atualização é `SubtractOldThenAddNewPreserveCount` e o certificado é checado contra o fold completo.
+`FoldSpec::AverageExactU64` deriva `DerivedAveragePlan`. O cache é criado pelo artifact como `(sum: u128, count: usize)`; o chamador não pode fornecer um `sum` ou `count` arbitrário. A saída é `ExactAverage`, uma fração sem arredondamento. A regra é `SubtractOldThenAddNewPreserveCount`.
+
+O contrato numérico é `ExactU128`: `AVG` não usa `SUM mod 2^64`. O teste inclui `[u64::MAX, u64::MAX]` e preserva o numerador largo, portanto overflow modular não altera silenciosamente a média. Se o acumulador `u128` não comportasse a entrada, o plano retorna erro de overflow; não degrada a semântica.
+
+`SemanticArtifact` carrega capability, certificado, guards, versões do kernel/semântica e um selo de conteúdo estável. Na criação, o kernel de regras confere a composição declarada; no reload, confere versão, certificado, guards e selo em tempo constante. Este selo detecta corrupção acidental e drift de versão, mas não é assinatura criptográfica. `PhysicalRealization` é separado e hoje é apenas `Interpreter` com evidência `Unmeasured`.
+
+`DerivedAveragePlan::check` permanece como auditoria concreta de benchmark/teste. Ele não roda no reuso de produção: cada execução aplica apenas `RuntimeGuards` de custo constante, como input não vazio e semântica `ReplaceFinalState`.
 
 `MIN` continua recusado. Não é correto reutilizar a regra de AVG/SUM para ele: o mínimo exige estado auxiliar diferente (por exemplo, contagem/estrutura dos candidatos), que ainda não foi derivado nem certificado.

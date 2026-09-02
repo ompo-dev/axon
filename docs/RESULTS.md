@@ -109,7 +109,9 @@ Command executado neste host:
 cargo run --release --bin axon-uic-deltaforge-avg -- --mib 64 --runs 15
 ```
 
-Foram 15 rodadas em cada um dos três pontos: 45 pares Full/AVG reutilizado, todos com paridade exata. Cada rodada cria um artifact em diretório temporário, escreve e sincroniza o arquivo antes de publicar; depois faz reload do mesmo artifact. Portanto `artifact_persist` e `artifact_load` são custos reais de filesystem neste PC, não tempo de uma função constante otimizada pelo compilador.
+### Resultado anterior — checker por dataset
+
+O resultado abaixo foi produzido antes da separação entre `SemanticArtifact` e `PhysicalRealization`. Ele mantém valor histórico, mas não é o protocolo atual: o checker concreto era repetido a cada dataset.
 
 | Escritas finais | Full HOT / LIFECYCLE p50 ms | AVG reutilizado HOT / LIFECYCLE p50 ms | Persistir artifact p50 ms | Break-even medido |
 |---:|---:|---:|---:|---|
@@ -117,4 +119,16 @@ Foram 15 rodadas em cada um dos três pontos: 45 pares Full/AVG reutilizado, tod
 | 1.000.000 | 17.898 / 33.823 | 15.743 / 81.401 | 1.542 | não atingido em 15 usos |
 | 4.000.000 | 26.827 / 58.035 | 28.096 / 121.153 | 1.469 | não atingido em 15 usos |
 
-No maior ponto, o reload do artifact foi `0.818 ms` p50; a verificação do certificado custou `51.989 ms` p50 e a validação independente `4.622 ms`. Por isso o caminho reutilizado tem HOT menor nos dois primeiros tamanhos, mas perde em lifecycle em todos. A decisão correta é **não promover** esse artifact para o hot path ainda. A hipótese de engenharia fica clara: o checker precisa tornar-se um gate amortizado/shadow ou ganhar uma prova incremental, sem remover a garantia de correção. Este resultado não mede aprendizagem, descoberta ou generalização; mede somente a capability AVG declarada sob este protocolo.
+No maior ponto, o reload do artifact foi `0.818 ms` p50; a verificação concreta custou `51.989 ms` p50. Esse custo motivou o corte semântico abaixo.
+
+### Resultado atual — certificado semântico selado
+
+Mesmo comando, mesmo host e 15 rodadas por ponto. Cada rodada cria, sincroniza e recarrega um artifact semântico. O reload verifica somente selo, versões e guards; `DerivedAveragePlan::check` não roda por dataset. As 45 comparações Full/AVG continuaram com paridade exata.
+
+| Escritas finais | Full HOT / LIFECYCLE p50 ms | AVG reutilizado HOT / LIFECYCLE p50 ms | Persistir artifact p50 ms | Break-even medido |
+|---:|---:|---:|---:|---|
+| 1.024 | 14.601 / 25.079 | 10.097 / 30.269 | 1.454 | não atingido em 15 usos |
+| 1.000.000 | 18.220 / 34.144 | 15.416 / 40.569 | 1.505 | não atingido em 15 usos |
+| 4.000.000 | 26.766 / 58.405 | 27.982 / 69.066 | 1.612 | não atingido em 15 usos |
+
+No maior ponto, `verification` por reuso foi `0 ms`; `artifact_load` foi `0.922 ms` p50 e validação independente foi `4.622 ms` p50. O lifecycle ainda perde porque este benchmark reconstrói input, cache e validação em toda rodada. Conclusão: **não promover** realização física ainda; porém o erro anterior — pagar checker linear de ~52 ms por dataset — foi removido. O resultado não mede aprendizagem, descoberta ou generalização.

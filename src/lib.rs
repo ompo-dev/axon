@@ -32,8 +32,11 @@ pub use delta::{
     coalesce_adjacent_last_writes,
 };
 pub use delta_forge::{
-    AlgebraicClass, AverageCache, DeltaCertificate, DeltaForge, DerivedArtifact,
-    DerivedAveragePlan, DerivedSumPlan, ExactAverage, FoldSpec, ForgeError, MaintenanceState,
+    AlgebraicClass, ArithmeticSemantics, AverageCache, CertificateStatus, ChangeSemantics,
+    DeltaCertificate, DeltaForge, DerivedArtifact, DerivedAveragePlan, DerivedSumPlan,
+    ExactAverage, FoldSpec, ForgeError, KERNEL_SEMANTICS_VERSION, MaintenanceState,
+    PhysicalBackend, PhysicalEvidence, PhysicalRealization, RuntimeGuardError, RuntimeGuards,
+    SEMANTIC_ARTIFACT_VERSION, SemanticArtifact, SemanticArtifactError, SemanticArtifactHash,
     UpdateRule,
 };
 pub use morphology::{Morphology, MorphologyError, Region, RemorphPolicy, SemanticContract};

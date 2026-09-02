@@ -11,12 +11,13 @@ Rebuild limpo da AXON como **Universal Intelligence Calculus**: um núcleo Rust 
 | Escolher Delta ou Full por contrato e custo | `IncrementalizabilityAnalyzer`, `CostEstimate` | `SUM`/`COUNT`/`XOR` locais são exatos; `SORT` usa Full |
 | Reusar decisão física já medida | `StrategyEvidence`, `MetaJit` | estratégia só vira reflexo com intervalos não sobrepostos no mesmo domínio |
 | Comparar custo sem esconder fronteira | `BenchContract` | `HOT = execution`; `LIFECYCLE` soma todas as fases medidas da mesma rodada |
+| Separar verdade de execução | `SemanticArtifact`, `PhysicalRealization` | selo semântico imutável não depende do backend físico atual |
 | Criar e reusar capacidade persistente | `ArtifactStore`, `ArtifactLifetime` | criação, reload, invalidação e break-even têm custo explícito |
 | Comprimir rajadas de escrita | `coalesce_adjacent_last_writes` | última escrita adjacente preserva estado final |
 | Medir adaptação local | `axon-uic-hybrid-sweep` | compara Hybrid fim a fim, Oracle pré-compilado e Change Fabric com ingestão contabilizada |
 | Derivar delta declarado e checá-lo | `DeltaForge`, `DerivedSumPlan` | `fold(Add mod u64)` deriva cache/regra; `MIN` é recusado |
 | Derivar média exata | `DerivedAveragePlan`, `ExactAverage` | `AVG` deriva `sum:u128 + count:usize`; não recebe cache do chamador |
-| Executar tarefa declarada | `axon solve` | parser tipado, artifact persistente e resultado exato |
+| Executar tarefa declarada | `axon solve` | parser tipado, guard barato, hash semântico e resultado exato |
 | Quocientar estrutura equivalente | `LiftCertificate` | LIFT exato para classe de fontes idênticas; fora dela usa fallback |
 | Preservar comportamento | `AbstractionContract`, `SemanticContract` | limite de erro explícito; remorph exige contrato igual |
 | Preferir descrição física barata | `PhysicalCost`, `CostPrices` | refinamentos disputam custo de latência, bytes e energia |

@@ -113,7 +113,7 @@ fn run(config: Config) -> Result<(), String> {
         config.runs
     );
     println!(
-        "input FoldSpec::AverageExactU64; derived cache is exact (sum: u128, count: usize). HOT is execution only; LIFECYCLE includes input generation, allocation, initialization, validation and certificate check."
+        "input FoldSpec::AverageExactU64; derived cache is exact (sum: u128, count: usize). HOT is execution only; LIFECYCLE includes runtime work and independent result validation. Semantic certificate verification is cached O(1), not replayed per dataset."
     );
 
     let mut results = Vec::with_capacity(points.len());
@@ -166,7 +166,7 @@ fn run(config: Config) -> Result<(), String> {
         largest.checksum.denominator()
     );
     println!(
-        "limit: this measures a declared exact AVG artifact and its certificate check. It does not establish general program synthesis, learned discovery, or an optimization promotion."
+        "limit: this measures a declared exact AVG artifact with a cached semantic certificate and independent result validation. It does not establish general program synthesis, learned discovery, or an optimization promotion."
     );
     Ok(())
 }
@@ -370,10 +370,6 @@ fn run_reuse(
         return Err("reused AVG delta diverged from exact full fold".to_owned());
     }
     contract = contract.with_phase(BenchPhase::ResultValidation, validation_started.elapsed());
-    let verification_started = Instant::now();
-    plan.check(&before, &changes)
-        .map_err(|error| format!("AVG certificate failed: {error}"))?;
-    contract = contract.with_phase(BenchPhase::Verification, verification_started.elapsed());
     Ok(Measurement { contract, average })
 }
 
@@ -520,7 +516,11 @@ mod tests {
         assert_eq!(full.average, reuse.average);
         assert!(full.contract.lifecycle().unwrap() >= full.contract.hot());
         assert!(reuse.contract.lifecycle().unwrap() >= reuse.contract.hot());
-        assert!(reuse.contract.phase(BenchPhase::Verification) > Duration::ZERO);
+        assert_eq!(
+            reuse.contract.phase(BenchPhase::Verification),
+            Duration::ZERO
+        );
+        assert!(reuse.contract.phase(BenchPhase::ResultValidation) > Duration::ZERO);
         assert!(reuse.contract.phase(BenchPhase::ArtifactLoad) > Duration::ZERO);
         std::fs::remove_dir_all(root).unwrap();
     }

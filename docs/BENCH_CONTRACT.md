@@ -25,6 +25,8 @@
 
 `Duration::ZERO` é emitido somente quando a fase não se aplica ou não foi medida naquele protocolo. Isso permanece explícito na tabela, em vez de mover custo para fora da saída.
 
+`verification` de um `SemanticArtifact` é replay de certificado, versão e selo por conteúdo; deve escalar com artifact, não com vetor. `result_validation` continua sendo auditoria independente do experimento. Não se deve usar custo de auditoria para alegar custo de guard de produção, nem retirar a auditoria da tabela quando ela foi medida.
+
 ## Regras de comparação
 
 1. Só compare HOT com HOT e LIFECYCLE com LIFECYCLE.

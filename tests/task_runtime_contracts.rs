@@ -129,7 +129,7 @@ fn axon_solve_cli_persists_then_reuses_a_typed_artifact() {
     assert!(
         String::from_utf8(second.stdout)
             .unwrap()
-            .contains("artifact=reused")
+            .contains("artifact=reused\nsemantic_hash=")
     );
     std::fs::remove_dir_all(root).unwrap();
 }

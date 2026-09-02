@@ -64,3 +64,18 @@ fn forge_derives_exact_average_state_without_being_given_sum_and_count() {
     );
     assert!(plan.check(&before, &change).is_ok());
 }
+
+#[test]
+fn exact_average_never_reuses_modular_sum_semantics() {
+    let artifact = DeltaForge::synthesize_capability(FoldSpec::AverageExactU64).unwrap();
+    let DerivedArtifact::Average(plan) = artifact else {
+        panic!("average spec must derive an average artifact");
+    };
+
+    let (average, _) = plan.full(&[u64::MAX, u64::MAX]).unwrap();
+
+    assert_eq!(
+        average,
+        ExactAverage::new(u128::from(u64::MAX) * 2, 2).unwrap()
+    );
+}
