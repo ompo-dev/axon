@@ -7,7 +7,11 @@ pub mod change;
 pub mod cli;
 pub mod delta;
 pub mod delta_forge;
+pub mod learning;
+pub mod live;
+pub mod live_store;
 pub mod morphology;
+pub mod online_policy;
 pub mod refinement;
 pub mod runtime;
 pub mod solver;
@@ -19,7 +23,7 @@ pub use artifact_store::{ArtifactStatus, ArtifactStore, ArtifactStoreError, Inst
 
 pub use benchmark::{
     ArtifactLifetime, ArtifactLifetimeError, BenchContract, BenchContractError, BenchPhase,
-    BreakEven,
+    BreakEven, LiveBenchContract,
 };
 pub use capability::{Authority, Capability, CapabilityGate, Effect, Feasibility, GateFailure};
 pub use change::{
@@ -39,7 +43,14 @@ pub use delta_forge::{
     SEMANTIC_ARTIFACT_VERSION, SemanticArtifact, SemanticArtifactError, SemanticArtifactHash,
     UpdateRule,
 };
+pub use learning::{
+    CandidateKind, LearningProblem, LearningSummary, LearningTrial, ProblemFeatures,
+    StructurePrior, default_learning_curriculum, train_structure_prior,
+};
+pub use live::{AverageStrategy, LiveAverage, LiveError};
+pub use live_store::{CompactionReport, LiveAverageStore, RecoveryReport, StoreLimits};
 pub use morphology::{Morphology, MorphologyError, Region, RemorphPolicy, SemanticContract};
+pub use online_policy::{OnlineAveragePolicy, OnlineExecution};
 pub use refinement::{
     CostPrices, DecisionCertificate, DecisionError, Interval, PhysicalCost, Refinement,
     RefinementSet, select_refinement,

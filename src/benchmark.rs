@@ -76,6 +76,28 @@ pub enum BenchContractError {
     DurationOverflow,
 }
 
+/// Live protocol v3 keeps scientific audit costs outside production work.
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct LiveBenchContract {
+    pub setup: Duration,
+    pub steady: Duration,
+    pub durability: Duration,
+    pub recovery: Duration,
+    pub audit: Duration,
+}
+
+impl LiveBenchContract {
+    pub fn production(&self) -> Result<Duration, BenchContractError> {
+        [self.setup, self.steady, self.durability, self.recovery]
+            .into_iter()
+            .try_fold(Duration::ZERO, |total, phase| {
+                total
+                    .checked_add(phase)
+                    .ok_or(BenchContractError::DurationOverflow)
+            })
+    }
+}
+
 /// Explicit costs of a capability that can be installed and used repeatedly.
 ///
 /// Creation is charged exactly once. Each entry in `steady_state` is one

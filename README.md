@@ -23,6 +23,10 @@ Rebuild limpo da AXON como **Universal Intelligence Calculus**: um núcleo Rust 
 | Preferir descrição física barata | `PhysicalCost`, `CostPrices` | refinamentos disputam custo de latência, bytes e energia |
 | Segurança por capability | `CapabilityGate` | impossibilidade ou efeito sem autoridade bloqueia execução |
 | Remorph só amortizado | `Morphology`, `RemorphPolicy` | base protegida, histerese e Migration Tax |
+| Aprender a buscar menos | `StructurePrior`, `axon-uic-learn-bench` | ranker online reduz tentativas de candidatos sem mudar resposta aceita |
+| Manter estado entre eventos | `LiveAverage`, `LiveAverageStore` | AVG exato, atualizações transacionais, compactação e replay após interrupção |
+| Aprender com execução medida | `OnlineAveragePolicy`, `axon-uic-online-train` | aprendizado por ação executada, exploração, avaliação separada e checkpoint compacto |
+| Testar histórias e mudanças de carga | `axon-uic-stress`, `axon-uic-online-stream` | oráculo independente, falhas de armazenamento e comparação com regra fixa simples |
 | Otimização nunca quebra correção | `run_checked` | erro ou divergência retorna resultado exato |
 
 Não é AGI, percepção, robótica nem descoberta científica geral. É fundação executável e testável dessas regras.
@@ -38,7 +42,18 @@ cargo run --release --bin axon-uic-delta-sweep -- --mib 64 --runs 5 --max-update
 cargo run --release --bin axon-uic-hybrid-sweep -- --mib 64 --runs 30 --hardware-id <cpu-ram-profile>
 cargo run --release --bin axon-uic-deltaforge-sum -- --mib 64 --runs 15
 cargo run --release --bin axon-uic-deltaforge-avg -- --mib 64 --runs 15
+cargo run --bin axon-uic-learn-bench -- --epochs 8
+cargo run --release --bin axon-uic-live-avg -- --mib 1,16,64,256 --batches 10000 --updates 1024
+cargo run --release --bin axon-uic-online-train -- --epochs 32 --checkpoint target/avg-policy.bin
+cargo run --release --bin axon-uic-online-train -- --epochs 0 --resume target/avg-policy.bin --seed 20261001
+cargo run --release --bin axon-uic-online-train -- --epochs 128 --feedback selected --resume target/avg-policy.bin --checkpoint target/avg-continued.bin
+cargo run --release --bin axon-uic-stress -- --seeds 128 --steps 8192
+cargo run --release --bin axon-uic-online-stream -- --steps 256 --checkpoint target/stream-policy.bin --output target/stream-policy.json
 ```
+
+O checkpoint é criado sem substituir arquivos existentes. O relatório de [pesquisa, treino e estado contínuo de 13/09/2026](docs/LIVE_LEARNING_2026-09-13.md) contém medições, dados brutos e limites. Requer Rust 1.89 ou posterior; esta rodada foi executada com Rust 1.98.1.
+
+A [rodada de robustez e avaliação ampliada](docs/ROBUSTNESS_2026-09-13.md) passou em 118 testes e 1.048.576 passos de estresse. Em cinco novos treinos, o modelo preservou exatidão, mas não amortizou seu custo frente a uma regra fixa simples. A recuperação agora evita duplicar a fonte em memória; `StoreLimits` oferece limites configuráveis de fonte, lote e journal.
 
 Resultados e protocolo: [docs/EXPERIMENTS.md](docs/EXPERIMENTS.md), [docs/RESULTS.md](docs/RESULTS.md). Contratos e limites: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), [docs/BENCH_CONTRACT.md](docs/BENCH_CONTRACT.md), [docs/DELTA_ALGEBRA.md](docs/DELTA_ALGEBRA.md), [docs/DELTAFORGE.md](docs/DELTAFORGE.md), [docs/HYBRID_RECOMPUTE.md](docs/HYBRID_RECOMPUTE.md).
 

@@ -123,6 +123,8 @@ No maior ponto, o reload do artifact foi `0.818 ms` p50; a verificação concret
 
 ### Resultado atual — certificado semântico selado
 
+Nota posterior (13/09/2026): as 15 rodadas abaixo são ciclos frios independentes. A coluna histórica “não atingido em 15 usos” não demonstra ausência de break-even de uma instância viva. Os resultados de AVG-LIVE ao final deste documento medem essa outra fronteira.
+
 Mesmo comando, mesmo host e 15 rodadas por ponto. Cada rodada cria, sincroniza e recarrega um artifact semântico. O reload verifica somente selo, versões e guards; `DerivedAveragePlan::check` não roda por dataset. As 45 comparações Full/AVG continuaram com paridade exata.
 
 | Escritas finais | Full HOT / LIFECYCLE p50 ms | AVG reutilizado HOT / LIFECYCLE p50 ms | Persistir artifact p50 ms | Break-even medido |
@@ -132,3 +134,50 @@ Mesmo comando, mesmo host e 15 rodadas por ponto. Cada rodada cria, sincroniza e
 | 4.000.000 | 26.766 / 58.405 | 27.982 / 69.066 | 1.612 | não atingido em 15 usos |
 
 No maior ponto, `verification` por reuso foi `0 ms`; `artifact_load` foi `0.922 ms` p50 e validação independente foi `4.622 ms` p50. O lifecycle ainda perde porque este benchmark reconstrói input, cache e validação em toda rodada. Conclusão: **não promover** realização física ainda; porém o erro anterior — pagar checker linear de ~52 ms por dataset — foi removido. O resultado não mede aprendizagem, descoberta ou generalização.
+
+## LearnBench inicial
+
+Command:
+
+```powershell
+cargo run --bin axon-uic-learn-bench -- --epochs 8
+```
+
+Este é o primeiro loop mensurável de aprendizado no projeto. Ele não treina linguagem, percepção ou autonomia; treina um `StructurePrior` linear e pequeno para ordenar candidatos de derivação em tarefas sintéticas.
+
+| Métrica | Resultado |
+|---|---:|
+| Tarefas de avaliação | 4 |
+| Tentativas antes da experiência | 16 |
+| Tentativas depois da experiência | 4 |
+| Redução de busca | 75,00% |
+
+Depois do treino, o primeiro candidato escolhido foi o aceito para `SUM`, `AVG`, `VARIANCE` e `MIN` sintéticos. Treino e avaliação usam as mesmas quatro estruturas e respostas predefinidas. A redução mede memorização/ordenação neste currículo, não generalização nem implementação de `VARIANCE` ou `MIN`. A etapa seguinte executada foi AVG-LIVE e aprendizado de custos reais, descritos abaixo.
+
+## Estado contínuo e treino por execução (13/09/2026)
+
+Relatório completo, fontes de pesquisa, protocolo e arquivos: [LIVE_LEARNING_2026-09-13.md](LIVE_LEARNING_2026-09-13.md).
+
+AVG-LIVE completou três rodadas em cinco tamanhos, com 10.000 batches de 1.024 alterações por tamanho: 150.000 batches ao todo, todos com auditoria final exata. A mediana por batch em 64 MiB foi 2,3–2,5 microssegundos; em 1 GiB, 8,6–8,7 microssegundos. O custo físico não ficou constante, embora o caminho incremental não percorra o vetor inteiro.
+
+O experimento durável de 1 MiB aplicou 256 batches sincronizados e passou por 23 reaberturas/replays exatos. A mediana durável foi 0,3426 ms por batch. Testes adicionais mataram processos em três pontos e verificaram recuperação e continuação, além de truncar cada posição possível do último registro.
+
+Treinamos três políticas de custo independentes, cada uma com 1.024 observações de execução e 256 casos de avaliação separados. A política ocupa 520 bytes em memória e 536 bytes no checkpoint. Nas avaliações com alterações espalhadas, a execução da política reduziu tempo em 8,68–11,38% ante sempre Full e 11,42–12,74% ante sempre Delta. Houve 596 escolhas corretas em 602 comparações com diferença de pelo menos 10%; outros 166 casos ficaram fora dessa métrica. Todos os 768 casos mantiveram paridade exata. Nenhuma realização foi promovida automaticamente por esses números.
+
+Treinar custou 1,12–1,29 segundo por rodada. Esse custo não se paga nos 256 casos de avaliação; o arquivo aprendido permite reaproveitamento posterior. Uma nova execução carregou a política e avaliou 256 casos adicionais sem retreinar, preservando correção. Estes resultados demonstram manutenção de estado e seleção adaptativa restrita a AVG, não linguagem, compreensão do mundo ou AGI.
+
+### Continuação: compactação e aprendizado por ação
+
+Adicionamos compactação periódica com snapshot sincronizado, publicação por renomeação e lock lateral estável. Em três pares de 1.024 batches duráveis, o arquivo final caiu de 26.271.832 para 1.048.664 bytes (96,0% menor), e o tempo acumulado de recuperação caiu 65,1–68,9%. Compactar a cada 64 batches custou 56,9–60,8 ms adicionais por rodada. Paridade permaneceu exata, inclusive nos testes de processo interrompido nas fronteiras da compactação.
+
+`execute_and_learn` permite aprender executando somente uma estratégia por evento. Há exploração periódica para observar alternativas; eventos inválidos não treinam. Retomamos uma política de 1.024 observações e chegamos a 3.072 mantendo o checkpoint em 536 bytes. Na avaliação separada de 256 casos, a política executada economizou 10,86% ante sempre Full e 11,75% ante sempre Delta, com resultados exatos. O experimento de continuação custou 4,503 s; não provou vantagem sobre o modelo anterior. Detalhes e arquivos estão no relatório vinculado acima.
+
+## Robustez e comparação mais exigente
+
+Na rodada seguinte do mesmo dia, 118 testes passaram em debug e release. O teste diferencial concluiu 1.048.576 passos, 56.584.156 substituições e 1.834.899 comparações exatas, sem divergência. Novos testes verificaram 352 corrupções byte a byte, 353 comprimentos de arquivo, registros semanticamente inválidos com checksum recalculado e interrupções durante a gravação.
+
+A recuperação de uma fonte de 4 MiB solicitou 4.195.162 bytes ao alocador Rust, apenas 858 além da fonte. A execução de 1.000 pares de atualizações, incluindo aprendizado, não fez novas alocações. Isso não mede RSS nem inclui a construção prévia dos deltas.
+
+Cinco novos modelos receberam 8.192 observações cada, seguidas de 8.192 eventos de avaliação congelada por modelo, com oito regimes de carga. A política economizou 7,56–8,24% ante sempre Delta e 22,38–24,30% ante sempre Full. Porém, frente a uma regra fixa simples de densidade, a economia foi somente 0,39–1,50% na avaliação. Cobrando também a execução durante o aprendizado, ficou 0,11–1,41% mais lenta que essa regra nas cinco rodadas. Não houve amortização nesse horizonte nem promoção automática.
+
+Esse protocolo executa cada evento uma vez por candidato e equilibra posições e predecessores; não deve ser misturado numericamente com os probes do protocolo anterior. Detalhes, comandos, dados brutos e limites: [ROBUSTNESS_2026-09-13.md](ROBUSTNESS_2026-09-13.md).

@@ -2,6 +2,7 @@
 name = "axon-uic"
 version = "0.1.0"
 edition = "2024"
+rust-version = "1.89"
 autobins = false
 description = "AXON Universal Intelligence Calculus — certified adaptive cognition"
 license = "MIT"
@@ -33,5 +34,25 @@ path = "src/bin/axon_uic_deltaforge_sum.rs"
 [[bin]]
 name = "axon-uic-deltaforge-avg"
 path = "src/bin/axon_uic_deltaforge_avg.rs"
+
+[[bin]]
+name = "axon-uic-learn-bench"
+path = "src/bin/axon_uic_learn_bench.rs"
+
+[[bin]]
+name = "axon-uic-live-avg"
+path = "src/bin/axon_uic_live_avg.rs"
+
+[[bin]]
+name = "axon-uic-online-train"
+path = "src/bin/axon_uic_online_train.rs"
+
+[[bin]]
+name = "axon-uic-stress"
+path = "src/bin/axon_uic_stress.rs"
+
+[[bin]]
+name = "axon-uic-online-stream"
+path = "src/bin/axon_uic_online_stream.rs"
 
 [dependencies]

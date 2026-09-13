@@ -1,0 +1,1 @@
+{"schema":"axon-differential-stress-v1","base_seed":20260913,"seeds":128,"steps_per_seed":8192,"steps":1048576,"accepted":611633,"rejected":436943,"replacements":56584156,"exact_checks":1834899,"elapsed_ms":1537,"exact":true}
