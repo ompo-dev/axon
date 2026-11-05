@@ -1,0 +1,15 @@
+{
+  "schema": "axon-math-actor-diagnostic/v1",
+  "question": "Is the failed composition already wrong on the 2251 supplied training states under exactly the rollout decoder, rather than only after entering its own states?",
+  "studies": [".axon-memory/m1-math-actor-v1", ".axon-memory/m1-math-actor-state-v1"],
+  "episodes": ".axon-memory/m1-math-actor-source-v1/episodes.json",
+  "models": "All six previously frozen variants, no selection by new score, no fitting or label acquisition.",
+  "measurements": "Each 2251 supplied training frames using SAME beam8/intents5/mean-path/shape guard/2M decision budget as rollout. Separately all629 training questions in own-result rollouts, no teacher states at inference. Greedy results only historical reference.",
+  "scores": "Strict serialized terms, operation identity, operand values with supplied +/* commutativity, per-step/operation, whole teacher trajectory, own final answer, first disagreement on teacher trajectory. Numerical equality alone not semantic correctness. Duplicate-value provenance unresolved.",
+  "boundary": "Only already-taught train episodes. Do not open corpus answers, development derivations, reserved1562/research1/original test. Teacher state success not public generalization. No causal identification from correlation.",
+  "engineering": "Extract shared measurement helper without changing codec, weights, decoder, legacy quotas or authority. Diagnostic input accepts only id/text, <=32 already supplied states, <=100M work, no arithmetic execution. Real rollout remains <=4 requests, <=8 actions. Exact legacy replay mandatory.",
+  "research": ["https://arxiv.org/abs/1011.0686", "https://arxiv.org/abs/1506.03099"],
+  "research_limit": "These papers motivate comparing induced-state distributions. No DAgger/scheduled-sampling implementation, expert recovery policy or guaranteed AXON performance claimed.",
+  "m1_complete": false,
+  "m2_permitted": false
+}

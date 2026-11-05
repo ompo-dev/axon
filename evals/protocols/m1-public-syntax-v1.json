@@ -1,0 +1,19 @@
+{
+  "schema": "axon-public-syntax-protocol/v1",
+  "revision": "4f136acb02344e4f2f5e3d3e9ecc70aab61db62d",
+  "train_sha256": "b56d7124af821e2968302c38298904ec67af342304a33ae8a9dc4fa57df89648",
+  "dev_sha256": "f8a67abae12fbab85a3995204a6459d1958c11065062d4ea5349d6b914e78f81",
+  "reservation": "SHA256 document id first eight hex digits modulo five equals zero; metadata filter before text and annotations. Original test not downloaded.",
+  "policies": [
+    {"seed":19374611,"buckets":4096,"dimensions":16,"epochs":4,"learning_rate":0.1},
+    {"seed":19374611,"buckets":4096,"dimensions":32,"epochs":4,"learning_rate":0.1},
+    {"seed":19374611,"buckets":8192,"dimensions":8,"epochs":4,"learning_rate":0.1},
+    {"seed":19374611,"buckets":8192,"dimensions":16,"epochs":4,"learning_rate":0.1}
+  ],
+  "training": "Allowed original train only. Teacher segmentation/POS for static arc-standard oracle states. Nonprojective examples teach segmentation/POS, not impossible arc-standard derivations. All development examples remain in denominators.",
+  "inference": "Raw id/text only; model predicts boundaries, contraction expansions, POS and dependency edges. No gold words, POS, arcs, labels, documents or partition metadata reach inference.",
+  "scoring": "Strict complete-word-alignment scoring: if a sentence's predicted word forms differ from gold, all its gold words count wrong for strict POS/UAS/LAS. Also report conditional alignment-only diagnostics, exact tree count, relation families and projective/nonprojective strata. Not official UD shared-task scoring. All raw predictions retained.",
+  "selection": "Most strict end-to-end labeled correct attachments, then complete trees, then fewer page bytes, then policy order. Development is consumed; not final audit.",
+  "candidate_refusal": "A policy exceeding existing page/residency budgets is rejected with raw logs, not silently enlarged or retuned. Other runtime errors stop the campaign. Report every policy including rejected ones.",
+  "scope": "First supervised syntax experiment, not a semantic parser, pretrained LLM, autonomous architecture evolution, full M1, or authority. M1 completion contract unchanged; no M2 or production promotion. RSS and energy unavailable. Preserve CC BY-SA 4.0 corpus/derivative attribution."
+}

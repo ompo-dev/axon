@@ -1,0 +1,23 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import {execFile} from 'node:child_process';
+import {promisify} from 'node:util';
+import {createHash} from 'node:crypto';
+import {fileURLToPath} from 'node:url';
+const [numberPath,protocolPath,outputPath,developmentPath]=process.argv.slice(2);
+if(!numberPath||!protocolPath||!outputPath)throw Error('usage: bun scripts/probe-structural.mjs <number.axnum> <protocol.json> <new-output> [development.json]');
+const root=fileURLToPath(new URL('../',import.meta.url));
+const output=path.resolve(outputPath);await fs.mkdir(output);
+const raw=await fs.readFile(protocolPath),protocol=JSON.parse(raw);
+const inputKeys=new Set(protocol.cases.map(c=>JSON.stringify(c.input)));
+if(inputKeys.size!==protocol.cases.length)throw Error('Duplicate probe inputs');
+if(developmentPath){const development=JSON.parse(await fs.readFile(developmentPath,'utf8'));if(development.cases.some(c=>inputKeys.has(JSON.stringify(c.input))))throw Error('Probe overlaps development');}
+const cases=path.join(output,'cases.json'),number=path.join(output,'isolated.axnum'),receipt=path.join(output,'structural-predictions.json');
+await fs.writeFile(cases,JSON.stringify(protocol.cases),{flag:'wx'});await fs.copyFile(numberPath,number,fs.constants.COPYFILE_EXCL);
+const binary=path.join(root,'target/release',`axon-uic-curriculum-lab${process.platform==='win32'?'.exe':''}`);
+const result=await promisify(execFile)(binary,['structural-batch',number,path.join(output,'birth'),cases,receipt],{cwd:root,windowsHide:true,timeout:300000,maxBuffer:1000000});
+const summary=JSON.parse(result.stdout.trim());
+const sha=v=>createHash('sha256').update(v).digest('hex');
+const report={...summary,protocol:protocol.id,input_sha256:sha(raw),number_sha256:sha(await fs.readFile(number)),binary_sha256:sha(await fs.readFile(binary)),distinct_from_development:Boolean(developmentPath),scope:'New inputs under the same task generator and taught grammar; not an external natural-language benchmark.'};
+await fs.writeFile(path.join(output,'audit-portable-structural.json'),JSON.stringify(report,null,2),{flag:'wx'});console.log(JSON.stringify(report));
+if(summary.correct!==summary.total)process.exitCode=1;

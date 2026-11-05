@@ -1,0 +1,37 @@
+# Final untouched holdout for protocol v6, frozen before first execution on 2026-09-23.
+# query<TAB>all source suffixes judged relevant before execution; - means abstain.
+como OracleHeadroom registra que o candidato foi dominado em pontos base	docs/STRATEGY_EVIDENCE.md|src/strategy.rs|src/lib.rs
+quais mudancas de layout protocolo ou hardware reabrem uma decisao MetaJit	docs/STRATEGY_EVIDENCE.md|src/strategy.rs|src/lib.rs
+qual estado o plano de media exata deriva sem receber cache do chamador	docs/DELTAFORGE.md|README.md|src/delta_forge.rs
+por que duas palavras de orcamento nao bastam para sintetizar MIN	docs/DELTAFORGE_MIN_2026-09-22.md|docs/DELTAFORGE.md
+como o novo recurso de segundo momento alterou as tentativas do StructurePrior	docs/RESULTS.md|src/learning.rs
+quais versoes guards e selo protegem um SemanticArtifact recarregado	docs/DELTAFORGE.md|docs/DELTAFORGE_MIN_2026-09-22.md|src/artifact_store.rs
+como os checkpoints de specialist sao testados contra corrupcao byte a byte	docs/COMPOSITIONAL_FOUNDRY_2026-09-22.md|docs/SPECIALIST_FOUNDRY_2026-09-22.md|tests/specialist_contracts.rs
+quais quatro particoes separam treino selecao auditoria e holdout	docs/SPECIALIST_FOUNDRY_2026-09-22.md|docs/COMPOSITIONAL_FOUNDRY_2026-09-22.md
+o que feedback invalido faz com o estado do monitor de drift	docs/SPECIALIST_FOUNDRY_2026-09-22.md|tests/specialist_contracts.rs|src/specialist.rs
+por que uma falha de escrita deixa LiveAverageStore exigindo reabertura	docs/LIVE_LEARNING_2026-09-13.md|src/live_store.rs|tests/storage_adversarial.rs
+o que compactar faz com eventos do journal sem zerar a versao	docs/LIVE_LEARNING_2026-09-13.md|docs/ROBUSTNESS_2026-09-13.md|src/live_store.rs
+como a politica aprende apenas com a estrategia realmente escolhida	docs/LIVE_LEARNING_2026-09-13.md|docs/BENCH_CONTRACT.md|src/online_policy.rs
+quantos eventos invalidos o teste longo rejeitou sem divergencia	docs/ROBUSTNESS_2026-09-13.md
+como Morphology impede desalocar bytes da regiao protegida	docs/ARCHITECTURE.md|README.md|src/morphology.rs
+qual desigualdade estrita permite DecisionCertificate certificar uma acao	docs/ARCHITECTURE.md|src/refinement.rs
+como o seletor escolhe refinamento por reducao de ambiguidade e custo fisico	docs/ARCHITECTURE.md|README.md|src/refinement.rs
+por que uma mudanca em noise nao entra no ExecutionSlice do objetivo	docs/ARCHITECTURE.md|README.md|src/structure.rs|src/lib.rs
+quais dados de proveniencia cada trecho da memoria documental conserva	docs/ARCHITECTURE.md|README.md|src/knowledge.rs
+como uma segunda aprendizagem detecta arquivos inalterados sem reindexar	docs/ARCHITECTURE.md|README.md|src/knowledge.rs|tests/knowledge_cli_contracts.rs
+quais metricas memory eval calcula para ranking e abstencao	README.md|src/cli.rs|tests/knowledge_cli_contracts.rs
+como podar tomates para aumentar a producao no verao	-
+quem ocupa atualmente a presidencia da Argentina	-
+qual antibiotico trata sinusite bacteriana em adultos	-
+vai chover em Paris durante o fim de semana	-
+quais vacinas um cachorro filhote precisa receber	-
+qual foi o placar da ultima partida da NBA	-
+como afinar uma guitarra de doze cordas	-
+quanto custa reformar a cozinha de um apartamento pequeno	-
+quando usar crase antes de nomes de cidades	-
+como preparar vitamina de banana em um liquidificador	-
+por que a bateria do celular descarrega durante a noite	-
+qual seguro cobre danos causados por enchente em veiculos	-
+quando o vulcao Etna entrou em erupcao pela ultima vez	-
+qual filme ganhou o premio de melhor fotografia neste ano	-
+como emitir uma segunda via de certidao de nascimento	-

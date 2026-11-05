@@ -1,0 +1,19 @@
+{
+  "schema":"axon-public-grammar-protocol/v1",
+  "learner":"sequence-v1",
+  "source":"MASSIVE 1.1 pt-PT",
+  "source_sha256":"af89ce740b98e8fe73a0fb3ba69a296837910f037e954b87409ef41d467d3da0",
+  "previous_predictions":".axon-memory/m1-public-grammar-v3/policy-1-predictions.json",
+  "train":"Original train except all reserved localization workers; only utterance, intent and BIO supervision enter training",
+  "development":"Original dev except all reserved workers; adaptive development already consumed in previous attempts",
+  "reservation":"Original test and all reserved workers remain unused until development gates justify a frozen audit",
+  "policies":[
+    {"seed":47,"buckets":8192,"epochs":6,"weights":20000,"minimum_margin":1},
+    {"seed":19374611,"buckets":8192,"epochs":10,"weights":24000,"minimum_margin":1}
+  ],
+  "algorithm":"Greedy averaged perceptron with hashed word/context/affix/shape features and previous predicted BIO tags, gold intent conditioning at training. Learned weights quantized and pruned by magnitude per head, not learned exact rules or general mathematical certificates.",
+  "selection":"Exact structured dev matches, then fewer stored nonzero weights, then policy order",
+  "metrics":"Exact intent and all ordered role/value spans; novelty strata; all errors and abstentions in denominator. Margins are not probabilities or authority.",
+  "completion_contract":"evals/protocols/m1-completion-v1.json; all gates must pass before M1 approval or M2",
+  "scope":"Known empirical algorithm, not a novel AGI claim. Corpus labels supply role semantics; no language-specific vocabulary, pretrained weights or LLM teacher. Source/localizer limits and unknown RSS/energy remain. Stored previous predictions labeled as historical controls."
+}

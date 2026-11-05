@@ -1,0 +1,26 @@
+{
+  "schema":"axon-relational-pointer-study/v1",
+  "purpose":"Advance full M1 by replacing independent BIO word decisions with jointly learned operation/operand pointers and bounded continuous context. This is an experimental component, never a replacement for any of the seven M1 gates.",
+  "source_protocol":"evals/protocols/m1-math-actor-v1.json",
+  "parent":".axon-memory/m1-public-split-mixers-v1/policy-3/structural.axnum",
+  "parent_sha256":"97a7e3f0e8cc1a6f5b1822a655b4182a0b8af96438d0b427123ef17440d3dfd2",
+  "primitive_source":".axon-memory/m1-math-actor-v1",
+  "cohorts":"Matched629 frozen train episodes, then extended cohort admitted only by the same conservative train annotation parser with an explicit512-word question limit. No implicit constants, new operator, relaxed AST/binding ambiguity or development derivation. All refusals retained. Legacy teaching/parser defaults and codecs remain unchanged.",
+  "architecture":"Train-only vocabulary/shared embeddings; bidirectional Elman recurrence with continuous state across32-word blocks; separate directional states and local neighbors at candidate positions. Joint label+left+optional right scores: learned affine global/left/right terms plus learned diagonal bilinear pair term. Exact bounded choice enumeration, normalized loss over all legal choices with optional explicitly supplied equivalent targets. No BIO O-word loss. Existing recurrent derivatives, quantizer, Adam and genome runtime reused. Not the full Pointer Network, deep biaffine BiLSTM or Transformer-XL paper architectures.",
+  "representation":"New AXRP0001 payload/ModuleKind19/context, not reinterpretation of AXSQ seeds. Generic candidates are sorted unique source token positions,1..32. Learned label arity1/2 is shape not meaning. Returned global positions retain exact provenance even for equal values. Complete text read, no truncation/window voting/host formula parser at inference.",
+  "limits":{"question_bytes":4096,"question_tokens":512,"state_bytes":8192,"state_tokens":544,"token_bytes":256,"block_tokens":32,"candidates":32,"actions":8,"decisions":9,"decision_work":2000000,"request_work":18000000,"batch_work":100000000,"batch_requests":4,"genome_bytes":262144,"active_payload_bytes":262144,"query_workspace_bytes":262144},
+  "limits_note":"Explicit NEW long-context interface. Old64-token interfaces retain their exact limits. Model+query workspace preflight and actual accounted bytes are published, not process RSS/energy; if any existing genome/payload/work cap refuses, preserve failure and do not raise caps. Query workspace is not free. Bidirectional recurrence retains bounded states for pointers, not a claim of constant total memory or an entire brain under demand.",
+  "budget":{"seed":20261027,"vocabulary":1536,"dimensions":16,"epochs":32,"learning_rate":0.003,"minibatch":16},
+  "untrained_control":{"name":"untrained-matched-full","cohort":"matched","numbers_only":false,"epochs":0,"scope":"Same train-derived vocabulary and label/arity schema, zero parameter updates, not a zero-prior organism. Primitives retain their ancestral learning costs. Zero head ties choose deterministic first legal pointer; report rather than hide tie frequency."},
+  "policies":[
+    {"name":"matched-full","cohort":"matched","numbers_only":false},
+    {"name":"matched-question-free","cohort":"matched","numbers_only":true},
+    {"name":"extended-full","cohort":"extended","numbers_only":false},
+    {"name":"extended-question-free","cohort":"extended","numbers_only":true}
+  ],
+  "provided":"Tokenization, numeric scalar grammar, candidate enumeration, mathematical meanings of four elementary primitives, trace supervision and resource/shape constraints are provided. Learner chooses operator/bindings/stop. New parser/representation limits do not prove comprehension. Train traces are not autonomous discovery of formulas.",
+  "evaluation":"Same1481 already consumed GSM8K development questions, full denominator. Own-result rollout, no teacher intermediates or answer/equation fields in inference. Freeze predictions before final-scalar recount. Separate operation/pointer teacher accuracy, complete train rollout, public scalar correctness, long-input strata, constant4=35 and copy controls. Question-free matched policies mandatory; no score-selected retries. Joint argmax ties deterministically choose first legal action and publish zero margin, never claim calibrated semantic confidence; ambiguity/clarification gate stays unproved. Reserved1562/research1/original test stay sealed, no new external author certificate from this diagnostic.",
+  "engineering":"Finite-difference analytic gradients incl shared embedding/global/candidate/diagonal terms; block-size invariant context; codec strictness/tamper tests; native read-only inference/quotas/unknown-field rejection; inheritance preserving2 old modules plus model+4 admitted circuits; old numeric/CSV/context and public lexical/search replays. Full Rust/clippy/minimal and JS, immutable evidence/licenses. No UI changes planned; no fake telemetry.",
+  "references":["https://arxiv.org/html/1611.01734v3","https://arxiv.org/html/1506.03134v2","https://arxiv.org/html/1901.02860v3"],
+  "m1_complete":false,"m2_permitted":false
+}

@@ -1,0 +1,11 @@
+{
+  "schema":"axon-public-feedback-protocol/v1",
+  "source_sha256":"af89ce740b98e8fe73a0fb3ba69a296837910f037e954b87409ef41d467d3da0",
+  "learner":"factorized-sequence-v1",
+  "prefixes":[2500,4000,5500,7000,8526],
+  "budget":{"seed":19374611,"buckets":4096,"dimensions":32,"epochs":32,"learning_rate":0.03,"subwords":true,"tanh":true,"balanced":true,"minimum_margin":1},
+  "feedback":"Same original allowed training row order and five prefixes as the previous perceptron lineage. Freeze next-window predictions from current and initial ancestor before supplying feedback, then refine the actual preceding numeric genome with cumulative replay. No reset, all errors and per-case forgetting retained.",
+  "cost":"Entire lineage: 27526 cumulative rows times 32 epochs = 880832 sentence presentations. This uses more compute than the previous six-epoch lineage; it is not a matched-compute claim. Track all real core calls and costs.",
+  "evaluation":"All 1504 already-consumed dev rows after every stage, initial 2500-row training retention, next-window before/after feedback, final 8526-row fit. Not a fresh prospective reserve or natural temporal stream.",
+  "promotion":"Frozen full M1 gates unchanged. Never infer M1 completion, M2 permission, perfect retention or operational authority from a larger global score. No production promotion. Reserved workers/original test unused; unknown process RSS and energy remain unavailable."
+}

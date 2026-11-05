@@ -1,0 +1,24 @@
+# Final compositional holdout, frozen before implementation and first execution on 2026-09-23.
+# Do not use its results to tune this protocol.
+como a fronteira de observacao decide se escritas repetidas podem ser coalescidas	docs/DELTA_ALGEBRA.md|README.md|src/delta.rs
+por que uma mudanca em noise fica fora do slice exigido pelo objetivo	docs/ARCHITECTURE.md|README.md|src/structure.rs|src/lib.rs
+como a foundry aprende XOR mas usa paridade de tres fatores como controle negativo	docs/COMPOSITIONAL_FOUNDRY_2026-09-22.md|docs/SPECIALIST_FOUNDRY_2026-09-22.md|tests/specialist_contracts.rs
+como cauda truncada e eventos confirmados interagem na recuperacao do journal	docs/ROBUSTNESS_2026-09-13.md|docs/LIVE_LEARNING_2026-09-13.md|tests/live_avg_contracts.rs
+como o segundo momento mudou o prior estrutural e reduziu tentativas futuras	docs/RESULTS.md|src/learning.rs|tests/learning_contracts.rs
+como a memoria v1 migra para v2 e invalida experiencia quando a fonte muda	docs/KNOWLEDGE_MEMORY_2026-09-23.md|src/knowledge.rs
+qual resultado a variancia populacional exata produz para fonte unica e entrada vazia	docs/DELTAFORGE_VARIANCE_2026-09-22.md|tests/delta_forge_contracts.rs
+como multiplicidade e ultima ocorrencia do minimo determinam uma reconstrucao	docs/DELTAFORGE_MIN_2026-09-22.md|src/delta_forge.rs
+por que custo de rebuild impede promover universalmente a realizacao fisica de MIN	docs/DELTAFORGE_MIN_2026-09-22.md|docs/RESULTS.md
+como mudancas de hardware e protocolo reabrem MetaJIT depois de medir headroom	docs/STRATEGY_EVIDENCE.md|src/strategy.rs|src/lib.rs
+como a memoria tolera erro de digitacao e acento mas recusa assunto ausente	docs/KNOWLEDGE_MEMORY_2026-09-23.md|src/knowledge.rs|tests/knowledge_cli_contracts.rs
+como o runtime recusa artifact corrompido ou ligado a outra capability	tests/task_runtime_contracts.rs|src/artifact_store.rs
+como coalescer parcelas de um financiamento habitacional	-
+o drift continental altera a previsao de terremotos no Chile	-
+como calcular variancia de notas escolares numa planilha	-
+qual checksum confirma uma transferencia bancaria internacional	-
+como proteger a base de uma parede contra infiltracao	-
+qual backend usar para publicar um aplicativo Android	-
+como recuperar fotos apagadas depois de formatar um telefone	-
+qual politica publica cobre aluguel social em Portugal	-
+como treinar memoria para uma prova de anatomia	-
+quando reconstruir o motor de um automovel antigo	-

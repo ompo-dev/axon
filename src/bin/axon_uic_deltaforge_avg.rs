@@ -275,7 +275,11 @@ fn install_average(
     }
     let plan = match installed.artifact() {
         DerivedArtifact::Average(plan) => plan,
-        DerivedArtifact::Sum(_) => return Err("AVG capability derived a SUM artifact".to_owned()),
+        DerivedArtifact::Sum(_)
+        | DerivedArtifact::Minimum(_)
+        | DerivedArtifact::PopulationVariance(_) => {
+            return Err("AVG capability derived a different artifact".to_owned());
+        }
     };
     let phase = match expected_status {
         ArtifactStatus::Created => BenchPhase::ArtifactPersist,
@@ -520,8 +524,8 @@ mod tests {
             reuse.contract.phase(BenchPhase::Verification),
             Duration::ZERO
         );
-        assert!(reuse.contract.phase(BenchPhase::ResultValidation) > Duration::ZERO);
-        assert!(reuse.contract.phase(BenchPhase::ArtifactLoad) > Duration::ZERO);
+        assert!(reuse.contract.has_phase(BenchPhase::ResultValidation));
+        assert!(reuse.contract.has_phase(BenchPhase::ArtifactLoad));
         std::fs::remove_dir_all(root).unwrap();
     }
 

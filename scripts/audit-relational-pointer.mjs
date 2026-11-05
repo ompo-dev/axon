@@ -1,0 +1,37 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+import {isDeepStrictEqual} from 'node:util';
+import {sha} from './gsm8k-source.mjs';
+import {scalar} from './math-program-source.mjs';
+import {finalAnswer} from './math-answer-score.mjs';
+import {close} from './math-actor-trace.mjs';
+import {checkPointerTrace} from './relational-pointer-trace.mjs';
+import {checkWorkingTrace} from './working-pointer-trace.mjs';
+
+const [run,out]=process.argv.slice(2);if(!out)throw Error('usage: node scripts/audit-relational-pointer.mjs <frozen-study> <new-audit>');
+const read=async file=>JSON.parse(await fs.readFile(path.join(run,file))),frozen=await read('freeze.json'),study=await read('predictions-ready.json'),cohorts=await read('cohorts.json'),inputs=await read('development-inputs.json');
+assert.equal(study.schema,'axon-relational-pointer-study/v1');assert.equal(sha(await fs.readFile(path.join(run,'cohorts.json'))),frozen.cohorts_sha256);assert.equal(sha(await fs.readFile(path.join(run,'development-inputs.json'))),frozen.inputs_sha256);
+for(const [file,hash]of Object.entries(frozen.sources))assert.equal(sha(await fs.readFile(path.join(run,'source',file))),hash);
+for(const [name,b]of Object.entries(frozen.binaries))assert.equal(sha(await fs.readFile(path.join(run,`${name}.exe`))),b.sha256);
+const checked=[];
+for(const r of study.results){const dir=`policy-${r.index}`,page=r.policy.page??(r.policy.numbers_only?'free':'full'),rows=cohorts[r.policy.cohort],taught=rows.flatMap(e=>e[page].examples.map((x,step)=>({id:`${e.id}:${step}`,example:x}))),teacher=await read(`${dir}/teacher-predictions.json`),own=await read(`${dir}/own-predictions.json`),ownInputs=await read(`${dir}/own-inputs.json`),dev=await read(`${dir}/development-predictions.json`),devInputs=await read(`${dir}/development-inputs.json`);
+  const trace=['working-pointer','working-pointer-blind','uniform-working-pointer','attention-working-pointer'].includes(r.policy.layout)?(row,text)=>checkWorkingTrace(row,text,r.policy.layout==='working-pointer-blind'):checkPointerTrace;
+  assert.equal(sha(await fs.readFile(path.join(run,dir,'combined/structural.axnum'))),r.number_sha256);assert.equal(sha(await fs.readFile(path.join(run,dir,'development-predictions.json'))),r.development.predictions_sha256);assert.equal(sha(await fs.readFile(path.join(run,dir,'own-predictions.json'))),r.own.predictions_sha256);
+  assert.equal(teacher.length,taught.length);assert.equal(own.length,rows.length);assert.deepEqual(dev.map(x=>x.id),inputs.map(x=>x.id));assert.equal(dev.length,1481);
+  let fit=0;for(const [i,t]of teacher.entries()){assert.equal(t.id,taught[i].id);assert.equal(t.frame,taught[i].example.input.text);fit+=Number(taught[i].example.targets.some(x=>isDeepStrictEqual(x,t.prediction)));}assert.equal(fit,r.teacher.correct);
+  let ownCorrect=0;for(const [i,row]of own.entries()){assert.equal(row.id,rows[i].id);trace(row,ownInputs[i].text);ownCorrect+=Number(close(row.answer,rows[i][page].source.final));}
+  const traces=dev.map((row,i)=>trace(row,devInputs[i].text));checked.push({r,dev,traces,ownCorrect});
+}
+for(const [i,c]of study.calls.entries()){assert.equal(c.order,i);assert.equal(c.exit_code,0);assert.deepEqual(c,await read(`call-${i}.json`));}
+await fs.mkdir(out);await fs.writeFile(path.join(out,'freeze-before-gold.json'),JSON.stringify({auditor_sha256:sha(await fs.readFile(process.argv[1])),trace_verifier_sha256:sha(await fs.readFile('scripts/relational-pointer-trace.mjs')),working_trace_verifier_sha256:sha(await fs.readFile('scripts/working-pointer-trace.mjs')),arithmetic_verifier_sha256:sha(await fs.readFile('scripts/math-actor-trace.mjs')),predictions:study.results.map(r=>({index:r.index,sha256:r.development.predictions_sha256})),scope:'All own-result/source-position traces checked before this final-scalar recount, already consumed dev not a new reserve.'},null,2),{flag:'wx'});
+const base=JSON.parse(await fs.readFile(path.join(run,'source/evals/protocols/m1-math-actor-v1.json'))),partitionBytes=await fs.readFile(base.partition),raw=await fs.readFile('.axon-memory/corpora/gsm8k-3101c7d50724/train.jsonl');assert.equal(sha(raw),base.source_train_sha256);assert.equal(sha(partitionBytes),base.partition_sha256);const records=raw.toString('utf8').trimEnd().split(/\r?\n/u).map(JSON.parse),partition=JSON.parse(partitionBytes),accesses={train:0,development:0,reserved:0,research_only:0},gold=new Map(),counts=new Map();
+for(const [i,row]of records.entries())if(['reserved','research_only'].includes(partition[i].split))Object.defineProperty(row,'answer',{get(){accesses[partition[i].split]++;throw Error('Sealed reserved pointer answer');}});
+for(const p of partition){if(p.split==='train'){accesses.train++;const y=finalAnswer(records[p.ordinal].answer);if(y!==null)counts.set(y,(counts.get(y)??0)+1);}else if(p.split==='development'){accesses.development++;const y=finalAnswer(records[p.ordinal].answer);assert(y!==null);gold.set(String(p.ordinal),y);}}
+const constant=[...counts].sort((a,b)=>b[1]-a[1]||a[0]-b[0])[0][0],quantities=inputs.map(r=>r.text.toLowerCase().trim().replace(/[.?!]+$/u,'').split(/\s+/u).flatMap(w=>{try{return[scalar(w)];}catch{return[];}})),copy=which=>{let correct=0,refused=0;for(const [i,r]of inputs.entries()){if(!quantities[i].length){refused++;continue;}correct+=Number(close(which==='first'?quantities[i][0]:quantities[i].at(-1),gold.get(r.id)));}return {correct,incorrect:1481-refused-correct,refused,total:1481};};
+const results=[];
+for(const {r,dev,traces,ownCorrect}of checked){let correct=0,incorrect=0,refused=0,inputValue=0,multistep=0;const strata={short:{correct:0,total:0},long:{correct:0,total:0}};const scored=dev.map((row,i)=>{const ok=close(row.answer,gold.get(row.id)),long=inputs[i].text.toLowerCase().trim().replace(/[.?!]+$/u,'').split(/\s+/u).length+3>64;strata[long?'long':'short'].total++;strata[long?'long':'short'].correct+=Number(ok);if(ok){correct++;inputValue+=Number(quantities[i].some(n=>close(n,row.answer)));multistep+=Number(traces[i].calculations>1);}else if(row.answer===null)refused++;else incorrect++;return {id:row.id,expected:gold.get(row.id),actual:row.answer,correct:ok,...traces[i]};});
+  await fs.writeFile(path.join(out,`policy-${r.index}-scored.json`),JSON.stringify(scored,null,2),{flag:'wx'});results.push({index:r.index,name:r.policy.name,teacher:r.teacher,own_correct:ownCorrect,own_total:r.own.total,correct,incorrect,refused,total:1481,multistep_correct:multistep,correct_answer_already_in_question:inputValue,correct_answer_not_in_question:correct-inputValue,strata,passed:correct/1481>=.95});
+}
+assert.equal(accesses.reserved+accesses.research_only,0);
+const audit={schema:'axon-relational-pointer-recount/v1',results,constant:{value:constant,correct:[...gold.values()].filter(n=>close(n,constant)).length,total:1481},copy_controls:{first:copy('first'),last:copy('last')},answer_accesses:accesses,development_derivations_read:false,all_own_result_and_source_positions_verified:true,m1_complete:false,m2_permitted:false,scope:'Complete public scalar denominator with exact selected source indices and independently recomputed arithmetic/history. Provided operation semantics/teacher traces, already consumed dev and same engineering author. No discovery, independent linguistic-authorship certificate, fluency or full M1 approval.'};await fs.writeFile(path.join(out,'audit.json'),JSON.stringify(audit,null,2),{flag:'wx'});console.log(JSON.stringify(audit));

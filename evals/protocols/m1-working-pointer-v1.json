@@ -1,0 +1,28 @@
+{
+  "schema":"axon-working-pointer-study/v1",
+  "intervention":"working-provenance",
+  "purpose":"Expose actual executed operator/source provenance and test recovery teaching on frozen train-only mistakes. Full M1 contract unchanged; this is a mechanism study, not a milestone certificate.",
+  "parent":".axon-memory/m1-public-split-mixers-v1/policy-3/structural.axnum",
+  "parent_sha256":"97a7e3f0e8cc1a6f5b1822a655b4182a0b8af96438d0b427123ef17440d3dfd2",
+  "primitive_source":".axon-memory/m1-math-actor-v1",
+  "repair_donor":{"file":".axon-memory/m1-pointer-anonymity-v1/policy-0/own-predictions.json","sha256":"43577e58c5751a76be22b9438bc8a4d8f0cad41a1efb2a6b17d02327bfacb8fe","number_sha256":"9732ba58ed91011161f1716aff458c547f40a28be40dce1c2e7a9c4f5a0e4168"},
+  "repair_limit":3000,
+  "repair_rule":"Original629 train programs/2251 states always retained. Visit donor train requests in frozen original order and each successful actual prefix in order. Structural keys identify supplied expression graphs, commuting only supplied +/*. If a noncanonical prefix already contains the target graph, teach DONE on its actual register; otherwise append missing canonical subgraphs in provided topological order within existing8-action quota. No state contains a future result. Deduplicate exact input/target pairs per question, retain first3000 additional pairs globally; record all skipped/refused cases. Practice control repeats canonical state min(actual-register-count,canonical-last-index) for each selected repair. All4 fits have identical counts/order, not identical inputs/labels/parameter shapes.",
+  "representation":"New explicit working and blind module IDs with unchanged AXRP0001/tag19 model codec. Frame is normalized original question followed by four tokens per computed register: operator, left origin, right origin, actual scalar. Blind substitutes work/left/right at same positions. No future teacher states in autonomous execution. Provenance is an engineered interface, not emergent discovery. Legacy comparison additionally changes clock/layout; only working versus blind isolates provenance metadata.",
+  "budget":{"seed":20261027,"vocabulary":1536,"dimensions":16,"epochs":32,"learning_rate":0.003,"minibatch":16,"independent_shuffle":true,"candidate_vocabulary":"omit"},
+  "require_shared_order":true,
+  "transport":"session",
+  "default_reproduction":{"budget":{"seed":20261027,"vocabulary":1536,"dimensions":16,"epochs":32,"learning_rate":0.003,"minibatch":16},"page_sha256":"3155309434695edf5de4c21516ac186ef101149ad139afbadc00a38be2b7c866"},
+  "policies":[
+    {"name":"blind-practice","cohort":"practice","page":"blind","layout":"working-pointer-blind","module":"semantic-working-pointer-blind-v1"},
+    {"name":"provenance-practice","cohort":"practice","page":"working","layout":"working-pointer","module":"semantic-working-pointer-v1"},
+    {"name":"blind-repair","cohort":"repair","page":"blind","layout":"working-pointer-blind","module":"semantic-working-pointer-blind-v1"},
+    {"name":"provenance-repair","cohort":"repair","page":"working","layout":"working-pointer","module":"semantic-working-pointer-v1"}
+  ],
+  "compatibility":"Before new fits replay all4 frozen phase49 models' teacher2251/own629/dev1481 full JSON rows using same logical batch boundaries in sessions. Compare predictions, origins, arithmetic, work, margins and workspace exactly; only cache load/process counts may differ. No new gold opened. Test512 logical groups (4 own/32 frames) and refusal of empty/513,5/33 rows, duplicate IDs, unknown fields, labels, invalid later frames before birth.",
+  "evaluation":"Every1481 already-consumed GSM8K development request, every629 train question, all supplied teacher states. Freeze hashes of source/binaries/cohorts/inputs/models/predictions before final scalar recount. No raw development derivations, originaltest, reserved1562 or research1 opened. Same provided four arithmetic primitives; no English operator heuristic or automatic correct-answer executor in inference. All fits published irrespective of score, no retries selected by development. SVAMP already consumed and not used here as fresh reserve.",
+  "cost":"One native birth per bounded session; logical2M decision/18M request/100M batch quotas unchanged. At most512 groups, input16MB, receipt64,000,000B, same544-word/8192B frames,32 candidates,8 actions,2 resident modules and262144B pack limit. Report total native calls, training presentations, payload/genome/workspace separately. JSON/session buffers, executable/RSS/energy not covered by query-workspace count; unknown energy unavailable.",
+  "references":["https://arxiv.org/abs/1511.06279","https://arxiv.org/abs/1011.0686","https://arxiv.org/abs/2103.07191"],
+  "research_scope":"NPI motivates explicit program/working state; sequential imitation literature motivates evaluating own-induced states; fixed reference-model repairs here are neither full DAgger nor RL and inherit no published convergence/generalization guarantee. SVAMP motivates retaining question-free/constant controls; no claim of equivalent paper architecture/performance.",
+  "m1_complete":false,"m2_permitted":false
+}

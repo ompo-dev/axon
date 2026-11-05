@@ -6,6 +6,7 @@ use std::{
     fs::{self, OpenOptions},
     io::{Seek, SeekFrom, Write},
     path::PathBuf,
+    sync::atomic::{AtomicU64, Ordering},
     time::{SystemTime, UNIX_EPOCH},
 };
 
@@ -40,14 +41,28 @@ fn live_production_cost_excludes_audit_and_checks_overflow() {
 }
 
 fn path() -> PathBuf {
+    static NEXT: AtomicU64 = AtomicU64::new(0);
     std::env::temp_dir().join(format!(
-        "axon-live-{}-{}.bin",
+        "axon-live-{}-{}-{}.bin",
         std::process::id(),
         SystemTime::now()
             .duration_since(UNIX_EPOCH)
             .unwrap()
-            .as_nanos()
+            .as_nanos(),
+        NEXT.fetch_add(1, Ordering::Relaxed)
     ))
+}
+
+#[test]
+fn concurrent_journal_fixtures_have_distinct_paths() {
+    let workers: Vec<_> = (0..8)
+        .map(|_| std::thread::spawn(|| (0..256).map(|_| path()).collect::<Vec<_>>()))
+        .collect();
+    let paths: std::collections::BTreeSet<_> = workers
+        .into_iter()
+        .flat_map(|w| w.join().unwrap())
+        .collect();
+    assert_eq!(paths.len(), 2048);
 }
 
 #[test]

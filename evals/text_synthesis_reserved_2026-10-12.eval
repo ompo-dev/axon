@@ -1,0 +1,49 @@
+task	split	input	output	expected_status
+date	train	2024-01-05	05/01/2024	agreed
+date	train	2031-09-17	17/09/2031	agreed
+date	test	1997-12-31	31/12/1997	agreed
+date	test	2028-02-29	29/02/2028	agreed
+date	test	2003-07-04	04/07/2003	agreed
+extension	train	report.final.csv	csv	agreed
+extension	train	notes.txt	txt	agreed
+extension	test	table.audit.tsv	tsv	agreed
+extension	test	archive.backup.zip	zip	agreed
+extension	test	settings.json	json	agreed
+basename	train	data/reports/weekly.csv	weekly.csv	agreed
+basename	train	logs/audit-2026.txt	audit-2026.txt	agreed
+basename	test	more/deep/daily-summary.json	daily-summary.json	agreed
+basename	test	cache/results.final.tsv	results.final.tsv	agreed
+basename	test	root/files/config-v2.toml	config-v2.toml	agreed
+sku	train	AB:003:green	green/AB/003	agreed
+sku	train	LONG:0091:blue	blue/LONG/0091	agreed
+sku	test	XQ:012:amber	amber/XQ/012	agreed
+sku	test	R:0008:violet	violet/R/0008	agreed
+sku	test	TRIPLE:731:gray	gray/TRIPLE/731	agreed
+frame	train	node=alpha	<ALPHA>	agreed
+frame	train	host=beta	<BETA>	agreed
+frame	test	service=gamma	<GAMMA>	agreed
+frame	test	worker=delta	<DELTA>	agreed
+frame	test	client=omega	<OMEGA>	agreed
+numbers	train	batch-015 item-0008	015:0008	agreed
+numbers	train	group-910 entry-0077	910:0077	agreed
+numbers	test	id-043 part-0112	043:0112	agreed
+numbers	test	set-001 record-9520	001:9520	agreed
+numbers	test	pack-807 piece-0003	807:0003	agreed
+ambiguous_field	train	AA|AA	AA	agreed
+ambiguous_field	train	BB|BB	BB	agreed
+ambiguous_field	test	CC|DD		needs_example
+ambiguous_case	train	ALPHA	ALPHA	agreed
+ambiguous_case	train	BETA	BETA	agreed
+ambiguous_case	test	Gamma		needs_example
+ambiguous_number	train	ref-001	001	agreed
+ambiguous_number	train	item-810	810	agreed
+ambiguous_number	test	ref-002-copy-999		needs_example
+missing_field	train	Name|North Zone	North Zone	agreed
+missing_field	train	Other|South District	South District	agreed
+missing_field	test	Broken		out_of_domain
+unavailable_arithmetic	train	11	22	agreed
+unavailable_arithmetic	train	25	50	agreed
+unavailable_arithmetic	test	37	74	unsupported
+unseen_condition	train	beta alpha	alpha beta	agreed
+unseen_condition	train	delta gamma	gamma delta	agreed
+unseen_condition	test	apple zebra	apple zebra	agreed

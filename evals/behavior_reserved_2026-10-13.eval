@@ -1,0 +1,15 @@
+# Internal reserve, frozen before evaluation, not an external blinded benchmark.
+# Development: seed 513013, 12 systems; unit-test seed 817031.
+# Learner receives action count and generic resource limits, never state IDs/counts.
+# Generator: deterministic Mealy systems, 8..32 base states, 2..4 actions,
+# 2..4 output symbols, reachable input-0 cycle, other edges randomized.
+# An irrelevant internal counter modulo 17 is not part of the observable contract.
+# Learning: observation tables, minimized counterexamples, characterization-set
+# conformance at middle depth 2, 2048 deterministic random words of length 48.
+# Max 128 learned states, 32768 uncached queries, 800000 commanded actions.
+# Audit after learning: full reachable product, independent minimal partition,
+# saved/reloaded models, 23 fresh history/goal pairs plus one unreachable symbol.
+# Failures remain in CSV; exact auditor never refines a reserved model.
+seed=8301539 systems=32
+seed=19270471 systems=32
+seed=58091347 systems=32

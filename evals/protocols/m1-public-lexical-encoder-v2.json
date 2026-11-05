@@ -1,0 +1,17 @@
+{
+  "schema":"axon-public-lexical-encoder-mixing/v2",
+  "source":"MASSIVE 1.1 pt-PT",
+  "source_sha256":"af89ce740b98e8fe73a0fb3ba69a296837910f037e954b87409ef41d467d3da0",
+  "learner":"lexical-encoder-v1",
+  "policies":[
+    {"seed":19374611,"vocabulary":4096,"characters":512,"dimensions":16,"hidden":32,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"collision_control":false},
+    {"seed":19374611,"vocabulary":4096,"characters":512,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"collision_control":false},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"collision_control":false},
+    {"seed":19374611,"vocabulary":4096,"characters":512,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":false,"minimum_margin":1,"collision_control":false}
+  ],
+  "selection":"Development exact matches, then fewest retained parameters, then index. All failures retained; no test/reserved-author evaluation.",
+  "representation":"AXSQ0007 explicitly stores a learned dense tanh mixing layer after shared word vectors and separated context positions. AXSQ0006 remains byte/residency compatible. No quota increased.",
+  "scope":"Same public development source consumed before. Established neural window representation, not new invention or general-language/M1 proof. Labels never enter inference; model-scoring work is not whole RAM/energy cost.",
+  "promotion":false,
+  "m1_complete":false
+}

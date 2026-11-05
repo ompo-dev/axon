@@ -1,0 +1,26 @@
+{
+  "schema": "axon-milestone-contract/v1",
+  "stage_id": "M0",
+  "revision": "prospective-v1",
+  "status": "protocol-defined-not-evaluated",
+  "scope": "Learn reusable typed abstractions, construct a keyed-grouping workflow, select discriminating authorized questions, and transfer learned scalar transitions to held-out temporal recurrence classes; preserve capabilities and birth in another process.",
+  "excluded_claims": ["AGI", "open-ended representation learning", "free Portuguese", "general vision", "ARC improvement", "evolved universal learning algorithm", "lower total cost of active sampling than passive sampling"],
+  "priors": ["existing typed VM and its bounded generic construction/lifting grammar", "supervised source examples and disjoint admission", "finite authorized query pools", "host schemas, parsers, phrase forms and file IO", "three explicit i64 recurrence classes for the reserved evaluation"],
+  "data": {"generator": "scripts/create-m0-transfer-curriculum.mjs", "family_split": "two-argument source transition programs versus variable-length temporal recurrences", "reserved_classes": ["linear-recurrence", "quadratic-recurrence", "bilinear-recurrence"], "replicates_per_class": 16, "future_cases_per_replicate": 16, "replicates_are_not_independent_algorithm_families": true},
+  "limits": {"work_per_acquisition": 30000000, "candidates_per_acquisition": 50000, "queries_per_inquiry": 4, "source_and_full_process_wall_ms_each": 300000, "peak_process_working_set_bytes": 536870912, "binary_seed_bytes": 262144},
+  "acceptance": {
+    "G1": "Relevant contracts, complete Rust suite, Clippy, minimal build, UI check/build/unit tests and real-core browser suite pass with no known critical failures.",
+    "G2": "Integrated inquiry curriculum and full milestone curriculum admitted with all exact cases correct; keyed grouping/weighted grouping/histogram and actual 600-row CSV independently checked.",
+    "G3": "Reserved evaluation frozen before execution: all 768 inherited future outputs correct, every recurrence class and every replicate solved; no future outputs in learner payload.",
+    "G4": "Same source seed, demonstrations, cases and caps: no-library control included; inherited solves strictly more complete classes and future cases; record total costs rather than assuming inheritance is free.",
+    "G5": "All 35 previous procedures, all 7400 structural cases and 3100 dialogue turns retained in the full integrated campaign; dependency refutation and independent rules pass.",
+    "G6": "New process born from the compiled full number, no parent examples/logs/teacher: all 384 new portable recurrence outputs correct. Previous 2903 portable cases remain verified on their identified version.",
+    "G7": "Source preparation, complete teaching/control campaigns and final deployment executable measured or explicitly accounted for; measured full/source wall and RAM within caps. Physical energy unavailable, no energy claim. Historical research/engineering costs not called zero or included in a cold-inference claim.",
+    "G8": "VM type/domain/fuel checks, denied inputs, callback cancellation, independent admission, namespace and publication atomicity, incompatible-context rejection and no hidden effects verified.",
+    "G9": "Data, binary, seed, evaluator and protocol identities frozen; independent arithmetic audit; all failures and consumed development results preserved, including inquiry-v1 failure.",
+    "G10": "Real-core UI can execute/export new inquiry and milestone campaigns, with no event gaps, query before answer, historical/live distinction, unknown metrics not fabricated, bounded evidence restored correctly and mobile/accessibility checks. Existing persistent server loaded-code limitations explicitly recorded."
+  },
+  "freeze_rule": "Before reserved execution create a new manifest containing actual binary/source-number/data/evaluator/protocol SHA256s. No missing mandatory identity or post-result threshold change is allowed. Source preparation may precede candidate freeze, but may not use reserved target outputs for selection.",
+  "failure_rule": "Any failed required gate leaves M0 open. Preserve first result. Development corrections cannot relabel consumed target families as fresh independent reserve; a new prospective family split is required for a renewed independent-family claim.",
+  "promotion_rule": "All G1--G10 require verified receipts. Passing this bounded synthetic contract may validate M0 only in the stated scope, not an unrestricted version of the milestone or any successor. The original broader objective remains intact."
+}

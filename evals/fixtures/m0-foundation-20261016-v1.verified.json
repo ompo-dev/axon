@@ -1,0 +1,10 @@
+{
+  "schema": "axon-evidence-verified/v1",
+  "archive": "evals/fixtures/m0-foundation-20261016-v1.zip",
+  "sha256": "3E897FB92220C198BE988E49FF5966C1C7201A2E9845E5ABF5A44C0DDBD12981",
+  "files": 514,
+  "uncompressed_bytes": 505441637.0,
+  "archive_bytes": 23790633,
+  "all_entry_hashes_verified": true,
+  "full_m0_approved": false
+}

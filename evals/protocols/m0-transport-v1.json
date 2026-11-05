@@ -1,0 +1,10 @@
+{
+  "protocol": "m0-transport-v1",
+  "status": "engineering-amendment-after-preserved-portability-failure",
+  "full_milestone_approval": false,
+  "observed_failure": "The frozen number passed 2500/2501 portability requests. The 600-row synthetic CSV request had 2403 Value nodes within the 3072-node VM quota, but legacy sequence/page wrappers exceeded the 4096-node structural Term quota.",
+  "change": "Keep the existing public legacy encoder unchanged. Add an explicit compact nonempty small-list tag and use it as a transport fallback only when the legacy encoder exhausts the existing structural quota. Decode both formats; do not change arithmetic, learned programs, seed bytes, quotas or the 600-row request.",
+  "required_checks": ["old encoding remains byte-structurally stable for accepted inputs", "both representations roundtrip identically", "600-record input and result within unchanged quotas", "oversized Value inputs still rejected", "same previously failed portable cases and number rerun with the amended binary", "full Rust and UI regression"],
+  "limits_unchanged": {"value_nodes":3072,"list_items":2048,"term_nodes":4096,"term_children":31,"term_depth":48},
+  "scope": "Representation and integration correction; not additional learned intelligence or independent generalization evidence."
+}

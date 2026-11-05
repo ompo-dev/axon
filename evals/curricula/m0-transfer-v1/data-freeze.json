@@ -1,0 +1,57 @@
+{
+  "input_seed": "0x5b41cd79",
+  "files": [
+    {
+      "name": "external-answers.json",
+      "bytes": 29166,
+      "sha256": "054e5e44864ee10d0dfe19c1e6fa969e44dafe1b214c2246859b9f1de49a3994"
+    },
+    {
+      "name": "external-inputs.json",
+      "bytes": 178452,
+      "sha256": "7adc9a193847ee648738248e126d4c182e8319b2a7ced722d3fddb30b1b747fc"
+    },
+    {
+      "name": "full-data.json",
+      "bytes": 4801410,
+      "sha256": "109fb489b09be57ae2b4574b9c31243ef745d0b7556d6f4de520aea97647fb0b"
+    },
+    {
+      "name": "full.json",
+      "bytes": 14503141,
+      "sha256": "10b0e0a75d5633460f9ba30b432b501c86764c0a7075822c8ac430674acf9ea3"
+    },
+    {
+      "name": "portable-answers.json",
+      "bytes": 68931,
+      "sha256": "a43c36c89f6010ccc90e671d94fae82ee800ba9784be0cc24e02f08d18f10fed"
+    },
+    {
+      "name": "portable-inputs.json",
+      "bytes": 102988,
+      "sha256": "896935a8ecc7599b4f17f83996f585f50ee671e6f49f6fd635655298bb90e941"
+    },
+    {
+      "name": "source-data.json",
+      "bytes": 4683391,
+      "sha256": "1e2cc002cb4ef0c1c7d08890784a395a2ca9bd7a77a232484a89ef52115bf1cf"
+    },
+    {
+      "name": "source.json",
+      "bytes": 14503145,
+      "sha256": "3a4d197dbfdb733d9827a2676ee48ed36d5012d756baab1b9d701be195faec59"
+    }
+  ],
+  "families": [
+    "linear-recurrence",
+    "quadratic-recurrence",
+    "bilinear-recurrence"
+  ],
+  "independent_algorithm_classes": 3,
+  "paired_replicates_per_class": 16,
+  "cases_per_variant": 768,
+  "source_lessons": 43,
+  "full_lessons": 46,
+  "full_requests": 4266,
+  "scope": "Prospective local transfer from learned two-argument state transitions to variable-length temporal recurrences. Three structural/mathematical classes, not 48 independent algorithms. Full target lessons are absent from the source-only seed. Typed I/O, grammar/lifting recipes and numeric domains are provided. Test answers are in separate files. No claim about ARC, free language or arbitrary new families."
+}

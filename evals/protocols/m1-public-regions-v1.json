@@ -1,0 +1,20 @@
+{
+  "schema":"axon-public-region-encoder/v1",
+  "source":"MASSIVE 1.1 pt-PT",
+  "source_sha256":"af89ce740b98e8fe73a0fb3ba69a296837910f037e954b87409ef41d467d3da0",
+  "learner":"lexical-encoder-v1",
+  "policies":[
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":false},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true},
+    {"seed":19374611,"vocabulary":3072,"characters":512,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":false},
+    {"seed":19374611,"vocabulary":3072,"characters":512,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true}
+  ],
+  "hypothesis":"The old sentence representation cannot distinguish internal word permutations with identical endpoints/bags. Seven ordered regions and distant before/after token groups remove that specific information loss without new parameter matrices. Public improvement is not presumed.",
+  "representation":"AXSQ0009 explicitly persists ordered regions and distant relative context; legacy AXSQ0006/AXSQ0007 default remains unchanged. Each region is still an unordered set; this is not recurrence, full token order, sense disambiguation or a new intelligence paradigm.",
+  "comparison":"Paired window/regions policies share RNG, parameter shapes, vocabulary selection and quotas. Changed groups also change effective normalization/dropout activation; do not attribute outcomes only to word order. Policy 0 must reproduce lexical-encoder-v3 policy 2 learned-page bytes and 1504 prediction rows. The inherited operational parent is the newer winner/context seed, so whole-genome identity with the older parent is not expected; verify preservation of this current parent separately.",
+  "selection":"Same existing development exact frame count, then parameter count, then index. Score every fixed policy including regressions. No test or reserved-worker evaluation.",
+  "limits":"196608-byte page, 262144-byte genome, 64 input words, demand-loaded model, no teacher labels at inference, measured scoring including refusals. Whole-process RSS and energy unavailable.",
+  "scope":"Consumed public development data, not independent new semantic acceptance. No automatic WordNet synonyms, external pretrained knowledge, general conversation, tool permission, full M1 or M2 promotion.",
+  "promotion":false,
+  "m1_complete":false
+}

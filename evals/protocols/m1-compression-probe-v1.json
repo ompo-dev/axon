@@ -1,0 +1,11 @@
+{
+  "schema":"axon-compression-probe-protocol/v1",
+  "source_sha256":"af89ce740b98e8fe73a0fb3ba69a296837910f037e954b87409ef41d467d3da0",
+  "reference_run":".axon-memory/m1-public-enhanced-v1",
+  "reference_policy":7,
+  "training":"Exact frozen 8526 allowed training rows and budget of Enhanced7. No reserved workers or original test.",
+  "evaluation":"All 1504 already-consumed dev rows, plus 1000 previously taught rows selected by ascending SHA256(m1-compression-probe:+id), then source order. Sample fit is diagnostic, not validation.",
+  "comparison":"Same averaged and quantized coefficients, before/after magnitude pruning. The pruned predictions/errors must reproduce the frozen Enhanced7 control. The unpruned model is laboratory scratch, never encoded into a genome or admitted under deployment quotas.",
+  "hypothesis":"Post-training pruning may destroy decisions acquired during dense training. This probe isolates pruning after quantization, not full-precision loss, representation quality or an independent reserve.",
+  "completion":"Full M1 thresholds unchanged; no M1 approval, no M2, no production promotion. Report all errors and regressions. Unknown process RSS and energy stay unavailable."
+}

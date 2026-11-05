@@ -1,0 +1,35 @@
+{
+  "schema": "axon-engineering-protocol/v1",
+  "id": "m0-dependencies-v1",
+  "milestone": "M0",
+  "scope": "Engineering prerequisite: versioned closed-call dependencies, selective invalidation and portable revalidation",
+  "full_milestone_approval": false,
+  "teaching": "Existing public Agent API, bounded I/O examples; no supplied target programs",
+  "baseline": "v14 frozen implementation; regression must demonstrate that a disproved source leaves a stale caller active",
+  "limits": {
+    "rules": 128,
+    "dependencies_per_rule": 32,
+    "program_nodes": 256,
+    "seed_bytes": 262144,
+    "candidate_budget": 50000,
+    "search_work_budget": 30000000
+  },
+  "required_checks": [
+    "A contradicted source invalidates every dependent caller, including nested calls",
+    "Unrelated skills and independently admitted copies remain available",
+    "Replacing a source with different behavior invalidates callers; identical behavior preserves them",
+    "Failed admission and failed publication preserve the original seed atomically",
+    "A resumed seed enforces the same dependency graph",
+    "Missing, stale, fabricated and cyclic dependencies are rejected",
+    "New dependency-bearing seeds require codec v5 and reject false older version labels",
+    "Legacy v2/v3/v4 inference remains readable; tracked migration is explicit on adaptation",
+    "Metadata and invalidation are real events/results, not simulated telemetry",
+    "Existing algorithm, structural and Agent regressions pass"
+  ],
+  "acceptance": {
+    "mandatory_checks": "all",
+    "allowed_contract_failures": 0,
+    "audit": "Independent contract tests plus real-core curriculum and portable child",
+    "not_claimed": ["M0 transfer completion", "M1-M10 completion", "AGI", "new external benchmark success"]
+  }
+}

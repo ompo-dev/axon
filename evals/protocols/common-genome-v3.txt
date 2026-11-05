@@ -1,0 +1,76 @@
+# AXON Common Genome: Prospective Protocol V3
+
+The seed is a self-contained mixed-domain genotype, not an RNG integer. A fixed
+decimal bytecode uses `1` followed by a three-digit 000..255 word per encoded byte.
+It is a canonical decimal string representing the complete binary genotype, not
+compression, floating point, a cryptographic identity or a biological mechanism.
+Existing learned modules/procedures, operational policy, composition policy and
+parent identity are embedded. The host supplies the interpreter, ceilings and
+authority. No gene grants IO, simulation, native code or network permissions.
+
+Birth starts in a new directory, reuses existing module decoders, validates every
+payload/reference and replays inherited procedure evidence. A receipt is published
+only after success; partial installations remain on failure. No all-file atomicity
+or power-loss durability is claimed. Fresh cursors exclude parental live state.
+Encoded resident-footprint descriptors remain specific to this runtime ABI.
+
+## Development And Selection
+
+Bootstrap uses the already documented text extractors, acquired sum/product,
+acquired conditional and acquired one-step memory, plus a simulated-device model.
+Its examples/work are charged separately. It does not encode the new end-to-end
+task procedures. All worker processes receive only a decimal seed and labelled
+demonstration/scoring files, not source module paths. Workers have no simulation
+authority. Numeric CSV decoding and exact integer conversion remain innate.
+
+Default cohort: 32 candidates, eight rounds, six composition attempts per candidate:
+1536 attempts, not 1536 distinct tasks or necessarily successful discoveries.
+Policies mutate resident module count (1..8) and composition depth (4..6).
+Growth/work caps, component programs, evidence and host authority do not mutate.
+The development seed is 84371921. Equal examples and per-task work ceilings apply.
+Scoring has 32 points per goal. Development goals: sum, product, prior sum, prior
+product, condition of sum, condition of product. All are internal synthetic packet
+families. Pareto selection charges work, encoded size, stages and capability mask;
+policy niches preserve different depth/residency choices without using reserves.
+V1 development exposed a selection-order bug: truncating the Pareto list after
+appending niche representatives could discard all niche representatives. V2 keeps
+one development-best feasible representative per depth first, then fills the
+eight-parent limit from the Pareto frontier ordered by capability coverage/work/
+bytes/index. This correction is made before any reserve is evaluated. V1 run
+`b50e7191-f3ab-4978-8e99-0873a51b4b0a` is retained: 1536 attempts, 816 admissions,
+1600/3200 transfer/scoring outputs correct, zero new transfer goals admitted.
+The numerical format stays AXGN0001; this changes selection, not decoding.
+
+V2 run `e7aeb4f9-f32f-437e-8344-4fc66da1d3ce` retains 1536 attempts, 944 admissions
+and 2400/3200 correct outputs. Parent selection preserved niches, but the final
+four-candidate truncation discarded them again: all frozen candidates had depth
+four, already inherited six skills, and could not acquire six-stage new skills.
+V3 applies the same depth-niche preservation to freezing: first the development-
+best candidate per represented depth, then fill to four using development rank.
+This is a development-informed policy correction before any reserved data is read,
+not a selection based on final accuracy. V1/V2 failures are not deleted.
+
+All candidates, failures and parents are archived. Prior admitted procedures are
+replayed rather than silently deleted when a new acquisition fails.
+
+## Frozen Transfer And Reserve
+
+Freeze up to four final candidates before transfer teaching/evaluation. A fresh
+process born from each selected decimal seed learns two compositions not in the
+development curriculum: prior condition of sum, prior condition of product.
+These use the same component library/packet grammar. This is new composition
+transfer, not unseen primitive invention, arbitrary language or new vision.
+
+Transfer training seed: 17094361; admission seed: 49721833.
+New reserved input seeds: **80127491, 25609387, 61432871**.
+The reserve is never supplied to mutation, parent selection or procedure search.
+Transfer feedback cannot choose a replacement after admission refutation.
+Use 1000 evaluation points per acquired goal/seed by default; report refusals and
+coverage separately from correct predictions. Expansion includes negative values,
+zeros and a balanced low/high mixture. Parent outputs are audited independently.
+The reserved protocol performs no additional evolutionary selection after results.
+
+Forgetting is checked on development goals using fresh points. Lifelong journal
+recovery, external-effect restart semantics, pure inference/energy benchmarks and
+general cognitive development remain distinct next gates. The UI reports actual
+birth/acquisition/selection checkpoints and archived results, never fake neurons.

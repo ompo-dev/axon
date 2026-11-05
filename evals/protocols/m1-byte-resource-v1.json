@@ -1,0 +1,14 @@
+{
+  "schema": "axon-matched-process-resource/v1",
+  "run": ".axon-memory/m1-public-byte-convolution-v1",
+  "binary_sha256": "437ae1dc34c8db09263549efc97c8e8e417cdbceed8c902c41ae4f81d3cb9dbc",
+  "source": "first 64 already-consumed development requests, repeated four times with unique IDs",
+  "requests": 256,
+  "unique_accuracy_cases": 64,
+  "orders": [[0,2,3,4],[4,3,2,0],[0,2,3,4],[4,3,2,0],[0,2,3,4]],
+  "conditions": {"0":"legacy only","2":"frozen random byte CNN","3":"learned byte CNN","4":"learned byte CNN plus POS training"},
+  "sampler": "scripts/measure-program-resource.ps1 curriculum-encoder-batch -NoBuild",
+  "scope": "Sequential second-process numeric birth, input loading, encoder prediction and output IO. Same binary and inputs; OS cache/background not controlled, no random hardware assignment, no training or UI included. Not a cross-system benchmark, pure inference latency, isolated brain RAM, energy, or new independent accuracy cases. Last sampled CPU may not be final; memory sampling may miss final intervals. Samples unavailable remain null.",
+  "promotion": false,
+  "m1_complete": false
+}

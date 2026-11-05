@@ -1,0 +1,34 @@
+{
+  "schema":"axon-public-byte-convolution/v1",
+  "source":"MASSIVE 1.1 pt-PT plus allowed UD Portuguese Bosque train in auxiliary conditions",
+  "source_sha256":"af89ce740b98e8fe73a0fb3ba69a296837910f037e954b87409ef41d467d3da0",
+  "learner":"lexical-encoder-v1",
+  "training_timeout_ms":1800000,
+  "auxiliary_source":{
+    "corpus":".axon-memory/corpora/ud-bosque-r2.16-v3",
+    "train_sha256":"b56d7124af821e2968302c38298904ec67af342304a33ae8a9dc4fa57df89648",
+    "provenance_sha256":"328a9a4e8ec2450f6164b0014192e1813bc5306721850410db8716a7a9a42cbb"
+  },
+  "policies":[
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true,"byte_convolution":false},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true,"byte_convolution":false},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true,"byte_convolution":true,"freeze_byte_convolution":true},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true,"byte_convolution":true},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true,"byte_convolution":true}
+  ],
+  "auxiliary_policies":[null,{"weight":0.1,"interval":4,"shuffle_labels":false},null,null,{"weight":0.1,"interval":4,"shuffle_labels":false}],
+  "control_number_sha256":"824abdd1360511a06060e57aafc3e6529697120b9075efdf1318e16ce01b5c17",
+  "expected_numbers":{
+    "0":"824abdd1360511a06060e57aafc3e6529697120b9075efdf1318e16ce01b5c17",
+    "1":"bb0690a93ca056e89efb607f809bdc208d4d20a29af335c45f25809ef2d97cde"
+  },
+  "hypothesis":"51333 source auxiliary tokens were outside the primary vocabulary and shared UNK with no subwords. A trainable composition of UTF8 bytes may improve new-spelling representations and transfer. Contexts already distinguish some unknown words; no causal or general language improvement is presumed.",
+  "representation":"AXSQ0010, 258 byte/boundary rows x 8 dimensions, width-three convolution into the existing word-vector width, tanh/max pooling. Lexical table and main heads remain. Virtual word rows are query/training scratch, not deployed memory. CNN gradients are accumulated with fixed CNN parameters within each sentence and averaged over its heads before applying. Not recurrent, a full-order word encoder, Unicode graphemes, BiLSTM/CRF or semantic understanding.",
+  "controls":"Legacy-only and legacy+POS must reproduce the two frozen numeric genomes. Frozen random CNN shares initialization, input representation and parameter count with learned CNN but receives no CNN parameter updates. Learned CNN alone versus with POS separates auxiliary information effects. Primary vocabulary and ordinary shuffle/dropout RNG remain fixed; byte initialization uses a separate seed stream.",
+  "resource_scope":"CNN adds 2448 matrix coefficients and 16 biases at dimensions 16. Shapes/scales/payload and work are explicitly checked; no page/genome limit increase. Word contexts now also contain per-token CNN rows, changing normalization/frequency effects versus legacy. CNN cases use prediction chunks of 32 versus 128 for legacy, so process latency is not directly comparable. Training has a predeclared 30-minute child timeout, unchanged bounded epochs/data/receipt/work/page/genome limits. RSS and energy unknown.",
+  "selection":"Same consumed development exact frame count, then deployed matrix coefficient count, then index. Report all five cases, including failures. Do not inspect reserved-worker or original-test language. No metric in this study replaces any M1 gate.",
+  "method_source":"https://aclanthology.org/P16-1101/",
+  "scope":"Established convolutional representation adapted to bytes, no pretrained external network, keyword-specific parser, dictionary substitution or tool authority. Auxiliary labels exist only during training. Additional data/computation are not free or independent new experiences. No M1/M2 promotion inferred.",
+  "promotion":false,
+  "m1_complete":false
+}

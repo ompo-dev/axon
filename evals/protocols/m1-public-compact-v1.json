@@ -1,0 +1,27 @@
+{
+  "schema":"axon-public-grammar-protocol/v1",
+  "learner":"compact-sequence-v1",
+  "source":"MASSIVE 1.1 pt-PT",
+  "source_sha256":"af89ce740b98e8fe73a0fb3ba69a296837910f037e954b87409ef41d467d3da0",
+  "previous_predictions":".axon-memory/m1-public-grammar-v3/policy-1-predictions.json",
+  "previous_sequence_predictions":".axon-memory/m1-public-sequence-v5/policy-2-predictions.json",
+  "train":"8526 original train examples except every reserved localization worker; gold intent/BIO only during training",
+  "development":"1504 previously consumed dev examples, no reserved workers; adaptive engineering, not fresh audit",
+  "reservation":"Original test and every reserved worker remain unused until all development gates justify freezing a candidate",
+  "policies":[
+    {"seed":47,"buckets":8192,"epochs":6,"weights":20000,"intent_weights":10000,"minimum_margin":1},
+    {"seed":19374611,"buckets":16384,"epochs":10,"weights":24000,"intent_weights":12000,"minimum_margin":1},
+    {"seed":47,"buckets":8192,"epochs":6,"weights":52000,"intent_weights":24000,"minimum_margin":1},
+    {"seed":19374611,"buckets":8192,"epochs":10,"weights":78000,"intent_weights":30000,"minimum_margin":1},
+    {"seed":47,"buckets":16384,"epochs":6,"weights":64000,"intent_weights":24000,"minimum_margin":1},
+    {"seed":19374611,"buckets":16384,"epochs":10,"weights":64000,"intent_weights":30000,"minimum_margin":1},
+    {"seed":47,"buckets":4096,"epochs":10,"weights":78000,"intent_weights":30000,"minimum_margin":1},
+    {"seed":47,"buckets":8192,"epochs":16,"weights":78000,"intent_weights":35000,"minimum_margin":1}
+  ],
+  "algorithm":"Same quantized averaged perceptron and greedy decoder as sequence v5; lossless CSR storage with new module tag/codec. No legacy reinterpretation. Same 196608-byte page and 262144-byte full-genome/residency caps; more retained learned weights, not a raised memory limit.",
+  "change_hypothesis":"Sparse row storage removes per-weight repeated keys/hex overhead; preserve exact scores at equal weights, then test whether less pruning improves acquisition and generalization. First two policies are same-weight controls.",
+  "selection":"Exact complete dev structures, then fewer retained nonzero weights, then policy order",
+  "metrics":"Exact intent and every ordered role/value; novelty strata, errors and abstentions always counted. No excluded weak families.",
+  "completion_contract":"evals/protocols/m1-completion-v1.json; every gate unchanged and required before M1 or M2",
+  "scope":"Known CSR representation and empirical supervised learner, not novel AGI or autonomous evolutionary generations. Public corpus teaches label meanings. Unknown process RSS/energy are unavailable. No effect execution or LLM teacher."
+}

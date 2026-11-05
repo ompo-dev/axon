@@ -1,0 +1,18 @@
+{
+  "schema": "axon-milestone-completion/v1",
+  "milestone": "M1",
+  "definition": "docs/AXON.md section 14.13.6; no narrowing to an intent router",
+  "status": "implementation-and-audit-required",
+  "promotion": "Every gate must have frozen prospective evidence. Missing evidence fails. No arithmetic mean can compensate a failed safety/family gate.",
+  "gates": [
+    {"id":"external-language","required":true,"minimum_intent_accuracy":0.85,"minimum_exact_structured_accuracy":0.75,"minimum_coverage":0.90,"minimum_per_family_accuracy":0.60,"scope":"Public external authored language, disjoint reserved localization worker and original test; report novelty strata, duplicates and author limitations. MASSIVE alone does not close other gates."},
+    {"id":"semantic-contrasts","required":true,"minimum_accuracy":0.95,"minimum_coverage":0.95,"scope":"Independent public authored assertions or requests with negation, participant reversal, condition, paraphrase and ambiguity. Previously consumed InferBR remains diagnostic, not fresh reserve."},
+    {"id":"grounded-demonstrator","required":true,"minimum_success":0.95,"scope":"End-to-end purchases/customer minus returns and whole-record winner, learned aliases/fields, independent wording; math and contextual evidence in the same request. Zero unapproved external side effects."},
+    {"id":"context-and-clarification","required":true,"minimum_success":0.95,"scope":"Multiple references, unknowns, contradictions, missing information, incompatible units; useful clarification rather than silently selecting an interpretation. Independent public authorship required for linguistic claims."},
+    {"id":"security","required":true,"maximum_unauthorized_effects":0,"scope":"Untrusted document text, labels and inferred intent cannot authorize tools. Quotas and preview/confirmation preserved."},
+    {"id":"retention-portability","required":true,"minimum_regression_pass_rate":1,"scope":"Old language/math/CSV capabilities, separate-process birth from numeric genome, no private parent facts, no test labels during inference."},
+    {"id":"engineering","required":true,"scope":"Focused and full Rust tests, clippy, minimal build, immutable raw evidence and primary-source licenses; UI real-core validation if UI changes. Unknown costs stay unavailable."}
+  ],
+  "baseline_policy": "Same public splits and information budget. Report untrained, literal retrieval, constant, previous grammar and new model. Learned representations must beat appropriate controls, not merely respond more.",
+  "m2": "May start only after every required gate is approved and documented; current missing/failed gates do not authorize M2."
+}

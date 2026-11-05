@@ -5,3 +5,11 @@
 .env.*
 *.log
 .axon-artifacts/
+.axon-memory/
+.ecc/
+/ui/node_modules/
+/ui/dist/
+/ui/test-results/
+/src/graphify-out/
+/evals/fixtures/*.zip
+/evals/fixtures/**/*.zip

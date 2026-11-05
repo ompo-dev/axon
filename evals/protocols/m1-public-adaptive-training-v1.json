@@ -1,0 +1,26 @@
+{
+  "schema":"axon-public-adaptive-training/v1",
+  "source":"MASSIVE 1.1 pt-PT, allowed train/development only",
+  "source_sha256":"af89ce740b98e8fe73a0fb3ba69a296837910f037e954b87409ef41d467d3da0",
+  "learner":"lexical-encoder-v1",
+  "training_timeout_ms":1800000,
+  "policies":[
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true,"mean_token_loss":true},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.003,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true,"mean_token_loss":true,"minibatch":32},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.003,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true,"minibatch":32},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.01,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true,"mean_token_loss":true,"minibatch":32},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.01,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true,"minibatch":32}
+  ],
+  "control_number_sha256":"824abdd1360511a06060e57aafc3e6529697120b9075efdf1318e16ce01b5c17",
+  "expected_numbers":{"0":"824abdd1360511a06060e57aafc3e6529697120b9075efdf1318e16ce01b5c17","1":"dc6777c3b27962d8526d831a3ef06bb1b3258d071a7742c2e6f6c3b6a95f3168"},
+  "representation":"Exactly the existing AXSQ0009 region encoder, 86272 deployed matrix coefficients. No new inference opcode, pretraining, auxiliary data, optimizer state or memory facts in the genome. Batch Adam is train-only; no PyTorch dependency was installed or used.",
+  "training":"Accumulate gradients at unchanged parameters for 32 sentences; divide by actual sentence count including final partial batch, clip full global averaged gradient norm to 1, then dense Adam beta1=.9 beta2=.999 epsilon=1e-8 with bias correction. No weight decay. Same per-sentence frequency balance and inverted input dropout. Rate linearly decays to 10% across the fixed 32 epochs. Mean-token objective gives total BIO weight one per sentence; sum-token objective gives one per word. Output, mixing and lexical vectors update together. Adam moments use f32, corrections use f64; parameters bounded as before. SGD arithmetic must remain byte-identical in controls0/1.",
+  "controls":"Six fixed fits before new scores: online SGD sum/mean and two Adam rates crossed with sum/mean. Paired initial weights/shuffle/dropout seed shared; later weights differ as intended. This changes optimizer AND batch update schedule, not proof that Adam alone caused any effect. No recurrent/byte/auxiliary combination supported by this initial opt-in trainer.",
+  "preflight":"Finite differences of every coordinate of a tiny full input/mixing/output/bias network; sum of two half-gradients at unchanged parameters. Scalar two-step Adam reference, global clip, cleared batch, rejected invalid gradients without parameter mutation, deterministic numeric roundtrip and new copied value. Not independent language proof.",
+  "selection":"Consumed-development exact count, then deployed matrix coefficient count, then index. All results and failures retained. Development is adaptive across earlier studies, never a new reserve; reserved workers and original test untouched.",
+  "scope":"No expansion of page/genome/input/work/receipt quotas. Training workspace has three f32 arrays (gradient and two moments) per coefficient, bounded independently at 500000 coefficients; these buffers are not inference residency. No claim of exponential learning, AGI, language comprehension, measured physical efficiency or M1 completion. All seven M1 gates remain mandatory.",
+  "method_source":"https://arxiv.org/abs/1412.6980",
+  "promotion":false,
+  "m1_complete":false
+}

@@ -1,7 +1,8 @@
 use std::time::{SystemTime, UNIX_EPOCH};
 
 use axon_uic::{
-    ArtifactOutcome, ArtifactStatus, ArtifactStore, AxonTask, ExactAverage, FoldSpec, solve_task,
+    ArtifactOutcome, ArtifactStatus, ArtifactStore, AxonTask, ExactAverage,
+    ExactPopulationVariance, FoldSpec, solve_task,
 };
 
 fn temporary_artifact_root(label: &str) -> std::path::PathBuf {
@@ -97,6 +98,58 @@ fn solver_executes_a_persisted_average_artifact_with_exact_output() {
 }
 
 #[test]
+fn solver_persists_and_executes_a_derived_minimum_artifact() {
+    let root = temporary_artifact_root("minimum");
+    let store = ArtifactStore::open(&root);
+    let task = AxonTask::parse(
+        "task minimum_stream {\n  data numbers: Vec<u64> = [9, 4, 4, 12]\n  goal derive IncrementalArtifact<MinU64>\n}\n",
+    )
+    .unwrap();
+
+    let first = solve_task(&store, &task).unwrap();
+    let second = solve_task(&store, &task).unwrap();
+
+    assert_eq!(task.goal(), FoldSpec::MinU64);
+    assert_eq!(first.outcome(), &ArtifactOutcome::ExactMinimum(4));
+    assert_eq!(second.artifact_status(), ArtifactStatus::Reused);
+
+    let empty = AxonTask::parse(
+        "task empty_minimum {\n  data numbers: Vec<u64> = []\n  goal derive IncrementalArtifact<MinU64>\n}\n",
+    )
+    .unwrap();
+    assert!(solve_task(&store, &empty).is_err());
+    std::fs::remove_dir_all(root).unwrap();
+}
+
+#[test]
+fn solver_persists_and_executes_exact_population_variance() {
+    let root = temporary_artifact_root("population-variance");
+    let store = ArtifactStore::open(&root);
+    let task = AxonTask::parse(
+        "task variance_stream {\n  data numbers: Vec<u64> = [1, 2, 3]\n  goal derive IncrementalArtifact<PopulationVarianceExactU64>\n}\n",
+    )
+    .unwrap();
+
+    let first = solve_task(&store, &task).unwrap();
+    let second = solve_task(&store, &task).unwrap();
+
+    assert_eq!(task.goal(), FoldSpec::PopulationVarianceExactU64);
+    assert_eq!(
+        first.outcome(),
+        &ArtifactOutcome::ExactPopulationVariance(ExactPopulationVariance::new(6, 9).unwrap())
+    );
+    assert_eq!(second.artifact_status(), ArtifactStatus::Reused);
+
+    let overflowing = AxonTask::parse(&format!(
+        "task variance_overflow {{\n  data numbers: Vec<u64> = [{0}, {0}]\n  goal derive IncrementalArtifact<PopulationVarianceExactU64>\n}}\n",
+        u64::MAX
+    ))
+    .unwrap();
+    assert!(solve_task(&store, &overflowing).is_err());
+    std::fs::remove_dir_all(root).unwrap();
+}
+
+#[test]
 fn axon_solve_cli_persists_then_reuses_a_typed_artifact() {
     let root = temporary_artifact_root("cli");
     std::fs::create_dir_all(&root).unwrap();
@@ -131,5 +184,55 @@ fn axon_solve_cli_persists_then_reuses_a_typed_artifact() {
             .unwrap()
             .contains("artifact=reused\nsemantic_hash=")
     );
+    std::fs::remove_dir_all(root).unwrap();
+}
+
+#[test]
+fn axon_solve_cli_executes_minimum_through_the_persisted_artifact() {
+    let root = temporary_artifact_root("cli-minimum");
+    std::fs::create_dir_all(&root).unwrap();
+    let task_path = root.join("minimum.axon");
+    let artifact_root = root.join("artifacts");
+    std::fs::write(
+        &task_path,
+        "task minimum_cli {\n  data numbers: Vec<u64> = [12, 7, 9, 7]\n  goal derive IncrementalArtifact<MinU64>\n}\n",
+    )
+    .unwrap();
+
+    let output = std::process::Command::new(env!("CARGO_BIN_EXE_axon"))
+        .args(["solve", task_path.to_str().unwrap(), "--artifact-dir"])
+        .arg(&artifact_root)
+        .output()
+        .unwrap();
+
+    assert!(output.status.success());
+    let stdout = String::from_utf8(output.stdout).unwrap();
+    assert!(stdout.contains("artifact=created"));
+    assert!(stdout.contains("result=exact_minimum=7"));
+    std::fs::remove_dir_all(root).unwrap();
+}
+
+#[test]
+fn axon_solve_cli_executes_exact_population_variance() {
+    let root = temporary_artifact_root("cli-population-variance");
+    std::fs::create_dir_all(&root).unwrap();
+    let task_path = root.join("variance.axon");
+    let artifact_root = root.join("artifacts");
+    std::fs::write(
+        &task_path,
+        "task variance_cli {\n  data numbers: Vec<u64> = [1, 2, 3]\n  goal derive IncrementalArtifact<PopulationVarianceExactU64>\n}\n",
+    )
+    .unwrap();
+
+    let output = std::process::Command::new(env!("CARGO_BIN_EXE_axon"))
+        .args(["solve", task_path.to_str().unwrap(), "--artifact-dir"])
+        .arg(&artifact_root)
+        .output()
+        .unwrap();
+
+    assert!(output.status.success());
+    let stdout = String::from_utf8(output.stdout).unwrap();
+    assert!(stdout.contains("artifact=created"));
+    assert!(stdout.contains("result=exact_population_variance=6/9"));
     std::fs::remove_dir_all(root).unwrap();
 }

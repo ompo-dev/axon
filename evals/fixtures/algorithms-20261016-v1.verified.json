@@ -1,0 +1,9 @@
+{
+  "verified_utc": "2026-10-16T03:27:05.4523303Z",
+  "files": 3003,
+  "uncompressed_bytes": 359950239,
+  "zip_bytes": 17419368,
+  "sha256": "F0608878750133E157139B19D1DBF9BF9A0647BEC7C3CA682FD58F1210CEFBA1",
+  "all_entry_hashes_verified": true,
+  "note": "Original creation receipt has null uncompressed_bytes; this verified receipt supplies the measured total without modifying that receipt."
+}

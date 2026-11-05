@@ -1,6 +1,6 @@
 use std::cmp::Ordering;
 
-const FEATURE_COUNT: usize = 8;
+const FEATURE_COUNT: usize = 9;
 const LEARNING_RATE: i32 = 4;
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
@@ -52,6 +52,7 @@ pub struct ProblemFeatures {
     invertible: bool,
     shape_preserving_replace: bool,
     nested_aggregate: bool,
+    requires_second_moment: bool,
     requires_order: bool,
     numeric_exact: bool,
     numeric_stability_sensitive: bool,
@@ -64,6 +65,7 @@ impl ProblemFeatures {
             invertible: true,
             shape_preserving_replace: true,
             nested_aggregate: false,
+            requires_second_moment: false,
             requires_order: false,
             numeric_exact: true,
             numeric_stability_sensitive: false,
@@ -76,6 +78,7 @@ impl ProblemFeatures {
             invertible: true,
             shape_preserving_replace: true,
             nested_aggregate: true,
+            requires_second_moment: false,
             requires_order: false,
             numeric_exact: true,
             numeric_stability_sensitive: false,
@@ -88,8 +91,9 @@ impl ProblemFeatures {
             invertible: true,
             shape_preserving_replace: true,
             nested_aggregate: true,
+            requires_second_moment: true,
             requires_order: false,
-            numeric_exact: false,
+            numeric_exact: true,
             numeric_stability_sensitive: true,
         }
     }
@@ -100,6 +104,7 @@ impl ProblemFeatures {
             invertible: false,
             shape_preserving_replace: true,
             nested_aggregate: false,
+            requires_second_moment: false,
             requires_order: true,
             numeric_exact: true,
             numeric_stability_sensitive: false,
@@ -109,15 +114,20 @@ impl ProblemFeatures {
     const fn vector(self) -> [i32; FEATURE_COUNT] {
         [
             1,
-            self.fold as i32,
-            self.invertible as i32,
-            self.shape_preserving_replace as i32,
-            self.nested_aggregate as i32,
-            self.requires_order as i32,
-            self.numeric_stability_sensitive as i32,
-            self.numeric_exact as i32,
+            signed_feature(self.fold),
+            signed_feature(self.invertible),
+            signed_feature(self.shape_preserving_replace),
+            signed_feature(self.nested_aggregate),
+            signed_feature(self.requires_second_moment),
+            signed_feature(self.requires_order),
+            signed_feature(self.numeric_stability_sensitive),
+            signed_feature(self.numeric_exact),
         ]
     }
+}
+
+const fn signed_feature(value: bool) -> i32 {
+    if value { 1 } else { -1 }
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
@@ -299,9 +309,9 @@ pub fn default_learning_curriculum() -> Vec<LearningProblem> {
             CandidateKind::SumCountAverage,
         ),
         LearningProblem::new(
-            "variance/stable/replace",
+            "variance/population-exact-u64/replace",
             ProblemFeatures::variance_replace(),
-            CandidateKind::VarianceWelford,
+            CandidateKind::VarianceMoments,
         ),
         LearningProblem::new(
             "min/u64/replace",
@@ -376,12 +386,12 @@ mod tests {
     fn blank_prior_starts_with_deterministic_search_order() {
         let prior = StructurePrior::new();
         let problem = LearningProblem::new(
-            "variance/stable/replace",
+            "variance/population-exact-u64/replace",
             ProblemFeatures::variance_replace(),
-            CandidateKind::VarianceWelford,
+            CandidateKind::VarianceMoments,
         );
 
-        assert_eq!(prior.attempts_for(problem), 5);
+        assert_eq!(prior.attempts_for(problem), 4);
     }
 
     #[test]

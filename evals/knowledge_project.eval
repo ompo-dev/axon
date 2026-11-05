@@ -1,0 +1,26 @@
+# query<TAB>expected source suffix; use - when the correct behavior is abstention
+o que o AXON pretende ser e qual seu ciclo operacional	docs/VISION.md
+por que linguagem natural nao deve ser o nucleo inteiro do AXON	docs/VISION.md
+quando a ultima ocorrencia do minimo desaparece e exige reconstrucao	docs/DELTAFORGE_MIN_2026-09-22.md
+qual estado auxiliar guarda minimo multiplicidade e tamanho da fonte	docs/DELTAFORGE_MIN_2026-09-22.md|docs/DELTAFORGE.md
+como a variancia populacional exata evita arredondamento e recusa overflow	docs/DELTAFORGE_VARIANCE_2026-09-22.md
+quais tres momentos aritmeticos mantem a variancia exata	docs/DELTAFORGE_VARIANCE_2026-09-22.md
+como a foundry trata XOR e paridade de tres fatores	docs/COMPOSITIONAL_FOUNDRY_2026-09-22.md|docs/SPECIALIST_FOUNDRY_2026-09-22.md
+como confianca abstencao Brier e ECE sao auditados	docs/SPECIALIST_FOUNDRY_2026-09-22.md|docs/COMPOSITIONAL_FOUNDRY_2026-09-22.md
+o que acontece com Meta JIT quando muda contexto de hardware	docs/STRATEGY_EVIDENCE.md|src/lib.rs
+quais fases synthesis materialization verification execution entram no benchmark	docs/BENCH_CONTRACT.md
+como o journal recupera cauda truncada checksum e reabertura	docs/LIVE_LEARNING_2026-09-13.md|docs/ROBUSTNESS_2026-09-13.md
+por que eventos vazios nao ensinam custo de trabalho real	docs/ONLINE_COSTS_2026-09-22.md
+como Demand Delta calcula a intersecao entre needed e changed	docs/DELTA_ALGEBRA.md|docs/ARCHITECTURE.md|src/structure.rs|README.md
+como morfologia protege a base e exige contrato semantico	docs/ARCHITECTURE.md|README.md
+quais capacidades o AXON realmente executa hoje	README.md|docs/VISION.md
+como tarefas tipadas criam e reutilizam artifacts exatos	docs/DELTAFORGE_VARIANCE_2026-09-22.md|docs/DELTAFORGE_MIN_2026-09-22.md|docs/DELTAFORGE.md|README.md
+quais testes cobrem corrupcao e todos os truncamentos	docs/ROBUSTNESS_2026-09-13.md|docs/COMPOSITIONAL_FOUNDRY_2026-09-22.md|docs/SPECIALIST_FOUNDRY_2026-09-22.md
+como historias longas usam um oraculo independente	docs/ROBUSTNESS_2026-09-13.md
+por que uma realizacao fisica nao deve ser promovida universalmente	docs/DELTAFORGE_MIN_2026-09-22.md|docs/RESULTS.md
+receita de fermentacao natural com farinha de centeio	-
+fotossintese de orquideas marcianas com clorofila azul	-
+legislacao tributaria brasileira para importacao de motocicletas	-
+tratamento veterinario para insuficiencia renal de felinos	-
+previsao meteorologica de Toquio para o proximo domingo	-
+partitura barroca para violoncelo e cravo em re menor	-

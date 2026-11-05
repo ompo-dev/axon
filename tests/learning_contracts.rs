@@ -7,9 +7,9 @@ use axon_uic::{
 fn learning_moves_repeated_structure_to_the_front() {
     let mut prior = StructurePrior::new();
     let variance = LearningProblem::new(
-        "variance/stable/replace",
+        "variance/population-exact-u64/replace",
         ProblemFeatures::variance_replace(),
-        CandidateKind::VarianceWelford,
+        CandidateKind::VarianceMoments,
     );
 
     assert!(prior.attempts_for(variance) > 1);
@@ -19,7 +19,7 @@ fn learning_moves_repeated_structure_to_the_front() {
 
     assert_eq!(
         prior.rank(variance.features())[0],
-        CandidateKind::VarianceWelford
+        CandidateKind::VarianceMoments
     );
     assert_eq!(prior.attempts_for(variance), 1);
 }

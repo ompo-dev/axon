@@ -1,23 +1,80 @@
 //! AXON-UIC: small, executable primitives for certified adaptive cognition.
 
 pub mod artifact_store;
+pub mod behavior;
+mod behavior_cli;
+pub mod behavior_lab;
 pub mod benchmark;
 pub mod capability;
+#[cfg(feature = "curriculum")]
+pub mod cognitive_cycle;
+#[cfg(feature = "text-workflows")]
+pub mod casework;
 pub mod change;
 pub mod cli;
+#[cfg(feature = "text-workflows")]
+pub mod constructive_lab;
+pub mod cumulative;
+#[cfg(feature = "text-workflows")]
+pub mod cumulative_cli;
+#[cfg(feature = "curriculum")]
+pub mod curriculum;
+#[cfg(feature = "curriculum")]
+mod curriculum_integration;
 pub mod delta;
 pub mod delta_forge;
+pub mod demand;
+#[cfg(feature = "text-workflows")]
+mod demand_cli;
+pub mod episodic;
+mod episodic_cli;
+pub mod experience;
+pub mod factor;
+mod factor_cli;
+pub mod factor_lab;
+mod genome_cli;
+pub mod grounded_language;
+pub mod knowledge;
+#[cfg(feature = "text-workflows")]
+mod language_cli;
 pub mod learning;
+pub mod lexicon;
 pub mod live;
 pub mod live_store;
 pub mod morphology;
+pub mod numeric;
+mod numeric_cli;
+pub mod nursery;
+#[cfg(feature = "text-workflows")]
+pub mod nursery_lab;
 pub mod online_policy;
+pub mod reactive;
 pub mod refinement;
 pub mod runtime;
+pub mod semantic;
+#[cfg(feature = "text-workflows")]
+pub mod semantic_cli;
+#[cfg(feature = "text-workflows")]
+pub mod semantic_lab;
 pub mod solver;
+pub mod specialist;
 pub mod strategy;
+#[cfg(feature = "curriculum")]
+pub mod structural;
+#[cfg(feature = "curriculum")]
+mod structural_lab;
 pub mod structure;
 pub mod task;
+pub mod telemetry;
+#[cfg(feature = "text-workflows")]
+pub mod text_cli;
+pub mod text_forge;
+pub mod text_skill;
+pub mod transfer;
+mod transfer_cli;
+pub mod transfer_lab;
+pub mod world;
+mod world_cli;
 
 pub use artifact_store::{ArtifactStatus, ArtifactStore, ArtifactStoreError, InstalledArtifact};
 
@@ -26,6 +83,8 @@ pub use benchmark::{
     BreakEven, LiveBenchContract,
 };
 pub use capability::{Authority, Capability, CapabilityGate, Effect, Feasibility, GateFailure};
+#[cfg(feature = "curriculum")]
+pub use cognitive_cycle::{CognitiveCycle, CognitiveCycleError, CognitiveReceipt, ReplayReceipt};
 pub use change::{
     ChangeError, ChangeStructure, IncrementalOp, ModularU64, Replace, ReplaceDelta, SumFold,
     VectorU64,
@@ -36,12 +95,26 @@ pub use delta::{
     coalesce_adjacent_last_writes,
 };
 pub use delta_forge::{
-    AlgebraicClass, ArithmeticSemantics, AverageCache, CertificateStatus, ChangeSemantics,
-    DeltaCertificate, DeltaForge, DerivedArtifact, DerivedAveragePlan, DerivedSumPlan,
-    ExactAverage, FoldSpec, ForgeError, KERNEL_SEMANTICS_VERSION, MaintenanceState,
-    PhysicalBackend, PhysicalEvidence, PhysicalRealization, RuntimeGuardError, RuntimeGuards,
-    SEMANTIC_ARTIFACT_VERSION, SemanticArtifact, SemanticArtifactError, SemanticArtifactHash,
-    UpdateRule,
+    AlgebraicClass, ArithmeticSemantics, AverageCache, CandidateAttempt, CandidateDecision,
+    CertificateStatus, ChangeSemantics, DeltaCertificate, DeltaForge, DerivedArtifact,
+    DerivedAveragePlan, DerivedMinimumPlan, DerivedSumPlan, DerivedVariancePlan, ExactAverage,
+    ExactPopulationVariance, FoldSpec, ForgeError, KERNEL_SEMANTICS_VERSION, MaintenanceState,
+    MinimumCache, MinimumUpdate, PhysicalBackend, PhysicalEvidence, PhysicalRealization,
+    RebuildPolicy, RuntimeGuardError, RuntimeGuards, SEMANTIC_ARTIFACT_VERSION, SemanticArtifact,
+    SemanticArtifactError, SemanticArtifactHash, SynthesisBudget, SynthesisTrace, UpdateRule,
+    VarianceCache,
+};
+pub use episodic::{
+    ActionSummary, BeliefResult, BeliefStatus, Episode, EpisodeData, EpisodeError, EpisodeLimits,
+    EpisodeReceipt, EpisodeRecovery, EpisodeStamp, EpisodeStore, EpisodeValue, FactEvidence,
+    FactKey,
+};
+pub use experience::{ExperiencedSolveError, solve_task_with_experience};
+pub use knowledge::{
+    EvidenceBundle, EvidenceLink, EvidenceLinkKind, EvidencePath, EvidenceResult,
+    EvidenceSourceRole, InvestigationResult, KnowledgeError, KnowledgeFeedbackLabel,
+    KnowledgeFeedbackReport, KnowledgeLimits, KnowledgeStats, KnowledgeStore, LearnReport,
+    RecallHit, RecallResult, RecallStatus, SearchWork,
 };
 pub use learning::{
     CandidateKind, LearningProblem, LearningSummary, LearningTrial, ProblemFeatures,
@@ -57,12 +130,22 @@ pub use refinement::{
 };
 pub use runtime::{CheckedExecution, ExecutionMode, OptimizationFailure, run_checked};
 pub use solver::{ArtifactOutcome, SolveError, SolveReceipt, solve_task};
+pub use specialist::{
+    Abstention, BinaryRule, CapsuleId, DecisionFailure, EmpiricalEvidence, EmpiricalMetrics,
+    Feedback, FeedbackError, FoundryConfig, FoundryError, FoundryOutcome, Observation, Prediction,
+    Probability, Promotion, RuleForm, SpecialistCapsule, train_specialist,
+};
 pub use strategy::{
     CostInterval, MeasurementContext, MetaJit, StrategyEvidence, StrategyKey, StrategyMetric,
     StrategyStatus, UpdateLayout, WorkloadSignature,
 };
 pub use structure::{AbstractionContract, ExecutionSlice, LiftCertificate};
 pub use task::{AxonTask, TaskError};
+pub use text_forge::{
+    TextBudget, TextExample, TextForgeError, TextPrediction, TextProgram, TextValuePrediction,
+    TextWitness,
+};
+pub use text_skill::{TextSkill, TextSkillError};
 
 #[cfg(test)]
 mod tests {

@@ -1,0 +1,23 @@
+{
+  "schema":"axon-public-grammar-protocol/v1",
+  "learner":"factorized-sequence-v1",
+  "source":"MASSIVE 1.1 pt-PT",
+  "source_sha256":"af89ce740b98e8fe73a0fb3ba69a296837910f037e954b87409ef41d467d3da0",
+  "previous_predictions":".axon-memory/m1-public-grammar-v3/policy-1-predictions.json",
+  "previous_sequence_predictions":".axon-memory/m1-public-feedback-v1/stage-4-development-predictions.json",
+  "previous_compact_predictions":".axon-memory/m1-public-factorized-v1/policy-4-predictions.json",
+  "policies":[
+    {"seed":19374611,"buckets":4096,"dimensions":32,"epochs":32,"learning_rate":0.03,"subwords":true,"tanh":true,"balanced":false,"minimum_margin":1},
+    {"seed":19374611,"buckets":4096,"dimensions":32,"epochs":32,"learning_rate":0.03,"subwords":true,"tanh":true,"balanced":true,"minimum_margin":1},
+    {"seed":19374611,"buckets":8192,"dimensions":16,"epochs":32,"learning_rate":0.1,"subwords":true,"tanh":true,"balanced":true,"minimum_margin":1},
+    {"seed":19374611,"buckets":8192,"dimensions":16,"epochs":32,"learning_rate":0.1,"subwords":true,"tanh":false,"balanced":true,"minimum_margin":1},
+    {"seed":19374611,"buckets":4096,"dimensions":32,"epochs":32,"learning_rate":0.03,"subwords":true,"tanh":false,"balanced":true,"minimum_margin":1},
+    {"seed":19374611,"buckets":4096,"dimensions":32,"epochs":32,"learning_rate":0.1,"subwords":true,"tanh":true,"balanced":true,"minimum_margin":1},
+    {"seed":19374611,"buckets":8192,"dimensions":16,"epochs":32,"learning_rate":0.03,"subwords":true,"tanh":false,"balanced":true,"minimum_margin":1},
+    {"seed":19374611,"buckets":4096,"dimensions":32,"epochs":32,"learning_rate":0.1,"subwords":true,"tanh":false,"balanced":true,"minimum_margin":1}
+  ],
+  "change_hypothesis":"Rare intent families remained weak in V1. Reweight each supervised utterance by sqrt(N/(number_of_intents*intent_frequency)), clipped to [0.25,4], calculated from allowed training only. Intent and tag updates receive that rate multiplier; inference does not see these frequencies. Explicit same nonlinear control first. No additional rows or future labels.",
+  "training":"Same 8526 allowed train rows, 1504 consumed dev. 256 additional training epochs. No pretrained weights, reserved localization workers or original test.",
+  "selection":"Exact complete dev structures, then fewer scalar coefficients, then policy order. Still report and require the frozen minimum per-family criterion; macro reweighting cannot compensate a failed global gate.",
+  "scope":"Adaptive engineering, not an independent reserve or M1 completion. Same page/genome/residency byte caps. No M2 or production promotion. Tanh flag stored explicitly, balancing is training-only. Unknown RSS/energy unavailable."
+}

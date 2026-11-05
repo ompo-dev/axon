@@ -1,0 +1,498 @@
+{
+  "version": 1,
+  "lessons": [
+    {
+      "id": "key-query",
+      "family": "stateful-query",
+      "examples": [
+        {
+          "input": [
+            [],
+            "a"
+          ],
+          "output": 0
+        },
+        {
+          "input": [
+            [
+              [
+                "a",
+                12
+              ],
+              [
+                "b",
+                -4
+              ]
+            ],
+            "a"
+          ],
+          "output": 12
+        },
+        {
+          "input": [
+            [
+              [
+                "c",
+                6
+              ],
+              [
+                "d",
+                7
+              ]
+            ],
+            "d"
+          ],
+          "output": 7
+        }
+      ],
+      "admission": [
+        {
+          "input": [
+            [
+              [
+                "x",
+                -9
+              ],
+              [
+                "y",
+                4
+              ]
+            ],
+            "x"
+          ],
+          "output": -9
+        },
+        {
+          "input": [
+            [
+              [
+                "a",
+                3
+              ],
+              [
+                "b",
+                8
+              ]
+            ],
+            "z"
+          ],
+          "output": 0
+        }
+      ]
+    },
+    {
+      "id": "without-key",
+      "family": "stateful-without",
+      "examples": [
+        {
+          "input": [
+            [],
+            "a"
+          ],
+          "output": []
+        },
+        {
+          "input": [
+            [
+              [
+                "a",
+                2
+              ],
+              [
+                "b",
+                3
+              ],
+              [
+                "c",
+                4
+              ]
+            ],
+            "b"
+          ],
+          "output": [
+            [
+              "a",
+              2
+            ],
+            [
+              "c",
+              4
+            ]
+          ]
+        },
+        {
+          "input": [
+            [
+              [
+                "z",
+                4
+              ],
+              [
+                "b",
+                -2
+              ],
+              [
+                "a",
+                7
+              ]
+            ],
+            "z"
+          ],
+          "output": [
+            [
+              "b",
+              -2
+            ],
+            [
+              "a",
+              7
+            ]
+          ]
+        }
+      ],
+      "admission": [
+        {
+          "input": [
+            [
+              [
+                "x",
+                5
+              ],
+              [
+                "y",
+                -3
+              ],
+              [
+                "z",
+                7
+              ]
+            ],
+            "z"
+          ],
+          "output": [
+            [
+              "x",
+              5
+            ],
+            [
+              "y",
+              -3
+            ]
+          ]
+        },
+        {
+          "input": [
+            [
+              [
+                "k",
+                4
+              ]
+            ],
+            "other"
+          ],
+          "output": [
+            [
+              "k",
+              4
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "project-record",
+      "family": "stateful-project",
+      "examples": [
+        {
+          "input": [
+            "a",
+            2,
+            3
+          ],
+          "output": [
+            "a",
+            6
+          ]
+        },
+        {
+          "input": [
+            "b",
+            -4,
+            5
+          ],
+          "output": [
+            "b",
+            -20
+          ]
+        },
+        {
+          "input": [
+            "c",
+            7,
+            -2
+          ],
+          "output": [
+            "c",
+            -14
+          ]
+        }
+      ],
+      "admission": [
+        {
+          "input": [
+            "new",
+            9,
+            8
+          ],
+          "output": [
+            "new",
+            72
+          ]
+        },
+        {
+          "input": [
+            "other",
+            0,
+            -3
+          ],
+          "output": [
+            "other",
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "state-update",
+      "family": "stateful-update",
+      "examples": [
+        {
+          "input": [
+            [],
+            [
+              "azul",
+              2
+            ]
+          ],
+          "output": [
+            [
+              "azul",
+              2
+            ]
+          ]
+        },
+        {
+          "input": [
+            [
+              [
+                "azul",
+                7
+              ],
+              [
+                "verde",
+                -2
+              ]
+            ],
+            [
+              "azul",
+              3
+            ]
+          ],
+          "output": [
+            [
+              "verde",
+              -2
+            ],
+            [
+              "azul",
+              10
+            ]
+          ]
+        },
+        {
+          "input": [
+            [
+              [
+                "amarelo",
+                5
+              ],
+              [
+                "verde",
+                9
+              ]
+            ],
+            [
+              "novo",
+              -4
+            ]
+          ],
+          "output": [
+            [
+              "amarelo",
+              5
+            ],
+            [
+              "verde",
+              9
+            ],
+            [
+              "novo",
+              -4
+            ]
+          ]
+        }
+      ],
+      "admission": [
+        {
+          "input": [
+            [
+              [
+                "u",
+                -7
+              ],
+              [
+                "v",
+                12
+              ]
+            ],
+            [
+              "u",
+              2
+            ]
+          ],
+          "output": [
+            [
+              "v",
+              12
+            ],
+            [
+              "u",
+              -5
+            ]
+          ]
+        },
+        {
+          "input": [
+            [
+              [
+                "u",
+                9
+              ]
+            ],
+            [
+              "u",
+              -9
+            ]
+          ],
+          "output": [
+            [
+              "u",
+              0
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "requests": [
+    {
+      "id": "new-query",
+      "family": "stateful-query",
+      "text": "aplique key-query em dados",
+      "bindings": {
+        "dados": [
+          [
+            [
+              "novo",
+              -7
+            ],
+            [
+              "outro",
+              5
+            ]
+          ],
+          "novo"
+        ]
+      },
+      "expected": -7
+    },
+    {
+      "id": "new-without",
+      "family": "stateful-without",
+      "text": "aplique without-key em dados",
+      "bindings": {
+        "dados": [
+          [
+            [
+              "novo",
+              -7
+            ],
+            [
+              "outro",
+              5
+            ]
+          ],
+          "novo"
+        ]
+      },
+      "expected": [
+        [
+          "outro",
+          5
+        ]
+      ]
+    },
+    {
+      "id": "new-project",
+      "family": "stateful-project",
+      "text": "aplique project-record em dados",
+      "bindings": {
+        "dados": [
+          "novo",
+          -8,
+          7
+        ]
+      },
+      "expected": [
+        "novo",
+        -56
+      ]
+    },
+    {
+      "id": "new-update",
+      "family": "stateful-update",
+      "text": "aplique state-update em dados",
+      "bindings": {
+        "dados": [
+          [
+            [
+              "novo",
+              8
+            ],
+            [
+              "outro",
+              3
+            ]
+          ],
+          [
+            "novo",
+            -2
+          ]
+        ]
+      },
+      "expected": [
+        [
+          "outro",
+          3
+        ],
+        [
+          "novo",
+          6
+        ]
+      ]
+    }
+  ],
+  "changes": [],
+  "policy_trials": 0,
+  "file_demo": null
+}

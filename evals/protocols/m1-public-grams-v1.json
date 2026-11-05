@@ -1,0 +1,16 @@
+{
+  "schema":"axon-public-grams/v1",
+  "source":"MASSIVE 1.1 pt-PT, allowed train/development; reserved workers and original test withheld",
+  "source_sha256":"af89ce740b98e8fe73a0fb3ba69a296837910f037e954b87409ef41d467d3da0",
+  "learner":"lexical-encoder-v1",
+  "training_timeout_ms":1800000,
+  "policies":[
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true,"split_heads":true},
+    {"seed":19374611,"vocabulary":4096,"characters":512,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true,"split_heads":true},
+    {"seed":19374611,"vocabulary":4096,"characters":1024,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true,"split_heads":true}
+  ],
+  "hypothesis":"A small hashed representation of adjacent word pairs and local three-word windows, trained jointly with existing character features, can improve intent and BIO span composition on unseen public language without adding an external model or labels at inference.",
+  "representation":"AXSQ0014 is emitted only for split-head lexical encoders with character buckets. It adds bounded start/end-aware bigram and trigram feature rows into the existing hashed character page; old codecs and old headers remain readable. The feature page is immutable during inference.",
+  "controls":"Policy 0 is the frozen split-head control. Policies 1 and 2 change only the character bucket count and activate AXSQ0014. All policies share seed, corpus, epochs, optimizer, dropout, regions and hidden width. Development selects the winner; reserved workers and original test remain untouched until a separate audit.",
+  "scope":"Diagnostic M1 experiment only. It cannot certify M1 or permit M2 unless every required gate is independently re-run under evals/protocols/m1-completion-v1.json."
+}

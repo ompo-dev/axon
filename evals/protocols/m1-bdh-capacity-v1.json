@@ -1,0 +1,18 @@
+{
+  "schema":"axon-bdh-capacity/v1",
+  "status":"prospective-diagnostic-after-synaptic-v1",
+  "source_assay":".axon-memory/m1-bdh-synaptic-v1",
+  "purpose":"Expose interference beyond the eight-item acquisition mechanism; no selected retries or capacity claims from a tiny codebook. Reuse all six fixed seed/dimension combinations and both writable rules, no slow fitting.",
+  "rules":["hebbian","delta"],
+  "keys":[8,16,32,64],
+  "episodes_per_size":8,
+  "classes":8,
+  "repetitions":4,
+  "noise":0.02,
+  "seed":20261029,
+  "native_limits":"Unchanged from m1-bdh-synaptic-v1; at most512 events per episode and8192 per file. No cap increase or reset inside a logical episode.",
+  "controls":"Identical balanced shuffled labels, keys, order and noise across rules. Latest-observation nearest-neighbor using supplied raw keys. Queries contain no labels. After four passes measure observed and perturbed recall, then one changed association and retention of all other keys.",
+  "acceptance":"Publish every result, reference parity, fixed state bytes at each geometry, unchanged hereditary bytes, and all failures. No score threshold promotes M1, M2 or production.",
+  "m1_complete":false,
+  "m2_permitted":false
+}

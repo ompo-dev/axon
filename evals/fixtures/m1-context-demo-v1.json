@@ -1,0 +1,16 @@
+{
+  "interfaces": {
+    "u": {"arity":2,"epoch":1,"probes":[[0,0],[1,1],[2,2],[3,8],[5,2],[-3,4],[7,-2],[0,9],[8,0],[4,11],[-5,-6],[9,3]]},
+    "v": {"arity":2,"epoch":1,"probes":[[0,0],[1,1],[2,2],[3,8],[5,2],[-3,4],[7,-2],[0,9],[8,0],[4,11],[-5,-6],[9,3]]}
+  },
+  "turns": [
+    {"id":"record-ana","text":"defina saldo de ana maria como 12 reais"},
+    {"id":"record-bruno","text":"defina saldo de bruno silva como 5 reais"},
+    {"id":"sum","text":"some saldo de ana maria com saldo de bruno silva"},
+    {"id":"focus","text":"considere saldo de ana maria"},
+    {"id":"double","text":"duplique o saldo dele"},
+    {"id":"correct","text":"defina saldo de ana maria como 20 reais"},
+    {"id":"updated-double","text":"duplique o saldo dele"},
+    {"id":"incompatible","text":"some saldo de ana maria com 2 quilos"}
+  ]
+}

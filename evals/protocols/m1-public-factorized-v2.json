@@ -1,0 +1,23 @@
+{
+  "schema":"axon-public-grammar-protocol/v1",
+  "learner":"factorized-sequence-v1",
+  "source":"MASSIVE 1.1 pt-PT",
+  "source_sha256":"af89ce740b98e8fe73a0fb3ba69a296837910f037e954b87409ef41d467d3da0",
+  "previous_predictions":".axon-memory/m1-public-grammar-v3/policy-1-predictions.json",
+  "previous_sequence_predictions":".axon-memory/m1-public-feedback-v1/stage-4-development-predictions.json",
+  "previous_compact_predictions":".axon-memory/m1-public-factorized-v1/policy-4-predictions.json",
+  "policies":[
+    {"seed":19374611,"buckets":4096,"dimensions":32,"epochs":32,"learning_rate":0.03,"subwords":true,"tanh":false,"minimum_margin":1},
+    {"seed":19374611,"buckets":8192,"dimensions":16,"epochs":32,"learning_rate":0.03,"subwords":true,"tanh":false,"minimum_margin":1},
+    {"seed":19374611,"buckets":8192,"dimensions":16,"epochs":32,"learning_rate":0.1,"subwords":true,"tanh":false,"minimum_margin":1},
+    {"seed":47,"buckets":8192,"dimensions":16,"epochs":32,"learning_rate":0.1,"subwords":false,"tanh":false,"minimum_margin":1},
+    {"seed":19374611,"buckets":4096,"dimensions":32,"epochs":32,"learning_rate":0.03,"subwords":true,"tanh":true,"minimum_margin":1},
+    {"seed":19374611,"buckets":4096,"dimensions":32,"epochs":32,"learning_rate":0.1,"subwords":true,"tanh":true,"minimum_margin":1},
+    {"seed":19374611,"buckets":8192,"dimensions":16,"epochs":32,"learning_rate":0.1,"subwords":true,"tanh":true,"minimum_margin":1},
+    {"seed":47,"buckets":8192,"dimensions":16,"epochs":32,"learning_rate":0.3,"subwords":false,"tanh":true,"minimum_margin":1}
+  ],
+  "change_hypothesis":"V1 sharing did not beat 860 previous complete structures. Isolate old 834 control, larger feature space at lower rank, and explicit tanh interactions with analytic gradient checked numerically. All page/genome/residency byte caps unchanged. New nonlinear payloads carry an explicit flag; missing flag keeps old linear behavior and bytes.",
+  "training":"Same 8526 allowed train rows, 1504 consumed dev. No external weights, reserved workers or original test. Account 256 training epochs, not independent temporal experience.",
+  "selection":"Exact complete dev structures, then fewer scalar coefficients, then policy order",
+  "scope":"Adaptive engineering, not a prospective reserve or novel AGI result. No M1 approval, M2 or production promotion. Scalar quantization is not product quantization. Milli-logit margins are not calibrated probabilities. Unknown RSS and energy remain unavailable."
+}

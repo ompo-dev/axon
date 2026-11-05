@@ -1,0 +1,23 @@
+{
+  "schema":"axon-public-math-programs/v1",
+  "source_protocol":"evals/protocols/m1-public-math-source-v1.json",
+  "source_train_sha256":"17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+  "partition":".axon-memory/m1-gsm8k-partition-v3/partition.json",
+  "partition_sha256":"9cb71d13c74b18d3942a49177fd577069f74e4ebf0bf64543c308773dd4fb705",
+  "parent":".axon-memory/m1-public-split-mixers-v1/policy-3/structural.axnum",
+  "parent_sha256":"97a7e3f0e8cc1a6f5b1822a655b4182a0b8af96438d0b427123ef17440d3dfd2",
+  "supervision":"Only 4429 allowed train answers may be interpreted for annotations. Typescript AST whitelist +,-,*,/ and decimal literals/parentheses, no eval/exec, no names/calls/powers. Match each literal to exactly one question quantity or previous expanded calculation; ambiguity, missing literals, implicit constants, rounding and inconsistent annotations refuse. Final annotation must agree with final scalar. Supervised operation traces, NOT autonomous discovery of their target formulas.",
+  "domain":{"question_bytes":4096,"tokens":64,"token_bytes":256,"inputs":4,"expanded_instructions":12,"annotation_steps":16,"max_abs_number":1000000000,"implicit_constants":[],"programs":32,"minimum_program_examples":3},
+  "numbers":"Whitespace tokens, optional dollar prefix, ordinary signed decimal, optional one terminal punctuation mark. No percent, grouped thousands, word numerals, scientific notation, dates or automatic unit conversion. Preserve raw question wording and selected spans. Conservative rejection is counted, not discarded at evaluation.",
+  "library":"Rank signatures only on allowed train counts, deterministic lexical tie-break, top32 with >=3 examples. Generate fixed 8 teaching and 8 admission numeric tuples per signature. Reuse NumericSkill search maxcost12/maxterms20000; export only admitted programs using CircuitDna. Generated tuples derive from annotated programs, not new independent linguistic supervision. Search failures stay recorded and their original problems remain unsupported.",
+  "policies":[
+    {"name":"full-question","numbers_only":false},
+    {"name":"question-free-control","numbers_only":true}
+  ],
+  "budget":{"seed":20261021,"vocabulary":1024,"characters":256,"dimensions":8,"epochs":16,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"hidden":32,"input_dropout":0.3,"relative_regions":true},
+  "evaluation":"All 1481 development questions, unsupported included, through independently born numeric genomes. Inference reads only id/text, no answer/equation/operation labels. Read development final scalar ONLY after predictions, not annotation traces. Reserved1562/research_only1/original test remain unopened. Existing old lexical module and structural page must be retained byte-for-byte in combined genome; no private experiences inherited.",
+  "controls":"Full text vs numbers-only with same learning budget; exact literal retrieval and most common training answer; answer scalar correctness is separate from program exactness, units, ambiguity or semantic certification. Report end-to-end correct/incorrect/refused over full denominator, program counts, training eligibility, active loads/work/costs and new process portability. No post-score retries silently replace failures.",
+  "admission":"This is a prospective development diagnostic, NOT new M1 approval. Target >=95% on full denominator is aspirational and any miss remains failed. All seven m1-completion-v1 gates remain obligatory; this study cannot replace the grounded demonstrator/semantic contrasts or justify M2.",
+  "m1_complete":false,
+  "m2_permitted":false
+}

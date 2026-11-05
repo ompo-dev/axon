@@ -1,0 +1,11 @@
+{
+  "schema": "axon-milestone-development/v1",
+  "milestone": "M1",
+  "prerequisite": "M0 validated within prospective-state-transfer-v2; frozen candidate retained",
+  "hypothesis": "Existing demonstration-induced structural rules can act as semantic fragments in bounded chart composition, allowing unseen unparenthesized requests without teaching each full sentence.",
+  "priors": ["existing structural rule induction", "explicit local fragment/meaning examples and independent admission", "integer/word tokenization", "typed invoke interface and numerical acquisition", "bounded chart search supplied by engineers"],
+  "limits": {"words":31,"meanings_per_span":16,"retained_term_nodes":32768,"default_work":250000,"maximum_work":1000000},
+  "development_acceptance": ["unseen recursive compositions execute correctly", "surface order and semantic argument order may differ", "negation and subtraction cannot be silently dropped", "multiple whole-request meanings refuse before environment queries", "unknown words and leftover input refuse", "budget overflow fails rather than truncating alternatives", "serialized rules preserve composition without parent examples", "existing M0 algorithms and agent contracts retained"],
+  "not_m1_completion": "Synthetic same-author fragment composition is development, not independent-authorship Portuguese understanding. M1 still requires the full canonical author/semantic-family reserve, units/context/contradiction/calibration, useful file workflow, matched controls and prospective evaluation. No M2 promotion.",
+  "failure_policy": "Keep failed tests/campaigns. Never discard uncertain alternatives to turn ambiguity into a correct answer. Candidate and future data must be frozen before claiming any new reserve."
+}

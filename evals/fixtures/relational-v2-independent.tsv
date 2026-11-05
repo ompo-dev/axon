@@ -1,0 +1,29 @@
+id	family	text	expected	refusal
+T01	text	Ines possui 57 bilhetes. Ines nao recebeu 13 bilhetes. Quantos bilhetes ficaram com Ines?	57	
+T02	text	Tereza tinha 46 vasos. Ela recebeu 7 vasos. Quantos vasos ela tem?	53	
+T03	text	Luca tinha 104 conchas. Luca gastou 19 conchas. Quantos conchas ficaram com Luca?	85	
+T04	text	Caio tinha 29 pratos. Mara possui 8 pratos. Quantos pratos Caio tem a mais que Mara?	21	
+T05	text	Yuri tinha 37 adesivos. Iris tinha 16 adesivos. Quantos adesivos Yuri e Iris tem juntos?	53	
+X01	mixed	Ines tinha 27 livros. Caio tinha 2 livros. Ines emprestou 8 livros para Caio. Ines recebeu 4 livros. Quantos livros ficaram com Ines?	23	
+X02	mixed	Ines tinha 27 livros. Caio tinha 2 livros. Ines emprestou 8 livros para Caio. Ines recebeu 4 livros. Caio devolveu 6 livros para Ines. Quantos livros ficaram com Ines?	29	
+X03	mixed	Teo tinha 130 fichas. Iris tinha 18 fichas. Teo emprestou 23 fichas para Iris. Iris gastou 7 fichas. Quantos fichas Teo e Iris tem juntos?	141	
+X04	mixed	Nora tinha 61 moedas. Nora gastou 17 moedas. Nora recebeu 9 moedas. Nora gastou 4 moedas. Quantos moedas ficaram com Nora?	49	
+X05	mixed	Alba tinha 14 pecas. Bento tinha 9 pecas. Bento devolveu 5 pecas para Alba. Quantos pecas Bento tem a mais que Alba?	-15	
+M01	math	Quanto custa comprar 19 unidades a 31 por unidade?	589	
+M02	math	Qual x satisfaz 9 vezes x mais 17 igual a 89?	8	
+M03	math	Qual a norma de 28 e 45?	53	
+M04	math	Quanto custa comprar 3,5 unidades a 12 por unidade?	42	
+M05	math	Qual x satisfaz -5 vezes x mais 7 igual a 27?	-4	
+N01	negative	Quantos livros ficaram com Ines?		missing
+N02	negative	Ines tinha 27 livros. Caio tinha 2 livros. Ines emprestou 8 livros para Caio. Ela recebeu 4 livros. Quantos livros ficaram com Ines?		ambiguous
+N03	negative	Ines tinha 27 livros. Quantos moedas ficaram com Ines?		missing
+N04	negative	Qual x satisfaz 0 vezes x mais 7 igual a 27?		domain
+N05	negative	Ines tinha 27 livros. Ines possui 31 livros. Quantos livros ficaram com Ines?		ambiguous
+N06	negative	Ines tinha 27 livros. Ines perdeu 8 livros. Quantos livros ficaram com Ines?		unknown
+N07	negative	Ines tinha 27 livros. Ines recebeu NaN livros. Quantos livros ficaram com Ines?		domain
+N08	negative	Ines tinha 27 livros. Caio tinha 2 livros. Ines emprestou 8 livros para Ines. Quantos livros ficaram com Ines?		ambiguous
+P01	natural-probe	Ines comecou com vinte e sete livros, deu oito a Caio e depois ganhou quatro. Qual ficou sendo seu saldo?	23	
+P02	natural-probe	Teo possuia 130 fichas e Iris, 18. Ele entregou 23 a ela, que gastou sete. Quantas fichas sobraram ao todo?	141	
+P03	natural-probe	Qual e o comprimento da diagonal de um retangulo com lados de 28 e 45 centimetros?	53	
+P04	natural-probe	Nove vezes um valor somado a dezessete e igual a oitenta e nove. Encontre esse valor.	8	
+P05	natural-probe	Calcule o preco de dezenove unidades quando cada uma sai por trinta e um reais.	589	

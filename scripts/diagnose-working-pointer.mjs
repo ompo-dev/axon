@@ -1,0 +1,25 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+import {sha} from './gsm8k-source.mjs';
+import {scalar} from './math-program-source.mjs';
+import {repairExamples} from './working-pointer-repair.mjs';
+
+const [prepared,run,out]=process.argv.slice(2);assert(out&&path.resolve(out).startsWith(path.resolve()+path.sep));await fs.mkdir(out);
+const write=(name,data)=>fs.writeFile(path.join(out,name),JSON.stringify(data,null,2),{flag:'wx'}),read=async file=>JSON.parse(await fs.readFile(file));
+const study=await read(path.join(run,'predictions-ready.json')),cohorts=await read(path.join(prepared,'cohorts.json')),source=await read(path.join(prepared,'freeze-before-labels.json')),protocol=await read(path.join(prepared,'source',source.protocol_file)),sources={};
+for(const file of [process.argv[1],'scripts/working-pointer-repair.mjs','scripts/working-pointer-source.mjs',path.join(prepared,'cohorts.json'),path.join(prepared,'repair-audit.json'),path.join(run,'predictions-ready.json'),protocol.repair_donor.file])sources[file]=sha(await fs.readFile(file));
+assert.equal(sources[protocol.repair_donor.file],protocol.repair_donor.sha256);const donor=await read(protocol.repair_donor.file),original=cohorts.matched;
+assert.deepEqual(donor.map(r=>r.id),original.map(e=>e.id));
+await write('freeze-before-analysis.json',{sources,scope:'Post-fit diagnostic on supplied train states and frozen predictions only. No fitting, new model calls or development labels. Bounds concern mandatory scalar anonymity, not full learned vocabulary aliasing or true language.'});
+// Reconstruct every retained feedback/practice pair, including deterministic cap/refusals.
+const expectedPractice=structuredClone(original),expectedRepair=structuredClone(original);let additions=0,duplicates=0,skipped=0;const refusals=[];
+for(const [i,e]of original.entries()){const r=repairExamples(e.full.source,donor[i]),seen=new Set(e.working.examples.map(x=>JSON.stringify(x)));refusals.push(...r.refusals.map(x=>({id:e.id,...x})));for(const pair of r.pairs){const key=JSON.stringify(pair.working);if(seen.has(key)){duplicates++;continue;}seen.add(key);if(additions>=protocol.repair_limit){skipped++;continue;}for(const page of ['working','blind']){expectedPractice[i][page].examples.push(e[page].examples[pair.teacher_index]);expectedRepair[i][page].examples.push(pair[page]);}additions++;}}
+assert.deepEqual(expectedPractice,cohorts.practice);assert.deepEqual(expectedRepair,cohorts.repair);const repair=await read(path.join(prepared,'repair-audit.json'));assert.equal(additions,repair.added);assert.equal(duplicates,repair.duplicates);assert.equal(skipped,repair.skipped);assert.deepEqual(refusals,repair.refusals);
+const results=[];
+for(const r of study.results){assert.equal(r.training.candidate_lexemes_retained,0);const rows=cohorts[r.policy.cohort],teacher=await read(path.join(run,`policy-${r.index}/teacher-predictions.json`)),groups=new Map(),strata={canonical:{total:0,correct:0},additional:{total:0,correct:0}};let index=0;
+  for(const e of rows)for(const [j,x]of e[r.policy.page].examples.entries()){const key=JSON.stringify([x.input.text.split(' ').map(w=>{try{scalar(w);return '<scalar-unk>';}catch{return w;}}),x.input.candidates]),g=groups.get(key)??{items:[],votes:new Map()};g.items.push({id:teacher[index].id,targets:x.targets});for(const t of x.targets){const selection=JSON.stringify(t);g.votes.set(selection,(g.votes.get(selection)??0)+1);}groups.set(key,g);const stratum=j<e.full.examples.length?strata.canonical:strata.additional;stratum.total++;stratum.correct+=Number(x.targets.some(t=>JSON.stringify(t)===JSON.stringify(teacher[index].prediction)));index++;}
+  let bound=0,contradictoryGroups=0;const contradictions=[];for(const [key,g]of groups){const best=Math.max(...g.votes.values());bound+=best;if(best<g.items.length){contradictoryGroups++;contradictions.push({input_sha256:sha(key),total:g.items.length,best_possible:best,items:g.items});}}
+  assert.equal(index,r.teacher.total);assert.equal(strata.canonical.correct+strata.additional.correct,r.teacher.correct);assert(r.teacher.correct<=bound);await write(`policy-${r.index}-contradictions.json`,contradictions);results.push({index:r.index,name:r.policy.name,strata,unique_scalar_masked_states:groups.size,contradictory_groups:contradictoryGroups,maximum_possible_supplied_teacher_correct:bound,total:index,minimum_unavoidable_supplied_teacher_errors:index-bound,scope:'Exact deterministic-input collision upper bound under required scalar omission. Other out-of-vocabulary aliases may lower it. Independent initialization/parameter differences and memorization/generalization are not isolated by this diagnostic.'});
+}
+const audit={schema:'axon-working-pointer-train-diagnostic/v1',results,repair_reconstructed_exactly:true,repair_added:additions,repair_duplicates:duplicates,repair_skipped:skipped,repair_refusals:refusals,new_fits:0,new_inferences:0,new_corpus_answers_read:0,m1_complete:false,m2_permitted:false};await write('audit.json',audit);console.log(JSON.stringify(audit));

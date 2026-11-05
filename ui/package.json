@@ -1,0 +1,41 @@
+{
+  "name": "axon-workspace",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "bun run build && bun --watch server.mjs",
+    "start": "bun server.mjs",
+    "build": "tsc --noEmit && vite build",
+    "check": "tsc --noEmit && prettier --check src vite.config.ts playwright.config.ts tests/workspace.spec.ts",
+    "format": "prettier --write src vite.config.ts playwright.config.ts tests/workspace.spec.ts",
+    "test": "bun test tests/server.test.mjs tests/laboratory.test.mjs tests/format.test.ts",
+    "test:core": "node --test tests/core.test.mjs",
+    "test:ui": "playwright test"
+  },
+  "dependencies": {
+    "csv-parse": "^7.0.3",
+    "lucide-react": "^0.468.0",
+    "motion": "^12.23.24",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.56.0",
+    "@tailwindcss/vite": "^4.1.0",
+    "@types/node": "^24.0.0",
+    "@types/pngjs": "^6.0.5",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "pngjs": "^7.0.0",
+    "prettier": "^3.9.10",
+    "tailwindcss": "^4.1.0",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.0"
+  },
+  "packageManager": "bun@1.4.2",
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "schema":"axon-averaging-reuse-control/v1",
+  "learner":"enhanced-sequence-v1",
+  "source":"MASSIVE 1.1 pt-PT",
+  "source_sha256":"af89ce740b98e8fe73a0fb3ba69a296837910f037e954b87409ef41d467d3da0",
+  "policies":[{"seed":19374611,"buckets":16384,"epochs":6,"weights":64000,"intent_weights":32000,"minimum_margin":1,"subwords":true,"shared_roles":false}],
+  "reference_run":".axon-memory/m1-public-enhanced-v1",
+  "reference_policy":7,
+  "selection":"Single unchanged old policy; compare full numeric genome bytes and all development prediction rows to frozen reference, not merely totals.",
+  "scope":"Compatibility control for extracting the existing averaging/quantization implementation for reuse. Same old parent number and data. No new accuracy, external reserve, promotion or M1 completion claim.",
+  "promotion":false,
+  "m1_complete":false
+}

@@ -1,0 +1,57 @@
+{
+  "request": {
+    "repository": "pathwaycom/bdh",
+    "revision": "2b0d7a45b058d4309c84a10e0768d541fe18bdc2",
+    "files": [
+      [
+        "LICENSE.md",
+        1072,
+        "0167e9c56a249efa2b15b9c0b96ee56a06127c83"
+      ],
+      [
+        "README.md",
+        6832,
+        "d9193f7d5b0780c0f83c5b322fff5d5e6acfa419"
+      ],
+      [
+        "bdh.py",
+        5051,
+        "4cfff79df97fa6faafb33bf20739a027edd8f360"
+      ],
+      [
+        "train.py",
+        3670,
+        "6b982d8746a4455eb71f86ee54ddd40c1793d7b0"
+      ]
+    ]
+  },
+  "directory": "C:\\Users\\maico\\OneDrive\\Documents\\GitHub\\axon\\evals\\fixtures\\bdh-reference-v1",
+  "sources": {
+    "LICENSE.md": {
+      "url": "https://raw.githubusercontent.com/pathwaycom/bdh/2b0d7a45b058d4309c84a10e0768d541fe18bdc2/LICENSE.md",
+      "bytes": 1072,
+      "git_blob_sha1": "0167e9c56a249efa2b15b9c0b96ee56a06127c83",
+      "sha256": "9af11fdc30e0677facc238c0efb905203339dd3910514cc1fc2a2f8e5173d6b9"
+    },
+    "README.md": {
+      "url": "https://raw.githubusercontent.com/pathwaycom/bdh/2b0d7a45b058d4309c84a10e0768d541fe18bdc2/README.md",
+      "bytes": 6832,
+      "git_blob_sha1": "d9193f7d5b0780c0f83c5b322fff5d5e6acfa419",
+      "sha256": "6b76d6f5e056917c970e03306a3975a74f4d3fdd82b374da19b6557b98838e13"
+    },
+    "bdh.py": {
+      "url": "https://raw.githubusercontent.com/pathwaycom/bdh/2b0d7a45b058d4309c84a10e0768d541fe18bdc2/bdh.py",
+      "bytes": 5051,
+      "git_blob_sha1": "4cfff79df97fa6faafb33bf20739a027edd8f360",
+      "sha256": "cfe24008f920965cc3c8236feff52c89ca794a31e52324acf9ddb4cd6fd50ac9"
+    },
+    "train.py": {
+      "url": "https://raw.githubusercontent.com/pathwaycom/bdh/2b0d7a45b058d4309c84a10e0768d541fe18bdc2/train.py",
+      "bytes": 3670,
+      "git_blob_sha1": "6b982d8746a4455eb71f86ee54ddd40c1793d7b0",
+      "sha256": "25059c567c99feb989a36174ad984ccaab6e3cb6bb72385667b3775207431534"
+    }
+  },
+  "license": "MIT; copyright2025 Pathway Technology, Inc.",
+  "scope": "Pinned public baseline inference/reference only. Not BDH-CQ or the private Sudoku model; no downloaded code executed or weights/training data downloaded."
+}

@@ -1,0 +1,20 @@
+{
+  "schema":"axon-math-actor-state/v1",
+  "source_study":".axon-memory/m1-math-actor-v1",
+  "base_protocol":"evals/protocols/m1-math-actor-v1.json",
+  "hypothesis":"Actor v1 teacher-frame fit693/2251 and intent1449/2251 show underfitting before autonomous rollout. The relative-region encoder pools current step among question words; no explicit state focus. Test moving ONLY the existing step token to the first position and reusing the existing local/bag sentence representation, which gives first token an undiluted group. No new semantic parser, operation order, arithmetic opcode or gold state in inference.",
+  "source":"Reuse frozen629 allowed-train episodes/2251 frames and the SAME four admitted primitive circuit bytes. No new source answers interpreted, training examples, labels, weights inherited or AST generation. Both full and question-free cases were eligible in v1. No cap increases, no truncation.",
+  "policies":[
+    {"name":"legacy-local","numbers_only":false,"layout":"legacy","relative_regions":false},
+    {"name":"focused-regional","numbers_only":false,"layout":"focused","relative_regions":true},
+    {"name":"focused-local","numbers_only":false,"layout":"focused","relative_regions":false},
+    {"name":"focused-local-question-free","numbers_only":true,"layout":"focused","relative_regions":false}
+  ],
+  "baseline":"Frozen v1 full regional24/1481 and numbers-only12/1481. Existing constant35/1481. Three full-text cells complete representation/layout factorial with old regional cell; one matched question-free control. Report every variant, no post-score replacement.",
+  "format":"Focused frame is axon-step-N axon-question <unchanged question words> axon-memory <unchanged past registers>. Move existing O-tagged marker only, preserve all copied operand tags/values. Distinct math-actor-focused-v1 module identity and explicit CLI prevent silently reinterpreting v1 seeds. Old math-actor-batch/pack must replay unchanged.",
+  "evaluation":"All1481 consumed development questions, own-result rollout and no correct intermediate injection. Reserved1562/research_only1/original test stay sealed. No development calculation annotations. Recount traces before gold final scalars. New source-only program-order statistics are not proof of a new correct mathematical algorithm.",
+  "budget":"Same seed/V512/D8/H16/16 epochs/rate0.04/dropout0.3, semantic information, action/shape quotas, active_modules2 and byte caps as v1. Only declared frame layout and existing relative_regions flag vary; physical costs and ancestry not zero or assumed matched.",
+  "engineering":"New focused builder only, existing lexical encoders and beam unchanged. Verify old actor2962 rows bit-for-bit including traces/work; old public lexical/search, numerical and grounded retention must not regress. Full Rust/clippy/minimal/JS and immutable source/binary/evidence required. This is already consumed development, not reserve approval.",
+  "m1_complete":false,
+  "m2_permitted":false
+}

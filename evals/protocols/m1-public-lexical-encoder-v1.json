@@ -1,0 +1,20 @@
+{
+  "schema":"axon-public-lexical-encoder/v1",
+  "source":"MASSIVE 1.1 pt-PT",
+  "source_sha256":"af89ce740b98e8fe73a0fb3ba69a296837910f037e954b87409ef41d467d3da0",
+  "learner":"lexical-encoder-v1",
+  "policies":[
+    {"seed":19374611,"vocabulary":2048,"characters":512,"dimensions":8,"epochs":24,"learning_rate":0.05,"balanced":true,"minimum_margin":1,"collision_control":false},
+    {"seed":19374611,"vocabulary":4096,"characters":512,"dimensions":12,"epochs":24,"learning_rate":0.05,"balanced":true,"minimum_margin":1,"collision_control":false},
+    {"seed":19374611,"vocabulary":4096,"characters":512,"dimensions":16,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"collision_control":false},
+    {"seed":19374611,"vocabulary":4096,"characters":512,"dimensions":16,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"collision_control":true},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"collision_control":false},
+    {"seed":19374611,"vocabulary":4096,"characters":512,"dimensions":16,"epochs":32,"learning_rate":0.04,"balanced":false,"minimum_margin":1,"collision_control":false}
+  ],
+  "selection":"Development exact structured matches, then retained parameter count, then index. Every failed training/payload is reported; original test and reserved authors untouched.",
+  "representation":"Train-only compact UTF8 word index; shared word/character vectors; five explicit word positions, previous BIO and inferred intent; sentence first/bag/last. Local supervised SGD, no pretrained network, language dictionary meanings or copied training sentences.",
+  "collision_control":"Same lexical table/coverage/parameters, hash collides known word rows only. Row initialization also changes, so not a clean causal attribution to collisions alone.",
+  "scope":"Experimental acquisition/representation comparison, not a new invention, general Portuguese, permission to execute tools or complete M1. Vocabulary coverage is not comprehension. Fixed quotas remain unchanged; model scoring including refusals is measured, not RSS/energy.",
+  "promotion":false,
+  "m1_complete":false
+}

@@ -1,0 +1,14 @@
+{
+  "schema":"axon-public-relations/v1",
+  "source":"https://github.com/lbencke/InferBR",
+  "revision":"b6c5e0b27e52477bbc5433d130b0a0e825cf74dc",
+  "training_command":"relation-train-topology",
+  "batch_command":"relation-batch-topology",
+  "representation":"Closed edit-topology associations. Quotient out unchanged run lengths, preserve all changed words/direction/order. Normalizer is a supplied structural prior; incompatible associations abstain.",
+  "identity_examples":24,
+  "identity_supervision":"Explicit reflexivity teaching using only public train statements; not an independent evaluation.",
+  "policies":[{"seed":1,"proposals":128,"rules":128,"checks":16000000,"minimum_holes":1}],
+  "selection":"One deterministic policy. Train only original train and declared logical supervision; validation and consumed test remain separate, all abstentions included.",
+  "acceptance":"Development only. Recount, reflexivity, original reviewer strata and parent retention required; no automatic M1 promotion or M2 start.",
+  "limits":"300 seconds per process, original genome/rule caps. Unknown/ambiguous/oversized inputs refuse. No second agent, LLM or energy/RSS claim."
+}

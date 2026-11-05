@@ -1,0 +1,24 @@
+# EvidenceCoherenceBench development suite, frozen before graph implementation on 2026-09-23.
+# query<TAB>required-source clauses joined by &; alternatives inside a clause use |; - means abstain.
+como AXMEM001 checksum lock e previous recuperam uma publicacao interrompida	docs/KNOWLEDGE_MEMORY_2026-09-23.md&src/knowledge.rs
+como SemanticArtifact permanece verdadeiro enquanto PhysicalRealization troca o backend	docs/DELTAFORGE.md&src/delta_forge.rs
+como SpecialistCapsule consulta CapabilityGate e depois suspende previsoes sob drift	docs/ARCHITECTURE.md&src/specialist.rs
+como DerivedMinimumPlan transforma a perda da ultima testemunha em RebuildRequired	docs/DELTAFORGE_MIN_2026-09-22.md&src/delta_forge.rs
+como OnlineAveragePolicy explora uma alternativa mas aprende apenas o custo da acao executada	docs/LIVE_LEARNING_2026-09-13.md&src/online_policy.rs
+como LiveAverageStore combina estado committed compactacao e replay do journal	docs/ROBUSTNESS_2026-09-13.md&src/live_store.rs
+como StructurePrior usa segundo momento para reduzir tentativas sem alterar a verificacao	docs/DELTAFORGE_VARIANCE_2026-09-22.md&src/learning.rs
+como RemorphPolicy protege a base e exige Migration Tax com histerese	docs/ARCHITECTURE.md&src/morphology.rs
+como DerivedVariancePlan usa tres momentos u128 e recusa overflow	docs/DELTAFORGE_VARIANCE_2026-09-22.md&src/delta_forge.rs
+como ArtifactStore verifica capability guards hash semantico antes do reload	docs/DELTAFORGE.md&src/artifact_store.rs
+como ObservationFrontier permite coalescer escritas adjacentes somente no estado final	docs/DELTA_ALGEBRA.md&src/delta.rs
+como a foundry aprende XOR de dois predicados mas recusa paridade de tres fatores	docs/COMPOSITIONAL_FOUNDRY_2026-09-22.md&tests/specialist_contracts.rs
+como AXMEM001 checksum valida uma transferencia bancaria internacional	-
+como SemanticArtifact catalogado em museu recebe restauracao fisica	-
+como SpecialistCapsule trata drift de dosagem em um paciente	-
+quando RebuildRequired autoriza reconstruir o motor de um automovel	-
+como OnlineAveragePolicy escolhe candidato em uma eleicao digital	-
+como compactar o journal de um jornal impresso semanal	-
+como StructurePrior escolhe curso universitario para um aluno	-
+como Migration Tax calcula imposto sobre imigracao internacional	-
+qual variancia u128 preve a cotacao de uma criptomoeda	-
+onde ArtifactStore vende artefatos arqueologicos certificados	-

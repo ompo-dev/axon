@@ -1,0 +1,22 @@
+{
+  "schema":"axon-pointer-svamp-challenge/v1",
+  "source_directory":".axon-memory/corpora/svamp-78e727689e1c",
+  "revision":"78e727689e1c1bebfc4be39c446898e8e10b0518",
+  "source_sha256":"5be77703a6d891ae476d7c082787ad361392aa02453b132516cdd5f4e7934e3e",
+  "notice_sha256":"07ce3a34de7a865345634f9278bc26ddcacc2d0defd348c28e3f4603448b9ba4",
+  "study":".axon-memory/m1-pointer-anonymity-v1",
+  "cases":1000,
+  "scope":"Previously pinned download, historically sealed per phases40/41/43; reuse exact bytes, not a new acquisition. First prospective AXON evaluation under this protocol, not an assertion that a public question has never been exposed anywhere. Independently authored English variations of ASDiv/MAWPS; not independent grader or Portuguese/full M1 certification. Entire1000 are evaluation-only, no annotation used for training or model selection. MIT notice and derivative ancestry retained.",
+  "models":[
+    {"name":"previous-zero-update","run":".axon-memory/m1-relational-pointer-v2","index":0},
+    {"name":"previous-trained-full","run":".axon-memory/m1-relational-pointer-v2","index":1},
+    {"name":"retain-independent-shuffle","run":".axon-memory/m1-pointer-anonymity-v1","index":0},
+    {"name":"omit-without-refill","run":".axon-memory/m1-pointer-anonymity-v1","index":1},
+    {"name":"omit-and-reallocate","run":".axon-memory/m1-pointer-anonymity-v1","index":2},
+    {"name":"omit-question-free","run":".axon-memory/m1-pointer-anonymity-v1","index":3}
+  ],
+  "input":"After model fitting/freezing, parse only structural keys/ID/Body/Question with Answer/Equation getters refusing any access. Join original Body and Question with one space, no paraphrase/truncation, native id/text only, all1000 including refusals. Same numeric-only projection for declared question-free model. Host parses raw JSON in RAM: logical guard, not OS isolation.",
+  "overlap":"Before final scoring, compare full normalized question and numeric-masked templates against frozen629 training questions, and count duplicates within challenge. Report full denominator plus exact-overlap/nonoverlap strata; do not silently exclude duplicated/easy/unsupported examples. No searching target answers or importing predecessor datasets.",
+  "evaluation":"Freeze all6000 native predictions and seed/binary/input hashes before reading Answer. Recompute every arithmetic/source-position trace independently; finite final scalar comparison abs1e-9+rel1e-9. Do not interpret or execute Equation, never eval/exec target strings. Fixed constant4 from prior GSM train and copy-first/last controls, never selected on SVAMP. Every model and failure retained. New result consumes this challenge for future tuning; no reclassification as fresh reserve later.",
+  "m1_complete":false,"m2_permitted":false
+}

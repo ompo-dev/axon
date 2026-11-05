@@ -1,0 +1,37 @@
+{
+  "schema":"axon-public-conditional-loss/v1",
+  "source":"MASSIVE 1.1 pt-PT, allowed train/development; one explicit OWN-PT condition",
+  "source_sha256":"af89ce740b98e8fe73a0fb3ba69a296837910f037e954b87409ef41d467d3da0",
+  "learner":"lexical-encoder-v1",
+  "training_timeout_ms":1800000,
+  "policies":[
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true,"typed_roles":true},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true,"typed_roles":true,"mean_token_loss":true},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true,"typed_roles":true,"constrained_loss":true},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true,"typed_roles":true,"constrained_loss":true,"mean_token_loss":true},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true,"typed_roles":true,"constrained_loss":true}
+  ],
+  "lexical_source":{
+    "facts":".axon-memory/corpora/own-pt-1.0.0/facts-v2.tsv",
+    "facts_sha256":"ad8653d40b82b35e4c4073c9578931554e22111f636a568967fece3c572cbd33",
+    "vocabulary":".axon-memory/m1-public-adaptive-training-v1/policy-0/semantic-lexical-encoder-v1.axseq",
+    "vocabulary_sha256":"d5567d283da245a2b27aa97cefe0c3a316858aec1b1d7c4978d6003e10fd3ea3",
+    "license_file":".axon-memory/corpora/own-pt-1.0.0/own/LICENSE"
+  },
+  "lexical_policies":[null,null,null,null,null,{"weight":0.5,"interval":1,"rewire":false}],
+  "control_number_sha256":"824abdd1360511a06060e57aafc3e6529697120b9075efdf1318e16ce01b5c17",
+  "expected_numbers":{"0":"824abdd1360511a06060e57aafc3e6529697120b9075efdf1318e16ce01b5c17","1":"796674a0187efa6a1baa8e4e1334af2411c026893659bcdb211cb23ad6c3c0d7"},
+  "neural_controls":{"1":{"run":".axon-memory/m1-public-adaptive-training-v1","index":0},"2":{"run":".axon-memory/m1-public-adaptive-training-v1","index":1}},
+  "representation":"Unchanged AXSQ0012/type16 inference with learned categorical role support. No new codec, neural coefficient, inference policy, memory or tool authority. Constrained_loss is train-only and forbidden without typed_roles. All old false defaults preserve numbers.",
+  "learning":"Optional BIO cross-entropy is normalized only over labels allowed by train-derived intent/role support AND BIO legality under the previous supervised train tag. O always legal; B for every supported role; I only for the previous role. Same gold supervision, learned support, independent masks/dropout RNG and same number of input words. Never uses gold intent/previous tag at inference. Teacher forcing still has exposure bias. Intent objective unchanged. Counters record actual primary-tag normalization terms, not total neural FLOPs: forward still scores all heads.",
+  "controls":"0 reproduces untyped SGD;1 typed sum and2 typed mean are unconstrained-loss controls with exact old neural weights.3/4 compare constrained versus unconstrained loss at sum/mean weight;5 adds source graph0.5 to3, information/work addition explicit. No Adam, new depth, recurrent/byte model or extra epochs. Fixed before new task scores; one seed and adaptive consumed dev, no significance claim.",
+  "inference_limit":"Greedy inference already uses legal supported labels; it is unchanged. Existing experimental beam still normalizes scores over all tags, not the masked training domain, so its score is not claimed to equal the new training likelihood or calibrated confidence. No learned support certifies unrestricted semantics; unseen role combinations remain limited.",
+  "preflight":"Filtered softmax analytic gradients versus numerical loss; excluded class gradients exactly zero and cannot win; learned support, both loss weights, deterministic numeric birth and unseen copied value; flag absent from inference payload. Invalid mode requires refusal. Previous canonical-scale and graph kernel tests remain.",
+  "audit":"Independently derive allowed count per gold train position:1 plus distinct roles observed for the intent, plus one I continuation if previous tag is not O. Compare each epoch counter and total. Unconstrained normalizer must count all109 tags. This is not accuracy, an end-to-end semantic certificate or a measured inference speed gain.",
+  "work":"Six fits x32x8526=1636992 primary presentations; only5 has272832 graph pair updates. Same 86272 neural coefficients, primary vocabulary/source/splits and physical page/genome quotas. Dictionaries/graphs not in seeds. Unknown costs remain unavailable.",
+  "selection":"Consumed-development exact count, then neural coefficient count, then index. Preserve all failures and controls. Original test/reserved workers and PACIFIC annotations untouched. All seven M1 gates mandatory; no M2 or production promotion from this study.",
+  "scope":"Conditional categorical likelihood reusing an existing learned schema, not CRF/global normalization, a new invention, open compositional understanding, fluency, AGI or exponential evolution.",
+  "promotion":false,
+  "m1_complete":false
+}

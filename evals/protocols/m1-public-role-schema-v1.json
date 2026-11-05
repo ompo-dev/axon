@@ -1,0 +1,24 @@
+{
+  "schema":"axon-public-role-schema/v1",
+  "source":"MASSIVE 1.1 pt-PT, allowed train/development only",
+  "source_sha256":"af89ce740b98e8fe73a0fb3ba69a296837910f037e954b87409ef41d467d3da0",
+  "learner":"lexical-encoder-v1",
+  "training_timeout_ms":1800000,
+  "policies":[
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true,"typed_roles":true},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.01,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true,"minibatch":32,"typed_roles":true}
+  ],
+  "control_number_sha256":"824abdd1360511a06060e57aafc3e6529697120b9075efdf1318e16ce01b5c17",
+  "expected_numbers":{"0":"824abdd1360511a06060e57aafc3e6529697120b9075efdf1318e16ce01b5c17"},
+  "neural_controls":{"1":{"run":".axon-memory/m1-public-adaptive-training-v1","index":0},"2":{"run":".axon-memory/m1-public-adaptive-training-v1","index":5}},
+  "representation":"AXSQ0012 on the existing region lexical encoder: learned intent/role adjacency, seven bits per byte in a categorical tail, canonical bounded scale marker1/16. Same module16, neural coefficients, vocabulary, input/mixing/bias arrays. Categorical bytes are excluded from neural coefficient count but included in payload and actual residency. No pretrained weights or new action authority.",
+  "learning":"Only supervised train labels establish support; always permit O, and pair B/I for any observed role. No extra lexical rules, role names, gold development intent or annotations at inference. Adding a schema must not change neural training RNG, weights or biases. No CNN/recurrent combination in this initial mode. Never silently reinterpret old genomes or increase page/genome limits.",
+  "decoding":"Greedy scores all old heads, then filters unsupported tags plus old BIO legality; charges every role lookup. Joint experimental beam has the same hard support filter and charges lookups separately. Probability normalization remains over all learned tags, not renormalized by support. Unknown role/intent combinations cannot be predicted by this closed training-support schema; absence of a role is not semantic proof. Single surviving local tag has unavailable margin, not calibrated confidence.",
+  "controls":"0 is exact legacy control. 1 versus0 isolates the stored schema and decoding filter, not changed neural weights. 2 matches phase37 model5 neural weights, adding only learned schema; its old 826/1504 predictions are stored comparison, not a new simultaneous timing control. All three fits fixed before new scores, all failures retained, same consumed dev, original test/reserved workers untouched.",
+  "preflight":"Disjoint taught roles per intent, copied new value, full numeric roundtrip, equal neural arrays against unrestricted control, engineered wrong-role head counterexample, joint search budget/refusal, canonical scale/unused bits/O/B-I support validation after repaired checksum. These tests qualify a bounded mechanism, not public language generalization.",
+  "selection":"Consumed-development exact count, then deployed neural coefficient count, then index. No M1/M2 approval from this study; all seven gates remain mandatory. Public PACIFIC questions/labels not used.",
+  "scope":"Architecture/representation intervention reusing learned role domains already present in the segment model. Not a new invention, unconstrained compositional role discovery, autonomous natural evolution, or a claim that language is solved. Physical costs need separate measurement; unknown energy/RSS remain unavailable.",
+  "promotion":false,
+  "m1_complete":false
+}

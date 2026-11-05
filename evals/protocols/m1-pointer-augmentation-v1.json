@@ -1,0 +1,20 @@
+{
+  "schema":"axon-relational-pointer-augmentation/v1",
+  "purpose":"Test the observed train-program value sensitivity without changing native model, selection decoder, resource limits or any full M1 gate. Not a new reserve or semantic-correctness certificate.",
+  "source_protocol":"evals/protocols/m1-relational-pointer-v1.json",
+  "parent":".axon-memory/m1-public-split-mixers-v1/policy-3/structural.axnum",
+  "parent_sha256":"97a7e3f0e8cc1a6f5b1822a655b4182a0b8af96438d0b427123ef17440d3dfd2",
+  "primitive_source":".axon-memory/m1-math-actor-v1",
+  "source":"Frozen matched629 train-only episodes from m1-relational-pointer-source-v2, not new annotations or development solutions. Every original paired with graph rescalings2/4; all intermediate results recomputed from unchanged references. Preserve original position targets. If either scaling refuses a bound, exclude its entire matched triple from BOTH practice and augmentation cohorts and report it, without retrying factors.",
+  "cohorts":"Practice: original repeated3 times; augmentation: original,factor2,factor4, interleaved per original. Same episodes/frames/epochs/update counts within full/free controls. Identifiers carry source ordinal and replica; repeated practice is not extra independent experience. Training source programs are conservative provided hypotheses; changing a count/rate can invalidate English/implicit-constant meaning. These are function-graph interventions only, NOT independent natural language golds or discoveries.",
+  "budget":{"seed":20261027,"vocabulary":1536,"dimensions":16,"epochs":32,"learning_rate":0.003,"minibatch":16},
+  "policies":[
+    {"name":"practice-full","cohort":"practice","numbers_only":false},
+    {"name":"rescaled-full","cohort":"augmented","numbers_only":false},
+    {"name":"practice-question-free","cohort":"practice","numbers_only":true},
+    {"name":"rescaled-question-free","cohort":"augmented","numbers_only":true}
+  ],
+  "evaluation":"Same already consumed1481 public development questions, FULL denominator. Same native teacher/own-result/public decoders, no AST/answers/teacher intermediates in inference. Public predictions frozen before final-scalar recount. Teacher/own counts on1887 replicas are not1887 independent original questions. No changes to original test/reserved1562/research1. Reuse constant/copy and zero-update previous controls without claiming independent replicates. No selection based on public scores, all four fits retained regardless of outcome.",
+  "engineering":"Same frozen native binary as phase48; original2pages and4circuits preserved, no payload/workspace/genome cap increases. Source hashes and ancestral costs retained. No UI edits, no fake live telemetry.",
+  "m1_complete":false,"m2_permitted":false
+}

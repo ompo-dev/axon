@@ -1,0 +1,6 @@
+[
+  {"id":"adapted-sum","family":"unsignalled-change","text":"aplique somar em dados","bindings":{"dados":[7,3,2]},"expected":15},
+  {"id":"adapted-report","family":"dependency-report-changed","text":"aplique report-squares em dados","bindings":{"dados":[[2,7,2],2]},"expected":10},
+  {"id":"retained-map","family":"dependency-map","text":"aplique map-square em dados","bindings":{"dados":[3,-4]},"expected":[9,16]},
+  {"id":"retained-selection","family":"dependency-select-map","text":"aplique selected-squares em dados","bindings":{"dados":[[2,7,2],2]},"expected":[4,4]}
+]

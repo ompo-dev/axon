@@ -1,0 +1,58 @@
+{
+  "request": {
+    "repository": "openai/math",
+    "revision": "7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a",
+    "files": [
+      [
+        "preprints/The-Exponential-Time-Hypothesis-is-False-October-25-2026/build/main_full_version.tex",
+        214857,
+        "f7af85e623b58e0ca9f4b9416916d442defa963a"
+      ],
+      [
+        "lean/docs/378.md",
+        1090,
+        "223bbe187394bffca8a2c7ba1656538bfba26e3b"
+      ],
+      [
+        "LICENSE",
+        11357,
+        "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64"
+      ],
+      [
+        "history.md",
+        3888,
+        "ff52ee4dba7ac9a2f145b934f282f582525a4c0d"
+      ]
+    ],
+    "destination": "openai"
+  },
+  "directory": "C:\\Users\\maico\\OneDrive\\Documents\\GitHub\\axon\\evals\\fixtures\\eth-research-v1\\openai",
+  "sources": {
+    "main_full_version.tex": {
+      "url": "https://raw.githubusercontent.com/openai/math/7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a/preprints/The-Exponential-Time-Hypothesis-is-False-October-25-2026/build/main_full_version.tex",
+      "bytes": 214857,
+      "git_blob_sha1": "f7af85e623b58e0ca9f4b9416916d442defa963a",
+      "sha256": "b2e6159d4fb7ea6aa4f89ac15605152b0333a5f7cafe93323492bc20a5c066aa"
+    },
+    "378.md": {
+      "url": "https://raw.githubusercontent.com/openai/math/7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a/lean/docs/378.md",
+      "bytes": 1090,
+      "git_blob_sha1": "223bbe187394bffca8a2c7ba1656538bfba26e3b",
+      "sha256": "a2f7b390d6308997350b903be02c40a1227ebd2b9376982da528574500531f79"
+    },
+    "LICENSE": {
+      "url": "https://raw.githubusercontent.com/openai/math/7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a/LICENSE",
+      "bytes": 11357,
+      "git_blob_sha1": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    "history.md": {
+      "url": "https://raw.githubusercontent.com/openai/math/7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a/history.md",
+      "bytes": 3888,
+      "git_blob_sha1": "ff52ee4dba7ac9a2f145b934f282f582525a4c0d",
+      "sha256": "ac688a38eb9afdb1f3c339c1df251cdb1aa7d8f18067b3ce5d668a96d690f5fb"
+    }
+  },
+  "code_executed": false,
+  "lean_rebuilt": false
+}

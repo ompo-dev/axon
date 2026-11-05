@@ -1,0 +1,14 @@
+{
+  "protocol": "m0-stateful-v1",
+  "date": "2026-10-16",
+  "status": "development-protocol-before-implementation",
+  "full_milestone_approval": false,
+  "hypothesis": "A bounded observational expression search, goal-directed constructors and generic lifting of learned functions into Fold can acquire keyed state transitions and batch grouping without adding a group-by, dictionary, read/write or other VM opcode.",
+  "provided": ["unchanged Expr and Value semantics", "input/output teaching and separate admission", "bounded observational equivalence as a search heuristic, not proof", "goal-directed List/Push construction", "generic map and state-transition Fold lifting", "host parsing and column/token interfaces"],
+  "source_tasks": ["sum values matching a key", "remove records matching a key", "construct a projected record", "update keyed state from one event", "construct a unit-valued record from a scalar symbol"],
+  "development_targets": ["batch keyed totals, in last-update order", "map a learned record projection", "weighted totals by key via learned composition", "symbol histogram via the same grouping mechanism"],
+  "controls": ["frozen v15 on the same compiled source seed and new target demonstrations", "no relevant library", "irrelevant library"],
+  "limits": {"candidates":50000,"work":30000000,"rounds":6,"observed_pool":128,"retained_observation_nodes":32768,"teaching_value_nodes_for_generic_search":4096,"expression_nodes":256,"expression_depth":32,"loop_depth":4},
+  "required_checks": ["source programs actually induced", "public scalar invocation has the same admitted input contract as its program", "independent admission and counterexamples survive observational deduplication", "grouped totals on unseen keys, signs, empty lists and new lengths", "same grouping reused for a different input family", "captured-call dependencies and isolated numeric birth preserved", "no new opcode or target-named dispatch", "all search attempts charged and bounded", "real telemetry and previous regression suites"],
+  "scope": "Declared development tasks, not a new independent full M0 reserve. A useful grouping demonstration does not by itself approve all M0 gates or M1-M10. Learned transitions are prior knowledge for batch tasks, not learning grouping from no prior."
+}

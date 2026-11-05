@@ -1,0 +1,23 @@
+{
+  "schema":"axon-grounded-data-context-development/v3",
+  "id":"m1-data-context-v3",
+  "development_cases":64,
+  "consolidate_alternatives":true,
+  "measurement":"winner-amount",
+  "measured_request":"medida aplique result-value em destaque agrupe dados em dados",
+  "additional_algorithm_lessons":[
+    {"id":"result-value","family":"record-value",
+     "examples":[{"input":["a",3],"output":3},{"input":["b",-7],"output":-7},{"input":["c",11],"output":11}],
+     "admission":[{"input":["nova pessoa",29],"output":29},{"input":["outra",-41],"output":-41},{"input":["terceira",0],"output":0}]}
+  ],
+  "training":"Same prior curriculum plus three generic record-to-scalar examples. Synthesize the projection, reuse existing grouping, whole-record selection, learned field mappings, data quantity and contextual math. No financial answer function added to core.",
+  "architecture":"Opt-in exact union of disjoint, equally specific input alternatives with identical outputs/guards and binding layout. Structural codec v9, original codecs unchanged; preserve domain, conflicts, priorities, dependencies and 128-rule quota. Do not repeat the v1 rule-capacity failure without consolidation.",
+  "comparison":"Prior v28 number versus new model, same engine/inputs; all outputs and refusals counted. Old net-total/evidence/unit tests remain regressions, not redefined as winner tests.",
+  "acceptance":"Every generated answer, evidence and input provenance must match; zero teacher queries, inherited parent facts, seed mutation or unauthorized effects. Independent CSV parser and BigInt aggregation recount results.",
+  "units":"Host-supplied unit tags. Signed integer quantities encode returns; not general accounting.",
+  "language":"Same engineering author and taught forms; not independent public wording or full M1 approval. No reserved public tests consumed.",
+  "m1_complete":false,
+  "m2_allowed":false,
+  "rss_bytes":null,
+  "energy_joules":null
+}

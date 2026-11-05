@@ -1,0 +1,19 @@
+{
+  "schema":"axon-public-segment-model/v1",
+  "source":"MASSIVE 1.1 pt-PT",
+  "source_sha256":"af89ce740b98e8fe73a0fb3ba69a296837910f037e954b87409ef41d467d3da0",
+  "learner":"segment-sequence-v1",
+  "policies":[
+    {"learner":{"seed":19374611,"buckets":8192,"epochs":6,"weights":60000,"intent_weights":24000,"subwords":false,"minimum_margin":1},"max_span":12,"typed_roles":true,"max_work":5000000},
+    {"learner":{"seed":19374611,"buckets":8192,"epochs":6,"weights":60000,"intent_weights":24000,"subwords":true,"minimum_margin":1},"max_span":12,"typed_roles":true,"max_work":5000000},
+    {"learner":{"seed":19374611,"buckets":8192,"epochs":6,"weights":60000,"intent_weights":24000,"subwords":true,"minimum_margin":1},"max_span":12,"typed_roles":false,"max_work":5000000},
+    {"learner":{"seed":19374611,"buckets":8192,"epochs":10,"weights":70000,"intent_weights":24000,"subwords":false,"minimum_margin":1},"max_span":16,"typed_roles":true,"max_work":5000000}
+  ],
+  "selection":"Development exact matches, then retained weights, then index. Report all failures. No reserved-worker/original-test evaluation.",
+  "hypothesis":"Consumed-development diagnostic shows 344-358 slot-only failures in selected models. Learn segment boundaries/roles and exact bounded segment selection rather than BIO-local decisions. No improvement presumed.",
+  "representation":"AXSQ0008/tag 17 wraps unchanged CSR, adds explicit span/work/feature policy and supervised intent-role domains. Untyped control permits all taught roles. Same 196608-byte page and 262144-byte full-genome caps; 16 inputs per fresh process respect the existing 100-million aggregate batch work cap.",
+  "method_source":"https://papers.nips.cc/paper_files/paper/2004/hash/eb06b9db06012a7a4179b8f3cb5384d3-Abstract.html",
+  "scope":"Averaged segment perceptron, not a probabilistic CRF, new invention, free Portuguese or full M1 proof. Exact top-two search only for a greedily selected intent and declared role domain; uncertainty elsewhere remains unresolved. Only training examples teach labels/schema, never development truth at inference.",
+  "promotion":false,
+  "m1_complete":false
+}

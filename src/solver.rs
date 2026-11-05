@@ -2,14 +2,16 @@ use std::{fmt, path::Path};
 
 use crate::{
     ArtifactStatus, ArtifactStore, ArtifactStoreError, AxonTask, CertificateStatus,
-    DerivedArtifact, ExactAverage, ForgeError, PhysicalRealization, RuntimeGuardError,
-    RuntimeGuards, SemanticArtifactHash,
+    DerivedArtifact, ExactAverage, ExactPopulationVariance, ForgeError, PhysicalRealization,
+    RuntimeGuardError, RuntimeGuards, SemanticArtifactHash,
 };
 
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub enum ArtifactOutcome {
     ModularSum(u64),
     ExactAverage(ExactAverage),
+    ExactMinimum(u64),
+    ExactPopulationVariance(ExactPopulationVariance),
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
@@ -62,6 +64,12 @@ pub fn solve_task(store: &ArtifactStore, task: &AxonTask) -> Result<SolveReceipt
         DerivedArtifact::Average(plan) => {
             ArtifactOutcome::ExactAverage(plan.full(task.values()).map_err(SolveError::Forge)?.0)
         }
+        DerivedArtifact::Minimum(plan) => {
+            ArtifactOutcome::ExactMinimum(plan.full(task.values()).map_err(SolveError::Forge)?.0)
+        }
+        DerivedArtifact::PopulationVariance(plan) => ArtifactOutcome::ExactPopulationVariance(
+            plan.full(task.values()).map_err(SolveError::Forge)?.0,
+        ),
     };
     Ok(SolveReceipt {
         task_name: task.name().to_owned(),

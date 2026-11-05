@@ -1,0 +1,24 @@
+{
+  "schema":"axon-public-relation-network-protocol/v1",
+  "revision":"b6c5e0b27e52477bbc5433d130b0a0e825cf74dc",
+  "training_command":"relation-network-train",
+  "batch_command":"relation-network-batch",
+  "representation":"Locally learned hypothesis, directional paired lexical edits or predicted dependency graph differences. No built-in Portuguese truth rules.",
+  "training_quality":"all",
+  "syntax_parent":".axon-memory/m1-public-syntax-v3/policy-0/structural.axnum",
+  "syntax_information":"Frozen Bosque-supervised 113559-byte compact parser, not the larger best syntax model. Every compiled candidate retains identical syntax/operational pages. Graph mode uses additional ancestral syntactic supervision; report this information advantage, do not call it matched-data-only improvement.",
+  "policies":[
+    {"seed":19374611,"buckets":2048,"dimensions":16,"epochs":16,"learning_rate":0.1,"mode":"hypothesis","minimum_margin":0.0},
+    {"seed":19374611,"buckets":2048,"dimensions":16,"epochs":16,"learning_rate":0.1,"mode":"pair","minimum_margin":0.0},
+    {"seed":19374611,"buckets":2048,"dimensions":16,"epochs":16,"learning_rate":0.1,"mode":"graph","minimum_margin":0.0},
+    {"seed":19374611,"buckets":4096,"dimensions":16,"epochs":16,"learning_rate":0.1,"mode":"hypothesis","minimum_margin":0.0},
+    {"seed":19374611,"buckets":4096,"dimensions":16,"epochs":16,"learning_rate":0.1,"mode":"pair","minimum_margin":0.0},
+    {"seed":19374611,"buckets":4096,"dimensions":16,"epochs":16,"learning_rate":0.1,"mode":"graph","minimum_margin":0.0},
+    {"seed":19374611,"buckets":2048,"dimensions":32,"epochs":16,"learning_rate":0.1,"mode":"pair","minimum_margin":0.0},
+    {"seed":19374611,"buckets":2048,"dimensions":32,"epochs":16,"learning_rate":0.1,"mode":"graph","minimum_margin":0.0},
+    {"seed":19374611,"buckets":2048,"dimensions":32,"epochs":16,"learning_rate":0.1,"mode":"hypothesis","minimum_margin":0.0}
+  ],
+  "selection":"All 646 validation cases, then classifier page bytes, then policy index. Final 1758-case test was consumed by earlier rounds and remains diagnostic, never a fresh reserve. Original labels retained in overall scores; reviewed/clean strata reported separately.",
+  "authority":"Pure prediction only. No graph, relation, margin or text grants a tool permission. Unknown facts and semantic ambiguity are not resolved by forcing a classifier output.",
+  "scope":"Research toward the full M1 contract, not completion or M2 permission. Hypothesis-only and lexical controls are mandatory because annotation artifacts can mimic understanding. Preserve all raw evidence, original corpus license and prior failures."
+}

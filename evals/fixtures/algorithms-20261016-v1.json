@@ -1,0 +1,9 @@
+{
+  "created_utc": "2026-10-16T03:25:50.7587213Z",
+  "files": 3003,
+  "uncompressed_bytes": null,
+  "zip_bytes": 17419368,
+  "sha256": "F0608878750133E157139B19D1DBF9BF9A0647BEC7C3CA682FD58F1210CEFBA1",
+  "archive": "evals\\fixtures\\algorithms-20261016-v1.zip",
+  "scope": "Current source and immutable positive/negative v14 evidence; canonical document historical appendix preserved"
+}

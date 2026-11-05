@@ -1,0 +1,13 @@
+{
+  "schema":"axon-public-feedback-protocol/v1",
+  "source_sha256":"af89ce740b98e8fe73a0fb3ba69a296837910f037e954b87409ef41d467d3da0",
+  "learner":"enhanced-sequence-v1",
+  "prefixes":[2500,4000,5500,7000,8526],
+  "budget":{"seed":19374611,"buckets":16384,"epochs":6,"weights":64000,"intent_weights":32000,"minimum_margin":1,"subwords":true,"shared_roles":false},
+  "order":"Original allowed training row order, not a natural temporal stream. Filter reserved workers and original test before reading text or annotations.",
+  "feedback":"Predict the next unseen training window with both the frozen initial ancestor and the current descendant BEFORE writing that window's training labels to a core input. Then refine the actual previous genome with explicit cumulative replay. No reset from zero between windows.",
+  "retention":"Reevaluate the initial 2500 taught rows after every update. This is training retention, not independent generalization. Keep all forgetting and errors.",
+  "diagnostics":"Evaluate the same already-consumed 1504 dev rows after every stage. No policy selection on the results. Compare final whole-training fit separately. The corpus was previously used in other experiments; prequential ordering here is not a fresh independent reserve.",
+  "cost":"Count the entire lineage: 27526 cumulative training rows times six epochs = 165156 sentence presentations, plus all inference calls. Unknown RSS and energy remain unavailable.",
+  "promotion":"No production promotion, no M1 certification, no M2. The frozen full M1 completion contract is unchanged. Explicit replay is not proof of autonomous learning without forgetting."
+}

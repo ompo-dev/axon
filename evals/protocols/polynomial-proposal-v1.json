@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "id": "polynomial-proposal-v1",
+  "scope": "Bounded integer polynomial induction in the actual AXON algorithm engine. Not ETH implementation, AGI or M1 completion.",
+  "prior": {"arity": [1, 2], "maximum_total_degree": 3, "integer_coefficients": true, "training_coordinate_abs_max": 4096, "exact_arithmetic": "checked i128 rationals", "free_coefficients": 0},
+  "budget": {"candidates": 50000, "work": 30000000, "agent_attempts": 7, "admission_min_remaining": 2},
+  "comparison": ["existing enumeration", "polynomial proposal", "literal retrieval"],
+  "teaching": {"univariate_points": [-3, -1, 0, 2, 4, 5], "bivariate_points": [[0,0],[1,0],[0,1],[2,0],[1,1],[0,2],[3,0],[2,1],[1,2],[0,3]]},
+  "future": {"univariate_points": [-17,-11,-7,-5,6,7,9,11,13,19,23,29,31,37,41,47], "bivariate_points": [[-7,-3],[-5,4],[6,-2],[7,9],[11,3],[0,7],[8,0],[-4,-5],[12,-8],[3,13],[17,2],[-11,6],[9,10],[4,-13],[2,19],[23,-7]], "labels_available_to_core": false},
+  "tasks": {"scalar_integer_cubic_count": 12, "bivariate_integer_cubic_count": 12, "coefficient_rule": "deterministic small signed integers, arithmetic in experiment harness; no formula passed to learner", "policies": [96], "policy_selection": false},
+  "controls": ["quartic", "parity", "piecewise", "rational coefficient", "contradictory observations", "too few examples", "unsupported shape", "coordinate bound", "candidate cap", "work cap", "integer execution overflow", "ambiguous fit followed by discriminating admission", "observational collision outside chosen family"],
+  "inheritance": "Learn through existing AlgorithmAgent, store ordinary Program in existing StructuralSeed codec, pack with existing Genome codec and evaluate in separate birth process without teaching labels.",
+  "report": ["all task rows including failures", "unseen accuracy", "refutations", "work and candidates separately from wall time", "learned program nodes and bytes", "replay equivalence", "negative controls and unsupported-domain false acceptance"]
+}

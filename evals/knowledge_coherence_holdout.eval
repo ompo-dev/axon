@@ -1,0 +1,27 @@
+# Final EvidenceCoherenceBench holdout, frozen before graph implementation on 2026-09-23.
+# Do not execute until graph choices and thresholds are frozen; never tune against its result.
+# query<TAB>required-source clauses joined by &; alternatives inside a clause use |; - means abstain.
+por que noise fica fora de ExecutionSlice quando nao alcanca o objetivo	docs/ARCHITECTURE.md&src/structure.rs
+como uma cauda truncada do journal preserva eventos completos e permite continuar	docs/ROBUSTNESS_2026-09-13.md&tests/storage_adversarial.rs
+como CapabilityGate compara Effect pedido com Authority antes de autorizar	docs/ARCHITECTURE.md&src/capability.rs
+como hardware e protocolo diferentes impedem MetaJit de reutilizar evidencia	docs/STRATEGY_EVIDENCE.md&src/strategy.rs
+por que BenchContract calcula lifecycle por rodada antes do p50	docs/BENCH_CONTRACT.md&src/benchmark.rs
+como ExactAverage deriva sum e count sem aceitar cache arbitrario	docs/DELTAFORGE.md&src/delta_forge.rs
+como feedback da memoria migra v1 para v2 e expira quando a fonte muda	docs/KNOWLEDGE_MEMORY_2026-09-23.md&src/knowledge.rs
+por que rebuild impede promover universalmente a realizacao fisica de MIN	docs/DELTAFORGE_MIN_2026-09-22.md&docs/RESULTS.md
+qual contrato da variancia exata cobre fonte unica e recusa entrada vazia	docs/DELTAFORGE_VARIANCE_2026-09-22.md&tests/delta_forge_contracts.rs
+como dwell histerese e beneficio futuro controlam um remorph	docs/ARCHITECTURE.md&src/morphology.rs
+como execute_and_learn observa somente a estrategia realmente executada	docs/LIVE_LEARNING_2026-09-13.md&tests/online_policy_contracts.rs
+como capacidade verificada por byte e ignorancia explicita limitam a visao do AXON	docs/VISION.md
+qual ObservationFrontier devo usar no balcao de embarque de um aeroporto	-
+como ExecutionSlice divide uma pizza em fatias iguais	-
+como CapabilityGate aumenta a capacidade da bateria de um telefone	-
+como MetaJit melhora improvisacao de um musico de jazz	-
+qual BenchContract regula contrato de trabalho temporario	-
+como ExactAverage calcula media de notas numa planilha escolar	-
+como feedback da memoria ajuda a estudar para prova de anatomia	-
+qual PhysicalRealization melhora condicionamento numa academia	-
+como MinimumUpdate acompanha reajuste do salario minimo	-
+como remorph reforma a arquitetura de um predio historico	-
+qual online policy oferece seguro residencial mais barato	-
+quantos bytes de capacidade restam no plano de internet celular	-

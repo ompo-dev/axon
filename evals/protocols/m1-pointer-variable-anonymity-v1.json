@@ -1,0 +1,25 @@
+{
+  "schema":"axon-pointer-variable-anonymity/v1",
+  "intervention":"candidate-vocabulary",
+  "source_protocol":"evals/protocols/m1-relational-pointer-v1.json",
+  "parent":".axon-memory/m1-public-split-mixers-v1/policy-3/structural.axnum",
+  "parent_sha256":"97a7e3f0e8cc1a6f5b1822a655b4182a0b8af96438d0b427123ef17440d3dfd2",
+  "primitive_source":".axon-memory/m1-math-actor-v1",
+  "purpose":"Separate learned candidate literal identity from relational position/context using the existing unknown vector. No supplied operator/answer, new codec, inference special case or relaxation of full M1 requirements.",
+  "intervention_definition":"Train-only lexicon policy: retain is legacy; omit removes every lexeme ever observed at a candidate position AFTER original frequency ranking/truncation, without refilling; reallocate removes these BEFORE ranking/truncation. Omission applies globally even to occurrences elsewhere. In the math wrapper every scalar token is already a provided candidate, so valid scalar replacements map to the same learned UNK row. Query values still reach learned arithmetic circuits unchanged. This removes magnitude and identity cues, and may hurt tasks needing magnitude/comparison; not a universal solution or emergent discovery.",
+  "budget":{"seed":20261027,"vocabulary":1536,"dimensions":16,"epochs":32,"learning_rate":0.003,"minibatch":16,"independent_shuffle":true},
+  "require_shared_order":true,
+  "default_reproduction":{"budget":{"seed":20261027,"vocabulary":1536,"dimensions":16,"epochs":32,"learning_rate":0.003,"minibatch":16},"page_sha256":"3155309434695edf5de4c21516ac186ef101149ad139afbadc00a38be2b7c866","scope":"Default missing optional fields must reproduce the prior matched/full learned page byte for byte. One additional positive-control fit; no new public evaluation for it."},
+  "policies":[
+    {"name":"retain-independent-shuffle","cohort":"matched","numbers_only":false,"budget":{"candidate_vocabulary":"retain"}},
+    {"name":"omit-without-refill","cohort":"matched","numbers_only":false,"budget":{"candidate_vocabulary":"omit"}},
+    {"name":"omit-and-reallocate","cohort":"matched","numbers_only":false,"budget":{"candidate_vocabulary":"reallocate"}},
+    {"name":"omit-question-free","cohort":"matched","numbers_only":true,"budget":{"candidate_vocabulary":"omit"}}
+  ],
+  "controls":"Same629 train sources/2251 states per policy, no new annotation/repeat/rescaling in training. Independent shuffle derives solely from seed, not vocabulary size/embedding initialization; every epoch fingerprint must match across all four policies. Fingerprints are noncryptographic metadata backed by the shared deterministic code. Changed vocabularies imply changed parameter shapes/random initialization; not identical-weight ablation. Omit versus reallocate explicitly separates refilling lexical capacity. Vocabulary omission is an engineered inductive bias; do not call it learned masking.",
+  "evaluation":"Full already-consumed1481 GSM8K development denominator, own results, freeze before final scalar gold. No future states or equations in inference. Functional scaling2x diagnostic using same source graphs after freeze; not independent English truth. All variants retained regardless of score. No M2 or full M1 approval.",
+  "fresh_external_challenge":"Prospective SVAMP evaluation per m1-pointer-svamp-v1 before opening challenge answers; every1000 case, native id/text only. Untrained and previous frozen models declared in that protocol. No fitting, selecting/retrying models or changing recipes on SVAMP. Challenge becomes consumed after this once-frozen evaluation, not reusable as a fresh reserve.",
+  "engineering":"Budget defaults preserve old fits and AXRP0001 Model layout/bytes. Unknown vector, ordered context, same decoder, grammar, primitives, work/memory caps and packer reused. Focused invariance/default/order/codec tests, full Rust/clippy/minimal, JS and immutable snapshots. UI not changed, no fake telemetry.",
+  "references":["https://arxiv.org/abs/2103.07191"],
+  "m1_complete":false,"m2_permitted":false
+}

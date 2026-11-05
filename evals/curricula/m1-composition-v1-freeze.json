@@ -1,0 +1,9 @@
+{
+  "schema": "axon-m1-development-data/v1",
+  "curriculum_sha256": "6e950f72f94cdb5195568c3ed611566c08e730c846cac70060d3b128692c65ed",
+  "positive_goals": 1024,
+  "negative_goals": 64,
+  "composition_goals": 768,
+  "surface_fragments": 6,
+  "scope": "Synthetic same-author development. Local fragment/semantic annotations and typed interface are provided; no independent-author or free-language claim. Plans/labels stay in host evaluation, never passed to Agent::answer. M0 baseline receives identical teaching and observations."
+}

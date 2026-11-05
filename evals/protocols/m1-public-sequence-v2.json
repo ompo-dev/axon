@@ -1,0 +1,20 @@
+{
+  "schema":"axon-public-grammar-protocol/v1",
+  "learner":"sequence-v1",
+  "source":"MASSIVE 1.1 pt-PT",
+  "source_sha256":"af89ce740b98e8fe73a0fb3ba69a296837910f037e954b87409ef41d467d3da0",
+  "previous_predictions":".axon-memory/m1-public-grammar-v3/policy-1-predictions.json",
+  "train":"Original train except all reserved localization workers; utterance, intent, BIO supervision; gold intent and BIO histories only during training",
+  "development":"Original dev except all reserved workers; adaptive development, not a fresh reserve",
+  "reservation":"Original test and all reserved workers unused until development gates justify a frozen audit",
+  "policies":[
+    {"seed":47,"buckets":8192,"epochs":6,"weights":20000,"minimum_margin":1},
+    {"seed":19374611,"buckets":8192,"epochs":10,"weights":24000,"minimum_margin":1}
+  ],
+  "algorithm":"Hashed averaged perceptron with teacher-forced legal BIO histories during training; greedy predicted histories during inference. Per-head proportional int8 quantization and magnitude pruning. No vocabulary or domain answers hardcoded.",
+  "change_hypothesis":"Previous predicted histories made some gold I:role labels illegal in training, generating unavoidable errors. Public sequence v2 (clipping) and v3 (proportional quantization only) remain immutable negative controls; this protocol changes training history, not evaluation targets or acceptance gates.",
+  "selection":"Exact structured dev matches, then fewer stored nonzero weights, then policy order",
+  "metrics":"Exact intent and all ordered role/value spans; all errors and abstentions count. Margins are not probabilities or action authority.",
+  "completion_contract":"evals/protocols/m1-completion-v1.json; every gate required before M1 or M2",
+  "scope":"Known empirical method, not a novel AGI claim. pt-PT source and localizers do not establish general pt-BR understanding. Training scratch, unknown RSS and energy are not zero. Only raw id/text reach inference."
+}

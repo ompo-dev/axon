@@ -1,0 +1,12 @@
+# Freeze before evaluation; internal, not an external blinded benchmark.
+# Learner receives only shape/actions, never hidden control definitions.
+# Same declared rule family: 3..6 bits, 2..8 actions, <=2 guard literals,
+# toggle <=2 bits, assign one bit or noop. Deterministic resettable simulator.
+# Every policy uses the same hypothesis family and an intervention cap of 512.
+# Per identified world: exhaustive transition audit, 32 rollout-derived targets,
+# 8 arbitrary targets, independently computed shortest paths/unreachability.
+# The audit is after training, not training evidence; account separately.
+# No tuning on these seeds. Development uses seed=317031 worlds=24.
+seed=948310761 worlds=48
+seed=1402835917 worlds=48
+seed=381290477 worlds=48

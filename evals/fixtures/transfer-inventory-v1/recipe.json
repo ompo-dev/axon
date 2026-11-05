@@ -1,0 +1,4 @@
+{
+  "shortage": "stock necessidade {requested} estoque {available}",
+  "cost": "invoice preco {price} quantidade {needed}"
+}

@@ -10,7 +10,7 @@ fn interval(lower: i64, upper: i64) -> Interval {
 fn main() {
     let arguments: Vec<String> = std::env::args().skip(1).collect();
     if !arguments.is_empty() {
-        match axon_uic::cli::solve_command(&arguments) {
+        match axon_uic::cli::command(&arguments) {
             Ok(output) => println!("{output}"),
             Err(error) => {
                 eprintln!("AXON: {error}");

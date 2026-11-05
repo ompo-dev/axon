@@ -1,0 +1,34 @@
+{
+  "protocol": "m0-abstractions-v1",
+  "date": "2026-10-16",
+  "status": "development-protocol-before-implementation",
+  "full_milestone_approval": false,
+  "hypothesis": "Scope-checked anti-unification of admitted collection programs enables conditional transformations and conditional weighted reductions outside the six fixed construction recipes.",
+  "provided": ["typed value interface", "existing Expr VM and primitive semantics", "teaching and independent admission examples", "bounded structural anti-unification and substitution search"],
+  "learned": ["source programs from input/output examples", "shared program skeleton and correlated holes from source programs", "target substitution selected only by teaching, then checked on admission"],
+  "controls": ["same search without a library", "same search with unrelated admitted programs", "frozen v14 executable on the development curriculum"],
+  "limits": {
+    "candidates_per_acquisition": 50000,
+    "work_per_acquisition": 30000000,
+    "source_programs": 32,
+    "templates": 64,
+    "holes_per_template": 2,
+    "expression_nodes": 256,
+    "expression_depth": 32,
+    "loop_depth": 4,
+    "no_new_vm_opcodes": true
+  },
+  "required_checks": [
+    "source acquisition by examples, not hand-supplied target programs",
+    "two independent source bodies required; duplicate aliases do not count",
+    "conditional record transformation and weighted reduction acquired with useful sources",
+    "same targets and resource limits evaluated without useful sources",
+    "new values, empty collections, signs and held-out list lengths",
+    "binding depth, repeated holes and closed Call boundaries preserved",
+    "mining charged to the search work quota, including unsuccessful acquisition",
+    "no examples or template execution opcodes added to the exported seed",
+    "descendant remakes templates from inherited programs without ancestral examples",
+    "previous algorithm and dependency contracts remain valid"
+  ],
+  "interpretation": "Engineering and development evidence only. These declared target families are not an independent M0 reserve and do not demonstrate free language, general grouping, external benchmark success, AGI or M1-M10 completion. Wall time, memory and ancestral costs must be reported separately from internal VM work."
+}

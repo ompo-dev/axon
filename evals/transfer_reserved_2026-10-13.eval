@@ -1,0 +1,24 @@
+# Internal reserve frozen before execution; not an external blinded benchmark.
+# Development seed 7132026 / 16 cases. Tests also use explicitly separate seeds.
+# Per seed: 8 remapped 2x2 grids, 8 depth-3 protocols, 8 document pipelines,
+# 8 novel 3x3 grids. All have 4 actions; reset state and injective output/action
+# labels are randomized. Sources: learned 2x2 grid, depth-3 protocol, pipeline.
+# Learner receives only the source atlas, action count, context and query callback.
+# Supplied reset, discrete actions/replies and goal tokens are not learned semantics.
+# Policies: active structural transfer, random transfer, from-scratch discovery.
+# All three use the same candidate-based bounded conformance: access sequences,
+# middle depth 2, characterizing suffixes, plus all length-4 action words.
+# Cache counts report physical resets/actions separately from chosen learning probes.
+# Limits: 128 states, 32768 uncached queries, 800000 actions; transfer search
+# additionally has at most 65536 hypotheses / 128 probes / 4096 probe steps.
+# Selection uses no target states, transition table, label mappings or audit witness.
+# After fit: reachable product audit, independent goal rollouts, save/reload.
+# Goals include each reachable symbol and one absent control, not all complex plans.
+# New 9-state representation is separately learned, audited, persisted/reloaded,
+# appended without replacing old sources, then reused on a differently wired grid.
+# Record failures and fallback reasons. No tuning after this reserve is opened.
+# Timing fit includes search/cache/common conformance, not audit/storage/planning.
+# Source training and extra representation growth/reuse are reported separately.
+seed=27461983 cases=32
+seed=59173027 cases=32
+seed=86240951 cases=32

@@ -1,0 +1,18 @@
+{
+  "schema":"axon-public-relation-network-protocol/v1",
+  "revision":"b6c5e0b27e52477bbc5433d130b0a0e825cf74dc",
+  "training_command":"relation-network-train",
+  "batch_command":"relation-network-batch",
+  "representation":"Same empirical features as V1/V2. Add 1500 explicit self-entailment axioms using distinct original train statements selected by canonical SHA256; never use validation/test text to construct them.",
+  "training_quality":"all",
+  "identity_examples":1500,
+  "identity_sampling":"statement-hash",
+  "policies":[
+    {"seed":19374611,"buckets":2048,"dimensions":16,"epochs":16,"learning_rate":0.1,"mode":"hypothesis","minimum_margin":0.0},
+    {"seed":19374611,"buckets":2048,"dimensions":16,"epochs":16,"learning_rate":0.1,"mode":"pair","minimum_margin":0.0},
+    {"seed":19374611,"buckets":2048,"dimensions":16,"epochs":16,"learning_rate":0.1,"mode":"graph","minimum_margin":0.0},
+    {"seed":19374611,"buckets":2048,"dimensions":16,"epochs":16,"learning_rate":0.1,"mode":"bound-graph","minimum_margin":0.0}
+  ],
+  "selection":"All 646 validation pairs, then page bytes, then index. Same previously consumed 1758 test remains diagnostic. Self-entailment is supplied teacher knowledge, not an independent externally authored evaluation.",
+  "scope":"Adaptive artifact-mitigation experiment. The original 8399 labeled pairs remain intact; matched hypothesis/pair/graph modes receive the same 9899 teacher pairs. No new architecture, quota increase, fresh reserve, promotion or M2. No hardcoded reflexive response in inference."
+}

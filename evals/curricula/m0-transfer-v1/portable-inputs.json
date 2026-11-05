@@ -1,0 +1,6548 @@
+[
+  {
+    "id": "portable-0-0",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        2,
+        2,
+        1,
+        -1,
+        -1,
+        3,
+        0,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-1",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        0,
+        -3,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-2",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        -1,
+        0,
+        -3,
+        3,
+        -3,
+        2,
+        2,
+        -1,
+        2,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-3",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        0,
+        0,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-4",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-5",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        0,
+        -3,
+        -1,
+        2,
+        0,
+        -3,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-6",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        1,
+        -1,
+        -1,
+        1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-7",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        3,
+        1,
+        2,
+        -3,
+        2,
+        3,
+        1,
+        0,
+        -3,
+        3,
+        3,
+        2,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-8",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        2,
+        -1,
+        -3,
+        -1,
+        1,
+        3,
+        0,
+        1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-9",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        -1,
+        3,
+        2,
+        -2,
+        -1,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-10",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        1,
+        -3,
+        -2,
+        -3,
+        -3,
+        -3,
+        -2,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-11",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        1,
+        1,
+        -2,
+        -2,
+        3,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-12",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        2,
+        -1,
+        -1,
+        2,
+        2,
+        0,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-13",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        0,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-14",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        -2,
+        -1,
+        3,
+        1,
+        3,
+        1,
+        -3,
+        0,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-15",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        3,
+        -3,
+        2,
+        -2,
+        0,
+        3,
+        3,
+        -2,
+        2,
+        -1,
+        -1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-16",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        -2,
+        -3,
+        3,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-17",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        -2,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-18",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        2,
+        -3,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-19",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        -1,
+        2,
+        -2,
+        0,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-20",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        1,
+        3,
+        -2,
+        -1,
+        1,
+        -3,
+        3,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-21",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        -2,
+        -1,
+        2,
+        -2,
+        -1,
+        -1,
+        -3,
+        0,
+        2,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-22",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        -1,
+        0,
+        -1,
+        2,
+        1,
+        1,
+        -1,
+        0,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-23",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        -3,
+        3,
+        1,
+        -3,
+        0,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-24",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        3,
+        -3,
+        1,
+        0,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-25",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        -2,
+        2,
+        -1,
+        2,
+        -1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-26",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        2,
+        -1,
+        1,
+        -1,
+        -1,
+        1,
+        3,
+        0,
+        -2,
+        -2,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-27",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        2,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-28",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        -1,
+        1,
+        3,
+        -1,
+        -3,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-29",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        -3,
+        0,
+        2,
+        -1,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-30",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-31",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        0,
+        1,
+        -2,
+        1,
+        -2,
+        -3,
+        -2,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-32",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        3,
+        0,
+        1,
+        3,
+        1,
+        -3,
+        -3,
+        -2,
+        2,
+        3,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-33",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        3,
+        0,
+        -2,
+        -3,
+        0,
+        3,
+        0,
+        2,
+        -1,
+        -1,
+        -3,
+        0,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-34",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        -1,
+        2,
+        1,
+        3,
+        -3,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-35",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-36",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        -1,
+        3,
+        2,
+        0,
+        3,
+        1,
+        -2,
+        -1,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-37",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        2,
+        -1,
+        -2,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-38",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        3,
+        2,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-39",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        -3,
+        -2,
+        1,
+        3,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-40",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        2,
+        2,
+        -1,
+        2,
+        -3,
+        3,
+        1,
+        1,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-41",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-42",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        0,
+        2,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-43",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        0,
+        2,
+        -3,
+        -1,
+        3,
+        0,
+        2,
+        0,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-44",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        0,
+        3,
+        1,
+        2,
+        2,
+        2,
+        -1,
+        3,
+        0,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-45",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        0,
+        0,
+        0,
+        -1,
+        -3,
+        -2,
+        -3,
+        -3,
+        -1,
+        2,
+        -2,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-46",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        0,
+        -2,
+        0,
+        -2,
+        -1,
+        3,
+        2,
+        0,
+        -3,
+        -3,
+        2,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-47",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        2,
+        -2,
+        0,
+        2,
+        -3,
+        1,
+        1,
+        2,
+        3,
+        1,
+        0,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-48",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        1,
+        2,
+        -1,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-49",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-50",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        3,
+        -1,
+        -3,
+        2,
+        3,
+        -1,
+        -2,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-51",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        3,
+        0,
+        2,
+        2,
+        -3,
+        2,
+        -1,
+        -2,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-52",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        -3,
+        -2,
+        -1,
+        -2,
+        1,
+        2,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-53",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        0,
+        3,
+        2,
+        2,
+        3,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-54",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        -1,
+        -1,
+        -2,
+        -3,
+        3,
+        2,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-55",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        2,
+        3,
+        -3,
+        -3,
+        2,
+        -2,
+        1,
+        0,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-56",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        -1,
+        3,
+        -2,
+        -2,
+        -3,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-57",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        3,
+        2,
+        -1,
+        -1,
+        -1,
+        -3,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-58",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        2,
+        -1,
+        -1,
+        -2,
+        1,
+        3,
+        0,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-59",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        -2,
+        -3,
+        -3,
+        0,
+        -3,
+        -3,
+        -2,
+        0,
+        -2,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-60",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        -1,
+        3,
+        -2,
+        2,
+        3,
+        1,
+        0,
+        -1,
+        1,
+        2,
+        0,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-61",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        -1,
+        2,
+        -2,
+        -2,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-62",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        1,
+        -3,
+        1,
+        0,
+        1,
+        1,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-63",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        3,
+        -3,
+        1,
+        3,
+        -1,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-64",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        -1,
+        3,
+        -3,
+        -2,
+        2,
+        -2,
+        3,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-65",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        0,
+        -2,
+        2,
+        -3,
+        -3,
+        3,
+        1,
+        3,
+        -3,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-66",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        2,
+        -2,
+        -1,
+        -3,
+        -2,
+        1,
+        2,
+        2,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-67",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        0,
+        2,
+        2,
+        -2,
+        -2,
+        3,
+        0,
+        3,
+        1,
+        2,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-68",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        -3,
+        -2,
+        3,
+        2,
+        -3,
+        -3,
+        2,
+        3,
+        -1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-69",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        3,
+        1,
+        -3,
+        1,
+        3,
+        3,
+        0,
+        1,
+        -3,
+        3,
+        1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-70",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        -2,
+        -1,
+        1,
+        1,
+        3,
+        2,
+        0,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-71",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-72",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        -3,
+        -1,
+        3,
+        2,
+        -1,
+        3,
+        -3,
+        2,
+        -1,
+        -1,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-73",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-74",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        3,
+        2,
+        -1,
+        1,
+        2,
+        0,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-75",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        0,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-76",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        3,
+        -1,
+        0,
+        1,
+        1,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-77",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        -3,
+        3,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-78",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        3,
+        3,
+        2,
+        1,
+        1,
+        -2,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-79",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        -1,
+        -1,
+        -2,
+        -2,
+        -3,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-80",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        1,
+        3,
+        2,
+        2,
+        3,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-81",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        -3,
+        3,
+        0,
+        2,
+        1,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-82",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        -3,
+        -2,
+        2,
+        2,
+        2,
+        -2,
+        0,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-83",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-84",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        3,
+        -2,
+        -2,
+        3,
+        3,
+        1,
+        -3,
+        0,
+        -1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-85",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        -3,
+        -1,
+        -2,
+        1,
+        2,
+        -3,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-86",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        0,
+        3,
+        -3,
+        1,
+        2,
+        -1,
+        -2,
+        2,
+        -3,
+        1,
+        3,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-87",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        1,
+        0,
+        0,
+        3,
+        1,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-88",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        3,
+        -2,
+        0,
+        2,
+        2,
+        2,
+        -3,
+        0,
+        3,
+        3,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-89",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        -3,
+        1,
+        3,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-90",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        2,
+        3,
+        -2,
+        0,
+        2,
+        2,
+        3,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-91",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        2,
+        -2,
+        2,
+        3,
+        2,
+        1,
+        2,
+        0,
+        2,
+        0,
+        3,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-92",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        1,
+        -2,
+        -3,
+        0,
+        0,
+        0,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-93",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        0,
+        3,
+        -2,
+        3,
+        0,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-94",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        0,
+        3,
+        -1,
+        -3,
+        1,
+        1,
+        -2,
+        3,
+        0,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-95",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        1,
+        0,
+        2,
+        -1,
+        2,
+        3,
+        -3,
+        -3,
+        -1,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-96",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        -1,
+        3,
+        3,
+        0,
+        1,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-97",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        -3,
+        -1,
+        -2,
+        -3,
+        -1,
+        2,
+        1,
+        0,
+        -1,
+        -1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-98",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        1,
+        -3,
+        3,
+        -3,
+        2,
+        0,
+        3,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-99",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        0,
+        0,
+        3,
+        -2,
+        3,
+        1,
+        0,
+        -2,
+        -1,
+        -1,
+        2,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-100",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-101",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        -1,
+        1,
+        3,
+        -1,
+        1,
+        2,
+        1,
+        -3,
+        -3,
+        2,
+        -2,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-102",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        1,
+        2,
+        0,
+        1,
+        2,
+        -2,
+        2,
+        0,
+        -1,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-103",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        2,
+        2,
+        -1,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-104",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        -3,
+        1,
+        3,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-105",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        -1,
+        0,
+        -3,
+        -3,
+        -2,
+        -1,
+        1,
+        0,
+        -1,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-106",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        2,
+        -2,
+        -3,
+        -2,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-107",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        -2,
+        -1,
+        0,
+        1,
+        3,
+        -1,
+        0,
+        -3,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-108",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        2,
+        -3,
+        3,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-109",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-110",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-111",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        0,
+        -1,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-112",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        0,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-113",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        -1,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-114",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        3,
+        -2,
+        3,
+        3,
+        -2,
+        2,
+        1,
+        3,
+        1,
+        2,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-115",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        -3,
+        -1,
+        0,
+        2,
+        1,
+        -1,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-116",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        2,
+        -2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        3,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-117",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        -2,
+        2,
+        1,
+        -3,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-118",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        3,
+        -3,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-119",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        2,
+        2,
+        1,
+        -3,
+        1,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-120",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        0,
+        0,
+        -3,
+        2,
+        -2,
+        0,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-121",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        2,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-122",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        -3,
+        0,
+        -3,
+        -2,
+        2,
+        3,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-123",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        -2,
+        3,
+        -3,
+        2,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-124",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        3,
+        -2,
+        0,
+        1,
+        -2,
+        -2,
+        -2,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-125",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        1,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-126",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        -3,
+        3,
+        -2,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-0-127",
+    "family": "linear-recurrence",
+    "text": "aplique recurrence-0 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        -3,
+        -2,
+        -1,
+        -3,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-0",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-1",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        1,
+        -1,
+        -1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-2",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        1,
+        -1,
+        1,
+        1,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-3",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-4",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        -1,
+        0,
+        0,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-5",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        0,
+        0,
+        0,
+        -1,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-6",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        1,
+        -1,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-7",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        -1,
+        0,
+        0,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-8",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        1,
+        -1,
+        1,
+        0,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-9",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        1,
+        1,
+        1,
+        -1,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-10",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        1,
+        1,
+        1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-11",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        -1,
+        -1,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-12",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        0,
+        0,
+        -1,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-13",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        0,
+        -1,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-14",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        1,
+        0,
+        -1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-15",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-16",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        0,
+        0,
+        -1,
+        -1,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-17",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        0,
+        -1,
+        0,
+        1,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-18",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        1,
+        0,
+        1,
+        1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-19",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        0,
+        -1,
+        0,
+        1,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-20",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-21",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        -1,
+        1,
+        -1,
+        -1,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-22",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-23",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        -1,
+        -1,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-24",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        -1,
+        1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-25",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        1,
+        0,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-26",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        0,
+        0,
+        0,
+        -1,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-27",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        1,
+        1,
+        1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-28",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        -1,
+        -1,
+        -1,
+        0,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-29",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        -1,
+        1,
+        1,
+        -1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-30",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        -1,
+        0,
+        -1,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-31",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        -1,
+        1,
+        0,
+        1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-32",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        -1,
+        1,
+        1,
+        0,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-33",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        1,
+        -1,
+        1,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-34",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        1,
+        -1,
+        0,
+        0,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-35",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        1,
+        -1,
+        -1,
+        0,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-36",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        -1,
+        1,
+        -1,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-37",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        -1,
+        0,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-38",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        0,
+        -1,
+        0,
+        -1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-39",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        0,
+        0,
+        -1,
+        -1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-40",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        0,
+        -1,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-41",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-42",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        -1,
+        0,
+        1,
+        1,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-43",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        -1,
+        0,
+        1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-44",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        0,
+        -1,
+        1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-45",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        1,
+        -1,
+        -1,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-46",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        -1,
+        0,
+        -1,
+        -1,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-47",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-48",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        0,
+        0,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-49",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        1,
+        0,
+        -1,
+        1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-50",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        -1,
+        1,
+        -1,
+        -1,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-51",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        0,
+        -1,
+        1,
+        -1,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-52",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        1,
+        0,
+        0,
+        -1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-53",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        0,
+        1,
+        0,
+        1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-54",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        0,
+        -1,
+        -1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-55",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-56",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        1,
+        1,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-57",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        -1,
+        -1,
+        0,
+        0,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-58",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        -1,
+        1,
+        1,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-59",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        -1,
+        1,
+        0,
+        1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-60",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        0,
+        1,
+        -1,
+        -1,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-61",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        1,
+        -1,
+        1,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-62",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        0,
+        -1,
+        0,
+        1,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-63",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        0,
+        0,
+        0,
+        0,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-64",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        1,
+        0,
+        -1,
+        -1,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-65",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        -1,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-66",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        1,
+        0,
+        -1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-67",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        -1,
+        -1,
+        0,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-68",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        1,
+        0,
+        -1,
+        -1,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-69",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        1,
+        0,
+        0,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-70",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        0,
+        1,
+        -1,
+        1,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-71",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        1,
+        1,
+        -1,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-72",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        1,
+        -1,
+        0,
+        0,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-73",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        1,
+        1,
+        0,
+        0,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-74",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        1,
+        0,
+        -1,
+        -1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-75",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        1,
+        0,
+        -1,
+        0,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-76",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        1,
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-77",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        1,
+        0,
+        -1,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-78",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-79",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        1,
+        1,
+        -1,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-80",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        -1,
+        1,
+        -1,
+        0,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-81",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        0,
+        1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-82",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        -1,
+        0,
+        1,
+        0,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-83",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        0,
+        0,
+        -1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-84",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        0,
+        0,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-85",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        1,
+        0,
+        -1,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-86",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        0,
+        -1,
+        0,
+        0,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-87",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        1,
+        -1,
+        0,
+        0,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-88",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        -1,
+        0,
+        1,
+        1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-89",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        0,
+        1,
+        -1,
+        0,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-90",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        -1,
+        1,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-91",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        -1,
+        -1,
+        -1,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-92",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        0,
+        -1,
+        1,
+        1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-93",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        0,
+        1,
+        1,
+        -1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-94",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        0,
+        0,
+        0,
+        -1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-95",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        1,
+        0,
+        0,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-96",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        1,
+        1,
+        0,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-97",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        0,
+        1,
+        0,
+        -1,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-98",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        -1,
+        0,
+        -1,
+        1,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-99",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        -1,
+        -1,
+        1,
+        0,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-100",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        -1,
+        0,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-101",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        -1,
+        0,
+        -1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-102",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-103",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        -1,
+        1,
+        -1,
+        0,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-104",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        -1,
+        0,
+        -1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-105",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        -1,
+        -1,
+        -1,
+        1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-106",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-107",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        0,
+        1,
+        -1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-108",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        -1,
+        -1,
+        0,
+        1,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-109",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        1,
+        -1,
+        -1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-110",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        -1,
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-111",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        0,
+        1,
+        0,
+        -1,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-112",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        1,
+        0,
+        1,
+        -1,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-113",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        0,
+        1,
+        -1,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-114",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        0,
+        1,
+        -1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-115",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        -1,
+        0,
+        0,
+        0,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-116",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        1,
+        1,
+        1,
+        0,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-117",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        -1,
+        0,
+        0,
+        -1,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-118",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        0,
+        0,
+        0,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-119",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        -1,
+        -1,
+        0,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-120",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        0,
+        1,
+        -1,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-121",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        -1,
+        1,
+        -1,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-122",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        -1,
+        1,
+        1,
+        1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-123",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        0,
+        0,
+        0,
+        1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-124",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        1,
+        0,
+        1,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-125",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        -1,
+        0,
+        1,
+        1,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-126",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        0,
+        -1,
+        -1,
+        1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-1-127",
+    "family": "quadratic-recurrence",
+    "text": "aplique recurrence-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-0",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        3,
+        -2,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-1",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        3,
+        3,
+        -2,
+        0,
+        -1,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-2",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        0,
+        0,
+        1,
+        1,
+        2,
+        1,
+        3,
+        3,
+        2,
+        0,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-3",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        1,
+        0,
+        -2,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-4",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        1,
+        -3,
+        -3,
+        3,
+        1,
+        1,
+        -1,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-5",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-6",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        0,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-7",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        0,
+        2,
+        -2,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-8",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        3,
+        -3,
+        1,
+        0,
+        -2,
+        0,
+        -3,
+        3,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-9",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        -2,
+        2,
+        0,
+        2,
+        -3,
+        -2,
+        1,
+        0,
+        -1,
+        -2,
+        3,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-10",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        -1,
+        -1,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-11",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        1,
+        0,
+        2,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-12",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        -3,
+        0,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-13",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        3,
+        1,
+        2,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-14",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        -3,
+        3,
+        2,
+        -1,
+        -2,
+        3,
+        2,
+        -3,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-15",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        0,
+        3,
+        -2,
+        3,
+        0,
+        -1,
+        0,
+        -2,
+        -2,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-16",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        -1,
+        2,
+        3,
+        -2,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-17",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        1,
+        0,
+        1,
+        -1,
+        2,
+        1,
+        -3,
+        -1,
+        -1,
+        -2,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-18",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        -2,
+        1,
+        3,
+        3,
+        2,
+        -2,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-19",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        3,
+        -2,
+        2,
+        -3,
+        3,
+        3,
+        -3,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-20",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        -2,
+        1,
+        1,
+        -3,
+        -1,
+        0,
+        0,
+        1,
+        3,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-21",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        0,
+        -1,
+        -2,
+        -2,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-22",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        3,
+        1,
+        2,
+        3,
+        -2,
+        1,
+        -2,
+        1,
+        -2,
+        2,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-23",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        3,
+        -2,
+        1,
+        3,
+        0,
+        -2,
+        1,
+        -2,
+        2,
+        -3,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-24",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        -1,
+        -1,
+        -3,
+        1,
+        3,
+        1,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-25",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        3,
+        2,
+        2,
+        -1,
+        -3,
+        1,
+        -3,
+        2,
+        2,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-26",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        3,
+        3,
+        -1,
+        -1,
+        0,
+        1,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-27",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        3,
+        -1,
+        1,
+        3,
+        -2,
+        2,
+        -3,
+        3,
+        -3,
+        -1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-28",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        -1,
+        -3,
+        1,
+        -2,
+        -3,
+        3,
+        3,
+        3,
+        0,
+        -2,
+        -3,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-29",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        -3,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-30",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        -3,
+        -2,
+        2,
+        2,
+        2,
+        -2,
+        -1,
+        -1,
+        2,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-31",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        3,
+        -2,
+        0,
+        3,
+        0,
+        1,
+        -3,
+        -3,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-32",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        3,
+        -3,
+        -2,
+        1,
+        0,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-33",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        2,
+        -3,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-34",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        -2,
+        -1,
+        0,
+        -1,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-35",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        -2,
+        2,
+        0,
+        -2,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-36",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        3,
+        3,
+        1,
+        1,
+        -2,
+        3,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-37",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        1,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-38",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        -3,
+        -2,
+        2,
+        0,
+        -3,
+        3,
+        0,
+        -1,
+        2,
+        0,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-39",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        2,
+        2,
+        -3,
+        3,
+        -2,
+        0,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-40",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        0,
+        2,
+        1,
+        -3,
+        0,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-41",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        -1,
+        1,
+        3,
+        1,
+        2,
+        -2,
+        0,
+        -2,
+        1,
+        -3,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-42",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        -2,
+        3,
+        -3,
+        1,
+        -2,
+        1,
+        3,
+        -1,
+        -3,
+        -1,
+        0,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-43",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        -1,
+        -3,
+        -1,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-44",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        2,
+        2,
+        -1,
+        -2,
+        2,
+        1,
+        0,
+        1,
+        -3,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-45",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        -1,
+        -2,
+        -3,
+        0,
+        2,
+        2,
+        1,
+        1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-46",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        3,
+        -2,
+        -1,
+        3,
+        3,
+        -2,
+        1,
+        1,
+        -2,
+        -2,
+        -2,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-47",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        2,
+        -3,
+        3,
+        0,
+        1,
+        -3,
+        -3,
+        -1,
+        -3,
+        2,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-48",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        -2,
+        1,
+        -3,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-49",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        3,
+        -2,
+        2,
+        1,
+        2,
+        -2,
+        -1,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-50",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        0,
+        -2,
+        -2,
+        3,
+        1,
+        2,
+        1,
+        -2,
+        -2,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-51",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        -1,
+        -2,
+        -3,
+        1,
+        -2,
+        3,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-52",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        2,
+        1,
+        1,
+        -3,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-53",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        -2,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-54",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        0,
+        3,
+        2,
+        1,
+        0,
+        3,
+        -3,
+        3,
+        2,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-55",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        0,
+        3,
+        1,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-56",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        -2,
+        -3,
+        -2,
+        -1,
+        -1,
+        -2,
+        2,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-57",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        -2,
+        1,
+        -1,
+        0,
+        0,
+        3,
+        -1,
+        0,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-58",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        3,
+        3,
+        -1,
+        1,
+        3,
+        0,
+        -2,
+        -1,
+        2,
+        2,
+        1,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-59",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        -2,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-60",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        1,
+        -1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        -1,
+        -1,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-61",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        -2,
+        2,
+        0,
+        -1,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-62",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-63",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        -2,
+        2,
+        3,
+        2,
+        3,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-64",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        -2,
+        -3,
+        0,
+        -3,
+        -1,
+        3,
+        1,
+        -1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-65",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        -3,
+        0,
+        3,
+        -2,
+        2,
+        -2,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-66",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        -1,
+        3,
+        2,
+        1,
+        3,
+        3,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-67",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        1,
+        -1,
+        -2,
+        -3,
+        -1,
+        0,
+        3,
+        1,
+        -3,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-68",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        2,
+        0,
+        2,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-69",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-70",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        1,
+        1,
+        2,
+        2,
+        0,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-71",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        1,
+        -1,
+        3,
+        1,
+        -1,
+        -2,
+        2,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-72",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        -1,
+        2,
+        1,
+        0,
+        2,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-73",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        3,
+        -2,
+        -1,
+        2,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-74",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        -2,
+        -1,
+        0,
+        0,
+        1,
+        -3,
+        3,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-75",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        -1,
+        -1,
+        -2,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-76",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        1,
+        2,
+        -1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-77",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        3,
+        -1,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-78",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        1,
+        0,
+        3,
+        -3,
+        2,
+        -2,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-79",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        -3,
+        3,
+        -2,
+        2,
+        -3,
+        -3,
+        -1,
+        -3,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-80",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        -3,
+        -3,
+        -1,
+        2,
+        -3,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-81",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        3,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-82",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        0,
+        -1,
+        1,
+        0,
+        1,
+        -1,
+        0,
+        3,
+        3,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-83",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        3,
+        1,
+        -2,
+        -3,
+        2,
+        2,
+        -1,
+        2,
+        1,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-84",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        0,
+        -3,
+        3,
+        0,
+        3,
+        1,
+        1,
+        -3,
+        -1,
+        -3,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-85",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        -2,
+        2,
+        1,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-86",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        -3,
+        3,
+        0,
+        -3,
+        0,
+        -1,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-87",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        2,
+        1,
+        -3,
+        1,
+        2,
+        2,
+        1,
+        -3,
+        1,
+        -2,
+        1,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-88",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        0,
+        0,
+        -3,
+        3,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-89",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        3,
+        -3,
+        -1,
+        0,
+        0,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-90",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        -2,
+        -3,
+        2,
+        1,
+        -2,
+        0,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-91",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        1,
+        -2,
+        -2,
+        -2,
+        -3,
+        2,
+        -2,
+        2,
+        3,
+        1,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-92",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        -3,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-93",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        0,
+        -3,
+        -2,
+        -1,
+        -1,
+        3,
+        -2,
+        0,
+        0,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-94",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        -2,
+        1,
+        1,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-95",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        -1,
+        -2,
+        0,
+        0,
+        -1,
+        -2,
+        -2,
+        3,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-96",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        -1,
+        -2,
+        1,
+        -3,
+        1,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-97",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        -2,
+        -3,
+        2,
+        -1,
+        0,
+        3,
+        -3,
+        3,
+        1,
+        1,
+        2,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-98",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        2,
+        3,
+        0,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-99",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        3,
+        3,
+        1,
+        1,
+        0,
+        3,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-100",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        0,
+        3,
+        -1,
+        -1,
+        0,
+        -1,
+        0,
+        0,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-101",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        2,
+        2,
+        -2,
+        0,
+        -1,
+        2,
+        -3,
+        -2,
+        -3,
+        -2,
+        0,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-102",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        -3,
+        -2,
+        0,
+        3,
+        -1,
+        3,
+        -3,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-103",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        1,
+        2,
+        -3,
+        -2,
+        -2,
+        -1,
+        0,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-104",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        -3,
+        -1,
+        2,
+        1,
+        0,
+        2,
+        2,
+        -1,
+        3,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-105",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        0,
+        1,
+        -1,
+        0,
+        2,
+        3,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-106",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        -3,
+        -1,
+        -1,
+        2,
+        1,
+        -1,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-107",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        -3,
+        0,
+        3,
+        -3,
+        3,
+        -3,
+        -1,
+        2,
+        3,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-108",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        2,
+        -3,
+        1,
+        3,
+        -3,
+        -3,
+        1,
+        2,
+        2,
+        3,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-109",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        1,
+        2,
+        3,
+        2,
+        2,
+        -2,
+        2,
+        -3,
+        -1,
+        -2,
+        -1,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-110",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        0,
+        2,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-111",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        3,
+        -3,
+        1,
+        3,
+        3,
+        3,
+        -3,
+        -2,
+        -3,
+        3,
+        -1,
+        0,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-112",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        -2,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-113",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        0,
+        -2,
+        -1,
+        -2,
+        -3,
+        0,
+        -2,
+        0,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-114",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        3,
+        1,
+        1,
+        -3,
+        3,
+        0,
+        2,
+        -2,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-115",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        -1,
+        -3,
+        -2,
+        -3,
+        -2,
+        -2,
+        2,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-116",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        3,
+        3,
+        1,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-117",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        -2,
+        2,
+        0,
+        -3,
+        -1,
+        -2,
+        3,
+        -1,
+        0,
+        1,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-118",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        1,
+        3,
+        3,
+        0,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-119",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        -1,
+        -2,
+        -2,
+        -1,
+        -3,
+        -3,
+        -2,
+        -3,
+        -1,
+        -3,
+        2,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-120",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-121",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        3,
+        2,
+        -1,
+        -2,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-122",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        -3,
+        3,
+        3,
+        -1,
+        -3,
+        2,
+        2,
+        0,
+        3,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-123",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        2,
+        1,
+        0,
+        0,
+        -3,
+        1,
+        2,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-124",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        2,
+        3,
+        -3,
+        1,
+        1,
+        3,
+        -1,
+        1,
+        -3,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-125",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        2,
+        0,
+        -2,
+        2,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-126",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        1,
+        -2,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "portable-2-127",
+    "family": "bilinear-recurrence",
+    "text": "aplique recurrence-2 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        -2,
+        0,
+        -3
+      ]
+    },
+    "expected": null
+  }
+]

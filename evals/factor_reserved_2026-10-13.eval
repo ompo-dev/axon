@@ -1,0 +1,32 @@
+# Internal reserve frozen before execution. Development: seed 519731, 10 cases.
+# Three seeds, 15 cases each; 3 instances of each regime per seed:
+# small parallel cycles (3 sensors, hidden periods 3..4), large cycles (6 sensors),
+# small hidden workflow (2 sensors, 3 actions each), large workflow (4 sensors),
+# coupled negative control (2 sensors, one action gated by the other hidden state).
+# Actions and sensor ordering/tokens are shuffled; periods/states/transitions are
+# not provided. Workflows reset to the zero phase; cycles/coupled reset randomly.
+# Schema, discrete reset interface and goal token calibration are supplied.
+# Projected: one learner per output channel, all global actions, shared full-frame
+# prefix cache. No independent-action assumption, no truth-based refinements.
+# Monolithic: dynamically intern observed complete frames as output tokens,
+# same oracle/cache/action limits, existing 128-state learner. Limits are refusals,
+# not correct models; preserve them and any incorrectly accepted candidate.
+# Common bounded conformance: candidate accesses x depth-2 middles x suffixes,
+# fixed exploration depth 4 for up to 6 actions, otherwise 3. Not equivalence proof.
+# Global acquisition limits: 32768 reset calls, 800000 action calls, 200000 cached
+# prefixes. Per-component existing learner bounds apply; no RSS/energy cap.
+# After fit only: whole reachable product audit (<=65536 pairs), save/catalog/reload,
+# 6 goals including partial/full targets, histories and one absent-symbol control.
+# Plans checked against independent truth BFS for possibility, minimal length,
+# and actual final output. No planning/audit signal goes back to learning.
+# Cache is in RAM, not an episodic journal. Models and catalog are persistent.
+# fit_ns includes learning/cache/common conformance; audit/save/plans excluded.
+# Order projected/flat alternates per case. No tuning after reserved execution.
+# Additional selection comparison: seed xor 0xC1317, 15 targets per seed,
+# 5 fully recorded repetitions of compact/reference/from-scratch adaptation.
+# Alternating compact/reference order; all use the same conformance and query cache.
+# Check exact audit and compact/reference parity of model, probes, queries/steps.
+# Repetitions are not independent environments. Sources/training recorded separately.
+seed=19374611 cases=15
+seed=46782319 cases=15
+seed=90861527 cases=15

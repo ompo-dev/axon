@@ -1,0 +1,14 @@
+# Grounding reserve written before the one-edit investigation policy on 2026-10-12.
+# query<TAB>required sources; this suite is evaluated once after implementation and validation.
+como LiveAverageStore sincroniza journal antes de alterar estado e recusa segundo escritor	docs/LIVE_LEARNING_2026-09-13.md&src/live_store.rs&tests/live_avg_contracts.rs
+como MinimumUpdate RebuildRequired obriga varredura depois da ultima ocorrencia	docs/DELTAFORGE_MIN_2026-09-22.md|docs/DELTAFORGE.md&src/delta_forge.rs&tests/delta_forge_contracts.rs
+como SpecialistCapsule load preserva monitor e valida identidade	docs/SPECIALIST_FOUNDRY_2026-09-22.md|docs/COMPOSITIONAL_FOUNDRY_2026-09-22.md&src/specialist.rs&tests/specialist_contracts.rs
+como FoldSpec PopulationVarianceExactU64 recusa entrada vazia e ArithmeticOverflow	docs/DELTAFORGE_VARIANCE_2026-09-22.md|docs/DELTAFORGE.md&src/delta_forge.rs&tests/delta_forge_contracts.rs|tests/task_runtime_contracts.rs
+como OnlineAveragePolicy choose separa avaliacao de execute_and_learn	docs/LIVE_LEARNING_2026-09-13.md|docs/ARCHITECTURE.md&src/online_policy.rs&tests/online_policy_contracts.rs
+como KnowledgeStore record_feedback descarta relevancia quando muda conteudo da fonte	docs/KNOWLEDGE_MEMORY_2026-09-23.md|docs/ARCHITECTURE.md&src/knowledge.rs&tests/knowledge_cli_contracts.rs
+como AXMEM001 checksum autoriza transferencia bancaria	-
+como train_specialist cria classificacao bancaria com quatro atributos	-
+como ExactAverage preve cotacao futura com tres momentos	-
+como LiveAverageStore diagnostica estado clinico depois de replay	-
+como SpecialistCapsule seleciona terapia individual sem exames	-
+como ArtifactStore instala uma peca de museu depois de avaliar autenticidade	-

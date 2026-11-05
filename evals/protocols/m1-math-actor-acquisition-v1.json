@@ -1,0 +1,24 @@
+{
+  "schema": "axon-math-actor-acquisition/v1",
+  "base_protocol": "evals/protocols/m1-math-actor-v1.json",
+  "source_study": ".axon-memory/m1-math-actor-v1",
+  "diagnostic": ".axon-memory/m1-math-actor-diagnostic-v3/audit.json",
+  "parent": ".axon-memory/m1-public-split-mixers-v1/policy-3/structural.axnum",
+  "parent_sha256": "97a7e3f0e8cc1a6f5b1822a655b4182a0b8af96438d0b427123ef17440d3dfd2",
+  "parent_modules": 2,
+  "ancestry": "Explicit sibling branch from the207515B pre-math parent with structural and public-language modules. Preserve both byte-for-byte, never remove old pages from existing35-module genomes. Reuse the SAME four learned primitive bytes with full ancestral costs. This frees experimental-library bytes, not an increase of262144B caps or proof of learned compression.",
+  "hypothesis": "Matched decoder on teacher states already fails: full983/2251 semantic actions, first189/629, whole37/629; own52/629, none fails if all teacher actions correct with same first frame. Under-acquisition is observable before exposure bias. Test existing recurrent/contextual representation with a larger bounded vocabulary/vector/state budget, not thousands of random seeds or recovery on unseen labels.",
+  "source": "Same629 frozen train episodes/2251 states. Canonicalize only terminal punctuation of question component exactly as State::new before appending scratch; source scalar meanings, labels, action order, registers and eligibility unchanged. The31/629 question-free mismatches stay in prior failed artifacts, not retroactively fixed.",
+  "policies": [
+    {"name":"canonical-regional-small-full","numbers_only":false,"layout":"focused","relative_regions":true,"budget":{},"expected_encoder":".axon-memory/m1-math-actor-state-v1/policy-1-model/semantic-lexical-encoder-v1.axseq"},
+    {"name":"canonical-regional-small-free","numbers_only":true,"layout":"focused","relative_regions":true,"budget":{}},
+    {"name":"canonical-recurrent-large-full","numbers_only":false,"layout":"focused","relative_regions":true,"budget":{"vocabulary":1536,"dimensions":16,"hidden":32,"epochs":32,"ordered_context":true}},
+    {"name":"canonical-recurrent-large-free","numbers_only":true,"layout":"focused","relative_regions":true,"budget":{"vocabulary":1536,"dimensions":16,"hidden":32,"epochs":32,"ordered_context":true}}
+  ],
+  "controls": "Small/full identical examples and recipe to previous focused/regional full: neural page must be byte-identical. Small/free isolates canonicalization with same recurrent-free budget. Large/full vs large/free match recipe but differ semantic input; large vs small is a joint representation/capacity/training-budget intervention, NOT isolated proof for any component. Report all4 fits; do not retry score-selected settings.",
+  "runtime": "Original learned actor and explicit focused module. SAME eight elementary operations, nine decisions, beam8/top5,2M/decision,18M/request,100M/batch, active_modules2 and262144B payload/genome caps. No future teacher result in inference. Any compile/size/work refusal remains a failure, no cap raises or fallback replacing refused fit.",
+  "evaluation": "Full1481 already consumed development only, final scalar recount after frozen predictions. Train greedy is not constrained rollout; public scalar alone not full M1. No reserved/research/original test answers, no development derivations.",
+  "engineering": "Existing tested Elman/BPTT/AXSQ0011 reused without encoder/decoder/codec changes. Only training-driver explicit alternate-parent/per-policy-budget path and source normalization helper. Check old actor replay, old language retention, mixed-genome quotas, tests, clippy and evidence. UI/production unchanged.",
+  "m1_complete": false,
+  "m2_permitted": false
+}

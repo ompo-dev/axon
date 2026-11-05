@@ -1,0 +1,23 @@
+{
+  "schema":"axon-lexical-normalized-decoding/v1",
+  "source":".axon-memory/m1-public-ordered-context-v1",
+  "models":[0,6],
+  "plans":[
+    {"name":"greedy","format":"lexical-sum","budget":{"beam":1,"intents":1,"max_work":5000000}},
+    {"name":"slots4","format":"lexical-sum","budget":{"beam":4,"intents":1,"max_work":5000000}},
+    {"name":"slots8","format":"lexical-sum","budget":{"beam":8,"intents":1,"max_work":5000000}},
+    {"name":"joint4-sum","format":"lexical-sum","budget":{"beam":4,"intents":2,"max_work":5000000}},
+    {"name":"joint8-sum","format":"lexical-sum","budget":{"beam":8,"intents":4,"max_work":5000000}},
+    {"name":"joint4-mean","format":"lexical-mean","budget":{"beam":4,"intents":2,"max_work":5000000}},
+    {"name":"joint8-mean","format":"lexical-mean","budget":{"beam":8,"intents":4,"max_work":5000000}}
+  ],
+  "chunk_requests":16,
+  "hypothesis":"Independent greedy tag decisions and intent selection may miss better whole-frame paths. Neural logits have arbitrary additive head/context offsets and must not be summed as though they were comparable log probabilities.",
+  "objective":"Sum: log softmax(intent) plus sum log softmax(tag|text,intent,previous). Mean: intent term plus mean token log terms, a weighted score not a joint probability. The softmax tag denominator covers all learned tags, then BIO-legal paths are searched. Fixed-point units1e-6 after the existing quantized logit units1e-3. Rounding can create ties; ties among retained final paths refuse.",
+  "controls":"Same frozen numeric models, no retraining, extra lexical labels/domains, allowed-role oracle, teacher at inference, or reserve. Greedy1/1 deliberately reuses the original predictor, including local margin refusals and charged work. Slots-only beams separate tag search from intent reranking. Every plan/result is reported, including regressions and budget refusals.",
+  "resources":"Existing beam<=16,intents<=8,query<=50million allowed by engine, this study fixes max5million, existing aggregate100million and receipt16MB unchanged. Sixteen requests per process bound aggregate charged work. Cache only current token-position scores keyed by candidate intent and previous tag, at most16 rows of <=256 scores; no model clone, train data or previous request cache. Work charges scoring, softmax proxy, cache probes and expansions, not physical FLOPs/process IO/energy.",
+  "scope":"Reuses shared bounded beam algorithm, not exact Viterbi/CRF or globally normalized training. Pruned paths mean retained margins are neither global ambiguity certificates nor calibrated confidence. New decoder policy is an explicit lab argument, not silently encoded in these unchanged genomes or promoted operationally. This consumed-development study cannot satisfy independent M1 semantic/grounded gates or authorize tools.",
+  "selection":"Development exact count, then charged work, then model index and plan order; records all14conditions. Source protocol frozen before new decoder predictions. No original test/reserved worker evaluation or M1/M2 promotion.",
+  "promotion":false,
+  "m1_complete":false
+}

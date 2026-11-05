@@ -10,13 +10,15 @@ $files = @(Get-ChildItem -LiteralPath $Directory -Filter $Pattern | Sort-Object 
 if ($files.Count -eq 0) { throw 'No stream reports found' }
 $rows = foreach ($file in $files) {
     $report = Get-Content -LiteralPath $file.FullName -Raw | ConvertFrom-Json
-    if ($report.schema -ne 'axon-online-stream-v2' -or !$report.exact) { throw "Invalid report: $file" }
+    if ($report.schema -notin @('axon-online-stream-v2', 'axon-online-stream-v3', 'axon-online-stream-v4') -or !$report.exact) { throw "Invalid report: $file" }
     $cases = $report.steps_per_size_phase * 32
-    if ($report.observations -ne $cases -or $report.records.Count -ne 2 * $cases -or $report.exact_checks -ne 8 * $cases) {
+    $expectedObservations = if ($report.schema -ne 'axon-online-stream-v2') { $report.training.learnable_cases } else { $cases }
+    if ($report.observations -ne $expectedObservations -or $report.records.Count -ne 2 * $cases -or $report.exact_checks -ne 8 * $cases) {
         throw "Inconsistent counts: $file"
     }
     $sums = @(@([long]0, [long]0, [long]0, [long]0), @([long]0, [long]0, [long]0, [long]0))
     $positions = @{}
+    $learnable = @(0, 0)
     foreach ($record in $report.records) {
         if ($record.Count -ne 10 -or $record[0] -notin @(0, 1) -or $record[1] -lt 0 -or $record[1] -gt 7 -or $record[3] -gt $record[2] -or $record[3] -lt 0 -or $record[4] -notin @(0, 1, 2, 3) -or $record[9] -notin @(0, 1)) {
             throw "Malformed sample: $file"
@@ -29,7 +31,9 @@ $rows = foreach ($file in $files) {
         $key = '{0}/{1}/{2}' -f $record[0], $record[1], $record[2]
         if (!$positions.ContainsKey($key)) { $positions[$key] = @(0, 0, 0, 0) }
         $positions[$key][$record[4]]++
+        if ($record[3] -gt 0) { $learnable[$record[0]]++ }
     }
+    if ($report.schema -ne 'axon-online-stream-v2' -and ($learnable[1] -ne $report.observations -or $learnable[0] -ne $report.holdout.learnable_cases)) { throw "Wrong nonempty observation counts: $file" }
     if ($positions.Count -ne 64) { throw "Missing experimental contexts: $file" }
     foreach ($counts in $positions.Values) {
         foreach ($count in $counts) {
@@ -47,6 +51,7 @@ $rows = foreach ($file in $files) {
     $test = $report.holdout.totals_ns
     [pscustomobject]@{
         seed = $report.seed
+        observations = $report.observations
         training_cases = $cases
         holdout_cases = $cases
         exact_checks = $report.exact_checks

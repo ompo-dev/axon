@@ -1,0 +1,26 @@
+{
+  "schema":"axon-public-grammar-protocol/v1",
+  "learner":"sequence-v1",
+  "source":"MASSIVE 1.1 pt-PT",
+  "source_sha256":"af89ce740b98e8fe73a0fb3ba69a296837910f037e954b87409ef41d467d3da0",
+  "previous_predictions":".axon-memory/m1-public-grammar-v3/policy-1-predictions.json",
+  "train":"8526 original train examples excluding all reserved localization workers; gold intent and BIO histories only in training",
+  "development":"1504 already consumed original dev examples excluding reserved workers; adaptive selection, not prospective final audit",
+  "reservation":"Original test and every reserved localizer remain unused; do not evaluate until all development gates justify it",
+  "policies":[
+    {"seed":47,"buckets":8192,"epochs":6,"weights":20000,"intent_weights":0,"minimum_margin":1},
+    {"seed":19374611,"buckets":8192,"epochs":10,"weights":24000,"intent_weights":0,"minimum_margin":1},
+    {"seed":47,"buckets":8192,"epochs":6,"weights":20000,"intent_weights":10000,"minimum_margin":1},
+    {"seed":19374611,"buckets":8192,"epochs":10,"weights":24000,"intent_weights":12000,"minimum_margin":1},
+    {"seed":47,"buckets":8192,"epochs":6,"weights":20000,"intent_weights":14000,"minimum_margin":1},
+    {"seed":19374611,"buckets":8192,"epochs":10,"weights":24000,"intent_weights":16000,"minimum_margin":1},
+    {"seed":47,"buckets":16384,"epochs":6,"weights":20000,"intent_weights":10000,"minimum_margin":1},
+    {"seed":19374611,"buckets":16384,"epochs":10,"weights":24000,"intent_weights":12000,"minimum_margin":1}
+  ],
+  "algorithm":"Same proportional-int8 averaged perceptron and teacher-forced training as protocol v2. Zero intent_weights retains one-third allocation. Inference remains greedy and receives no labels or teacher queries.",
+  "change_hypothesis":"Under fixed 20000/24000 stored-weight caps, test allocation between intent and argument heads and hash collisions. First two policies are unchanged controls; this is a bounded hyperparameter experiment, not autonomous seed evolution or a claim of exponential intelligence.",
+  "selection":"Exact complete dev structures, then fewer stored weights, then policy order; no post-hoc selection of a favorable family",
+  "metrics":"Exact intent and ordered role/value spans, novelty strata and errors/abstentions in all denominators; report failures even if best candidate improves",
+  "completion_contract":"evals/protocols/m1-completion-v1.json; all required gates, unchanged",
+  "scope":"Public pt-PT supervision, known algorithm, no pretrained LLM or remote teacher. Margins are not probabilities, certificates or action authority. No M1 promotion from this development sweep alone; unknown energy/RSS remain unavailable."
+}

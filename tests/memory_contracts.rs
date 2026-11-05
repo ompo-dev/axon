@@ -39,19 +39,24 @@ static ALLOCATOR: Meter = Meter;
 fn incremental_execution_allocates_nothing_and_recovery_does_not_duplicate_source() {
     let semantic = SemanticArtifact::synthesize(FoldSpec::AverageExactU64).unwrap();
     let mut live = LiveAverage::materialize(7, vec![1; 524288], semantic).unwrap();
-    let mut policy = OnlineAveragePolicy::new("allocation-test");
+    let mut policies = [
+        OnlineAveragePolicy::new("allocation-test"),
+        OnlineAveragePolicy::normalized("normalized-allocation-test"),
+    ];
     let delta = ReplaceDelta::try_new(vec![Replace::new(0, 1, 2)]).unwrap();
     let inverse = ReplaceDelta::try_new(vec![Replace::new(0, 2, 1)]).unwrap();
     let empty = ReplaceDelta::try_new(vec![]).unwrap();
     ALLOCATED.store(0, Ordering::SeqCst);
     MEASURING.store(true, Ordering::SeqCst);
-    for _ in 0..1000 {
-        live.apply(7, live.version(), live.version() + 1, &delta)
-            .unwrap();
-        let event = live.version() + 1;
-        policy
-            .execute_and_learn(&mut live, event, &inverse)
-            .unwrap();
+    for policy in &mut policies {
+        for _ in 0..1000 {
+            live.apply(7, live.version(), live.version() + 1, &delta)
+                .unwrap();
+            let event = live.version() + 1;
+            policy
+                .execute_and_learn(&mut live, event, &inverse)
+                .unwrap();
+        }
     }
     MEASURING.store(false, Ordering::SeqCst);
     assert_eq!(ALLOCATED.load(Ordering::SeqCst), 0);
@@ -77,7 +82,7 @@ fn incremental_execution_allocates_nothing_and_recovery_does_not_duplicate_sourc
     assert_eq!(report.replayed_events, 0);
     assert_eq!(store.state().unwrap().query().numerator(), 524288);
     println!(
-        "recovery_source_bytes=4194304 recovery_allocated_bytes={bytes} steady_allocated_bytes=0"
+        "recovery_source_bytes=4194304 recovery_allocated_bytes={bytes} steady_events=4000 steady_allocated_bytes=0"
     );
     drop(store);
     std::fs::remove_dir_all(root).unwrap();

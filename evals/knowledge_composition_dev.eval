@@ -1,0 +1,22 @@
+# Development suite for compositional evidence, frozen before implementation on 2026-09-23.
+# query<TAB>relevant source suffixes; - requires abstention.
+como a memoria combina checksum lock e snapshot anterior para publicar sem perder dados	docs/KNOWLEDGE_MEMORY_2026-09-23.md|src/knowledge.rs
+por que feedback pode mudar ranking sem fabricar um hit fora do corpus	docs/KNOWLEDGE_MEMORY_2026-09-23.md|docs/ARCHITECTURE.md|src/knowledge.rs
+como MIN combina testemunha compacta com reconstrucao quando a informacao desaparece	docs/DELTAFORGE_MIN_2026-09-22.md|docs/DELTAFORGE.md
+por que o specialist separa auditoria holdout e monitor de drift	docs/SPECIALIST_FOUNDRY_2026-09-22.md|docs/COMPOSITIONAL_FOUNDRY_2026-09-22.md|src/specialist.rs
+como os tres momentos da variancia exata convivem com a recusa de overflow	docs/DELTAFORGE_VARIANCE_2026-09-22.md|src/delta_forge.rs
+como compactar o journal preserva a versao e permite continuar recebendo eventos	docs/LIVE_LEARNING_2026-09-13.md|docs/ROBUSTNESS_2026-09-13.md|src/live_store.rs
+como hash semantico guards e backend protegem um artifact persistente	docs/DELTAFORGE.md|src/artifact_store.rs
+como a politica explora alternativas mas aprende somente com a estrategia executada	docs/LIVE_LEARNING_2026-09-13.md|docs/ONLINE_COSTS_2026-09-22.md|src/online_policy.rs
+por que um benchmark lifecycle inclui sintese materializacao verificacao e execucao	docs/BENCH_CONTRACT.md|README.md
+como Morphology protege a base e cobra Migration Tax antes de remorph	docs/ARCHITECTURE.md|README.md|src/morphology.rs
+como ignorancia explicita e capacidade por byte limitam a visao do AXON	docs/VISION.md
+como a media exata deriva sum e count e depois reutiliza o artifact	docs/DELTAFORGE.md|README.md|src/delta_forge.rs
+como usar checksum para recuperar a senha de uma carteira de Bitcoin	-
+como desenvolver memoria fotografica para decorar livros rapidamente	-
+qual variancia recente do preco da gasolina em Sao Paulo	-
+como compactar um diario de bordo escrito a mao	-
+qual morfologia de planta produz mais tomates no verao	-
+como aumentar a capability de bateria de um telefone celular	-
+qual treinamento de corrida reduz o tempo nos cinco quilometros	-
+onde encontrar artifacts arqueologicos em museus de Lisboa	-

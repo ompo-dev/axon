@@ -1,0 +1,21 @@
+{
+  "schema":"axon-public-segment-recombination/v2",
+  "source":"MASSIVE 1.1 pt-PT",
+  "source_sha256":"af89ce740b98e8fe73a0fb3ba69a296837910f037e954b87409ef41d467d3da0",
+  "learner":"segment-sequence-v1",
+  "policies":[
+    {"learner":{"seed":19374611,"buckets":8192,"epochs":6,"weights":60000,"intent_weights":24000,"subwords":true,"minimum_margin":1},"max_span":12,"typed_roles":true,"max_work":5000000,"span_replacements":0.0},
+    {"learner":{"seed":19374611,"buckets":8192,"epochs":6,"weights":60000,"intent_weights":24000,"subwords":true,"minimum_margin":1},"max_span":12,"typed_roles":true,"max_work":5000000,"span_replacements":0.3},
+    {"learner":{"seed":19374611,"buckets":8192,"epochs":6,"weights":60000,"intent_weights":24000,"subwords":true,"minimum_margin":1},"max_span":12,"typed_roles":true,"max_work":5000000,"span_replacements":0.7},
+    {"learner":{"seed":19374611,"buckets":8192,"epochs":6,"weights":60000,"intent_weights":24000,"subwords":true,"minimum_margin":1},"max_span":12,"typed_roles":true,"max_work":5000000,"span_replacements":1.0}
+  ],
+  "selection":"Original public-development full-frame exact matches, then fewer retained weights, then policy index. All failures retained; no test/reserved-worker evaluation.",
+  "hypothesis":"Recombine train-only role values across taught contexts, preserving originals, to reduce reliance on specific entity words. This may improve or harm generalization; no success presumed.",
+  "augmentation":"For every original presentation, optionally add at most one changed frame. Replace each eligible labeled span with probability p using a unique original-train value of the same role. Never change outside words, role, intent or order. Reindex boundaries and refuse replacements that would exceed 64 tokens. No development value or label enters the pool. Synthetic frames are not independently authored or guaranteed linguistically natural.",
+  "control":"Probability zero must preserve RNG and reproduce v1 policy-1 full number and every prediction. Added presentations and replacements are explicitly counted. They are recombinations of the same 8526 observations, not new real experiences or inherited private facts.",
+  "representation":"Training-only option; unchanged AXSQ0008/tag-17 inference and physical quotas. Existing strict public development truth remains unchanged. Extra training does not prove emergence or full M1.",
+  "method_source":"https://aclanthology.org/2020.coling-main.343/",
+  "scope":"Known NER augmentation idea applied to a bounded segment perceptron, not an AXON invention or replacement for independent semantic/grounded M1 gates. Work is model scoring/expansions, not whole RAM or energy.",
+  "promotion":false,
+  "m1_complete":false
+}

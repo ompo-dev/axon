@@ -1,0 +1,9 @@
+{
+  "schema": "axon-context-development-data/v1",
+  "sha256": "ed67e4e3f3fa56850de8c2a7bff019da570b67008ac3c4a6e2801c0370aac25d",
+  "lessons": 68,
+  "sessions": 48,
+  "turns": 1536,
+  "restarts": 96,
+  "scope": "Same-author synthetic context, quantity, source, reference and unit development. New values/names/compositions, not independent Portuguese authorship or M1 closure. No units or arithmetic answers hardcoded in Session."
+}

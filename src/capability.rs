@@ -8,6 +8,7 @@ pub enum Effect {
     Network,
     Actuator,
     SpawnProcess,
+    Simulate,
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]

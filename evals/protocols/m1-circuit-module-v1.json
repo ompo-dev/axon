@@ -1,0 +1,19 @@
+{
+  "schema":"axon-compiled-circuit-module/v1",
+  "objective":"Reuse existing CircuitDna AXCG0001 and NumericExecution to birth numerical capabilities without serializing foundry training/admission examples, names, contexts or optimizer state. This is an architectural prerequisite for a language/math bridge, not full M1 completion.",
+  "representation":"Explicit new portable catalog kind18, existing AXCG0001 payload, maximum65536 bytes. Existing kinds0..17 and formats unchanged. Global genome/page/authority quotas never enlarged. Runtime retains compiled NumericExecution only, not an EvolvedSkill/NumericSkill witness archive. Same partial floating-point arithmetic and finite/domain guards.",
+  "scope":"Source-program export references the existing numerical foundry and compiler, not another solver. It does not guarantee arbitrary learned programs contain no sensitive information: an induced constant can encode a fact. Only authorized capabilities may be exported; explicit private journals/examples must not be copied.",
+  "context":"The existing AXCG format uses explicit generic runtime context axon/constructive-v1, not the original skill's semantic context. CLI export must validate the source context before writing; caller must rebind units/meaning/authority explicitly. Arithmetic/domain guards are preserved, not a semantic-context or privacy certificate.",
+  "preflight":["Program conversion preserves expression, arity and bits/domain errors through serialization and compilation","Different witness/name/context histories yielding the same program yield the same executable DNA","Separate-process/demand birth from numeric genome without original data files","Strict parser, canonical genes, cycles/forward references, checksum and quota failures remain refusals","Authority/context and active-module/byte limits preserved; rejected requests cannot authorize effects"],
+  "regression":"Focused numeric/demand/genome and full Rust tests, clippy, minimal build, legacy public numeric seed replay and existing language/math/context retention. Record all negative tests and full immutable source/binary evidence. No old numeric format silently reinterpreted.",
+  "measurement":"Report serialized module versus witness-bearing source and retained compiled bytes. Decode scratch/stack and full process/IO costs remain distinct; do not claim physical speed, RSS or energy improvements without matched measurements.",
+  "source":"GSM8K partition and answer-access audit remain frozen. This module qualification reads no GSM answer property, performs no word-problem training/evaluation and cannot report a GSM score.",
+  "demo_cases":[
+    {"name":"calibration","training":"examples/numeric/calibration.tsv","context":"circuit/source-calibration","max_cost":8,"max_terms":100000,"queries":[{"values":[-1000.25],"expected":-1999.5},{"values":[123.25],"expected":247.5},{"values":[99999],"expected":199999}]},
+    {"name":"distance2","training":"examples/numeric/distance2.tsv","context":"circuit/source-distance2","max_cost":8,"max_terms":100000,"queries":[{"values":[6,8],"expected":10},{"values":[9,12],"expected":15},{"values":[20,21],"expected":29},{"values":[-5,-12],"expected":13},{"values":[0.3,0.4],"expected":0.5}]}
+  ],
+  "demo_controls":"Old witness-bearing predictor, exported circuit-number predictor and new genome-number demand predictor on the same8 declared queries. Freeze before fitting. Move the original catalog/payload directory aside after packing; demand predictions must then use only the packed number and fresh birth directories. Invalid values, context, id and numeric kind mismatch are refusals; record any authorized local birth files even on a failed query. These are same-author numerical regression cases, not new mathematical discoveries or independent public language tests.",
+  "promotion":false,
+  "m1_complete":false,
+  "m2_permitted":false
+}

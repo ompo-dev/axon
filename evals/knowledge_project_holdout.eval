@@ -1,0 +1,31 @@
+# Frozen before the first run on 2026-09-23. query<TAB>relevant suffixes; - means abstain.
+qual expressao com soma e soma dos quadrados publica a variancia como fracao	docs/ARCHITECTURE.md|docs/DELTAFORGE_VARIANCE_2026-09-22.md
+quantas palavras logicas o Forge exige para manter minimo e multiplicidade	docs/DELTAFORGE_MIN_2026-09-22.md|docs/DELTAFORGE.md
+quando CapabilityGate bloqueia um efeito mesmo que a previsao esteja confiante	docs/ARCHITECTURE.md|README.md|docs/SPECIALIST_FOUNDRY_2026-09-22.md
+depois de quantos erros consecutivos o monitor suspende o specialist sob drift	docs/SPECIALIST_FOUNDRY_2026-09-22.md|docs/COMPOSITIONAL_FOUNDRY_2026-09-22.md
+qual tamanho do checkpoint composicional v2 e do formato antigo v1	docs/COMPOSITIONAL_FOUNDRY_2026-09-22.md|README.md
+por que o holdout congelado nao participa da decisao de promocao	docs/SPECIALIST_FOUNDRY_2026-09-22.md|docs/COMPOSITIONAL_FOUNDRY_2026-09-22.md
+como o custo normalizado leva em conta a quantidade de substituicoes	docs/ONLINE_COSTS_2026-09-22.md
+como compactacao publica temporario sincronizado mantendo o lock lateral	docs/LIVE_LEARNING_2026-09-13.md|docs/ARCHITECTURE.md
+o que StoreLimits restringe em fonte lote e journal	docs/ROBUSTNESS_2026-09-13.md
+por que coalescing e recusado quando eventos intermediarios sao observaveis	docs/DELTA_ALGEBRA.md|src/lib.rs|src/delta.rs
+em qual classe de fontes LiftCertificate aceita equivalencia exata	docs/ARCHITECTURE.md|README.md|src/structure.rs
+por que os experimentos atuais nao podem ser chamados de AGI	docs/VISION.md|README.md
+quantas transicoes exaustivas verificaram a variancia em vetores ternarios	docs/DELTAFORGE_VARIANCE_2026-09-22.md|docs/RESULTS.md
+em qual regime Full venceu 913 pares do candidato de minimo	docs/DELTAFORGE_MIN_2026-09-22.md|docs/RESULTS.md|README.md
+quantos casos sem sinal a primeira foundry recusou	docs/SPECIALIST_FOUNDRY_2026-09-22.md|docs/RESULTS.md
+de quantas para quantas tentativas o StructurePrior reduziu a busca	docs/RESULTS.md
+como ArtifactStore reutiliza uma tarefa pelo hash semantico e pelos guards	README.md|docs/DELTAFORGE_MIN_2026-09-22.md|tests/task_runtime_contracts.rs
+como a media exata representa numerador e denominador sem ponto flutuante	docs/DELTAFORGE.md|README.md
+qual limite impede a alocacao Pareto de explorar estados demais	docs/ARCHITECTURE.md
+por que a materializacao inicial passou a entrar na razao instalada do minimo	docs/DELTAFORGE_MIN_2026-09-22.md|docs/RESULTS.md
+como ajustar o pH do solo para cultivar mirtilos organicos	-
+quais documentos preciso para visto de turismo no Japao	-
+como responder a defesa siciliana no xadrez com as pecas brancas	-
+qual dose de insulina deve ser aplicada depois do jantar	-
+quando sera o proximo eclipse lunar visivel em Recife	-
+quais causas economicas levaram a Revolucao Francesa	-
+como calcular juros de financiamento imobiliario pela tabela Price	-
+qual perfil de torra combina com cafe etiope de altitude	-
+como trocar o filtro de combustivel de um motor diesel	-
+qual adubo melhora a floracao de roseiras no inverno	-

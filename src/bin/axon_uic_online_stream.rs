@@ -16,20 +16,22 @@ const PHASES: [&str; 8] = [
 ];
 const TRAIN_SIZES: [usize; 4] = [384, 6144, 98304, 393216];
 const HOLDOUT_SIZES: [usize; 4] = [511, 8191, 131071, 524287];
-const CONTEXT: &str = "axon-online-stream-v2/mixed-layout/selected-only";
+const CONTEXT: &str = "axon-online-stream-v4/mixed-layout/nonempty-selected-only";
 
 #[derive(Default)]
 struct Scores {
     samples: [Vec<u64>; 4],
     choices: [usize; 2],
+    learnable_cases: usize,
 }
 
 impl Scores {
-    fn record(&mut self, elapsed: [u64; 4], strategy: AverageStrategy) {
+    fn record(&mut self, elapsed: [u64; 4], strategy: AverageStrategy, updates: usize) {
         for (samples, elapsed) in self.samples.iter_mut().zip(elapsed) {
             samples.push(elapsed);
         }
         self.choices[usize::from(strategy == AverageStrategy::Full)] += 1;
+        self.learnable_cases += usize::from(updates != 0);
     }
     fn totals(&self) -> [u128; 4] {
         self.samples
@@ -41,8 +43,9 @@ impl Scores {
         let p50 = self.samples.each_ref().map(|s| percentile(s, 50));
         let p95 = self.samples.each_ref().map(|s| percentile(s, 95));
         format!(
-            "{{\"cases\":{},\"totals_ns\":{totals:?},\"p50_ns\":{p50:?},\"p95_ns\":{p95:?},\"policy_choices_incremental_full\":{:?}}}",
+            "{{\"cases\":{},\"learnable_cases\":{},\"totals_ns\":{totals:?},\"p50_ns\":{p50:?},\"p95_ns\":{p95:?},\"policy_choices_incremental_full\":{:?}}}",
             self.samples[0].len(),
+            self.learnable_cases,
             self.choices
         )
     }
@@ -60,11 +63,12 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
     let mut steps = 256;
     let mut output: Option<PathBuf> = None;
     let mut checkpoint: Option<PathBuf> = None;
+    let mut normalized = true;
     let mut args = std::env::args().skip(1);
     while let Some(flag) = args.next() {
         if flag == "--help" {
             println!(
-                "axon-uic-online-stream [--seed N] [--steps 4..4096 (multiple of 4)] [--output report.json] [--checkpoint new.policy]"
+                "axon-uic-online-stream [--seed N] [--steps 4..4096 (multiple of 4)] [--cost-model raw|normalized] [--output report.json] [--checkpoint new.policy]"
             );
             return Ok(());
         }
@@ -74,6 +78,13 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
             "--steps" => steps = bounded(&value, 4, 4096)?,
             "--output" => output = Some(value.into()),
             "--checkpoint" => checkpoint = Some(value.into()),
+            "--cost-model" => {
+                normalized = match value.as_str() {
+                    "raw" => false,
+                    "normalized" => true,
+                    _ => return Err("expected raw or normalized cost model".into()),
+                }
+            }
             _ => return Err(format!("unknown option {flag}").into()),
         }
     }
@@ -82,15 +93,20 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
     }
     let hardware =
         std::env::var("PROCESSOR_IDENTIFIER").unwrap_or_else(|_| std::env::consts::ARCH.into());
+    let cost_model = if normalized { "normalized" } else { "raw" };
     let context = format!(
-        "{CONTEXT}/{hardware}/{}",
+        "{CONTEXT}/{cost_model}/{hardware}/{}",
         if cfg!(debug_assertions) {
             "debug"
         } else {
             "release"
         }
     );
-    let mut policy = OnlineAveragePolicy::new(&context);
+    let mut policy = if normalized {
+        OnlineAveragePolicy::normalized(&context)
+    } else {
+        OnlineAveragePolicy::new(&context)
+    };
     let start = Instant::now();
     let mut records = String::new();
     let (training, training_phases) =
@@ -108,7 +124,7 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
     );
     let holdout_wall_ns = start.elapsed().as_nanos();
     assert_eq!(policy, frozen, "holdout must not update cost estimates");
-    assert_eq!(policy.observations(), (steps * 32) as u64);
+    assert_eq!(policy.observations(), training.learnable_cases as u64);
     if let Some(path) = checkpoint {
         make_parent(&path)?;
         policy.save(&path)?;
@@ -135,7 +151,7 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
         make_parent(&path)?;
         let exact_checks = steps * 32 * 2 * 4;
         let json = format!(
-            "{{\"schema\":\"axon-online-stream-v2\",\"seed\":{seed},\"steps_per_size_phase\":{steps},\"training_wall_ns\":{training_wall_ns},\"holdout_wall_ns\":{holdout_wall_ns},\"observations\":{},\"policy_memory_bytes\":{},\"checkpoint_bytes\":{},\"exact_checks\":{exact_checks},\"exact\":true,\"candidate_order\":[\"incremental\",\"full\",\"density_heuristic\",\"learned\"],\"order_offsets\":[0,1,3,2],\"heuristic\":\"incremental if k <= floor(n/4), else full\",\"training\":{},\"holdout\":{},\"training_phases\":[{}],\"holdout_phases\":[{}],\"columns\":[\"training\",\"phase\",\"n\",\"k\",\"first_candidate\",\"incremental_ns\",\"full_ns\",\"heuristic_ns\",\"learned_ns\",\"learned_full\"],\"records\":[{records}]}}\n",
+            "{{\"schema\":\"axon-online-stream-v4\",\"cost_model\":\"{cost_model}\",\"seed\":{seed},\"steps_per_size_phase\":{steps},\"training_wall_ns\":{training_wall_ns},\"holdout_wall_ns\":{holdout_wall_ns},\"observations\":{},\"policy_memory_bytes\":{},\"checkpoint_bytes\":{},\"exact_checks\":{exact_checks},\"exact\":true,\"candidate_order\":[\"incremental\",\"full\",\"density_heuristic\",\"learned\"],\"order_offsets\":[0,1,3,2],\"heuristic\":\"incremental if k <= floor(n/4), else full\",\"training\":{},\"holdout\":{},\"training_phases\":[{}],\"holdout_phases\":[{}],\"columns\":[\"training\",\"phase\",\"n\",\"k\",\"first_candidate\",\"incremental_ns\",\"full_ns\",\"heuristic_ns\",\"learned_ns\",\"learned_full\"],\"records\":[{records}]}}\n",
             policy.observations(),
             std::mem::size_of::<OnlineAveragePolicy>(),
             OnlineAveragePolicy::checkpoint_bytes(),
@@ -229,8 +245,8 @@ fn evaluate(
                     assert_eq!(state.query().denominator(), n);
                     assert_eq!(state.version(), event);
                 }
-                total.record(elapsed, learned_strategy);
-                scores.record(elapsed, learned_strategy);
+                total.record(elapsed, learned_strategy, k);
+                scores.record(elapsed, learned_strategy, k);
                 if !records.is_empty() {
                     records.push(',');
                 }
@@ -317,10 +333,11 @@ mod tests {
 
     #[test]
     fn streaming_protocol_learns_only_during_training_and_balances_order() {
-        let mut policy = OnlineAveragePolicy::new(CONTEXT);
+        let mut policy = OnlineAveragePolicy::normalized(CONTEXT);
         let mut records = String::new();
         let (scores, _) = evaluate(&mut policy, [16, 17, 31, 32], 8, 42, true, &mut records);
-        assert_eq!(policy.observations(), 256);
+        assert_eq!(policy.observations(), scores.learnable_cases as u64);
+        assert!(scores.learnable_cases < 256);
         assert_eq!(scores.samples[0].len(), 256);
         let frozen = policy.clone();
         evaluate(

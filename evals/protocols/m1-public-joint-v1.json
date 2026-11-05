@@ -1,0 +1,18 @@
+{
+  "schema":"axon-public-joint-sequence/v1",
+  "source":"MASSIVE 1.1 pt-PT",
+  "source_sha256":"af89ce740b98e8fe73a0fb3ba69a296837910f037e954b87409ef41d467d3da0",
+  "learner":"joint-sequence-v1",
+  "selection":"Highest complete development accuracy, then fewest retained weights, then policy order. Never select with original test or reserved localization workers.",
+  "policies":[
+    {"learner":{"seed":19374611,"buckets":8192,"epochs":6,"weights":60000,"intent_weights":30000,"subwords":false,"shared_roles":false,"minimum_margin":1},"search":{"beam":2,"intents":1,"max_work":5000000}},
+    {"learner":{"seed":19374611,"buckets":8192,"epochs":6,"weights":60000,"intent_weights":30000,"subwords":false,"shared_roles":false,"minimum_margin":1},"search":{"beam":4,"intents":2,"max_work":5000000}},
+    {"learner":{"seed":19374611,"buckets":8192,"epochs":6,"weights":60000,"intent_weights":30000,"subwords":true,"shared_roles":false,"minimum_margin":1},"search":{"beam":2,"intents":1,"max_work":5000000}},
+    {"learner":{"seed":19374611,"buckets":8192,"epochs":6,"weights":60000,"intent_weights":30000,"subwords":true,"shared_roles":false,"minimum_margin":1},"search":{"beam":4,"intents":2,"max_work":5000000}}
+  ],
+  "mechanism":"Global structured perceptron corrections, shared-head quantization scale, bounded joint intent/BIO beam. Established structured-prediction method, not a new invention, CRF, exact Viterbi or calibrated posterior.",
+  "baseline_requirement":"Keep earlier greedy predictions and decoder-only controls separate. Compare full structured outputs, values, intent, novelty, every family and abstentions. Missing/full M1 gates stay failed.",
+  "reserved":"All reserved workers and original test remain untouched.",
+  "promotion":false,
+  "m1_complete":false
+}

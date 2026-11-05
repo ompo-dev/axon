@@ -4,6 +4,97 @@ use axon_uic::{
 };
 
 #[test]
+fn empty_observations_cannot_overwrite_evidence_about_real_updates() {
+    let mut policy = OnlineAveragePolicy::new("empty-is-not-a-workload-sample");
+    for _ in 0..8 {
+        assert!(policy.observe(4096, 16, Incremental, 20));
+        assert!(policy.observe(4096, 16, Full, 200));
+    }
+    let before = policy.clone();
+    for _ in 0..1000 {
+        assert!(!policy.observe(4096, 0, Full, 1));
+        assert!(!policy.observe(4096, 0, Incremental, 1));
+    }
+    assert_eq!(policy, before);
+    assert_eq!(policy.choose(4096, 16), Incremental);
+    assert_eq!(policy.choose(4096, 0), Incremental);
+    assert_eq!(policy.explore(4096, 0), Incremental);
+}
+
+#[test]
+fn empty_execution_advances_the_event_without_training_or_skipping_guards() {
+    use axon_uic::{FoldSpec, LiveAverage, ReplaceDelta, SemanticArtifact};
+    let semantic = SemanticArtifact::synthesize(FoldSpec::AverageExactU64).unwrap();
+    let mut state = LiveAverage::materialize(42, vec![u64::MAX, 1], semantic).unwrap();
+    let mut policy = OnlineAveragePolicy::new("empty-execution");
+    let empty = ReplaceDelta::try_new(vec![]).unwrap();
+    let frozen = policy.clone();
+    for event in 1..=256 {
+        let receipt = policy.execute_and_learn(&mut state, event, &empty).unwrap();
+        assert_eq!(receipt.strategy, Incremental);
+        assert_eq!(receipt.average.numerator(), u64::MAX as u128 + 1);
+        assert!(receipt.elapsed_ns > 0);
+        assert_eq!(state.version(), event);
+        assert_eq!(policy, frozen);
+    }
+    let before = state.clone();
+    assert!(policy.execute_and_learn(&mut state, 256, &empty).is_err());
+    assert!(policy.execute_and_learn(&mut state, 258, &empty).is_err());
+    assert_eq!(state, before);
+    assert_eq!(policy, frozen);
+}
+
+#[test]
+fn normalized_costs_transfer_across_work_amounts_inside_the_same_bucket() {
+    let mut raw = OnlineAveragePolicy::new("raw-control");
+    let mut normalized = OnlineAveragePolicy::normalized("normalized-control");
+    // Both sources and all update counts below share the same cost bucket.
+    for _ in 0..8 {
+        for policy in [&mut raw, &mut normalized] {
+            policy.observe(512, 4, Incremental, 40);
+            policy.observe(512, 4, Full, 20);
+        }
+    }
+    assert_eq!(raw.choose(512, 1), Full);
+    assert_eq!(normalized.choose(512, 1), Incremental);
+    assert_eq!(normalized.choose(512, 8), Full);
+    assert_eq!(normalized.choose(256, 1), Full);
+    let frozen = normalized.clone();
+    assert!(!normalized.observe(512, 0, Full, 1));
+    assert_eq!(normalized, frozen);
+}
+
+#[test]
+fn normalized_policy_persistence_retains_mode_and_handles_extreme_costs() {
+    let path = std::env::temp_dir().join(format!(
+        "axon-normalized-{}-{}.bin",
+        std::process::id(),
+        std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .unwrap()
+            .as_nanos()
+    ));
+    let mut policy = OnlineAveragePolicy::normalized("normalized-extremes");
+    for _ in 0..8 {
+        policy.observe(512, 4, Incremental, 40);
+        policy.observe(512, 4, Full, 20);
+        policy.observe(usize::MAX, usize::MAX, Incremental, u64::MAX);
+        policy.observe(usize::MAX, usize::MAX, Full, 1);
+    }
+    assert_eq!(policy.choose(512, 1), Incremental);
+    assert_eq!(policy.choose(usize::MAX, usize::MAX), Full);
+    policy.save(&path).unwrap();
+    let loaded = OnlineAveragePolicy::load(&path, "normalized-extremes").unwrap();
+    assert_eq!(loaded, policy);
+    assert_eq!(loaded.choose(512, 1), Incremental);
+    assert_eq!(
+        std::fs::metadata(&path).unwrap().len() as usize,
+        OnlineAveragePolicy::checkpoint_bytes()
+    );
+    std::fs::remove_file(path).unwrap();
+}
+
+#[test]
 fn measured_costs_change_decisions_and_follow_a_cost_reversal() {
     let mut policy = OnlineAveragePolicy::new("test-cpu/protocol1");
     assert_eq!(policy.choose(4096, 16), Full);
@@ -45,6 +136,11 @@ fn policy_checkpoint_roundtrip_detects_corruption_and_context_change() {
     assert!(OnlineAveragePolicy::load(&root, "cpu-b").is_err());
     assert!(policy.save(&root).is_err());
     let mut bytes = std::fs::read(&root).unwrap();
+    assert_eq!(
+        &bytes[..8],
+        b"AXPOL001",
+        "raw policy format stays compatible"
+    );
     bytes[31] ^= 1;
     std::fs::write(&root, bytes).unwrap();
     assert!(OnlineAveragePolicy::load(&root, "cpu-a").is_err());

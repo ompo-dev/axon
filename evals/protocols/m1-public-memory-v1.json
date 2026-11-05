@@ -1,0 +1,14 @@
+{
+  "schema":"axon-public-relations/v1",
+  "source":"https://github.com/lbencke/InferBR",
+  "revision":"b6c5e0b27e52477bbc5433d130b0a0e825cf74dc",
+  "training_command":"relation-train-memory",
+  "batch_command":"relation-batch-memory",
+  "representation":"Finite closed associations of recurring aligned edit signatures, with original sentences varying in independent teaching/admission. Same Rule/Guard/StructuralSeed, not a new LLM or broad language proof.",
+  "identity_examples":24,
+  "identity_supervision":"Supplied NLI reflexivity axiom over public train statements. This is teaching, not independent test.",
+  "policies":[{"seed":1,"proposals":128,"rules":128,"checks":16000000,"minimum_holes":1}],
+  "selection":"One deterministic policy; no meaningless RNG replicas. All original validation/test retained in denominators. Conflicting signatures and unseen signatures abstain.",
+  "acceptance":"Development-only, not full M1 approval. Independently recount and test metamorphic consistency; do not promote on answered-only precision.",
+  "limits":"300 seconds per process, current 128-rule and genome caps. Raw sentences over symbol/key bounds explicitly refuse; no truncation or hash collision aliasing."
+}

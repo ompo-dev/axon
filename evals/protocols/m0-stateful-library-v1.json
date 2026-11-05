@@ -1,0 +1,11 @@
+{
+  "protocol":"m0-stateful-library-v1",
+  "extends":"m0-stateful-v1.json",
+  "status":"development-contract-amendment",
+  "full_milestone_approval":false,
+  "catalogue_and_working_set":"Preserve all admitted catalogue rules up to the existing 128-rule seed cap. Keep at most 32 synthesis priors: unchanged order when the catalogue has at most 32 procedures; otherwise retain 16 recent distinct programs and fill with the smallest distinct programs. This is a declared host heuristic, not an evolved policy.",
+  "campaign_versions":"Algorithm campaign v1 retains its 32-lesson cap. Campaign v2 allows 64 lessons under the unchanged file and seed bounds. The full development campaign has 35 procedures.",
+  "seed_versions":"Scalar/heterogeneous compiled Algorithm input bindings use structural codec v6. Existing valid v2-v5 seeds remain readable; scalar bindings cannot be relabeled v5. Expr and Value opcodes remain unchanged.",
+  "comparison":"Export a v5 source-only prefix before scalar bindings or target acquisition. Both the frozen v15 and amended learner receive exactly that same number and demonstrations via algorithm-external; never count incompatible v6 import as a cognitive failure.",
+  "required_checks":["recent state transition usable after 36 unrelated synthetic routing fixtures","independent skills retained on selective refutation after restart","source-only prefix is actually readable by frozen v15","catalogue size and selected library size distinguished in telemetry"]
+}

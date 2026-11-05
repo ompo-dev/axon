@@ -1,0 +1,16 @@
+{
+  "schema":"axon-public-ordered-split/v1",
+  "source":"MASSIVE 1.1 pt-PT, allowed train/development; reserved workers and original test withheld",
+  "source_sha256":"af89ce740b98e8fe73a0fb3ba69a296837910f037e954b87409ef41d467d3da0",
+  "learner":"lexical-encoder-v1",
+  "training_timeout_ms":1800000,
+  "policies":[
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true,"split_heads":true},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true,"split_heads":true,"ordered_context":true,"mean_token_loss":true},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true,"split_heads":true,"ordered_context":true}
+  ],
+  "hypothesis":"A bounded bidirectional ordered context shared by separate intent and BIO heads can preserve token order and improve unseen span roles without increasing the seed or loading a language model.",
+  "representation":"AXSQ0015 combines the existing ordered-context page with split intent/BIO mixers. It is a distinct codec; old split and old ordered codecs remain readable. Characters stay disabled because the existing ordered-context contract forbids combining them.",
+  "controls":"Policy 0 is the frozen split-head control. Policies 1 and 2 change only ordered context and token-loss normalization. All policies share seed, vocabulary, dimensions, hidden width, epochs, optimizer, dropout and relative regions. Development selects the winner; reserved workers and original test remain untouched until a separate audit.",
+  "scope":"Diagnostic M1 experiment only. It cannot certify M1 or permit M2 unless every required gate is independently re-run under evals/protocols/m1-completion-v1.json."
+}

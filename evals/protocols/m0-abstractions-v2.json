@@ -1,0 +1,10 @@
+{
+  "protocol": "m0-abstractions-v2",
+  "extends": "m0-abstractions-v1.json",
+  "status": "development-amendment-after-preserved-v1-failure",
+  "full_milestone_approval": false,
+  "failure": "Discarding a duplicate template also discarded new hole exemplars. A large inherited library then prevented the two target acquisitions despite the small-library checks passing.",
+  "correction": "Merge corroborating exemplars into each template hole; retain at most eight compact deterministic alternatives, at most 1024 substitutions per hole, and dovetail across templates and holes under the unchanged candidate/work caps.",
+  "additional_checks": ["full 19-procedure ancestral library before the four source acquisitions", "source programs represented as learned closed calls as well as inline bodies", "runtime dependency invalidation evaluated against actual captured calls, not an assumed search result"],
+  "scope": "Same two declared development target families and regression suite. Prior failed receipts remain immutable; this revision is not a fresh independent reserve."
+}

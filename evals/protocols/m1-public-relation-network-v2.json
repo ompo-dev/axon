@@ -1,0 +1,18 @@
+{
+  "schema":"axon-public-relation-network-protocol/v1",
+  "revision":"b6c5e0b27e52477bbc5433d130b0a0e825cf74dc",
+  "training_command":"relation-network-train",
+  "batch_command":"relation-network-batch",
+  "representation":"Graph controls unchanged; bound-graph adds paired dependency edges under a shared predicate, with noun/proper-noun surface equality slots. Lexical equality is not entity coreference and never a truth rule.",
+  "training_quality":"all",
+  "policies":[
+    {"seed":19374611,"buckets":2048,"dimensions":16,"epochs":16,"learning_rate":0.1,"mode":"graph","minimum_margin":0.0},
+    {"seed":19374611,"buckets":2048,"dimensions":16,"epochs":16,"learning_rate":0.1,"mode":"bound-graph","minimum_margin":0.0},
+    {"seed":19374611,"buckets":4096,"dimensions":16,"epochs":16,"learning_rate":0.1,"mode":"graph","minimum_margin":0.0},
+    {"seed":19374611,"buckets":4096,"dimensions":16,"epochs":16,"learning_rate":0.1,"mode":"bound-graph","minimum_margin":0.0},
+    {"seed":19374611,"buckets":2048,"dimensions":32,"epochs":16,"learning_rate":0.1,"mode":"graph","minimum_margin":0.0},
+    {"seed":19374611,"buckets":2048,"dimensions":32,"epochs":16,"learning_rate":0.1,"mode":"bound-graph","minimum_margin":0.0}
+  ],
+  "selection":"Same 646 validation pairs, then page bytes, then policy order. Test1758 consumed, diagnostic only. Three exact controls must reproduce V1 weights/predictions. Hypothesis-only V1 controls remain in the comparison; never count this as a new reserve.",
+  "scope":"Adaptive representation experiment after weak V1 pairwise gains and strong hypothesis artifacts. No new corpus, no pretrained weights, no increase in page/genome/residency caps, no promotion or M2. Bound lexical slots are a supplied representation mechanism, not autonomous invention or proof of meaning."
+}

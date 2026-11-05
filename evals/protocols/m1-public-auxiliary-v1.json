@@ -1,0 +1,32 @@
+{
+  "schema":"axon-public-auxiliary-grammar/v1",
+  "source":"MASSIVE 1.1 pt-PT plus allowed UD Portuguese Bosque train",
+  "source_sha256":"af89ce740b98e8fe73a0fb3ba69a296837910f037e954b87409ef41d467d3da0",
+  "learner":"lexical-encoder-v1",
+  "auxiliary_source":{
+    "corpus":".axon-memory/corpora/ud-bosque-r2.16-v3",
+    "train_sha256":"b56d7124af821e2968302c38298904ec67af342304a33ae8a9dc4fa57df89648",
+    "provenance_sha256":"328a9a4e8ec2450f6164b0014192e1813bc5306721850410db8716a7a9a42cbb"
+  },
+  "policies":[
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true}
+  ],
+  "auxiliary_policies":[null,
+    {"weight":0.1,"interval":4,"shuffle_labels":false},
+    {"weight":0.3,"interval":4,"shuffle_labels":false},
+    {"weight":0.1,"interval":4,"shuffle_labels":true}
+  ],
+  "control_number_sha256":"824abdd1360511a06060e57aafc3e6529697120b9075efdf1318e16ce01b5c17",
+  "hypothesis":"Shared word/mixing representations may benefit from grammatical supervision rather than only main BIO/intent labels. Improvement is not presumed. The shuffled-POS control distinguishes grammatical information from extra corpus/update regularization, though none of these conditions proves causal exclusivity.",
+  "representation":"Same 86272 deployed coefficients, vocabulary selected only from primary train, same AXSQ0009/runtime and limits. Auxiliary POS heads exist only in training and are removed before serialization. Dedicated auxiliary RNG does not advance primary shuffling/dropout RNG.",
+  "information_budget":"Auxiliary variants see more public supervised data than the primary-only control, explicitly disclosed. Positive and shuffled conditions use identical additional texts, label counts, quotas and schedule. No auxiliary dev or reserved-document annotations are read. POS training does not imply gold POS at inference.",
+  "source_transforms":"5712 frames from 5568 allowed train sentences, no sentence deletion. Split long sentences at 64 words, with explicit core/original-index origins. One formatted NUM source word expands into two NUM core tokens: 136434 source words, 136435 core words. Raw corpus/attribution/CC-BY-SA-4.0 retained.",
+  "selection":"Same existing development exact frame count, then deployed coefficient count, then index. Score all four fixed conditions, including shuffled control. Original test/reserved workers unchanged; missing M1 evidence fails promotion.",
+  "method_source":"https://www.jmlr.org/papers/v12/collobert11a.html",
+  "scope":"Established shared/multitask supervision, not an AXON invention or proof of general understanding. No dictionary replacements, external pretrained network, action authority, independent semantic reserve or M2 authorization. Extra source data and training work are not free; RSS/energy unavailable.",
+  "promotion":false,
+  "m1_complete":false
+}

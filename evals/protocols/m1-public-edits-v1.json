@@ -1,0 +1,18 @@
+{
+  "schema": "axon-public-relations/v1",
+  "source": "https://github.com/lbencke/InferBR",
+  "revision": "b6c5e0b27e52477bbc5433d130b0a0e825cf74dc",
+  "training_command": "relation-train-edit",
+  "batch_command": "relation-batch-edit",
+  "representation": "Vocabulary-free aligned copy/edit runs; ambiguous alignments abstain. Same Rule/StructuralSeed, separate demand-loaded module.",
+  "identity_examples": 24,
+  "identity_supervision": "Public train statements paired with themselves, one per distinct whitespace length, up to the declared cap. Label Entailment=1 is a supplied supervised logical axiom, not autonomous discovery or external-authorship evaluation.",
+  "selection": "All original validation pairs. Maximize correct, then fewer rules, then policy order. Public test consumed before this protocol, never a fresh reserve.",
+  "policies": [
+    {"seed":47,"proposals":256,"rules":128,"checks":4000000,"minimum_holes":1},
+    {"seed":83,"proposals":512,"rules":128,"checks":8000000,"minimum_holes":1},
+    {"seed":131,"proposals":1024,"rules":128,"checks":16000000,"minimum_holes":1}
+  ],
+  "acceptance": "Development experiment, not full M1 approval. Keep all errors and abstentions; independently test reflexivity and adversarial consistency before any promotion. Do not override low coverage using conditional accuracy.",
+  "limits": "300 seconds per process; existing structural/genome quotas unchanged. No second agent, LLM, energy or RSS claim."
+}

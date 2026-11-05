@@ -1,0 +1,12 @@
+{
+  "schema":"axon-math-library-transfer/v1",
+  "source_study":".axon-memory/m1-public-math-programs-v1",
+  "targets":["math-p000","math-p011","math-p013","math-p031"],
+  "source_library":"All27 admitted programs from allowed train only. Mine reusable structures through existing NumericLibrary, no new target opcode, expression import or expected development answer. All32 prospective class identities remain unchanged; no target chosen by dev correctness.",
+  "attempts":[{"name":"mined-fit","command":"numeric-fit","max_cost":12,"max_terms":20000},{"name":"demand-development","command":"numeric-develop","max_cost":12,"max_terms":20000,"max_attempts":4,"total_work":80000000}],
+  "evaluation":"Same8 fixed teaching tuples and8 separate admission tuples as original failed fits. Also128 fixed-seed signed/fractional numerical probes per acquired program, against the source train-annotated formula. Target-domain refusals recorded separately, not silently passed. Export only after both numerical checks, then query witness-free DNA in a fresh CLI process.",
+  "attribution":"mined-fit uses same local search limits as original primitive-only failures but extra ancestral information/mining cost. Demand-development has up to4 attempts and larger total work: not a matched efficiency control. Count original acquisition, mining and retries separately. This is supervised program recomposition, not discovery of the source formula or human-language competence.",
+  "isolation":"Never replace the27-program frozen public study or reopen reserved/public test labels. New programs do not inherit automatic linguistic or M1 certification. No new neural training in this transfer study.",
+  "m1_complete":false,
+  "m2_permitted":false
+}

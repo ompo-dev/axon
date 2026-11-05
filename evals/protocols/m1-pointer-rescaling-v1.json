@@ -1,0 +1,11 @@
+{
+  "schema":"axon-pointer-rescaling-diagnostic/v1",
+  "study":".axon-memory/m1-relational-pointer-v2",
+  "models":[0,1,2],
+  "cohort":"Same629 matched allowed-train episodes, all included in reported denominator. No fitting or corpus answers read.",
+  "intervention":"Multiply every copyable question scalar by2, preserving token count, numeric equality/order/sign and all nonnumeric words/punctuation. Re-execute the SAME provided source action graph to generate coherent teacher registers and final scalar. Source graph/target source positions unchanged, rather than simply doubling the final answer. Refuse domains/bounds without retries and report them.",
+  "measure":"Same frozen native decoder on supplied new teacher states, then own-result rollout on the changed question. Original training teacher/own success fixed before this diagnostic. Report label/pointer changes, exact taught action agreement, own scalar success, domain refusals and all denominators.",
+  "limits":"POST-HOC numerical-function transfer diagnosis, NOT independent natural-language ground truth. Source arithmetic annotations can spuriously bind constants to coincident question values; changing counts/rates together can contradict unstated world knowledge. Do not use this as a semantic benchmark, new reserve, proof of memorization alone or M1 approval. Tests whether decisions transfer with values under the provided source program hypothesis.",
+  "authority":"Only id/text enter the child. Source actions/targets/new final scalars stay in host files. No new development/reserved/research/test answers, no new public score selection or changed models.",
+  "m1_complete":false,"m2_permitted":false
+}

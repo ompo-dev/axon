@@ -36,6 +36,14 @@ name = "axon-uic-deltaforge-avg"
 path = "src/bin/axon_uic_deltaforge_avg.rs"
 
 [[bin]]
+name = "axon-uic-deltaforge-min"
+path = "src/bin/axon_uic_deltaforge_min.rs"
+
+[[bin]]
+name = "axon-uic-deltaforge-variance"
+path = "src/bin/axon_uic_deltaforge_variance.rs"
+
+[[bin]]
 name = "axon-uic-learn-bench"
 path = "src/bin/axon_uic_learn_bench.rs"
 
@@ -55,4 +63,124 @@ path = "src/bin/axon_uic_stress.rs"
 name = "axon-uic-online-stream"
 path = "src/bin/axon_uic_online_stream.rs"
 
+[[bin]]
+name = "axon-uic-specialist-lab"
+path = "src/bin/axon_uic_specialist_lab.rs"
+
+[[bin]]
+name = "axon-uic-episodic-stream"
+path = "src/bin/axon_uic_episodic_stream.rs"
+
 [dependencies]
+csv = { version = "1.4.0", optional = true }
+microlp = { version = "0.6.0", default-features = false, optional = true }
+serde = { version = "1", features = ["derive"], optional = true }
+serde_json = { version = "1", features = ["float_roundtrip"], optional = true }
+
+[features]
+default = ["text-workflows"]
+text-workflows = ["dep:csv", "dep:microlp"]
+curriculum = ["text-workflows", "dep:serde", "dep:serde_json"]
+
+[[bin]]
+name = "axon-uic-curriculum-lab"
+path = "src/bin/axon_uic_curriculum_lab.rs"
+required-features = ["curriculum"]
+
+[[bin]]
+name = "axon-uic-text-lab"
+path = "src/bin/axon_uic_text_lab.rs"
+required-features = ["text-workflows"]
+
+[[bin]]
+name = "axon-uic-world-lab"
+path = "src/bin/axon_uic_world_lab.rs"
+
+[[bin]]
+name = "axon-uic-behavior-lab"
+path = "src/bin/axon_uic_behavior_lab.rs"
+
+[[bin]]
+name = "axon-uic-demand-lab"
+path = "src/bin/axon_uic_demand_lab.rs"
+required-features = ["text-workflows"]
+
+[[bin]]
+name = "axon-uic-transfer-lab"
+path = "src/bin/axon_uic_transfer_lab.rs"
+required-features = ["text-workflows"]
+
+[[bin]]
+name = "axon-uic-factor-lab"
+path = "src/bin/axon_uic_factor_lab.rs"
+required-features = ["text-workflows"]
+
+[[bin]]
+name = "axon-observer"
+path = "src/bin/axon_observer.rs"
+
+[[bin]]
+name = "axon-uic-program-lab"
+path = "src/bin/axon_uic_program_lab.rs"
+
+[[bin]]
+name = "axon-uic-abstraction-lab"
+path = "src/bin/axon_uic_abstraction_lab.rs"
+
+[[bin]]
+name = "axon-uic-live-agent"
+path = "src/bin/axon_uic_live_agent.rs"
+
+[[bin]]
+name = "axon-uic-continuous-lab"
+path = "src/bin/axon_uic_continuous_lab.rs"
+
+[[bin]]
+name = "axon-uic-reactive-agent"
+path = "src/bin/axon_uic_reactive_agent.rs"
+
+[[bin]]
+name = "axon-uic-reactive-lab"
+path = "src/bin/axon_uic_reactive_lab.rs"
+
+[[bin]]
+name = "axon-uic-evolution-lab"
+path = "src/bin/axon_uic_evolution_lab.rs"
+
+[[bin]]
+name = "axon-uic-constructive-lab"
+path = "src/bin/axon_uic_constructive_lab.rs"
+required-features = ["text-workflows"]
+
+[[bin]]
+name = "axon-uic-seed-lab"
+path = "src/bin/axon_uic_seed_lab.rs"
+
+[[bin]]
+name = "axon-uic-controller-lab"
+path = "src/bin/axon_uic_controller_lab.rs"
+required-features = ["text-workflows"]
+
+[[bin]]
+name = "axon-uic-genome-lab"
+path = "src/bin/axon_uic_genome_lab.rs"
+required-features = ["text-workflows"]
+
+[[bin]]
+name = "axon-uic-language-lab"
+path = "src/bin/axon_uic_language_lab.rs"
+
+[[bin]]
+name = "axon-uic-cumulative-lab"
+path = "src/bin/axon_uic_cumulative_lab.rs"
+required-features = ["text-workflows"]
+
+[[bin]]
+name = "axon-uic-semantic-lab"
+path = "src/bin/axon_uic_semantic_lab.rs"
+required-features = ["text-workflows"]
+
+[[bin]]
+name = "axon-uic-nursery-lab"
+path = "src/bin/axon_uic_nursery_lab.rs"
+required-features = ["text-workflows"]

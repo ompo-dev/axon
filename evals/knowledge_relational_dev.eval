@@ -1,0 +1,18 @@
+# RelationalRecallBench development suite, frozen before source-role implementation on 2026-09-23.
+# query<TAB>required-source clauses joined by &; alternatives inside a clause use |; - means abstain.
+como LiveAverageStore limita o journal compacta o snapshot e recupera uma cauda truncada	docs/ROBUSTNESS_2026-09-13.md|docs/LIVE_LEARNING_2026-09-13.md&src/live_store.rs&tests/storage_adversarial.rs
+como DerivedMinimumPlan usa multiplicidade e tamanho para aplicar delta ou pedir RebuildRequired	docs/DELTAFORGE_MIN_2026-09-22.md&src/delta_forge.rs&tests/delta_forge_contracts.rs
+como DerivedVariancePlan mantem tres momentos exatos e recusa overflow	docs/DELTAFORGE_VARIANCE_2026-09-22.md&src/delta_forge.rs&tests/delta_forge_contracts.rs
+como SpecialistCapsule verifica CapabilityGate e suspende inferencia depois de drift	docs/ARCHITECTURE.md|docs/SPECIALIST_FOUNDRY_2026-09-22.md&src/specialist.rs&tests/specialist_contracts.rs
+como OnlineAveragePolicy ignora evento vazio e aprende o custo da estrategia realmente executada	docs/ONLINE_COSTS_2026-09-22.md|docs/LIVE_LEARNING_2026-09-13.md&src/online_policy.rs&tests/online_policy_contracts.rs
+como AXMEM001 valida checksum e recusa memoria truncada ou corrompida	docs/KNOWLEDGE_MEMORY_2026-09-23.md&src/knowledge.rs&tests/knowledge_cli_contracts.rs
+como ArtifactStore preserva o hash semantico e recusa capability alterada no reload	docs/DELTAFORGE.md&src/artifact_store.rs&tests/semantic_artifact_contracts.rs|tests/task_runtime_contracts.rs
+como train_specialist aprende XOR de dois predicados audita e recusa paridade de tres fatores	docs/COMPOSITIONAL_FOUNDRY_2026-09-22.md&src/specialist.rs&tests/specialist_contracts.rs
+como LiveAverageStore compacta um jornal impresso e restaura paginas rasgadas	-
+como DerivedMinimumPlan escolhe o menor preco de uma loja sem dados locais	-
+como DerivedVariancePlan preve o risco futuro de uma criptomoeda	-
+como SpecialistCapsule diagnostica drift clinico de um paciente	-
+como OnlineAveragePolicy seleciona propaganda para uma campanha eleitoral	-
+como AXMEM001 valida checksum de uma transferencia bancaria	-
+como ArtifactStore certifica uma escultura arqueologica	-
+como train_specialist aprende preferencias privadas de um usuario ausente	-

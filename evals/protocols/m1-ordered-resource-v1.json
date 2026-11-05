@@ -1,0 +1,14 @@
+{
+  "schema":"axon-matched-process-resource/v1",
+  "run":".axon-memory/m1-public-ordered-context-v1",
+  "binary_sha256":"43e806103758f58aeee76e354778f1c2e27d9e7c57bea7f3403cc25fb290d4a6",
+  "source":"first 64 already-consumed development requests, repeated four times with unique IDs",
+  "requests":256,
+  "unique_accuracy_cases":64,
+  "orders":[[0,3,4,6],[6,4,3,0],[0,3,4,6],[6,4,3,0],[0,3,4,6]],
+  "conditions":{"0":"ordinary historical control","3":"linear head with frozen recurrent weights","4":"linear head with learned recurrent weights","6":"mixing head with learned recurrent weights"},
+  "sampler":"scripts/measure-program-resource.ps1 curriculum-encoder-batch -NoBuild",
+  "scope":"Sequential second-process numeric birth, same 256 requests and predictions IO, five processes each in alternating order. Not training, pure inference time, isolated model memory, new accuracy cases, or a fair cross-hardware experiment. OS cache/background not controlled. Last sampled CPU may not be final and sampled memory may miss intervals. Energy unavailable. Measure only after training/full-test processes finish.",
+  "promotion":false,
+  "m1_complete":false
+}

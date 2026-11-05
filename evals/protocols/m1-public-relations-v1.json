@@ -1,0 +1,15 @@
+{
+  "schema": "axon-public-relations/v1",
+  "source": "https://github.com/lbencke/InferBR",
+  "revision": "b6c5e0b27e52477bbc5433d130b0a0e825cf74dc",
+  "training": "All original train pairs, generated labels, excluding only invalid structural input with explicit count.",
+  "selection": "All original validation pairs. Maximize total correct; ties favor fewer rules, then policy order. Abstention never counts as Neutral.",
+  "evaluation": "All original test pairs, plus original reviewer/quality strata and statement-disjoint subset. Test previously consumed by the equivalence diagnostic; not a fresh M1 reserve.",
+  "policies": [
+    { "seed": 47, "proposals": 256, "rules": 128, "checks": 4000000 },
+    { "seed": 83, "proposals": 512, "rules": 128, "checks": 8000000 },
+    { "seed": 131, "proposals": 1024, "rules": 128, "checks": 16000000 }
+  ],
+  "limits": "At most 300 seconds per process. Structural page and original capacities remain separate; no extra interpreter or Portuguese label heuristics. Three supervised search policies, not thousands of evolved brains.",
+  "acceptance": "Diagnostic only. Publish all failures, wrong answers and abstentions. This experiment alone cannot approve M1 or start M2. No LLM, energy or RSS comparison."
+}

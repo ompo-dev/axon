@@ -1,0 +1,13 @@
+{
+  "schema":"axon-math-constrained-decoding/v1",
+  "source_study":".axon-memory/m1-public-math-programs-v1",
+  "models":"Both trained lexical pages and27 admitted circuit pages unchanged. No new examples, training, program selection or library admission. Additive repacking preserves original language and structural modules, adds explicit circuit arity metadata computed from actual program.",
+  "development_status":"Already consumed1481 development final answers. This is a controlled development correction, not a fresh independent reserve. First scalar scorer offset error and corrected recount retained. Reserved1562/research_only1/original test remain sealed.",
+  "plans":[{"name":"legacy-greedy","command":"math-batch"},{"name":"numeric-shape-beam","command":"math-search-batch","beam":16,"intents":8,"max_work":5000000,"mean_tags":true}],
+  "constraints":"Pure host shape grammar: only finite decimal number tokens may take B:x0..3, no I tags, each argument exactly once, contiguous roles match the circuit arity, enough remaining numeric tokens to complete. Does not select the right operator, entities, units or physical meaning. No target/equation/answer input. Constraints are an engineered bias, not emergently learned mathematics.",
+  "batch_size":16,
+  "metrics":"Same1481 full denominator for every plan/model. Compare semantic answer correctness, coverage/wrong/refused. Greedy rows/work must remain exactly equal EXCEPT old math operand source/role errors: source-span verifier now applies the SAME terminal-punctuation removal as existing sequence output. Previously a copied internal token5. became5 but was rejected as not copied. Count changed rows explicitly, no other differences allowed. Report observed peak_active_bytes separately from ending active bytes. Earlier v1 study incorrectly named maximum ending observations a peak; preserve and correct metadata, no false memory savings. Parent fingerprint reported as hex string to avoid JS unsafe integer rounding.",
+  "engineering":"Reuse existing bounded beam, optional path guard, same heads/log-softmax and quotas. With no guard existing paths, scores and logical work must remain identical. Work counts guard consultations, not physical instructions spent inside callbacks. Full Rust/clippy/minimal and frozen legacy replays required.",
+  "m1_complete":false,
+  "m2_permitted":false
+}

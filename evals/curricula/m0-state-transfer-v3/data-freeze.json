@@ -1,0 +1,73 @@
+{
+  "input_seed": "0x4c09b8a3",
+  "files": [
+    {
+      "name": "external-answers.json",
+      "bytes": 252590,
+      "sha256": "9268624e57700092899f138181dac13f478c05d27501c756da1832ff6c4de2c6"
+    },
+    {
+      "name": "external-inputs.json",
+      "bytes": 525542,
+      "sha256": "df3d01000b98657a743909e48dc0a67ee6d9acebdacbb9dc2b99c922a2bc44ef"
+    },
+    {
+      "name": "full-data.json",
+      "bytes": 5081521,
+      "sha256": "5dfd92e4129a3441a66e59f22b15bda753276b28ee18f35af7f37bce0c1489d2"
+    },
+    {
+      "name": "full.json",
+      "bytes": 14503138,
+      "sha256": "113cd20a24010a2c7664fc870d7c120aef6fb27dd96c277e3912eaaad733264e"
+    },
+    {
+      "name": "portable-answers.json",
+      "bytes": 184764,
+      "sha256": "d2ea9339765eec4d846e170cf6f0c23012e32ebadc541f34e09d2260b3fef38e"
+    },
+    {
+      "name": "portable-inputs.json",
+      "bytes": 184244,
+      "sha256": "f85da6befaf3080dedf2df2c3ede947bd197a7b36c93ad7f45e4109ce6350807"
+    },
+    {
+      "name": "source-data.json",
+      "bytes": 4818511,
+      "sha256": "c66cf9252d2ad2f9c1e7cfcb8bcb8e0c32206906da698090b98a62bf4941510c"
+    },
+    {
+      "name": "source.json",
+      "bytes": 14503142,
+      "sha256": "4bc08525df339d4a45cb844695b3205a5d2c635e578640dcd51a0e11a4784f38"
+    }
+  ],
+  "families": [
+    "order-reversal",
+    "cumulative-state-history",
+    "modulus-changing-state"
+  ],
+  "independent_algorithm_classes": 3,
+  "paired_replicates_per_class": 16,
+  "cases_per_variant": 768,
+  "protocol": "evals/protocols/m0-completion-v2.json",
+  "generator": "scripts/create-m0-state-transfer-curriculum.mjs",
+  "reserve_target_ids": [
+    "algorithm-state-reserve-0",
+    "algorithm-state-reserve-1",
+    "algorithm-state-reserve-2"
+  ],
+  "required_source_ids": [
+    "algorithm-wrap-state",
+    "algorithm-prepend-state",
+    "algorithm-initial-state",
+    "algorithm-history-state",
+    "algorithm-state-total",
+    "algorithm-state-remainder",
+    "algorithm-modular-state"
+  ],
+  "source_lessons": 53,
+  "full_lessons": 56,
+  "full_requests": 4686,
+  "scope": "Prospective transfer to order transformation, augmented state/history and changing-modulus dynamics, not reparameterizations of the consumed v1 recurrence reserve. The failed v1 remains development and all its integrated tasks remain in the curriculum. Source lessons teach only local constructors/updates; the three new sequential targets are withheld from the source seed. Future labels are separate; no claim of arbitrary family transfer, raw perception or free language."
+}

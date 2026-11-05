@@ -1,0 +1,15 @@
+{
+  "schema":"axon-public-boundary/v1",
+  "source":"MASSIVE 1.1 pt-PT, allowed train/development; reserved workers and original test withheld",
+  "source_sha256":"af89ce740b98e8fe73a0fb3ba69a296837910f037e954b87409ef41d467d3da0",
+  "learner":"lexical-encoder-v1",
+  "training_timeout_ms":1800000,
+  "policies":[
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true,"split_heads":true},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true,"split_heads":true,"boundary_features":true}
+  ],
+  "hypothesis":"Four learned token-position signals (single, start, end, interior) improve BIO span boundary transfer without increasing vocabulary, character buckets, hidden width, epochs or the seed.",
+  "representation":"AXSQ0016 adds four bounded input rows to the existing relative-region split-head encoder. The feature is derived only from token position in the current input; it is not a label, dictionary, retrieval table or teacher query.",
+  "controls":"Policy 0 is the frozen split-head control. Policy 1 changes only boundary_features. Development selects the winner; reserved workers and original test remain untouched until a separate audit.",
+  "scope":"Diagnostic M1 experiment only. It cannot certify M1 or permit M2 unless every required gate is independently re-run under evals/protocols/m1-completion-v1.json."
+}

@@ -1,0 +1,91 @@
+{
+  "request": {
+    "repository": "anthropics/formal-math",
+    "revision": "16a5ce41304fcdaea4e0be7c132e1c361dc26da5",
+    "files": [
+      [
+        "eth/LICENSE",
+        11357,
+        "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64"
+      ],
+      [
+        "eth/MainResults.lean",
+        11542,
+        "1c62a550fa1e4cbec65bb7112f92ad67589afddc"
+      ],
+      [
+        "eth/NOTICE",
+        924,
+        "e8566e13158182ca02087a5430b640093e5c6c4a"
+      ],
+      [
+        "eth/README.md",
+        3696,
+        "0b3dcf4a858ff802b3275fc5999ffb134c74de60"
+      ],
+      [
+        "eth/Solution.lean",
+        3171,
+        "176892178e49792ae41368c13bb4973bae035b29"
+      ],
+      [
+        "eth/lean-toolchain",
+        25,
+        "a8afa7d1b02d96f0671eba854a8dc4b416beb473"
+      ],
+      [
+        "eth/paper.pdf",
+        900337,
+        "77f4a8f043f65cecf0ee8e4024bf026aff1066e8"
+      ]
+    ],
+    "destination": "anthropic"
+  },
+  "directory": "C:\\Users\\maico\\OneDrive\\Documents\\GitHub\\axon\\evals\\fixtures\\eth-research-v1\\anthropic",
+  "sources": {
+    "LICENSE": {
+      "url": "https://raw.githubusercontent.com/anthropics/formal-math/16a5ce41304fcdaea4e0be7c132e1c361dc26da5/eth/LICENSE",
+      "bytes": 11357,
+      "git_blob_sha1": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    "MainResults.lean": {
+      "url": "https://raw.githubusercontent.com/anthropics/formal-math/16a5ce41304fcdaea4e0be7c132e1c361dc26da5/eth/MainResults.lean",
+      "bytes": 11542,
+      "git_blob_sha1": "1c62a550fa1e4cbec65bb7112f92ad67589afddc",
+      "sha256": "47f78a9550d95b37d8718dd1ee16ae824da893a5e17c319f737e6d0a5ed24944"
+    },
+    "NOTICE": {
+      "url": "https://raw.githubusercontent.com/anthropics/formal-math/16a5ce41304fcdaea4e0be7c132e1c361dc26da5/eth/NOTICE",
+      "bytes": 924,
+      "git_blob_sha1": "e8566e13158182ca02087a5430b640093e5c6c4a",
+      "sha256": "5dc7b1516f2efe701c0917fd0b10ee89fc4d41f50a8b3576af0a6333cefb5b93"
+    },
+    "README.md": {
+      "url": "https://raw.githubusercontent.com/anthropics/formal-math/16a5ce41304fcdaea4e0be7c132e1c361dc26da5/eth/README.md",
+      "bytes": 3696,
+      "git_blob_sha1": "0b3dcf4a858ff802b3275fc5999ffb134c74de60",
+      "sha256": "844e0dd78593f728e6a6a1f52b7b3d1e162020c1746ac1f4b3c4e5f2ff7f494e"
+    },
+    "Solution.lean": {
+      "url": "https://raw.githubusercontent.com/anthropics/formal-math/16a5ce41304fcdaea4e0be7c132e1c361dc26da5/eth/Solution.lean",
+      "bytes": 3171,
+      "git_blob_sha1": "176892178e49792ae41368c13bb4973bae035b29",
+      "sha256": "27d304798a6ec294db7fdeee301227b70d72044cb31c85615901a8d728b0b98f"
+    },
+    "lean-toolchain": {
+      "url": "https://raw.githubusercontent.com/anthropics/formal-math/16a5ce41304fcdaea4e0be7c132e1c361dc26da5/eth/lean-toolchain",
+      "bytes": 25,
+      "git_blob_sha1": "a8afa7d1b02d96f0671eba854a8dc4b416beb473",
+      "sha256": "3aac669c7a910ec2389f4e4f921b605adf6ebf2d1e0c9b9cd0be4d33f3f5db71"
+    },
+    "paper.pdf": {
+      "url": "https://raw.githubusercontent.com/anthropics/formal-math/16a5ce41304fcdaea4e0be7c132e1c361dc26da5/eth/paper.pdf",
+      "bytes": 900337,
+      "git_blob_sha1": "77f4a8f043f65cecf0ee8e4024bf026aff1066e8",
+      "sha256": "7af518b09342c967ea371c74b8989806684c5d02aabe5763ca08554aff5025a0"
+    }
+  },
+  "code_executed": false,
+  "lean_rebuilt": false
+}

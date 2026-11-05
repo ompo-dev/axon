@@ -1,0 +1,17 @@
+{
+  "schema":"axon-public-math-source-admission/v1",
+  "source":"https://github.com/openai/grade-school-math",
+  "revision":"3101c7d5072418e28b9008a6636bde82a006892c",
+  "train_sha256":"17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+  "original_train_rows":7473,
+  "partition":"Hash lowercase whitespace-normalized QUESTION with numeric digit runs replaced by a marker; SHA256 first32 bits modulo5:0 reserved,1 development,2..4 training. Exact/template duplicates stay together. This is not semantic equivalence, author separation or proof against all paraphrase overlap.",
+  "exposed_question_prefixes":["A carnival snack booth made $50 selling popcorn each day."],
+  "exposure":"One Socratic README example and its answer895 were exposed in primary-source research. Mark matching numeric-template prefixes research-only, never a pristine reserve. Do not download Socratic/model-solution/original-test files. Original test file remains untouched; this does not assert the README example cannot overlap it.",
+  "labels":"Partition must not access answer properties. Freeze metadata/indices before answer parsing or learning. Future training may read only admitted train answers; development answers belong to evaluator only, reserved answers remain unopened until learner/protocol are frozen. Raw answer/calculation strings never eval/exec or inferred tool authority.",
+  "future_solver":"Use existing bounded program/learning/birth contracts. Distinguish math operations provided as primitives, supervised expression annotations, programs actually inferred from I/O and any genuinely discovered relation. Do not call equation-labelled training autonomous mathematical discovery. Count unsupported/refused/incorrect examples, no silent evaluation filtering.",
+  "limits":"English mathematical source, not Portuguese comprehension. Download/schema/partition checks are not learned capabilities. A future solver protocol must fix baselines, task denominator, answer interfaces, grouping, source overlap, costs and gates before scoring. All seven full M1 gates unchanged; this source cannot replace them.",
+  "training_started":false,
+  "inference_started":false,
+  "m1_complete":false,
+  "m2_permitted":false
+}

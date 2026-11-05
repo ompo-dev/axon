@@ -1,0 +1,14 @@
+{
+  "protocol": "axon-m0-inquiry/development-v1",
+  "date": "2026-10-16",
+  "full_milestone_approval": false,
+  "hypothesis": "An authorized discriminating question can resolve observational ambiguity that uninformative demonstrations leave unresolved.",
+  "provided": ["existing typed VM and bounded construction grammar", "finite unlabeled input pool", "authorized teaching oracle", "host record schemas and known arithmetic families", "maximum-disagreeing-pairs selection heuristic, not evolved"],
+  "boundaries": ["no future evaluation answers enter the learner", "admission inputs disjoint from teaching and query pool", "a sampled committee is not the full version space or proof", "no new VM opcodes", "query policy does not grant tool or filesystem authority"],
+  "caps": {"queries": 4, "pool_inputs": 64, "pool_nodes": 8192, "hypotheses": 16, "retained_prediction_nodes": 32768, "candidates": 50000, "work": 30000000},
+  "controls": ["passive input prefix under identical total caps and oracle opportunity", "prospectively shuffled passive pool", "same inherited library and source seed", "independent admission and prior retention in integrated campaign"],
+  "rejections": ["selection exceeds total budget", "oracle call outside authorized pool", "admission label used for query selection", "failed acquisition omitted", "historical trace shown as live activity", "fitness reused across changed search semantics"],
+  "evaluation_scope": "Development ambiguity stress tests in five known families, not a new full-M0 family reserve. Freeze actual tasks and binary before executing; preserve first results even if poor.",
+  "missing_for_M0": ["complete prospective milestone contract", "genuinely reserved family transfer", "physical costs of committee/oracle/ancestry under matched controls", "all transversal gates"],
+  "reference": "https://collaborate.princeton.edu/en/publications/query-by-committee/"
+}

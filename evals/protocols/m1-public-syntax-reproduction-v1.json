@@ -1,0 +1,10 @@
+{
+  "schema":"axon-public-syntax-protocol/v1",
+  "revision":"4f136acb02344e4f2f5e3d3e9ecc70aab61db62d",
+  "train_sha256":"b56d7124af821e2968302c38298904ec67af342304a33ae8a9dc4fa57df89648",
+  "dev_sha256":"f8a67abae12fbab85a3995204a6459d1958c11065062d4ea5349d6b914e78f81",
+  "policies":[{"seed":19374611,"buckets":8192,"dimensions":16,"epochs":4,"learning_rate":0.1}],
+  "selection":"One deliberate reproduction of policy 3 from m1-public-syntax-v3; no new hyperparameter search or new distinct linguistic examples.",
+  "candidate_refusal":"Reject existing page/residency/genome quota failures; never enlarge caps.",
+  "scope":"Final codec AXDP0002 and legacy residency compatibility control. Predictions must match the already consumed v3 development. Still not semantics, M1 completion, M2 or production promotion. Unknown RSS/energy remain unavailable. Same external CC BY-SA 4.0 Bosque supervision."
+}

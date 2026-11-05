@@ -1,0 +1,14 @@
+{
+  "schema":"axon-public-joint-matched-controls/v1",
+  "source":"MASSIVE 1.1 pt-PT",
+  "source_sha256":"af89ce740b98e8fe73a0fb3ba69a296837910f037e954b87409ef41d467d3da0",
+  "learner":"enhanced-sequence-v1",
+  "policies":[
+    {"seed":19374611,"buckets":8192,"epochs":6,"weights":60000,"intent_weights":30000,"subwords":false,"shared_roles":false,"minimum_margin":1},
+    {"seed":19374611,"buckets":8192,"epochs":6,"weights":60000,"intent_weights":30000,"subwords":true,"shared_roles":false,"minimum_margin":1}
+  ],
+  "selection":"Development exact matches then retained weights then policy order; only a matched control campaign.",
+  "scope":"Same train, dimensions of hashed feature space, weight/epoch budget and seed as joint training. Teacher-forced local updates and greedy decoding are the control. Reserved authors/test untouched; all M1 gates remain required.",
+  "promotion":false,
+  "m1_complete":false
+}

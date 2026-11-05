@@ -1,0 +1,121 @@
+rule	sentence	kind	owner	item	before	after	focus_owner	focus_item	arguments	answer
+01-declare	Ana tinha 18 livros	change	Ana	livros	_	18				
+02-possess	Ana possui 18 livros	change	Ana	livros	_	18				
+03-receive	Ana recebeu 5 livros	change	Ana	livros	18	23				
+04-spend	Ana gastou 5 livros	change	Ana	livros	18	13				
+05-transfer	Ana emprestou 5 livros para Bruno	change	Ana|Bruno	livros|livros	18|3	13|8				
+06-return	Bruno devolveu 5 livros para Ana	change	Bruno|Ana	livros|livros	18|3	13|8				
+07-negation	Ana nao recebeu 5 livros	ignore								
+08-reference	Ela recebeu 5 livros	change	Ana	livros	18	23	Ana			
+09-query	Quantos livros ficaram com Ana	question	Ana	livros	18					18
+10-reference-query	Quantos livros ela tem	question	Ana	livros	18		Ana			18
+11-total	Quantos livros Ana e Bruno tem juntos	question	Ana|Bruno	livros|livros	18|3					21
+12-compare	Quantos livros Ana tem a mais que Bruno	question	Ana|Bruno	livros|livros	18|3					15
+13-product	Quanto custa comprar 5 unidades a 3 por unidade	calculate							5|3	15
+14-affine	Qual x satisfaz 5 vezes x mais 3 igual a 18	calculate							5|3|18	3
+01-declare	Carla tinha 25 moedas	change	Carla	moedas	_	25				
+02-possess	Carla possui 25 moedas	change	Carla	moedas	_	25				
+03-receive	Carla recebeu 7 moedas	change	Carla	moedas	25	32				
+04-spend	Carla gastou 7 moedas	change	Carla	moedas	25	18				
+05-transfer	Carla emprestou 7 moedas para Davi	change	Carla|Davi	moedas|moedas	25|9	18|16				
+06-return	Davi devolveu 7 moedas para Carla	change	Davi|Carla	moedas|moedas	25|9	18|16				
+07-negation	Carla nao recebeu 7 moedas	ignore								
+08-reference	Ela recebeu 7 moedas	change	Carla	moedas	25	32	Carla			
+09-query	Quantos moedas ficaram com Carla	question	Carla	moedas	25					25
+10-reference-query	Quantos moedas ela tem	question	Carla	moedas	25		Carla			25
+11-total	Quantos moedas Carla e Davi tem juntos	question	Carla|Davi	moedas|moedas	25|9					34
+12-compare	Quantos moedas Carla tem a mais que Davi	question	Carla|Davi	moedas|moedas	25|9					16
+13-product	Quanto custa comprar 7 unidades a 9 por unidade	calculate							7|9	63
+14-affine	Qual x satisfaz 7 vezes x mais 9 igual a 25	calculate							7|9|25	2.2857142857142856
+01-declare	Eva tinha 13 pecas	change	Eva	pecas	_	13				
+02-possess	Eva possui 13 pecas	change	Eva	pecas	_	13				
+03-receive	Eva recebeu 2 pecas	change	Eva	pecas	13	15				
+04-spend	Eva gastou 2 pecas	change	Eva	pecas	13	11				
+05-transfer	Eva emprestou 2 pecas para Fabio	change	Eva|Fabio	pecas|pecas	13|6	11|8				
+06-return	Fabio devolveu 2 pecas para Eva	change	Fabio|Eva	pecas|pecas	13|6	11|8				
+07-negation	Eva nao recebeu 2 pecas	ignore								
+08-reference	Ela recebeu 2 pecas	change	Eva	pecas	13	15	Eva			
+09-query	Quantos pecas ficaram com Eva	question	Eva	pecas	13					13
+10-reference-query	Quantos pecas ela tem	question	Eva	pecas	13		Eva			13
+11-total	Quantos pecas Eva e Fabio tem juntos	question	Eva|Fabio	pecas|pecas	13|6					19
+12-compare	Quantos pecas Eva tem a mais que Fabio	question	Eva|Fabio	pecas|pecas	13|6					7
+13-product	Quanto custa comprar 2 unidades a 6 por unidade	calculate							2|6	12
+14-affine	Qual x satisfaz 2 vezes x mais 6 igual a 13	calculate							2|6|13	3.5
+01-declare	Gabi tinha 37 flores	change	Gabi	flores	_	37				
+02-possess	Gabi possui 37 flores	change	Gabi	flores	_	37				
+03-receive	Gabi recebeu 11 flores	change	Gabi	flores	37	48				
+04-spend	Gabi gastou 11 flores	change	Gabi	flores	37	26				
+05-transfer	Gabi emprestou 11 flores para Hugo	change	Gabi|Hugo	flores|flores	37|4	26|15				
+06-return	Hugo devolveu 11 flores para Gabi	change	Hugo|Gabi	flores|flores	37|4	26|15				
+07-negation	Gabi nao recebeu 11 flores	ignore								
+08-reference	Ela recebeu 11 flores	change	Gabi	flores	37	48	Gabi			
+09-query	Quantos flores ficaram com Gabi	question	Gabi	flores	37					37
+10-reference-query	Quantos flores ela tem	question	Gabi	flores	37		Gabi			37
+11-total	Quantos flores Gabi e Hugo tem juntos	question	Gabi|Hugo	flores|flores	37|4					41
+12-compare	Quantos flores Gabi tem a mais que Hugo	question	Gabi|Hugo	flores|flores	37|4					33
+13-product	Quanto custa comprar 11 unidades a 4 por unidade	calculate							11|4	44
+14-affine	Qual x satisfaz 11 vezes x mais 4 igual a 37	calculate							11|4|37	3
+01-declare	Iara tinha 19 cartas	change	Iara	cartas	_	19				
+02-possess	Iara possui 19 cartas	change	Iara	cartas	_	19				
+03-receive	Iara recebeu 6 cartas	change	Iara	cartas	19	25				
+04-spend	Iara gastou 6 cartas	change	Iara	cartas	19	13				
+05-transfer	Iara emprestou 6 cartas para Joao	change	Iara|Joao	cartas|cartas	19|8	13|14				
+06-return	Joao devolveu 6 cartas para Iara	change	Joao|Iara	cartas|cartas	19|8	13|14				
+07-negation	Iara nao recebeu 6 cartas	ignore								
+08-reference	Ela recebeu 6 cartas	change	Iara	cartas	19	25	Iara			
+09-query	Quantos cartas ficaram com Iara	question	Iara	cartas	19					19
+10-reference-query	Quantos cartas ela tem	question	Iara	cartas	19		Iara			19
+11-total	Quantos cartas Iara e Joao tem juntos	question	Iara|Joao	cartas|cartas	19|8					27
+12-compare	Quantos cartas Iara tem a mais que Joao	question	Iara|Joao	cartas|cartas	19|8					11
+13-product	Quanto custa comprar 6 unidades a 8 por unidade	calculate							6|8	48
+14-affine	Qual x satisfaz 6 vezes x mais 8 igual a 19	calculate							6|8|19	1.8333333333333333
+01-declare	Lia tinha 42 pontos	change	Lia	pontos	_	42				
+02-possess	Lia possui 42 pontos	change	Lia	pontos	_	42				
+03-receive	Lia recebeu 9 pontos	change	Lia	pontos	42	51				
+04-spend	Lia gastou 9 pontos	change	Lia	pontos	42	33				
+05-transfer	Lia emprestou 9 pontos para Mauro	change	Lia|Mauro	pontos|pontos	42|12	33|21				
+06-return	Mauro devolveu 9 pontos para Lia	change	Mauro|Lia	pontos|pontos	42|12	33|21				
+07-negation	Lia nao recebeu 9 pontos	ignore								
+08-reference	Ela recebeu 9 pontos	change	Lia	pontos	42	51	Lia			
+09-query	Quantos pontos ficaram com Lia	question	Lia	pontos	42					42
+10-reference-query	Quantos pontos ela tem	question	Lia	pontos	42		Lia			42
+11-total	Quantos pontos Lia e Mauro tem juntos	question	Lia|Mauro	pontos|pontos	42|12					54
+12-compare	Quantos pontos Lia tem a mais que Mauro	question	Lia|Mauro	pontos|pontos	42|12					30
+13-product	Quanto custa comprar 9 unidades a 12 por unidade	calculate							9|12	108
+14-affine	Qual x satisfaz 9 vezes x mais 12 igual a 42	calculate							9|12|42	3.3333333333333335
+01-declare	Nina tinha 31 frutas	change	Nina	frutas	_	31				
+02-possess	Nina possui 31 frutas	change	Nina	frutas	_	31				
+03-receive	Nina recebeu 4 frutas	change	Nina	frutas	31	35				
+04-spend	Nina gastou 4 frutas	change	Nina	frutas	31	27				
+05-transfer	Nina emprestou 4 frutas para Otavio	change	Nina|Otavio	frutas|frutas	31|7	27|11				
+06-return	Otavio devolveu 4 frutas para Nina	change	Otavio|Nina	frutas|frutas	31|7	27|11				
+07-negation	Nina nao recebeu 4 frutas	ignore								
+08-reference	Ela recebeu 4 frutas	change	Nina	frutas	31	35	Nina			
+09-query	Quantos frutas ficaram com Nina	question	Nina	frutas	31					31
+10-reference-query	Quantos frutas ela tem	question	Nina	frutas	31		Nina			31
+11-total	Quantos frutas Nina e Otavio tem juntos	question	Nina|Otavio	frutas|frutas	31|7					38
+12-compare	Quantos frutas Nina tem a mais que Otavio	question	Nina|Otavio	frutas|frutas	31|7					24
+13-product	Quanto custa comprar 4 unidades a 7 por unidade	calculate							4|7	28
+14-affine	Qual x satisfaz 4 vezes x mais 7 igual a 31	calculate							4|7|31	6
+01-declare	Paula tinha 28 bolas	change	Paula	bolas	_	28				
+02-possess	Paula possui 28 bolas	change	Paula	bolas	_	28				
+03-receive	Paula recebeu 8 bolas	change	Paula	bolas	28	36				
+04-spend	Paula gastou 8 bolas	change	Paula	bolas	28	20				
+05-transfer	Paula emprestou 8 bolas para Rui	change	Paula|Rui	bolas|bolas	28|5	20|13				
+06-return	Rui devolveu 8 bolas para Paula	change	Rui|Paula	bolas|bolas	28|5	20|13				
+07-negation	Paula nao recebeu 8 bolas	ignore								
+08-reference	Ela recebeu 8 bolas	change	Paula	bolas	28	36	Paula			
+09-query	Quantos bolas ficaram com Paula	question	Paula	bolas	28					28
+10-reference-query	Quantos bolas ela tem	question	Paula	bolas	28		Paula			28
+11-total	Quantos bolas Paula e Rui tem juntos	question	Paula|Rui	bolas|bolas	28|5					33
+12-compare	Quantos bolas Paula tem a mais que Rui	question	Paula|Rui	bolas|bolas	28|5					23
+13-product	Quanto custa comprar 8 unidades a 5 por unidade	calculate							8|5	40
+14-affine	Qual x satisfaz 8 vezes x mais 5 igual a 28	calculate							8|5|28	2.875
+15-norm	Qual a norma de 3 e 4	calculate							3|4	5
+15-norm	Qual a norma de 5 e 12	calculate							5|12	13
+15-norm	Qual a norma de 8 e 15	calculate							8|15	17
+15-norm	Qual a norma de 7 e 24	calculate							7|24	25
+15-norm	Qual a norma de 9 e 40	calculate							9|40	41
+15-norm	Qual a norma de 20 e 21	calculate							20|21	29
+15-norm	Qual a norma de 12 e 35	calculate							12|35	37
+15-norm	Qual a norma de 11 e 60	calculate							11|60	61

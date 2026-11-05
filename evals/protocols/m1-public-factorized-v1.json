@@ -1,0 +1,25 @@
+{
+  "schema":"axon-public-grammar-protocol/v1",
+  "learner":"factorized-sequence-v1",
+  "source":"MASSIVE 1.1 pt-PT",
+  "source_sha256":"af89ce740b98e8fe73a0fb3ba69a296837910f037e954b87409ef41d467d3da0",
+  "previous_predictions":".axon-memory/m1-public-grammar-v3/policy-1-predictions.json",
+  "previous_sequence_predictions":".axon-memory/m1-public-feedback-v1/stage-4-development-predictions.json",
+  "previous_compact_predictions":".axon-memory/m1-public-compact-v1/policy-4-predictions.json",
+  "train":"Exactly 8526 public allowed training rows; no pretrained representations, reserved workers or original test",
+  "development":"All 1504 already-consumed dev rows; adaptive engineering, not prospective reserve",
+  "policies":[
+    {"seed":47,"buckets":2048,"dimensions":16,"epochs":16,"learning_rate":0.1,"subwords":false,"minimum_margin":1},
+    {"seed":47,"buckets":4096,"dimensions":24,"epochs":32,"learning_rate":0.1,"subwords":false,"minimum_margin":1},
+    {"seed":19374611,"buckets":4096,"dimensions":32,"epochs":32,"learning_rate":0.1,"subwords":true,"minimum_margin":1},
+    {"seed":19374611,"buckets":4096,"dimensions":32,"epochs":32,"learning_rate":0.3,"subwords":true,"minimum_margin":1},
+    {"seed":19374611,"buckets":4096,"dimensions":32,"epochs":32,"learning_rate":0.03,"subwords":true,"minimum_margin":1},
+    {"seed":19374611,"buckets":4096,"dimensions":24,"epochs":32,"learning_rate":0.3,"subwords":false,"minimum_margin":1},
+    {"seed":47,"buckets":2048,"dimensions":32,"epochs":32,"learning_rate":0.3,"subwords":true,"minimum_margin":1},
+    {"seed":47,"buckets":4096,"dimensions":32,"epochs":32,"learning_rate":1.0,"subwords":true,"minimum_margin":1}
+  ],
+  "algorithm":"Shared low-rank hashed feature embeddings and separate intent/BIO softmax heads trained with SGD. Sqrt feature normalization, teacher histories only in training, greedy own predictions at inference. Per-row int8 scalar quantization, explicit float scales/bias. Distinct AXSQ0004 codec; old codecs unchanged. Not the full fastText algorithm or a novel AGI claim.",
+  "hypothesis":"A pruning diagnostic showed only 15 net dev structures lost; dropping pruning alone cannot close M1. Learn a shared feature representation across output classes instead of independent coefficients, within unchanged deployment caps. More training epochs are accounted, not hidden as a free comparison.",
+  "selection":"Exact complete dev structures, then fewer scalar coefficients, then policy order. No full M1 approval from this selection.",
+  "scope":"Experiments only, under the same 196608-byte page and 262144-byte genome/residency caps. Margin is a milli-logit difference, not probability or action authority. Full M1 gates unchanged, no M2, no operational promotion. Unknown RSS/energy remain unavailable."
+}

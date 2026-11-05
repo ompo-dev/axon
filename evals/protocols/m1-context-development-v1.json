@@ -1,0 +1,11 @@
+{
+  "schema": "axon-milestone-development/v1",
+  "milestone": "M1",
+  "predecessor": "m1-compositional-development-v1.json",
+  "scope": "Compositional requests grounded in persistent personal quantity facts, units, explicit focus, source conflicts, revisions and retractions; arithmetic through the existing learned numeric agent.",
+  "priors": ["typed quantity/reference/memory/equal-unit-call interfaces", "local fragment-to-meaning demonstrations and independent admission", "existing episodic store and authority/epoch preflight", "bounded structural chart search", "explicit environment numeric demonstrations, not future answers"],
+  "limits": {"rules":128,"words":31,"meanings_per_span":16,"retained_nodes":32768,"composition_work_per_turn":250000,"sessions":128,"turns_per_session":64,"receipt_bytes":16000000},
+  "acceptance": ["all enabled-context development turns correct, including refusals", "same-source revision replaces earlier value; conflicting sources are not silently merged", "ambiguous focus and missing facts cause no numeric queries or memory writes", "different units refuse before numeric execution; no automatic conversion", "retraction cannot remove another source's observation", "memory survives journal reopen", "child born in a separate process inherits procedures but no parent personal facts", "matched no-memory and no-composition controls retain their failures", "all previous structural, dialogue, algorithm and compositional cases retained", "live UI counters derive only from core receipts, unknown costs remain unavailable"],
+  "not_completion": "This is synthetic same-author development, not the independent-author Portuguese reserve required to close M1. It neither closes M1 nor starts M2. Quantity interfaces and unit equality are provided type semantics, not independently discovered physics or finance.",
+  "failure_rule": "Preserve negative receipts. Do not weaken unit, source, ambiguity, teacher-isolation or existing regression checks to achieve approval."
+}

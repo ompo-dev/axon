@@ -1,0 +1,14 @@
+{
+  "schema":"axon-grounded-data-context-development/v2",
+  "training":"Rebuild frozen m1-lexical-v2 unchanged and add one supervised semantic fragment. Reuse the already learned signed weighted total, not another projection program. The v1 extra projection exhausted the 128-rule quota during dynamic dialogue teaching; preserve that negative run and keep the quota.",
+  "development_cases":64,
+  "comparison":"Same new engine, new trained number versus frozen prior operational number. No answer labels in session or file inference payloads.",
+  "acceptance":"Every generated answer, evidence-source list and refusal must match; no denied teacher queries, inherited private facts, seed mutation or unauthorized file access. Report all failures.",
+  "units":"Explicit host metadata; equal unit tags only. Signed integer quantity times integer price inherited from prior curriculum, not general accounting.",
+  "demonstration":"Whole-record winner remains a separate file request. The integrated contextual request combines personal evidence and net total over all records, NOT the winner's amount.",
+  "language":"Same engineering author, taught forms and novel compositions/names/data; not independent public language acceptance or continued neural training.",
+  "m1_complete":false,
+  "m2_allowed":false,
+  "rss_bytes":null,
+  "energy_joules":null
+}

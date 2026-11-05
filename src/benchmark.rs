@@ -2,8 +2,8 @@ use std::time::Duration;
 
 /// A named portion of one benchmarked workload lifecycle.
 ///
-/// `Duration::ZERO` means that the phase was intentionally not measured or is
-/// not applicable to this workload. It must not be interpreted as a hidden cost.
+/// A zero duration can be either measured or absent. Use
+/// [`BenchContract::has_phase`] when that distinction matters.
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum BenchPhase {
     InputGeneration,
@@ -245,18 +245,21 @@ const fn map_contract_error(_: BenchContractError) -> ArtifactLifetimeError {
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct BenchContract {
     durations: [Duration; 12],
+    measured: u16,
 }
 
 impl BenchContract {
     pub const fn empty() -> Self {
         Self {
             durations: [Duration::ZERO; 12],
+            measured: 0,
         }
     }
 
     /// Returns a new record with `phase` replaced, preserving the original.
     pub fn with_phase(mut self, phase: BenchPhase, duration: Duration) -> Self {
         self.durations[phase.index()] = duration;
+        self.measured |= 1 << phase.index();
         self
     }
 
@@ -265,14 +268,21 @@ impl BenchContract {
         phase: BenchPhase,
         duration: Duration,
     ) -> Result<Self, BenchContractError> {
-        self.durations[phase.index()] = self.durations[phase.index()]
+        let duration = self.durations[phase.index()]
             .checked_add(duration)
             .ok_or(BenchContractError::DurationOverflow)?;
+        self.durations[phase.index()] = duration;
+        self.measured |= 1 << phase.index();
         Ok(self)
     }
 
     pub const fn phase(&self, phase: BenchPhase) -> Duration {
         self.durations[phase.index()]
+    }
+
+    /// Distinguishes a measured zero-duration phase from a phase never recorded.
+    pub const fn has_phase(&self, phase: BenchPhase) -> bool {
+        self.measured & (1 << phase.index()) != 0
     }
 
     pub const fn hot(&self) -> Duration {
@@ -332,6 +342,16 @@ mod tests {
             amended.phase(BenchPhase::Planning),
             Duration::from_millis(2)
         );
+    }
+
+    #[test]
+    fn measured_zero_is_distinct_from_an_absent_phase() {
+        let empty = BenchContract::empty();
+        let measured = empty.with_phase(BenchPhase::ResultValidation, Duration::ZERO);
+
+        assert!(!empty.has_phase(BenchPhase::ResultValidation));
+        assert!(measured.has_phase(BenchPhase::ResultValidation));
+        assert_eq!(measured.phase(BenchPhase::ResultValidation), Duration::ZERO);
     }
 
     #[test]

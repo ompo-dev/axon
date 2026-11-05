@@ -1,0 +1,35 @@
+task	split	input	output	expected_status
+normalize	train	  Alpha  Beta  	alpha beta	agreed
+normalize	train	 Gamma   Delta 	gamma delta	agreed
+normalize	test	  NOVA   Equipe 	nova equipe	agreed
+normalize	test	Outro   Grupo	outro grupo	agreed
+reorder	train	Ana Maria|Silva Costa	Silva Costa, Ana Maria	agreed
+reorder	train	Bruno|Lima Rocha	Lima Rocha, Bruno	agreed
+reorder	test	Carla Sofia|Pereira Alves	Pereira Alves, Carla Sofia	agreed
+reorder	test	Daniel|Rocha Santos	Rocha Santos, Daniel	agreed
+ticket	train	ticket AB-003	ID:003	agreed
+ticket	train	receipt XYZ-810	ID:810	agreed
+ticket	train	case K-042	ID:042	agreed
+ticket	test	order LM-0007	ID:0007	agreed
+ticket	test	request R-951	ID:951	agreed
+email	train	Ana.Maria@example.org	ana.maria	agreed
+email	train	Bruno_Silva@office.net	bruno_silva	agreed
+email	test	Clara.Souza@team.com	clara.souza	agreed
+email	test	Daniel_Lima@work.org	daniel_lima	agreed
+swap	train	red:blue	blue/red	agreed
+swap	train	green:yellow	yellow/green	agreed
+swap	test	cyan:magenta	magenta/cyan	agreed
+swap	test	black:white	white/black	agreed
+upper	train	  Alpha Beta 	ALPHA BETA	agreed
+upper	train	 Gamma  Delta  	GAMMA DELTA	agreed
+upper	test	  Nova   Equipe 	NOVA EQUIPE	agreed
+upper	test	Outro  Grupo	OUTRO GRUPO	agreed
+surname	train	Ana Silva	Silva	agreed
+surname	train	Bruno Costa	Costa	agreed
+surname	test	Carla de Souza		needs_example
+reverse	train	abcd	dcba	agreed
+reverse	train	wxyz	zyxw	agreed
+reverse	test	lmno	onml	unsupported
+double	train	10	20	agreed
+double	train	20	40	agreed
+double	test	30	60	unsupported

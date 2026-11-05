@@ -1,0 +1,16 @@
+{
+  "schema":"axon-public-feedback-protocol/v1",
+  "source_sha256":"af89ce740b98e8fe73a0fb3ba69a296837910f037e954b87409ef41d467d3da0",
+  "learner":"lexical-encoder-v1",
+  "prefixes":[2500,4000,5500,7000,8526],
+  "chunk_requests":128,
+  "budget":{"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":16,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true},
+  "representation":"No new inference codec or birth format. Continue dequantized lexical, mixer, class-input and readout parameters from the actual immediately previous numeric genome. Preserve all inherited words; admit frequent new words only into remaining4096 slots. Union intent/BIO labels and remap their input/readout rows. In typed models preserve old role support; this run uses no typed mask, split, CNN, recurrence, graph or optimizer state.",
+  "order":"Same original allowed train row order and five prefixes as prior feedback protocols. Reserved workers and original test excluded before text/annotations. The source has been consumed in previous studies, so window ordering does not create a new independent reserve or natural temporal stream.",
+  "feedback":"Predict next-window requests with current descendant and frozen initial ancestor BEFORE writing their labels to core training input. Then refine the actual preceding genome with cumulative replay. All existing supervision remains explicit. No from-scratch reset between generations. Gold labels never enter prediction input.",
+  "retention":"Score all original2500 taught requests after every stage, preserve every gain/loss and frozen ancestor. Repeated teaching is not perfect lifelong memory. Score all1504 consumed development examples at every stage without recipe changes; final8526-row fit separately.",
+  "preflight":"All-coordinate inherited parameter mapping across lexical and class index shifts for linear/shared/split/typed layouts; character/special/class rows, mixer and biases. New class readouts untouched; no inherited word evicted. Acquire a new intent/role and copy unseen value, preserve old support, numeric birth, callback failure leaves parent intact, incompatible schemas refused. CNN/recurrence/collision refinement explicitly unsupported, never silently reset.",
+  "controls":"Paired current-versus-frozen-initial-ancestor before each next window and old-row forgetting after each update. Those differ in experience and vocabulary, not matched-information causal proof. Historical cold32 fits use a different curriculum and total work, not a fair speed baseline. No claim of superior acquisition efficiency without a later matched exposure/parameter test.",
+  "cost":"Entire lineage27526 cumulative rows times16 epochs=440416 sentence presentations, plus every pre-feedback/retention/development/fit inference chunk. Account all ancestor training, expanded labels/vocabulary and serialized sizes. Logical work is not CPU time, RSS or energy; unknown measurements unavailable.",
+  "promotion":"M1 gates unchanged. This is actual inherited supervised acquisition, not autonomous semantic discovery or full M1 approval. No M2 or production promotion. Preserve errors and source/candidate/protocol/lineage before training. Fixed recipe, no development-driven sweep."
+}

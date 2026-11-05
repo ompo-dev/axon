@@ -1,0 +1,29 @@
+id	family	text	expected	refusal
+T01	text	Sofia possui 41 selos. Sofia nao recebeu 9 selos. Quantos selos ficaram com Sofia?	41	
+T02	text	Vera tinha 28 caixas. Ela recebeu 6 caixas. Quantos caixas ela tem?	34	
+T03	text	Marta tinha 73 figurinhas. Marta gastou 11 figurinhas. Quantos figurinhas ficaram com Marta?	62	
+T04	text	Zeca tinha 19 copos. Bia possui 7 copos. Quantos copos Zeca tem a mais que Bia?	12	
+T05	text	Leo tinha 23 pontos. Zoe tinha 12 pontos. Quantos pontos Leo e Zoe tem juntos?	35	
+X01	mixed	Sofia tinha 18 livros. Bruno tinha 0 livros. Sofia emprestou 5 livros para Bruno. Sofia recebeu 2 livros. Quantos livros ficaram com Sofia?	15	
+X02	mixed	Sofia tinha 18 livros. Bruno tinha 0 livros. Sofia emprestou 5 livros para Bruno. Sofia recebeu 2 livros. Bruno devolveu 3 livros para Sofia. Quantos livros ficaram com Sofia?	18	
+X03	mixed	Raul tinha 90 fichas. Mia tinha 10 fichas. Raul emprestou 14 fichas para Mia. Mia gastou 3 fichas. Quantos fichas Raul e Mia tem juntos?	97	
+X04	mixed	Dora tinha 33 moedas. Dora gastou 8 moedas. Dora recebeu 4 moedas. Dora gastou 2 moedas. Quantos moedas ficaram com Dora?	27	
+X05	mixed	Mila tinha 10 pecas. Otto tinha 4 pecas. Otto devolveu 3 pecas para Mila. Quantos pecas Otto tem a mais que Mila?	-12	
+M01	math	Quanto custa comprar 17 unidades a 23 por unidade?	391	
+M02	math	Qual x satisfaz 7 vezes x mais 13 igual a 62?	7	
+M03	math	Qual a norma de 16 e 63?	65	
+M04	math	Quanto custa comprar 2,5 unidades a 8 por unidade?	20	
+M05	math	Qual x satisfaz -3 vezes x mais 5 igual a 14?	-3	
+N01	negative	Quantos livros ficaram com Sofia?		missing
+N02	negative	Sofia tinha 18 livros. Bruno tinha 0 livros. Sofia emprestou 5 livros para Bruno. Ela recebeu 2 livros. Quantos livros ficaram com Sofia?		ambiguous
+N03	negative	Sofia tinha 18 livros. Quantos moedas ficaram com Sofia?		missing
+N04	negative	Qual x satisfaz 0 vezes x mais 5 igual a 14?		domain
+N05	negative	Sofia tinha 18 livros. Sofia possui 20 livros. Quantos livros ficaram com Sofia?		ambiguous
+N06	negative	Sofia tinha 18 livros. Sofia queimou 4 livros. Quantos livros ficaram com Sofia?		unknown
+N07	negative	Sofia tinha 18 livros. Sofia recebeu infinito livros. Quantos livros ficaram com Sofia?		domain
+N08	negative	Sofia tinha 18 livros. Bruno tinha 0 livros. Sofia emprestou 5 livros para Sofia. Quantos livros ficaram com Sofia?		ambiguous
+P01	natural-probe	No inicio, Sofia guardava dezoito livros; emprestou cinco ao Bruno e ganhou dois de Carla. Com quantos livros ela ficou?	15	
+P02	natural-probe	O saldo de Raul era de 90 fichas; ele passou 14 para Mia, que tinha 10. Ela usou 3. Quanto restou entre os dois?	97	
+P03	natural-probe	Um triangulo retangulo tem lados perpendiculares medindo dezesseis e sessenta e tres. Qual e a hipotenusa?	65	
+P04	natural-probe	Sete vezes um numero, acrescido de treze, resulta em sessenta e dois. Descubra o numero.	7	
+P05	natural-probe	Se cada peca custa vinte e tres reais, quanto pago por dezessete pecas?	391	

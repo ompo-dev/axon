@@ -1,0 +1,13 @@
+{
+  "schema":"axon-grounded-data-context-development/v1",
+  "training":"Rebuild the frozen m1-lexical-v2 curriculum unchanged, add one supervised semantic fragment and one learned record-value projection. Reused previous operational training, not autonomous concept discovery or continued neural training.",
+  "development_cases":64,
+  "comparison":"Same new engine, new trained number versus frozen prior operational number. No answer labels in session or file inference payloads.",
+  "acceptance":"Every generated answer, evidence-source list and refusal must match; no denied teacher queries, inherited private facts, seed mutation or unauthorized file access. Report all failures, including pipeline failures.",
+  "units":"Explicit host metadata; equal unit tags only, no implicit exchange or dimensional inference. Signed integer quantity times integer price convention inherited from prior curriculum.",
+  "language":"Same engineering author, bounded taught forms and novel compositions/names/data. NOT independent public language acceptance.",
+  "m1_complete":false,
+  "m2_allowed":false,
+  "rss_bytes":null,
+  "energy_joules":null
+}

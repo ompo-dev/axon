@@ -1,0 +1,39 @@
+{
+  "schema":"axon-public-lexical-graph/v1",
+  "source":"MASSIVE 1.1 pt-PT, allowed train/development only; extra OWN-PT lexical supervision explicitly admitted",
+  "source_sha256":"af89ce740b98e8fe73a0fb3ba69a296837910f037e954b87409ef41d467d3da0",
+  "learner":"lexical-encoder-v1",
+  "training_timeout_ms":1800000,
+  "policies":[
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true}
+  ],
+  "lexical_source":{
+    "facts":".axon-memory/corpora/own-pt-1.0.0/facts-v2.tsv",
+    "facts_sha256":"ad8653d40b82b35e4c4073c9578931554e22111f636a568967fece3c572cbd33",
+    "vocabulary":".axon-memory/m1-public-adaptive-training-v1/policy-0/semantic-lexical-encoder-v1.axseq",
+    "vocabulary_sha256":"d5567d283da245a2b27aa97cefe0c3a316858aec1b1d7c4978d6003e10fd3ea3",
+    "license_file":".axon-memory/corpora/own-pt-1.0.0/own/LICENSE"
+  },
+  "lexical_policies":[
+    {"weight":0,"interval":1,"rewire":false},
+    {"weight":0.1,"interval":1,"rewire":false},
+    {"weight":0.5,"interval":1,"rewire":false},
+    {"weight":0.5,"interval":1,"rewire":true}
+  ],
+  "control_number_sha256":"824abdd1360511a06060e57aafc3e6529697120b9075efdf1318e16ce01b5c17",
+  "expected_numbers":{"0":"824abdd1360511a06060e57aafc3e6529697120b9075efdf1318e16ce01b5c17"},
+  "representation":"Unchanged AXSQ0009 lexical model/module16, 86272 neural coefficients. No new inference state, vocabulary, text substitution, codec, graph or semantic fact is deployed. Trained embedding values may change. No pretrained LLM, PyTorch or hidden remote service.",
+  "lexical_information":"Only OWN-PT word-to-synset facts: lower-case exact single-word matches to the 4096-word frozen primary-train lexicon, all senses retained, 1123 unique undirected co-synset edges on957 words. Definitions/hypernyms not used. Source word facts83762, covered senses7406. Co-synset at word level is NOT unambiguous synonymy or proof of task-preserving substitution. Extra source information is not claimed equal to primary-only training.",
+  "learning":"For each supervised sentence, after its ordinary online SGD heads, one shuffled lexical edge receives the gradient of 1/2||e_a-e_b||^2: both endpoints updated simultaneously at decaying base learning rate times lexical weight, independent of intent frequency balance. Independent RNG shuffles lexical edges without consuming primary initialization/shuffle/dropout RNG. Source edges are train-only and bounded50000; labels/words must match the learned vocabulary. Initial mode rejects graph+Adam/CNN/recurrent/collision-control/character/active-POS combinations. Zero weight must reproduce old number and update no edge.",
+  "controls":"0 zero-weight same graph; 1 weak0.1; 2 strong0.5; 3 strong0.5 degree-preserving rewired graph. Every word degree, node/edge count, same vocabulary and primary data preserved by negative graph control. Bounded double-edge swaps seed19374611:11230 accepted/11390 attempts,14 original edges retained. Not a uniform random-graph sampler. All policies fixed before task scores; single initialization, no statistical significance claim.",
+  "work":"4 fits x32 epochs x8526 sentences =1091328 primary presentations; active policies each272832 pair updates. Graph buffers/source JSON are additional training workspace and discarded before birth. CPU/RSS/energy must be measured separately, not inferred from the unchanged genome or elapsed training under concurrent tests.",
+  "preflight":"Analytic symmetric pair gradient versus finite differences, untouched other rows, bounded failed update; zero-weight bytes/RNG unchanged, active counters, deterministic roundtrip, unknown/reversed/duplicate edges and unsupported combinations refused. Graph source parser/degree preservation/rewiring deterministic tests. Not independent language proof.",
+  "selection":"Consumed-development exact count, then deployed neural coefficient count, then index. All failures retained. Original test and reserved workers untouched; PACIFIC question/answer annotations unused. No best-development score closes all seven M1 gates or authorizes M2.",
+  "method_source":"https://aclanthology.org/N15-1184/",
+  "method_limit":"Inspired by established lexical regularization/retrofitting, not a reproduction of its offline update algorithm, an AXON invention, learned sense disambiguation, AGI, or proof of emergent unrestricted understanding.",
+  "promotion":false,
+  "m1_complete":false
+}

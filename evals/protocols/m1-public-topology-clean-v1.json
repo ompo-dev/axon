@@ -1,0 +1,15 @@
+{
+  "schema":"axon-public-relations/v1",
+  "source":"https://github.com/lbencke/InferBR",
+  "revision":"b6c5e0b27e52477bbc5433d130b0a0e825cf74dc",
+  "training_command":"relation-train-topology",
+  "batch_command":"relation-batch-topology",
+  "training_quality":"reviewer-clean",
+  "representation":"Same edit-topology/closed associations as topology-v1. Training accepts only original low_quality=N and reviewer label equal to generated label; no lexical/test filtering.",
+  "identity_examples":24,
+  "identity_supervision":"Explicit supervised reflexivity over selected public train statements.",
+  "policies":[{"seed":1,"proposals":128,"rules":128,"checks":16000000,"minimum_holes":1}],
+  "selection":"One deterministic policy. All 646 validation and 1758 previously consumed test pairs evaluated, including confusing/low-quality examples. Report clean strata additionally, never replace the full denominator.",
+  "acceptance":"Development experiment, not M1 approval. Compare validation, consistency and retention; no automatic promotion or M2 start.",
+  "limits":"Current rule/genome/input caps and 300 seconds per process. No hidden model, second agent, RSS or energy claim."
+}

@@ -1,0 +1,76 @@
+{
+  "schema": "axon-eth-research/v1",
+  "date": "2026-10-28",
+  "scope": "Pinned primary-source research only. No downloaded code executed; Lean proof not rebuilt locally. Mathematical spot checks are not reproduction of either ETH algorithm or new AXON capability.",
+  "sources": [
+    {
+      "repository": "anthropics/formal-math",
+      "revision": "16a5ce41304fcdaea4e0be7c132e1c361dc26da5",
+      "files": [
+        [
+          "eth/LICENSE",
+          11357,
+          "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64"
+        ],
+        [
+          "eth/MainResults.lean",
+          11542,
+          "1c62a550fa1e4cbec65bb7112f92ad67589afddc"
+        ],
+        [
+          "eth/NOTICE",
+          924,
+          "e8566e13158182ca02087a5430b640093e5c6c4a"
+        ],
+        [
+          "eth/README.md",
+          3696,
+          "0b3dcf4a858ff802b3275fc5999ffb134c74de60"
+        ],
+        [
+          "eth/Solution.lean",
+          3171,
+          "176892178e49792ae41368c13bb4973bae035b29"
+        ],
+        [
+          "eth/lean-toolchain",
+          25,
+          "a8afa7d1b02d96f0671eba854a8dc4b416beb473"
+        ],
+        [
+          "eth/paper.pdf",
+          900337,
+          "77f4a8f043f65cecf0ee8e4024bf026aff1066e8"
+        ]
+      ],
+      "destination": "anthropic"
+    },
+    {
+      "repository": "openai/math",
+      "revision": "7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a",
+      "files": [
+        [
+          "preprints/The-Exponential-Time-Hypothesis-is-False-October-25-2026/build/main_full_version.tex",
+          214857,
+          "f7af85e623b58e0ca9f4b9416916d442defa963a"
+        ],
+        [
+          "lean/docs/378.md",
+          1090,
+          "223bbe187394bffca8a2c7ba1656538bfba26e3b"
+        ],
+        [
+          "LICENSE",
+          11357,
+          "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64"
+        ],
+        [
+          "history.md",
+          3888,
+          "ff52ee4dba7ac9a2f145b934f282f582525a4c0d"
+        ]
+      ],
+      "destination": "openai"
+    }
+  ]
+}

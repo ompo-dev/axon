@@ -1,0 +1,31 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+import {execFile} from 'node:child_process';
+import {promisify} from 'node:util';
+import {sha} from './gsm8k-source.mjs';
+
+const [lab,out]=process.argv.slice(2);assert(out&&path.resolve(out).startsWith(path.resolve()+path.sep));await fs.mkdir(out);
+const root='.axon-memory/m1-pointer-anonymity-v1',read=async file=>JSON.parse(await fs.readFile(path.join(root,file))),study=await read('predictions-ready.json'),calls=[],sources={};
+const write=(file,data)=>fs.writeFile(path.join(out,file),JSON.stringify(data,null,2),{flag:'wx'});
+async function capture(file){sources[file]=sha(await fs.readFile(file));}
+for(const file of [process.argv[1],'evals/protocols/m1-working-pointer-v1.json',`${root}/freeze.json`,`${root}/predictions-ready.json`])await capture(file);
+await fs.copyFile(lab,path.join(out,'lab.exe'),fs.constants.COPYFILE_EXCL);const binary=path.resolve(out,'lab.exe'),binaryHash=sha(await fs.readFile(binary));
+async function core(name,args,success=true){let stdout='',stderr='',code=0;const start=performance.now();try{({stdout,stderr}=await promisify(execFile)(binary,args,{windowsHide:true,timeout:300000,maxBuffer:2000000}));}catch(e){stdout=e.stdout??'';stderr=e.stderr??'';code=e.code??'spawn';}const call={name,args,exit_code:code,whole_process_ms:performance.now()-start};calls.push(call);await fs.writeFile(path.join(out,`${name}.stdout.log`),stdout,{flag:'wx'});await fs.writeFile(path.join(out,`${name}.stderr.log`),stderr,{flag:'wx'});await write(`${name}-call.json`,call);if(success){assert.equal(code,0,stderr);return JSON.parse(stdout);}assert.notEqual(code,0);return stderr;}
+const requests=[];
+for(const r of study.results)for(const kind of ['teacher','own','development']){
+  const dir=`policy-${r.index}`,expectedFile=`${root}/${dir}/${kind}-predictions.json`,expected=await read(`${dir}/${kind}-predictions.json`),size=kind==='teacher'?32:4,batches=[];
+  await capture(expectedFile);assert.equal(sha(await fs.readFile(path.join(root,dir,'combined/structural.axnum'))),r.number_sha256);
+  for(let start=0;start<expected.length;start+=size){const file=`${root}/${dir}/${kind}-${start}-inputs.json`;await capture(file);batches.push(JSON.parse(await fs.readFile(file)));}
+  assert.deepEqual(batches.flat().map(x=>x.id),expected.map(x=>x.id));const name=`p${r.index}-${kind}`,file=path.join(out,`${name}-input.json`);await write(`${name}-input.json`,{batches});await capture(file);requests.push({name,r,kind,expected,batches,file});
+}
+await write('freeze-before-execution.json',{binary_sha256:binaryHash,sources,scope:'Complete frozen phase49 predictions/inputs, no gold or fitting. All per-batch identities, frame/value/origin/work/margin fields must be byte-value-equivalent after JSON decoding.'});
+const results=[];
+for(const {name,r,kind,expected,batches,file}of requests){const receipt=path.join(out,`${name}-receipt.json`),summary=await core(name,[kind==='teacher'?'pointer-frames-session':'pointer-session',path.join(root,`policy-${r.index}/combined/structural.axnum`),path.join(out,`${name}-birth`),file,receipt]),rows=JSON.parse(await fs.readFile(receipt));assert.equal(summary.native_births,1);assert.equal(summary.logical_batches,batches.length);assert.equal(rows.batches.length,batches.length);assert.deepEqual(rows.batches.flat(),expected);assert.equal(summary.total,expected.length);results.push({name,total:expected.length,logical_batches:batches.length,summary,predictions_sha256:sha(await fs.readFile(receipt))});console.log(JSON.stringify({name,identical:expected.length}));}
+const zero='.axon-memory/m1-relational-pointer-v2/policy-0/combined/structural.axnum';await capture(zero);
+const simple={id:'x',text:'2'},invalid=[{name:'empty',data:{batches:[]}},{name:'513',data:{batches:Array.from({length:513},()=>[simple])}},{name:'empty-group',data:{batches:[[]]}},{name:'five',data:{batches:[Array.from({length:5},(_,i)=>({...simple,id:`q${i}`}))]}},{name:'duplicate',data:{batches:[[simple,simple]]}},{name:'unknown-root',data:{batches:[[simple]],expected:2}},{name:'label',data:{batches:[[{...simple,expected:2}]]}},{name:'late-invalid-frame',frames:true,data:{batches:[[simple],[{id:'bad',text:'not numeric'}]]}},{name:'33-frames',frames:true,data:{batches:[Array.from({length:33},(_,i)=>({...simple,id:`q${i}`}))]}}];
+const boundaries=[];
+for(const c of invalid){const name=`reject-${c.name}`,birth=path.join(out,`${name}-birth`),receipt=path.join(out,`${name}-receipt.json`),input=path.join(out,`${name}-input.json`);await write(`${name}-input.json`,c.data);await core(name,[c.frames?'pointer-frames-session':'pointer-session',zero,birth,input,receipt],false);await assert.rejects(fs.stat(birth),e=>e.code==='ENOENT');await assert.rejects(fs.stat(receipt),e=>e.code==='ENOENT');boundaries.push({name,refused_before_birth:true});}
+for(const frames of [false,true]){const name=`max-${frames?'frames':'own'}`,batches=Array.from({length:512},()=>Array.from({length:frames?32:4},(_,i)=>({id:`q${i}`,text:frames?'axon-step-0 axon-question 2 axon-memory':'2'}))),input=path.join(out,`${name}-input.json`),receipt=path.join(out,`${name}-receipt.json`);await write(`${name}-input.json`,{batches});const summary=await core(name,[frames?'pointer-frames-session':'pointer-session',zero,path.join(out,`${name}-birth`),input,receipt]),rows=JSON.parse(await fs.readFile(receipt));assert.equal(summary.total,frames?16384:2048);assert.equal(summary.logical_batches,512);assert.equal(rows.batches.length,512);for(const row of rows.batches)assert.deepEqual(row,rows.batches[0]);boundaries.push({name,summary});}
+for(const [file,hash]of Object.entries(sources))assert.equal(sha(await fs.readFile(file)),hash);
+const audit={schema:'axon-pointer-session-compatibility/v1',results,boundaries,total_rows:results.reduce((n,r)=>n+r.total,0),previous_cold_births:results.reduce((n,r)=>n+r.logical_batches,0),session_births:results.length,calls,binary_sha256:binaryHash,boundary_sources:{[zero]:sources[zero]},no_gold_read:true,no_fitting:true,m1_complete:false,m2_permitted:false};await write('audit.json',audit);console.log(JSON.stringify({rows:audit.total_rows,previous_births:audit.previous_cold_births,session_births:audit.session_births,boundaries:boundaries.length,calls:calls.length}));

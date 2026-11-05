@@ -1,0 +1,36 @@
+{
+  "schema":"axon-public-split-mixers/v1",
+  "source":"MASSIVE 1.1 pt-PT, allowed train/development; two explicit OWN-PT conditions",
+  "source_sha256":"af89ce740b98e8fe73a0fb3ba69a296837910f037e954b87409ef41d467d3da0",
+  "learner":"lexical-encoder-v1",
+  "training_timeout_ms":1800000,
+  "policies":[
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":32,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":32,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true,"split_heads":true},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true,"split_heads":true},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true,"split_heads":true}
+  ],
+  "lexical_source":{
+    "facts":".axon-memory/corpora/own-pt-1.0.0/facts-v2.tsv",
+    "facts_sha256":"ad8653d40b82b35e4c4073c9578931554e22111f636a568967fece3c572cbd33",
+    "vocabulary":".axon-memory/m1-public-adaptive-training-v1/policy-0/semantic-lexical-encoder-v1.axseq",
+    "vocabulary_sha256":"d5567d283da245a2b27aa97cefe0c3a316858aec1b1d7c4978d6003e10fd3ea3",
+    "license_file":".axon-memory/corpora/own-pt-1.0.0/own/LICENSE"
+  },
+  "lexical_policies":[null,null,null,null,{"weight":0.5,"interval":1,"rewire":false},{"weight":0.5,"interval":1,"rewire":false}],
+  "control_number_sha256":"824abdd1360511a06060e57aafc3e6529697120b9075efdf1318e16ce01b5c17",
+  "expected_numbers":{"0":"824abdd1360511a06060e57aafc3e6529697120b9075efdf1318e16ce01b5c17","4":"82fe0daa53a76f166d34579651266992a48ec859a297f405fb5c6252e829b936"},
+  "hypothesis":"The same seven input groups have different semantics in sentence intent and token BIO contexts. Separate tanh mixing matrices might reduce destructive task sharing. This is a hypothesis, not an established diagnosis or a claim that all language is routing.",
+  "representation":"AXSQ0013/type16 declares two H-unit mixers; input word/character embeddings and existing readout rows remain shared storage. Head selected by the existing typed intent-feature range in BIO group6, not by text instructions or gold labels. No new tool authority. Reject split mode without regions/H or with typed roles/CNN/recurrence/active POS. Old defaults/numbers preserved.",
+  "learning":"Clone the originally initialized H-row mixer into the second branch without consuming another primary random number. Intent gold updates branch0, BIO gold updates branch1, both backpropagate into shared word embeddings. At equal H, primary initialization/shuffle/dropout streams match shared controls. Existing SGD, global BIO normalizer and teacher-forced previous train tag unchanged; inference uses only its own predictions.",
+  "controls":"Fixed six fits before scores: shared64, shared32, split32, split64, shared64+graph, split64+graph. Compare1/2,0/3,4/5. Split32 is smaller than shared64 but same-H pairs have extra parameters, not a perfectly coefficient-matched causal experiment. No changed upper H64/D16/vocabulary4096 or page/genome quotas. No extra epochs or withheld data. One initialization, consumed development, no significance claim.",
+  "preflight":"Numerical gradients on every parameter for both tasks, inactive-branch gradients exactly zero, shared lexical gradients nonzero; deterministic codec and copied unseen value, strict shape/flag/scale rejection, old numeric births and CLI label-free inference. Preserve any failed preflight rather than erase it.",
+  "audit":"Independent source recount and deployed shape: input4268x16, readout169xH, mixer Hx112 or2Hx112; neural counts86272/77280/80864/93440/86272/93440. Graph0.5 only4/5 with272832 pair updates each. All normalize211575104 primary BIO terms. Graph/optimizer/labels not deployed; check old controls byte-for-byte and separate-process retention.",
+  "work":"1636992 primary presentations and545664 graph pair updates. Split inference scores only the relevant readout head; logical work counts do not prove physical speed/energy improvements. Report actual page, residency and genome sizes separately; unknown RAM/energy unavailable.",
+  "research":"Task-dependent sharing is established prior art: Misra et al., CVPR2016, https://arxiv.org/abs/1604.03539 . This static split is not their learned cross-stitch operator or a new invention.",
+  "selection":"Consumed-development exact frames, then neural coefficient count, then index. Preserve every failure and compare gains/losses. Original test/reserved workers and PACIFIC/SVAMP labels untouched. Every M1 gate remains mandatory; no M2 or production promotion from this study.",
+  "promotion":false,
+  "m1_complete":false
+}

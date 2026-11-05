@@ -1,0 +1,21 @@
+{
+  "schema":"axon-public-lexical-encoder-regularization/v3",
+  "source":"MASSIVE 1.1 pt-PT",
+  "source_sha256":"af89ce740b98e8fe73a0fb3ba69a296837910f037e954b87409ef41d467d3da0",
+  "learner":"lexical-encoder-v1",
+  "policies":[
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.0},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.1},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.5},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":8,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.0},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":16,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.0}
+  ],
+  "selection":"Development exact matches, then fewest retained parameters, then index. Preserve failures and score all fixed policies. No test/reserved-author evaluation.",
+  "hypothesis":"Mixing model fits 8348/8526 taught rows but only 821/1504 development rows. Inverted input-activation dropout or fewer epochs may reduce overfit. They may also hurt acquisition; no improvement presumed.",
+  "representation":"Training-only regularization, unchanged AXSQ0006/AXSQ0007 inference, parameter/page/whole-genome quotas. Dropout zero consumes no RNG and must reproduce previous control model.",
+  "method_source":"https://www.jmlr.org/papers/v15/srivastava14a.html",
+  "scope":"Previously consumed development set, not a fresh semantic reserve. Established dropout, not an AXON invention. Labels never enter inference. Scoring work is not whole RAM/energy cost.",
+  "promotion":false,
+  "m1_complete":false
+}

@@ -1,0 +1,28 @@
+{
+  "schema":"axon-public-grammar-protocol/v1",
+  "learner":"enhanced-sequence-v1",
+  "source":"MASSIVE 1.1 pt-PT",
+  "source_sha256":"af89ce740b98e8fe73a0fb3ba69a296837910f037e954b87409ef41d467d3da0",
+  "previous_predictions":".axon-memory/m1-public-grammar-v3/policy-1-predictions.json",
+  "previous_sequence_predictions":".axon-memory/m1-public-sequence-v5/policy-2-predictions.json",
+  "previous_compact_predictions":".axon-memory/m1-public-compact-v1/policy-4-predictions.json",
+  "train":"8526 original train examples except all reserved localizers; supervision only in training",
+  "development":"1504 consumed dev examples; adaptive engineering, no independent final audit claim",
+  "reservation":"All reserved workers and original test remain unused",
+  "policies":[
+    {"seed":47,"buckets":16384,"epochs":6,"weights":64000,"intent_weights":24000,"minimum_margin":1,"subwords":false,"shared_roles":false},
+    {"seed":47,"buckets":16384,"epochs":6,"weights":64000,"intent_weights":24000,"minimum_margin":1,"subwords":false,"shared_roles":true},
+    {"seed":47,"buckets":16384,"epochs":6,"weights":64000,"intent_weights":24000,"minimum_margin":1,"subwords":true,"shared_roles":false},
+    {"seed":47,"buckets":16384,"epochs":6,"weights":64000,"intent_weights":24000,"minimum_margin":1,"subwords":true,"shared_roles":true},
+    {"seed":19374611,"buckets":8192,"epochs":10,"weights":78000,"intent_weights":30000,"minimum_margin":1,"subwords":true,"shared_roles":true},
+    {"seed":19374611,"buckets":16384,"epochs":10,"weights":64000,"intent_weights":30000,"minimum_margin":1,"subwords":true,"shared_roles":true},
+    {"seed":47,"buckets":16384,"epochs":16,"weights":64000,"intent_weights":32000,"minimum_margin":1,"subwords":true,"shared_roles":true},
+    {"seed":19374611,"buckets":16384,"epochs":6,"weights":64000,"intent_weights":32000,"minimum_margin":1,"subwords":true,"shared_roles":false}
+  ],
+  "algorithm":"CSR averaged perceptron. Optional Unicode character 2..4-gram features for intent/current word; optional shared lexical updates for B/I of the same role, while context/boundary updates remain distinct. New explicit codec and module, unchanged old decoders.",
+  "change_hypothesis":"First four policies isolate unchanged control, role sharing, subword features and their combination. Reuse learned role evidence across a multiword span and morphological fragments without hardcoded Portuguese vocabulary. Exact scores and full error counts decide, not a promise of improvement.",
+  "selection":"Exact complete dev structures, then fewer retained weights, then policy order",
+  "metrics":"Every intent and ordered role/value must match; all mistakes and abstentions counted, including weak families and novelty strata",
+  "completion_contract":"evals/protocols/m1-completion-v1.json; every required gate unchanged before M1 or M2",
+  "scope":"Known feature engineering and parameter sharing, not a novel AGI claim or autonomous evolution. Same 196608-byte page and 262144-byte genome/residency caps. No pretrained language model, no test labels at prediction, no effects, unknown RSS/energy remain unavailable."
+}

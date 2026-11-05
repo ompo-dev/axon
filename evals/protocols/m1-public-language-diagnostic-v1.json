@@ -1,0 +1,13 @@
+{
+  "schema": "axon-external-language-diagnostic/v1",
+  "milestone": "M1",
+  "source": "https://github.com/lbencke/InferBR",
+  "revision": "b6c5e0b27e52477bbc5433d130b0a0e825cf74dc",
+  "split": "original test.csv, all 1758 pairs, no semantic filtering or second agent",
+  "input": "Raw premise and hypothesis texts only, separately interpreted by the same compiled seed. Original labels/review flags remain exclusively in the host scorer.",
+  "probe": "Two unique identical complete semantic trees can support an equivalence-only entailment prediction. Otherwise abstain. An unrecognized text or abstention is never Neutral, NONE or a correct answer.",
+  "report": ["sentence coverage", "pair coverage", "answered-pair accuracy", "all-pair accuracy with abstentions wrong", "per-label and macro F1", "abstentions", "original generated labels and separately reviewer-agreed/clean strata", "seed/engine/corpus/evaluator hashes", "all actual work/refusals"],
+  "limits": {"pairs":1758,"input_bytes":16000000,"receipt_bytes":16000000,"core_work":100000000,"process_wall_ms":300000},
+  "guardrail": "This is a diagnostic for the current semantic interpreter, not a supplied NLI classifier or a sufficient M1 completion contract. No assertion that identical strings with no learned interpretation imply comprehension. Failed external coverage keeps the independent-language requirement open. Consumption of this test split is recorded and subsequent tuning cannot relabel it a fresh reserve.",
+  "scope": "Public third-party Portuguese sentence-pair data. Corpus text/authorship is external to local AXON templates; file schema/math/memory operational acceptance remains separately required. MIT repository license retained; preserve dataset citation and quality annotations."
+}

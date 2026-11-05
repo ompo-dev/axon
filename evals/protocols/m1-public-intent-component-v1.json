@@ -1,0 +1,18 @@
+{
+  "schema":"axon-public-intent-component/v1",
+  "source":"MASSIVE 1.1 pt-PT",
+  "source_sha256":"af89ce740b98e8fe73a0fb3ba69a296837910f037e954b87409ef41d467d3da0",
+  "learner":"lexical-encoder-v1",
+  "training_projection":"intent-only",
+  "policies":[
+    {"seed":19374611,"vocabulary":2048,"characters":0,"dimensions":16,"hidden":0,"epochs":24,"learning_rate":0.1,"balanced":true,"minimum_margin":1,"input_dropout":0.0},
+    {"seed":19374611,"vocabulary":2048,"characters":0,"dimensions":16,"hidden":64,"epochs":24,"learning_rate":0.05,"balanced":true,"minimum_margin":1,"input_dropout":0.1},
+    {"seed":19374611,"vocabulary":2048,"characters":512,"dimensions":16,"hidden":0,"epochs":24,"learning_rate":0.1,"balanced":true,"minimum_margin":1,"input_dropout":0.1}
+  ],
+  "selection":"Driver preserves its original full-frame exact selector for reproducibility. Report intent accuracy of every fixed component separately; do not select a full parser or promote M1 based on this component.",
+  "hypothesis":"Isolating intent removes interference from many token updates while using the existing encoder/codec, without extra input labels or a new pretrained model. Subsequent integration with a separately trained segmenter is not yet delivered by this protocol.",
+  "labels":"Every train BIO label becomes O only for this component; original intent and text are unchanged. Development truth and all full M1 checks stay original. An intent-only response cannot be called a correctly parsed slot-bearing request.",
+  "scope":"Component study on consumed development, not free language, whole parser success, a new reserve or full M1. Same page/genome/work caps. No test/reserved-worker text or labels used.",
+  "promotion":false,
+  "m1_complete":false
+}

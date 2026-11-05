@@ -1,0 +1,7 @@
+{
+  "schema":"axon-pointer-functional-rescaling/v1",
+  "study":".axon-memory/m1-pointer-anonymity-v1",
+  "models":[0,1,2,3],
+  "limits":"Frozen train graph intervention2x, no fitting/new corpus answers. Rescale all question scalars and recompute teacher registers with the same source graph. Keep all629 sources and refusals in denominator. In anonymous models, teacher decisions should be exactly invariant; useful semantics must still be independently demonstrated. Native own-program domain refusals may differ under scaling. English/implicit constants can invalidate the rescaled statement: do not call this independent linguistic truth or full M1 approval.",
+  "m1_complete":false,"m2_permitted":false
+}

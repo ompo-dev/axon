@@ -1,0 +1,6 @@
+[
+  {"id":"second-derivative-power","family":"advanced-probe","input":["d",["d",["pow",["var","x"],["num",3]],["var","x"]],["var","x"]],"expected":["mul",["num",6],["var","x"]],"forbid_heads":["d"]},
+  {"id":"second-derivative-sine","family":"advanced-probe","input":["d",["d",["sin",["var","x"]],["var","x"]],["var","x"]],"expected":["mul",["num",-1],["sin",["var","x"]]],"forbid_heads":["d"]},
+  {"id":"trigonometric-limit","family":"advanced-probe","input":["lim",["div",["sin",["var","x"]],["var","x"]],["var","x"],["num",0]],"expected":["num",1],"forbid_heads":["lim"]},
+  {"id":"new-cosine-derivative","family":"advanced-probe","input":["d",["cos",["var","x"]],["var","x"]],"expected":["mul",["num",-1],["sin",["var","x"]]],"forbid_heads":["d"]}
+]

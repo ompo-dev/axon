@@ -13,6 +13,7 @@ struct Report {
     rejected: u64,
     replacements: u64,
     exact_checks: u64,
+    learning_observations: u64,
 }
 
 fn main() {
@@ -54,6 +55,7 @@ fn run() -> Result<(), String> {
         total.rejected += report.rejected;
         total.replacements += report.replacements;
         total.exact_checks += report.exact_checks;
+        total.learning_observations += report.learning_observations;
     }
     let elapsed_ms = start.elapsed().as_millis();
     println!(
@@ -65,8 +67,13 @@ fn run() -> Result<(), String> {
             std::fs::create_dir_all(parent).map_err(|e| e.to_string())?;
         }
         let json = format!(
-            "{{\"schema\":\"axon-differential-stress-v1\",\"base_seed\":{base_seed},\"seeds\":{seeds},\"steps_per_seed\":{steps},\"steps\":{},\"accepted\":{},\"rejected\":{},\"replacements\":{},\"exact_checks\":{},\"elapsed_ms\":{elapsed_ms},\"exact\":true}}\n",
-            total.steps, total.accepted, total.rejected, total.replacements, total.exact_checks
+            "{{\"schema\":\"axon-differential-stress-v3\",\"strategies\":4,\"base_seed\":{base_seed},\"seeds\":{seeds},\"steps_per_seed\":{steps},\"steps\":{},\"accepted\":{},\"rejected\":{},\"replacements\":{},\"exact_checks\":{},\"learning_observations_per_policy\":{},\"elapsed_ms\":{elapsed_ms},\"exact\":true}}\n",
+            total.steps,
+            total.accepted,
+            total.rejected,
+            total.replacements,
+            total.exact_checks,
+            total.learning_observations
         );
         std::fs::write(path, json).map_err(|e| e.to_string())?;
     }
@@ -81,7 +88,9 @@ fn differential(seed: u64, steps: usize) -> Result<Report, String> {
         LiveAverage::materialize(seed, oracle.clone(), semantic()).map_err(|e| e.to_string())?;
     let mut full_state = delta_state.clone();
     let mut learned_state = delta_state.clone();
+    let mut normalized_state = delta_state.clone();
     let mut policy = OnlineAveragePolicy::new("differential-correctness");
+    let mut normalized_policy = OnlineAveragePolicy::normalized("differential-normalized");
     let mut report = Report::default();
     for step in 0..steps {
         let mode = rng.next() % 12;
@@ -130,18 +139,19 @@ fn differential(seed: u64, steps: usize) -> Result<Report, String> {
                 return Err(format!("partial mutation after rejection: {}", context()));
             }
             if matches!(mode, 4 | 7 | 8) {
-                let observations = policy.observations();
-                if policy
-                    .execute_and_learn(
-                        &mut learned_state,
-                        if mode == 7 { version } else { event },
-                        &delta,
-                    )
-                    .is_ok()
-                    || observations != policy.observations()
-                    || learned_state != full_state
-                {
-                    return Err(format!("invalid event changed learning: {}", context()));
+                for (learner, state) in [
+                    (&mut policy, &mut learned_state),
+                    (&mut normalized_policy, &mut normalized_state),
+                ] {
+                    let observations = learner.observations();
+                    if learner
+                        .execute_and_learn(state, if mode == 7 { version } else { event }, &delta)
+                        .is_ok()
+                        || observations != learner.observations()
+                        || *state != full_state
+                    {
+                        return Err(format!("invalid event changed learning: {}", context()));
+                    }
                 }
             }
             report.rejected += 1;
@@ -153,12 +163,15 @@ fn differential(seed: u64, steps: usize) -> Result<Report, String> {
             policy
                 .execute_and_learn(&mut learned_state, event, &delta)
                 .map_err(|e| e.to_string())?;
+            normalized_policy
+                .execute_and_learn(&mut normalized_state, event, &delta)
+                .map_err(|e| e.to_string())?;
             for change in delta.changes() {
                 oracle[change.index()] = change.new_value();
             }
             let numerator = oracle.iter().map(|v| u128::from(*v)).sum();
             let expected = ExactAverage::new(numerator, n).map_err(|e| e.to_string())?;
-            for state in [&delta_state, &full_state, &learned_state] {
+            for state in [&delta_state, &full_state, &learned_state, &normalized_state] {
                 if state.query() != expected || state.values() != oracle || state.version() != event
                 {
                     return Err(format!("oracle mismatch: {}", context()));
@@ -167,7 +180,10 @@ fn differential(seed: u64, steps: usize) -> Result<Report, String> {
             }
             report.accepted += 1;
             report.replacements += k as u64;
-            if policy.observations() != report.accepted {
+            report.learning_observations += u64::from(k != 0);
+            if policy.observations() != report.learning_observations
+                || normalized_policy.observations() != report.learning_observations
+            {
                 return Err(format!("observation count mismatch: {}", context()));
             }
         }

@@ -1,0 +1,14 @@
+# RelationalRecallBench reserved suite, frozen before source-role implementation on 2026-09-23.
+# This file must be executed once after implementation and validation, never used for tuning.
+como StructurePrior usa o segundo momento para ordenar candidatos sem mudar a verificacao exata	docs/DELTAFORGE_VARIANCE_2026-09-22.md|docs/ARCHITECTURE.md&src/learning.rs&tests/learning_contracts.rs
+como solve_task instala recarrega e executa um artifact somente com capability compativel	docs/ARCHITECTURE.md|docs/DELTAFORGE.md&src/solver.rs&tests/task_runtime_contracts.rs
+como CapabilityGate separa confianca empirica de autoridade para efeitos	docs/ARCHITECTURE.md|docs/SPECIALIST_FOUNDRY_2026-09-22.md&src/capability.rs|src/specialist.rs&tests/uic_contracts.rs|tests/specialist_contracts.rs
+como ExactAverage representa soma u128 e contagem e detecta overflow	docs/DELTAFORGE.md|README.md&src/delta_forge.rs&tests/delta_forge_contracts.rs
+como SemanticArtifact continua igual enquanto PhysicalRealization pode trocar de backend	docs/DELTAFORGE.md&src/delta_forge.rs&tests/semantic_artifact_contracts.rs
+como KnowledgeStore liga evidencias entre fontes e recusa caminho desconectado	docs/EVIDENCE_COHERENCE_2026-09-23.md|docs/ARCHITECTURE.md&src/knowledge.rs&tests/knowledge_cli_contracts.rs
+como StructurePrior escolhe a estrutura de um edificio sem projeto	-
+como solve_task resolve uma disputa judicial sem dados	-
+como CapabilityGate concede acesso bancario por alta confianca	-
+como ExactAverage calcula a nota futura de um aluno ausente	-
+como SemanticArtifact autentica uma pintura de museu	-
+como KnowledgeStore conecta boatos sem evidencia textual	-

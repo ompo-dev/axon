@@ -1,0 +1,28 @@
+{
+  "schema": "axon-milestone-contract/v1",
+  "stage_id": "M0",
+  "revision": "prospective-state-transfer-v2",
+  "supersedes_for_new_evaluation": "m0-completion-v1.json",
+  "preserved_failure": "v1 external reserve scored 513/768; linear recurrence was underdetermined. Its integrated campaign also failed old-procedure relearning under library pressure. Neither receipt is approved or relabeled fresh.",
+  "scope": "Reusable typed abstractions and initial-state constructors, grouping/calculation, discriminating authorized questions, transfer from local constructors/updates to new variable-length sequence/state algorithms, retention and independent birth.",
+  "not_a_relaxation": "Keep all v1 integrated recurrence tasks and earlier 40 procedures; add harder structured state and ordering families. Preserve the 100% exact-case criterion and the original acquisition caps. v1's failed external protocol remains failed; its families are now development, not independent reserve.",
+  "excluded_claims": ["AGI", "unrestricted representation discovery", "free Portuguese", "general perception", "ARC improvement", "autonomously evolved universal learner", "active policy cheaper overall than passive"],
+  "priors": ["existing typed VM without new opcodes", "bounded generic grammar, learned-library calls and initialization search", "typed schemas and taught phrase forms", "supervised source examples, disjoint admission and authorized query pools", "host maximum-disagreement and bounded-library-window heuristics, not evolved"],
+  "data": {"generator":"scripts/create-m0-state-transfer-curriculum.mjs","reserved_classes":["order-reversal","cumulative-state-history","modulus-changing-state"],"split":"local scalar/list constructors and one-step updates are taught; the three sequential target classes are absent from the source seed","replicates_per_class":16,"future_cases_per_replicate":16,"replicates_are_not_independent_algorithms":true},
+  "limits": {"work_per_acquisition":30000000,"candidates_per_acquisition":50000,"library_programs_per_window":32,"library_windows":8,"queries_per_inquiry":4,"source_and_full_process_wall_ms_each":300000,"peak_process_working_set_bytes":536870912,"binary_seed_bytes":262144},
+  "acceptance": {
+    "G1":"Complete relevant Rust/contracts, Clippy, minimal build, UI check/build/unit tests and real-core browser suite pass; no known critical unresolved failure.",
+    "G2":"All full-curriculum cases correct and admitted, including grouping, weighted calculation, histogram, actual 600-row CSV, all three old recurrence classes and all three new state/order classes; independently audit actual results.",
+    "G3":"Freeze source-only number, candidate, data and evaluator before reserved execution. All 768 inherited future outputs and 48 input-set replicates correct, in every new class; no future labels in learner payload.",
+    "G4":"Matched no-library control receives the same number, examples, future inputs and total caps, with only library use removed; inherited solves strictly more classes/cases. All costs and failures retained.",
+    "G5":"Retain all previous 40 procedures and v1 development extensions, 7400 structural cases, 3100 dialogue turns, selective dependency invalidation and relearning under the larger catalogue without raising per-acquisition caps.",
+    "G6":"Independent process born only from full compiled number: all 384 new portable outputs correct, without parent examples/cache/teacher. Prior portable evidence stays attributed to its actual version.",
+    "G7":"Measure source and full teaching/control processes, birth and executable/seed sizes; include initialization, window changes and inquiry in logged work and physical process scope. Respect fixed wall/RAM/seed caps. Energy and historical research costs unavailable, not zero; no cold-inference or universal efficiency claim.",
+    "G8":"Type/domain/fuel limits, invalid inputs, callback cancellation, independent admission, atomic publication, context identities, dependencies and effects validated; no candidate access to external files, evaluator labels or additional authority.",
+    "G9":"Actual SHA256 identities, prospective data manifest, independent arithmetic/array audit, immutable negative and positive receipts; no tuning on the new reserve. If it fails, keep M0 open.",
+    "G10":"Real-core UI run/export with no gaps, query selection preceding its answer, bounded evidence restoration, honest historical/live states, unknown metrics unavailable, mobile/accessibility checks. Record any existing persistent server loaded-code limitations."
+  },
+  "freeze_rule":"Before reserve create a new manifest with actual candidate, source-only number, compiled source, data, evaluator, reference and this protocol identities. Validate absence of target rules in the source-only seed and exact reproduction by birth.",
+  "failure_rule":"A failed required gate leaves M0 open. Never drop an old integrated failure or relabel a consumed family as fresh to approve this revision.",
+  "promotion_rule":"Only all G1--G10 with verified receipts can validate M0 in this bounded operational scope. Broader objectives and M1--M10 remain unachieved until their own evidence exists."
+}

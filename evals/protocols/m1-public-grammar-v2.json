@@ -1,0 +1,22 @@
+{
+  "schema": "axon-public-grammar-protocol/v1",
+  "source": "MASSIVE 1.1 pt-PT",
+  "source_sha256": "af89ce740b98e8fe73a0fb3ba69a296837910f037e954b87409ef41d467d3da0",
+  "grouping": "typed-template",
+  "train": "Original train partition, excluding every reserved localization worker",
+  "development": "Original dev partition, excluding every reserved localization worker; already consumed in v1, adaptive development only",
+  "reservation": "Original test and all three reserved localization workers remain unused",
+  "families": "Intent and ordered slot roles plus annotation-derived typed input template for slotted rows; no-slot rows retain intent families. Proposal scaffolding from train only, never test annotations at inference.",
+  "selection": "Highest exact development matches, then fewest rules, then policy order",
+  "policies": [
+    {"seed": 47, "proposals": 1024, "rules": 128, "checks": 16000000, "minimum_holes": 1, "structural_groups": true},
+    {"seed": 19374611, "proposals": 1024, "rules": 128, "checks": 16000000, "minimum_holes": 1, "structural_groups": true},
+    {"seed": 86240951, "proposals": 1024, "rules": 128, "checks": 16000000, "minimum_holes": 1, "structural_groups": true}
+  ],
+  "normalization": "Lowercase, collapse whitespace, remove terminal .?! from utterance and slot values. No translation, dictionaries, LLM or semantic preprocessing.",
+  "metrics": "Exact intent plus all ordered slot values; intentions/slots/strata reported separately. All abstentions count.",
+  "baselines": ["untrained", "exact normalized training-utterance retrieval (conflicts abstain)", "most frequent full training target"],
+  "promotion": false,
+  "m1_complete": false,
+  "scope": "Adapted development experiment after poor v1. Typed-template grouping is supplied supervision, not autonomous concept discovery. Does not close M1. Reserved test/localizers untouched; no LLM comparison, RSS or energy measurement."
+}

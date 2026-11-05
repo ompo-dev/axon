@@ -1,0 +1,12582 @@
+[
+  {
+    "id": "state-portable-0-0",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        4,
+        false,
+        -6,
+        true
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-1",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        true,
+        -1,
+        false,
+        "unseen-2",
+        false,
+        "unseen-1",
+        true,
+        false,
+        false,
+        -3,
+        "unseen-5",
+        "unseen-4",
+        0,
+        7,
+        "unseen-7",
+        "unseen-4",
+        true
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-2",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-5",
+        true,
+        false,
+        "unseen-2",
+        "unseen-0",
+        true
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-3",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        6,
+        -2,
+        false,
+        "unseen-1",
+        "unseen-7",
+        "unseen-9",
+        false,
+        true,
+        "unseen-6"
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-4",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-5",
+        -2,
+        "unseen-0",
+        11,
+        true,
+        true,
+        true,
+        "unseen-9",
+        "unseen-8",
+        true,
+        5,
+        4,
+        "unseen-5",
+        true,
+        false,
+        7,
+        "unseen-8",
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-5",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        -4,
+        "unseen-6",
+        -10,
+        3,
+        "unseen-10",
+        "unseen-0",
+        true,
+        "unseen-10",
+        "unseen-1",
+        false,
+        "unseen-2",
+        true,
+        "unseen-8",
+        true,
+        "unseen-10"
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-6",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-1",
+        false,
+        "unseen-9",
+        "unseen-9",
+        "unseen-3",
+        0,
+        false,
+        -8,
+        2,
+        10
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-7",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        false,
+        true,
+        -9,
+        false,
+        -9,
+        true,
+        -6,
+        "unseen-8",
+        "unseen-0",
+        "unseen-6",
+        "unseen-10",
+        -4,
+        "unseen-1",
+        "unseen-3",
+        "unseen-9",
+        false,
+        10,
+        "unseen-8"
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-8",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-3",
+        "unseen-4",
+        4,
+        "unseen-9",
+        "unseen-6",
+        2,
+        true,
+        "unseen-5",
+        true,
+        4,
+        true,
+        -11,
+        true,
+        10
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-9",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        false,
+        false,
+        false,
+        "unseen-8",
+        -3,
+        "unseen-7",
+        "unseen-10",
+        false,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-10",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        -11,
+        9,
+        -9,
+        "unseen-10",
+        false,
+        false,
+        -9,
+        -3,
+        "unseen-10",
+        -3,
+        "unseen-8",
+        false,
+        -3,
+        "unseen-5",
+        "unseen-1",
+        "unseen-4"
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-11",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        false,
+        -5,
+        "unseen-5",
+        "unseen-9",
+        -2,
+        "unseen-0",
+        "unseen-2",
+        "unseen-9",
+        "unseen-0",
+        "unseen-0",
+        -2,
+        -3,
+        false,
+        "unseen-2",
+        10,
+        9,
+        "unseen-7",
+        "unseen-7"
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-12",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        4,
+        false,
+        6,
+        6,
+        -5,
+        false,
+        5,
+        false,
+        true
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-13",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-4",
+        10,
+        -7,
+        "unseen-2",
+        true,
+        true,
+        "unseen-1",
+        true,
+        -7,
+        -11
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-14",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        -5,
+        false,
+        11,
+        "unseen-10",
+        false,
+        "unseen-2",
+        9,
+        -3,
+        0,
+        false,
+        "unseen-9",
+        false,
+        6,
+        -1,
+        true,
+        true,
+        false
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-15",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        -10,
+        "unseen-0",
+        "unseen-1",
+        true,
+        -7,
+        true,
+        false,
+        -8,
+        "unseen-0",
+        false,
+        "unseen-7",
+        "unseen-9",
+        -8,
+        8,
+        "unseen-8",
+        false
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-16",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        8,
+        "unseen-2",
+        true,
+        -6,
+        false,
+        true,
+        6,
+        false,
+        "unseen-6"
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-17",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        10,
+        11,
+        "unseen-10",
+        false,
+        "unseen-2",
+        true,
+        "unseen-4",
+        false,
+        true,
+        -11,
+        6,
+        true,
+        -5,
+        -10
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-18",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        3,
+        "unseen-0",
+        "unseen-7",
+        true,
+        true,
+        4,
+        "unseen-8",
+        true,
+        false
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-19",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        "unseen-4",
+        "unseen-2",
+        "unseen-3",
+        "unseen-8"
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-20",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-3",
+        -1,
+        false,
+        "unseen-0",
+        -7,
+        false,
+        "unseen-1",
+        true,
+        0,
+        true,
+        -11,
+        "unseen-9",
+        -11,
+        7,
+        false,
+        -4,
+        "unseen-7",
+        -8,
+        false
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-21",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        false,
+        6,
+        "unseen-7"
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-22",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-2",
+        "unseen-3",
+        -10,
+        true,
+        "unseen-5",
+        true,
+        "unseen-2",
+        "unseen-8",
+        -2,
+        -9,
+        9,
+        7,
+        "unseen-1"
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-23",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        true,
+        false,
+        false,
+        false,
+        "unseen-3",
+        "unseen-9",
+        "unseen-4",
+        -11,
+        "unseen-2",
+        false,
+        0,
+        -2,
+        -9,
+        -10,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-24",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        true,
+        true,
+        "unseen-8",
+        "unseen-5",
+        false,
+        "unseen-2",
+        false,
+        false
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-25",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-10",
+        -6,
+        true,
+        false,
+        false,
+        "unseen-9",
+        "unseen-1",
+        7,
+        "unseen-8",
+        5,
+        "unseen-0"
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-26",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-1",
+        1,
+        false,
+        false,
+        "unseen-10",
+        -11,
+        "unseen-5",
+        "unseen-9",
+        true
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-27",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        true,
+        2,
+        false,
+        -8,
+        "unseen-7"
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-28",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        7,
+        true,
+        true,
+        "unseen-10",
+        -1,
+        "unseen-10",
+        "unseen-9",
+        false,
+        true,
+        -11,
+        true
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-29",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-1",
+        0,
+        -9,
+        "unseen-2",
+        8,
+        "unseen-0",
+        "unseen-4",
+        "unseen-4",
+        "unseen-9",
+        -2,
+        true
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-30",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-5",
+        true,
+        0,
+        true,
+        true,
+        false
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-31",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        true,
+        -3,
+        false,
+        "unseen-7",
+        -3,
+        2,
+        -7,
+        true,
+        true,
+        10,
+        true,
+        true,
+        "unseen-0",
+        5
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-32",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        false,
+        false,
+        -10,
+        8,
+        true,
+        false,
+        0,
+        true,
+        -7,
+        "unseen-2",
+        "unseen-2",
+        "unseen-2",
+        true,
+        false
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-33",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        true,
+        "unseen-7",
+        false,
+        8,
+        "unseen-8",
+        "unseen-10",
+        true,
+        "unseen-5",
+        1,
+        false
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-34",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        -9,
+        "unseen-6",
+        7,
+        false,
+        -9,
+        false,
+        "unseen-2",
+        false,
+        "unseen-6",
+        3,
+        -9
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-35",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        7
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-36",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        9,
+        "unseen-4",
+        3,
+        "unseen-3",
+        false
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-37",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        false,
+        true,
+        "unseen-5",
+        true,
+        "unseen-7",
+        false,
+        6,
+        5,
+        true
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-38",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-2",
+        true,
+        false,
+        "unseen-5",
+        -6,
+        "unseen-1",
+        false,
+        false,
+        "unseen-8",
+        10,
+        false,
+        false,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-39",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-9",
+        true,
+        false,
+        true,
+        "unseen-0",
+        8,
+        "unseen-1",
+        false,
+        "unseen-8",
+        false,
+        true,
+        "unseen-4",
+        "unseen-3",
+        "unseen-10",
+        false
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-40",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        false,
+        true,
+        "unseen-4",
+        -1,
+        10,
+        false,
+        false,
+        3,
+        true,
+        true,
+        false,
+        false,
+        true
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-41",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        6,
+        "unseen-1",
+        false,
+        "unseen-4",
+        4,
+        false,
+        true,
+        -6,
+        -5,
+        false,
+        -10,
+        false,
+        "unseen-2",
+        "unseen-2",
+        -6,
+        -8,
+        "unseen-10",
+        "unseen-4"
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-42",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-9",
+        -5,
+        true,
+        true,
+        "unseen-0",
+        true,
+        true,
+        -1,
+        false,
+        9,
+        "unseen-2",
+        -8,
+        "unseen-1"
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-43",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-4",
+        "unseen-10",
+        4,
+        "unseen-7",
+        10,
+        "unseen-5",
+        "unseen-1",
+        -3,
+        -10,
+        -10,
+        5,
+        -6,
+        "unseen-0",
+        false,
+        10
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-44",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        true,
+        2,
+        8,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-45",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        -6,
+        8,
+        false,
+        3,
+        true,
+        true,
+        "unseen-9",
+        1,
+        false
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-46",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        false,
+        false,
+        true,
+        -11,
+        false,
+        -5,
+        -11,
+        1,
+        7,
+        true,
+        11,
+        "unseen-6",
+        "unseen-4",
+        2,
+        1,
+        true,
+        false,
+        true,
+        -6
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-47",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        8,
+        9,
+        7
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-48",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-7",
+        10,
+        "unseen-4",
+        -11,
+        false,
+        false
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-49",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        false,
+        "unseen-9",
+        "unseen-5",
+        false,
+        "unseen-2",
+        false,
+        false,
+        "unseen-7",
+        8,
+        "unseen-4",
+        "unseen-5",
+        true,
+        -10,
+        true,
+        false
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-50",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        8,
+        "unseen-5"
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-51",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-9",
+        3,
+        "unseen-10",
+        "unseen-10",
+        "unseen-9",
+        "unseen-6",
+        "unseen-0",
+        8,
+        "unseen-0",
+        false,
+        false,
+        -2,
+        false,
+        true,
+        "unseen-8"
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-52",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        4,
+        5,
+        true,
+        true
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-53",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-54",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        true,
+        "unseen-6",
+        10,
+        1,
+        2,
+        "unseen-2",
+        "unseen-4",
+        "unseen-8",
+        "unseen-9",
+        1,
+        false,
+        false,
+        -4,
+        -6,
+        false,
+        "unseen-5"
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-55",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-3",
+        false,
+        false,
+        -11,
+        -10,
+        "unseen-4",
+        -3,
+        0,
+        -3,
+        "unseen-10",
+        -10,
+        true,
+        true,
+        false,
+        true
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-56",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-2",
+        "unseen-4"
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-57",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        false,
+        5
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-58",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-0",
+        1,
+        false,
+        4,
+        "unseen-2",
+        "unseen-1",
+        false,
+        -1,
+        false,
+        -3,
+        -6,
+        3,
+        "unseen-1",
+        true,
+        4,
+        11,
+        "unseen-8",
+        "unseen-7"
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-59",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-6",
+        false,
+        "unseen-3",
+        "unseen-2",
+        7,
+        "unseen-2",
+        true,
+        "unseen-6",
+        "unseen-0",
+        -2,
+        true,
+        "unseen-3",
+        "unseen-9",
+        "unseen-6",
+        -3,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-60",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        true,
+        false,
+        "unseen-5",
+        true,
+        false,
+        -8,
+        "unseen-7",
+        "unseen-3",
+        -4,
+        -10,
+        false,
+        -8,
+        true,
+        -7,
+        "unseen-3",
+        0,
+        5,
+        0,
+        -10
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-61",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        -9,
+        false,
+        "unseen-7",
+        "unseen-5",
+        false
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-62",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        "unseen-5",
+        3,
+        false,
+        false,
+        6,
+        "unseen-6",
+        "unseen-2",
+        "unseen-8"
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-63",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-8",
+        true,
+        -7,
+        true,
+        "unseen-6",
+        true,
+        "unseen-5",
+        "unseen-6",
+        true,
+        true,
+        "unseen-10",
+        "unseen-8",
+        "unseen-3",
+        false,
+        "unseen-10",
+        10,
+        11,
+        "unseen-3"
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-64",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-7",
+        5,
+        false,
+        false,
+        "unseen-4",
+        "unseen-7",
+        false,
+        "unseen-2",
+        "unseen-10"
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-65",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-10",
+        "unseen-2",
+        -11,
+        9,
+        8,
+        -5,
+        3,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-66",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        true,
+        -7,
+        -6
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-67",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        false,
+        4,
+        -3,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-68",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        8,
+        false,
+        true,
+        true,
+        true,
+        false,
+        -5,
+        "unseen-9",
+        7,
+        "unseen-9",
+        11
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-69",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        true,
+        "unseen-9",
+        6,
+        "unseen-9",
+        false,
+        -3,
+        -4,
+        "unseen-4",
+        8
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-70",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        true,
+        "unseen-7",
+        "unseen-10",
+        true,
+        "unseen-2",
+        false,
+        5,
+        false,
+        "unseen-3",
+        10,
+        -6,
+        "unseen-10",
+        5,
+        true,
+        "unseen-6",
+        -6,
+        "unseen-5",
+        -10,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-71",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        true,
+        7,
+        -9,
+        "unseen-1",
+        false,
+        "unseen-0",
+        "unseen-8",
+        -9
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-72",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-3",
+        "unseen-3",
+        false,
+        false,
+        "unseen-1",
+        true,
+        "unseen-4",
+        -6,
+        "unseen-7",
+        "unseen-4",
+        8
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-73",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        false,
+        false,
+        true,
+        false,
+        "unseen-0",
+        true,
+        6,
+        "unseen-0",
+        -2,
+        true,
+        "unseen-4",
+        10,
+        5,
+        false,
+        "unseen-0"
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-74",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        11,
+        false,
+        true,
+        "unseen-0",
+        2,
+        -3,
+        2,
+        -2,
+        true,
+        true,
+        true,
+        false,
+        "unseen-6",
+        true,
+        -5,
+        "unseen-8",
+        true,
+        -4
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-75",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        false,
+        10,
+        "unseen-5",
+        -10,
+        1,
+        "unseen-6",
+        "unseen-4",
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-76",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        -10,
+        true,
+        true,
+        "unseen-6",
+        "unseen-4",
+        -11,
+        -10,
+        false,
+        9,
+        false,
+        false,
+        "unseen-5",
+        "unseen-7",
+        0,
+        "unseen-0",
+        false,
+        6,
+        "unseen-3",
+        -5
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-77",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        false,
+        "unseen-1",
+        -4,
+        false,
+        "unseen-10",
+        -7,
+        "unseen-7",
+        true,
+        true,
+        "unseen-1"
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-78",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        true,
+        false,
+        true,
+        true,
+        false,
+        11,
+        -5,
+        "unseen-10",
+        false,
+        "unseen-10"
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-79",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        8,
+        -5,
+        "unseen-6",
+        "unseen-6",
+        false,
+        "unseen-9",
+        false,
+        "unseen-9",
+        5,
+        true,
+        true,
+        true,
+        "unseen-4",
+        true,
+        3,
+        "unseen-2",
+        "unseen-7"
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-80",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-8",
+        "unseen-10",
+        "unseen-0",
+        3,
+        false,
+        "unseen-0",
+        true,
+        true,
+        false,
+        "unseen-10",
+        true,
+        false,
+        true,
+        true,
+        -3,
+        true,
+        true
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-81",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        "unseen-5",
+        -10,
+        "unseen-9",
+        true,
+        "unseen-9",
+        10,
+        8,
+        "unseen-10",
+        false,
+        false,
+        "unseen-10",
+        -3,
+        -5,
+        -8,
+        "unseen-6",
+        true
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-82",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        -8,
+        false,
+        "unseen-5",
+        "unseen-7",
+        false,
+        9,
+        false,
+        11,
+        true,
+        "unseen-1",
+        -11,
+        false,
+        8,
+        "unseen-2",
+        true,
+        -11,
+        "unseen-1"
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-83",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-10",
+        -8,
+        false,
+        "unseen-4",
+        "unseen-7",
+        "unseen-7"
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-84",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        3,
+        -7,
+        true,
+        false,
+        -3,
+        -7,
+        "unseen-1",
+        "unseen-0",
+        "unseen-1",
+        "unseen-1",
+        "unseen-10",
+        true,
+        0,
+        true,
+        6,
+        -5,
+        "unseen-5",
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-85",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-7",
+        "unseen-7",
+        true,
+        true,
+        "unseen-2",
+        false,
+        "unseen-1",
+        "unseen-0"
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-86",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-5",
+        false,
+        "unseen-3"
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-87",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        true,
+        "unseen-8",
+        true,
+        -10,
+        false,
+        false,
+        "unseen-0",
+        "unseen-10",
+        true,
+        -3,
+        1,
+        "unseen-1",
+        5,
+        "unseen-7",
+        false,
+        11
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-88",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        true,
+        false,
+        "unseen-7",
+        true,
+        "unseen-0",
+        false,
+        true,
+        false,
+        -5,
+        true,
+        -10,
+        "unseen-5",
+        -7,
+        -8,
+        1,
+        "unseen-5",
+        false,
+        false
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-89",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-6",
+        5,
+        true,
+        true,
+        11,
+        false,
+        "unseen-7",
+        "unseen-0",
+        "unseen-9",
+        2,
+        false,
+        "unseen-0",
+        "unseen-9",
+        "unseen-10",
+        "unseen-5",
+        "unseen-2",
+        -10
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-90",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        11,
+        "unseen-2",
+        false,
+        false,
+        -6,
+        "unseen-4",
+        "unseen-0",
+        true,
+        "unseen-8",
+        5
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-91",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-0",
+        "unseen-1",
+        false,
+        -10,
+        1,
+        "unseen-0",
+        "unseen-1",
+        false,
+        "unseen-8",
+        "unseen-9",
+        7,
+        "unseen-6",
+        true,
+        "unseen-6"
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-92",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        -6,
+        "unseen-9",
+        false,
+        "unseen-7",
+        false,
+        "unseen-2",
+        "unseen-4",
+        "unseen-2",
+        false,
+        1,
+        false,
+        true,
+        false,
+        false,
+        false,
+        -7,
+        true
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-93",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        7,
+        "unseen-9",
+        0,
+        -11,
+        3,
+        -5,
+        0,
+        8
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-94",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        10,
+        "unseen-9",
+        true,
+        0,
+        true,
+        10,
+        false,
+        false,
+        -10,
+        9,
+        2,
+        -2,
+        "unseen-8",
+        -11,
+        true
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-95",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-0",
+        true,
+        false,
+        5,
+        "unseen-0",
+        "unseen-2",
+        "unseen-2",
+        "unseen-0",
+        1,
+        "unseen-5",
+        true,
+        "unseen-9",
+        false
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-96",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-6",
+        false,
+        -2,
+        false,
+        "unseen-6",
+        "unseen-1",
+        -3,
+        "unseen-5",
+        "unseen-1",
+        -10,
+        "unseen-8"
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-97",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        -8,
+        "unseen-10",
+        "unseen-5",
+        true,
+        "unseen-3",
+        2,
+        "unseen-2",
+        false,
+        "unseen-10",
+        true,
+        true
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-98",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        11,
+        1,
+        "unseen-9",
+        "unseen-7",
+        4,
+        "unseen-0",
+        "unseen-9",
+        false,
+        "unseen-2",
+        false,
+        "unseen-2",
+        false,
+        10,
+        "unseen-3",
+        "unseen-3",
+        -7,
+        "unseen-4",
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-99",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        false,
+        -11,
+        true,
+        false,
+        "unseen-8",
+        2,
+        true,
+        "unseen-2",
+        -2,
+        6,
+        2,
+        true,
+        -9
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-100",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        false,
+        0,
+        true,
+        "unseen-2",
+        false,
+        false,
+        "unseen-8",
+        false,
+        -11,
+        6,
+        "unseen-1",
+        "unseen-0",
+        "unseen-7",
+        11,
+        true
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-101",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        -11,
+        "unseen-6",
+        "unseen-9",
+        true,
+        -9,
+        -9,
+        1,
+        false,
+        -2,
+        true,
+        7,
+        "unseen-1",
+        "unseen-1",
+        -5,
+        true,
+        false,
+        "unseen-0"
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-102",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        7,
+        "unseen-10",
+        "unseen-10",
+        false,
+        false,
+        "unseen-4",
+        6,
+        false,
+        5,
+        "unseen-3",
+        true,
+        1,
+        -3,
+        "unseen-1",
+        false,
+        "unseen-5",
+        "unseen-4",
+        6,
+        true
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-103",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        4,
+        "unseen-9",
+        true,
+        0,
+        false,
+        1,
+        false,
+        "unseen-8",
+        -10,
+        0,
+        -4,
+        true,
+        "unseen-4",
+        "unseen-5",
+        "unseen-0",
+        -2,
+        9,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-104",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        true,
+        "unseen-5",
+        "unseen-2",
+        -1,
+        true,
+        "unseen-0",
+        "unseen-3",
+        false,
+        true,
+        "unseen-1",
+        "unseen-3"
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-105",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-10",
+        "unseen-9",
+        true,
+        "unseen-1"
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-106",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        false,
+        "unseen-6",
+        "unseen-1",
+        true
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-107",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-4",
+        5,
+        "unseen-4",
+        -3,
+        true,
+        10,
+        -6,
+        "unseen-4",
+        -5,
+        false,
+        2,
+        false,
+        "unseen-8",
+        -1,
+        false,
+        4,
+        true,
+        false,
+        false
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-108",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        false,
+        false,
+        true,
+        -9
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-109",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        false,
+        "unseen-8",
+        false,
+        true,
+        4,
+        "unseen-8",
+        0,
+        "unseen-9"
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-110",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        -10,
+        -11,
+        11,
+        2,
+        false,
+        "unseen-3",
+        "unseen-10",
+        false,
+        false,
+        false,
+        true,
+        "unseen-7",
+        false,
+        true
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-111",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        10,
+        "unseen-3",
+        "unseen-3",
+        "unseen-4",
+        "unseen-5",
+        11
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-112",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        true,
+        true,
+        false,
+        false,
+        11,
+        -9,
+        false,
+        false,
+        -3,
+        8,
+        true,
+        "unseen-10",
+        "unseen-10",
+        2,
+        "unseen-8",
+        "unseen-8",
+        false,
+        -6,
+        false
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-113",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-7",
+        2,
+        "unseen-9",
+        "unseen-8",
+        0,
+        -10
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-114",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        -4,
+        "unseen-2",
+        false,
+        false,
+        false,
+        -10
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-115",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-0",
+        "unseen-1",
+        "unseen-7",
+        -6,
+        "unseen-3",
+        1,
+        "unseen-10",
+        false,
+        true,
+        false,
+        "unseen-7",
+        true,
+        true,
+        "unseen-3",
+        -4,
+        false,
+        -6,
+        false
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-116",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-2",
+        "unseen-6",
+        true,
+        -7
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-117",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-9",
+        true,
+        true,
+        false,
+        "unseen-9",
+        "unseen-2",
+        "unseen-7",
+        "unseen-6",
+        false,
+        true,
+        false,
+        true,
+        8,
+        false
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-118",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        false,
+        "unseen-2",
+        false,
+        -11,
+        false,
+        -1,
+        6,
+        8,
+        "unseen-7",
+        -7,
+        false,
+        true,
+        11,
+        true
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-119",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        true,
+        -11,
+        true,
+        true,
+        11
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-120",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        7,
+        8,
+        -7,
+        "unseen-8",
+        4,
+        -5,
+        false,
+        true,
+        -8,
+        true
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-121",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-9",
+        "unseen-0",
+        4,
+        2,
+        2,
+        false,
+        "unseen-7",
+        "unseen-1",
+        "unseen-7"
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-122",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        false,
+        "unseen-6",
+        false,
+        -11,
+        true,
+        true,
+        false,
+        false,
+        "unseen-3"
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-123",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        7,
+        -5,
+        false,
+        "unseen-4",
+        -11,
+        -6,
+        "unseen-10",
+        -5
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-124",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-5",
+        false,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-125",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        true,
+        "unseen-4",
+        true,
+        "unseen-6",
+        "unseen-2",
+        false,
+        "unseen-6",
+        "unseen-8",
+        "unseen-6",
+        -11,
+        true,
+        "unseen-3",
+        "unseen-4",
+        10,
+        11,
+        true,
+        -4,
+        -8
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-126",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-5",
+        false,
+        false,
+        -8,
+        6,
+        "unseen-1",
+        false,
+        true,
+        false,
+        true,
+        1,
+        "unseen-5",
+        "unseen-3",
+        "unseen-5"
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-0-127",
+    "family": "order-reversal",
+    "text": "aplique state-reserve-0 em dados",
+    "bindings": {
+      "dados": [
+        "unseen-6",
+        "unseen-10",
+        false,
+        false,
+        false,
+        true,
+        true,
+        true,
+        true,
+        -3,
+        true
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-0",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -6,
+        7,
+        5,
+        -8,
+        1,
+        11,
+        0,
+        -6,
+        3,
+        3,
+        -8,
+        -6,
+        -3,
+        -10,
+        -9,
+        -9,
+        9,
+        -11,
+        2,
+        2,
+        -5,
+        10,
+        4,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-1",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -5,
+        9,
+        -1,
+        7,
+        -2,
+        4,
+        8,
+        2,
+        0,
+        -10,
+        3,
+        -3,
+        8,
+        -11,
+        2,
+        9,
+        -11,
+        5,
+        1,
+        2,
+        -10,
+        6,
+        -3,
+        -2,
+        0,
+        5
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-2",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -11,
+        -10,
+        -10
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-3",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -10,
+        10,
+        0,
+        -8
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-4",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        6,
+        -2,
+        -4,
+        3,
+        -10
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-5",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        11,
+        2,
+        6,
+        2,
+        5,
+        1,
+        -5,
+        -10,
+        -1,
+        -3,
+        -5,
+        -11,
+        -5,
+        -11,
+        4,
+        3,
+        -10,
+        -7,
+        8,
+        -5,
+        11,
+        6,
+        -8,
+        -6,
+        4,
+        9
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-6",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -10,
+        -8,
+        -2,
+        5,
+        1,
+        -5,
+        3,
+        10,
+        2,
+        1,
+        -9,
+        8,
+        10,
+        -11,
+        -9,
+        -7,
+        2,
+        7,
+        -4,
+        -6
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-7",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        -3,
+        5,
+        5,
+        -4,
+        -2,
+        9,
+        7,
+        -10,
+        3,
+        -1,
+        6,
+        2,
+        -7,
+        9,
+        5,
+        3,
+        5,
+        -5,
+        7,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-8",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -11,
+        -11,
+        -7,
+        -1,
+        -4,
+        -2,
+        4,
+        0,
+        -6
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-9",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        10,
+        4,
+        -5,
+        4,
+        2,
+        -9,
+        8,
+        -4,
+        7,
+        10,
+        -8,
+        -7,
+        -10,
+        -5,
+        -5,
+        -8,
+        -6,
+        -2,
+        11,
+        -7,
+        5,
+        0,
+        -9,
+        2,
+        -9,
+        5,
+        2,
+        -9
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-10",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -5,
+        -4,
+        -4,
+        7,
+        1,
+        2,
+        -5,
+        4,
+        3,
+        1,
+        -11,
+        -11,
+        -10,
+        7,
+        11,
+        2,
+        -9,
+        6,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-11",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -10,
+        -4,
+        8
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-12",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        7,
+        -6,
+        4,
+        9,
+        5
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-13",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        5,
+        -11,
+        10,
+        4,
+        -11,
+        2,
+        2,
+        6,
+        -6
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-14",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -5,
+        2,
+        -1,
+        9,
+        -6,
+        -3,
+        -7,
+        2,
+        4,
+        -10,
+        -5,
+        -7,
+        4,
+        0,
+        -5,
+        4,
+        0,
+        11
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-15",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        5,
+        6,
+        1,
+        -4,
+        6,
+        3,
+        2,
+        8,
+        4,
+        -8,
+        -2,
+        -4,
+        -11,
+        6,
+        9,
+        -8,
+        6,
+        0,
+        3,
+        3,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-16",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        7,
+        11,
+        -9,
+        1,
+        -9,
+        0,
+        3,
+        3,
+        -2,
+        10,
+        -11,
+        -8,
+        4,
+        -9,
+        -7
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-17",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -5,
+        -11,
+        4,
+        8,
+        0,
+        5,
+        4,
+        -9,
+        2,
+        -9,
+        11,
+        -4,
+        5,
+        8,
+        5,
+        9,
+        5,
+        2,
+        -3,
+        5,
+        4,
+        3,
+        5,
+        -3,
+        11,
+        -6,
+        11,
+        -7,
+        8,
+        -1,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-18",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -10,
+        -2,
+        8,
+        11,
+        -1,
+        -9,
+        -8,
+        6,
+        11,
+        7,
+        -9
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-19",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        3,
+        -2,
+        10,
+        2,
+        11,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-20",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        3,
+        -4,
+        0,
+        -11,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-21",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        3,
+        -4,
+        7,
+        5,
+        6,
+        -8,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-22",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        7,
+        -5,
+        8,
+        4,
+        5,
+        3,
+        2,
+        -3,
+        -5,
+        -1,
+        10,
+        -6,
+        -2,
+        6,
+        -8,
+        -3,
+        11,
+        -11,
+        -10,
+        -11,
+        -5,
+        -1,
+        -3,
+        -9,
+        -8
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-23",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -8,
+        -11,
+        -11,
+        3,
+        4,
+        -1,
+        6,
+        8,
+        -1,
+        2,
+        -11,
+        0,
+        -9
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-24",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        10,
+        -11
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-25",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        8,
+        6,
+        -2,
+        9,
+        8,
+        -11,
+        -3,
+        8,
+        10,
+        -9,
+        3,
+        -4,
+        -2,
+        8,
+        10,
+        3,
+        3,
+        11,
+        6,
+        0,
+        -8,
+        7,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-26",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -4,
+        10,
+        -2,
+        -2,
+        10,
+        9,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-27",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        -6,
+        -10,
+        -9,
+        1,
+        0,
+        9,
+        -3,
+        9
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-28",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -10,
+        7,
+        11,
+        -6,
+        3,
+        8,
+        -1,
+        5,
+        0,
+        -11,
+        -8,
+        -11,
+        2,
+        9,
+        -3,
+        9,
+        -2,
+        1,
+        6,
+        -3,
+        10,
+        6,
+        3,
+        4,
+        9,
+        -2,
+        6,
+        2,
+        11,
+        -8
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-29",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        5,
+        0,
+        -11,
+        10,
+        -9,
+        6,
+        7,
+        8,
+        3,
+        -5,
+        -8,
+        11,
+        10,
+        4,
+        5,
+        -10,
+        -9,
+        -5,
+        -9,
+        2,
+        1,
+        2,
+        -2,
+        -2,
+        4,
+        -3,
+        1,
+        -3,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-30",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        9,
+        -8,
+        5,
+        8,
+        -5,
+        6
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-31",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        6,
+        8,
+        -4,
+        -11,
+        -4,
+        -1,
+        -10,
+        -11,
+        10,
+        -5,
+        -7,
+        7,
+        2,
+        0,
+        2,
+        0,
+        -7,
+        2,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-32",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        5,
+        -11,
+        -11,
+        7,
+        2,
+        -10,
+        -2,
+        -6,
+        8,
+        1,
+        -11,
+        -9,
+        -8,
+        1,
+        0,
+        2,
+        1,
+        3,
+        0,
+        -6,
+        -2,
+        2,
+        -8
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-33",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        10,
+        7,
+        -11,
+        -5,
+        -2,
+        4,
+        11,
+        5,
+        -10,
+        0,
+        11,
+        -9,
+        3,
+        -2,
+        -4,
+        -11,
+        3,
+        0,
+        -8,
+        11,
+        0,
+        -2,
+        -4,
+        8,
+        10,
+        5,
+        1,
+        7,
+        1,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-34",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -7,
+        -1,
+        11,
+        4,
+        8,
+        2,
+        -10,
+        -6,
+        6
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-35",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        2,
+        -10,
+        2,
+        -5,
+        -6,
+        -7,
+        3,
+        -5,
+        -11,
+        -3,
+        0,
+        0,
+        7,
+        1,
+        3,
+        10,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-36",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        -5,
+        -1,
+        -2,
+        -2,
+        -4,
+        1,
+        -8,
+        -11,
+        2,
+        -9,
+        9,
+        -9,
+        1,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-37",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -9,
+        4,
+        -4,
+        -1,
+        -3,
+        -5,
+        -7,
+        -5,
+        10,
+        4,
+        2,
+        -9,
+        4,
+        -8,
+        8,
+        4,
+        -5
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-38",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        4,
+        4,
+        8,
+        0,
+        -5,
+        6,
+        10,
+        -5,
+        -4,
+        -9,
+        -9,
+        -7
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-39",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        8,
+        3,
+        10,
+        8,
+        -9
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-40",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -6,
+        8,
+        9,
+        5,
+        -9,
+        -9,
+        -9,
+        -2,
+        -6,
+        11,
+        8,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-41",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        7,
+        10,
+        5,
+        10,
+        -4,
+        5,
+        -7,
+        10,
+        10,
+        2,
+        -2,
+        10,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-42",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        10,
+        -1,
+        -8,
+        9,
+        10,
+        -5,
+        -9,
+        0,
+        -9,
+        0,
+        8,
+        -8,
+        -5,
+        -3,
+        -6,
+        -9,
+        -1,
+        3,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-43",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        11,
+        2,
+        -6,
+        6,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-44",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -11,
+        -6,
+        -3,
+        4,
+        11,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-45",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        5,
+        -8,
+        -2,
+        6,
+        -2,
+        -8,
+        7,
+        2,
+        0,
+        -4,
+        -8,
+        -11,
+        3,
+        0,
+        7,
+        -10,
+        -2,
+        -3,
+        -8,
+        4,
+        6,
+        0,
+        5,
+        -8
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-46",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        6,
+        -6,
+        4,
+        5,
+        11,
+        -7,
+        -2,
+        -7,
+        2,
+        5,
+        -5,
+        8,
+        -4,
+        3,
+        -3,
+        -2,
+        5
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-47",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        10,
+        -1,
+        -4,
+        3,
+        11,
+        -10,
+        -11,
+        8,
+        6,
+        5,
+        -11,
+        -3,
+        9,
+        3,
+        -10,
+        5,
+        5,
+        0,
+        4,
+        5,
+        10,
+        10,
+        2,
+        -9,
+        -7,
+        3,
+        -5
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-48",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        7,
+        -4,
+        -5,
+        6,
+        -3,
+        11,
+        -10,
+        -2,
+        2,
+        5,
+        -10,
+        -8,
+        1,
+        -11,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-49",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -8,
+        -5,
+        -4,
+        8
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-50",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        7,
+        -7,
+        -9,
+        -9,
+        -9,
+        10,
+        -11,
+        8,
+        -2,
+        -5,
+        5,
+        -2,
+        0,
+        -5
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-51",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -7,
+        -8,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-52",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -4,
+        -1,
+        -4,
+        1,
+        7,
+        -9,
+        5,
+        -11,
+        2,
+        -5,
+        7,
+        -6,
+        -10,
+        -11,
+        -6,
+        7,
+        5,
+        7,
+        -4,
+        -9,
+        -3,
+        4,
+        10,
+        -4
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-53",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        4,
+        -6,
+        1,
+        -6
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-54",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -5,
+        -1,
+        -3,
+        -10,
+        6,
+        1,
+        -9,
+        2,
+        7,
+        -7,
+        -6,
+        -4,
+        -2,
+        1,
+        5,
+        2,
+        6,
+        8,
+        8,
+        -1,
+        4,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-55",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        7,
+        11,
+        5,
+        -5,
+        8,
+        -4,
+        5,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-56",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -7,
+        -10,
+        3,
+        -5,
+        -8,
+        -7,
+        -2,
+        7,
+        -8,
+        -11,
+        -11,
+        -2,
+        0,
+        9,
+        -3,
+        -3,
+        2,
+        -2,
+        10,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-57",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        0,
+        4,
+        9,
+        -10,
+        -4,
+        10,
+        -2,
+        -5,
+        -8,
+        -4
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-58",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -10,
+        2,
+        -7,
+        -4,
+        -3,
+        -9,
+        -6,
+        -9,
+        3,
+        -5,
+        -11,
+        -6,
+        1,
+        -9,
+        1,
+        9,
+        5,
+        11,
+        5,
+        -4
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-59",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        4,
+        -8,
+        5,
+        6,
+        4,
+        -6,
+        6,
+        4,
+        -11,
+        -10,
+        5,
+        -7
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-60",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        7,
+        -6,
+        -11,
+        -2,
+        6
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-61",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        10,
+        -1,
+        -11,
+        -2,
+        -6,
+        0,
+        -7,
+        5,
+        -11,
+        3,
+        -5,
+        -5,
+        11,
+        0,
+        6,
+        -9,
+        6,
+        -9,
+        2,
+        -7,
+        -10,
+        0,
+        -3,
+        -7,
+        -2,
+        4
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-62",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -9,
+        -4,
+        -3,
+        8,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-63",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        11,
+        3,
+        -8,
+        4,
+        -3,
+        -8,
+        -2,
+        1,
+        7,
+        -10,
+        -7,
+        -3,
+        -2,
+        10,
+        -1,
+        -6,
+        1,
+        -9,
+        -4,
+        4,
+        0,
+        -8,
+        8,
+        -11
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-64",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        6,
+        2,
+        -7,
+        8,
+        11,
+        -4,
+        6,
+        -6,
+        1,
+        -9,
+        11,
+        -5,
+        2,
+        -11,
+        -2,
+        -6,
+        11
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-65",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        9,
+        -8,
+        2,
+        10,
+        9,
+        -10,
+        -5,
+        2,
+        -10,
+        -3,
+        9,
+        0,
+        -1,
+        -9,
+        4,
+        5,
+        4,
+        -9,
+        5,
+        -4,
+        -5,
+        -1,
+        9
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-66",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        5,
+        3,
+        2,
+        1,
+        -11,
+        8,
+        -9,
+        -10,
+        -4,
+        0,
+        9,
+        -9,
+        -10,
+        4,
+        1,
+        -5,
+        -10,
+        -6,
+        7,
+        7,
+        11,
+        6,
+        -8,
+        -3,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-67",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -6,
+        -4,
+        3,
+        -7,
+        -5,
+        -11,
+        -5,
+        10,
+        -4,
+        5,
+        7,
+        -4
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-68",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -6,
+        -6,
+        9,
+        3,
+        4,
+        9,
+        1,
+        -11,
+        4,
+        2,
+        -4,
+        -6,
+        9,
+        6,
+        9,
+        5,
+        2,
+        -8,
+        -5,
+        -5,
+        4,
+        -11
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-69",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        7,
+        -4,
+        -5,
+        -2,
+        9,
+        6,
+        -11,
+        4,
+        -5,
+        11,
+        7,
+        6,
+        -10
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-70",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        1,
+        -10,
+        9
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-71",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        4,
+        0,
+        -2,
+        3,
+        2,
+        -5,
+        6,
+        7,
+        8,
+        10,
+        -6,
+        -3,
+        6,
+        6,
+        -9,
+        8
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-72",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -11,
+        7,
+        3,
+        -7,
+        -2,
+        -10,
+        7
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-73",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        6,
+        6,
+        7,
+        -5,
+        -5,
+        6,
+        1,
+        2,
+        10,
+        -9,
+        11,
+        -1,
+        -4,
+        7,
+        -6,
+        2,
+        -8,
+        -3,
+        8,
+        -10,
+        0,
+        -10,
+        -9,
+        4,
+        -2,
+        0,
+        -9,
+        5,
+        -9,
+        -2,
+        9
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-74",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        -2,
+        -5,
+        -11,
+        -1,
+        1,
+        10,
+        8,
+        -2,
+        1,
+        2,
+        9,
+        5,
+        6,
+        4,
+        0,
+        1,
+        -9
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-75",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        10,
+        -4
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-76",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        8,
+        -6,
+        0,
+        11,
+        -7,
+        0,
+        1,
+        8,
+        -5,
+        8,
+        -1,
+        -6
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-77",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -5,
+        -4,
+        3,
+        -1,
+        5,
+        5,
+        10,
+        -2,
+        7,
+        -11,
+        -2,
+        10,
+        2,
+        -3,
+        -2,
+        -2,
+        -10,
+        -11
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-78",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -1,
+        10,
+        0,
+        -6,
+        9,
+        8,
+        10,
+        2,
+        11,
+        -10,
+        -8,
+        3,
+        8,
+        3,
+        -10
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-79",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        8,
+        -6,
+        10,
+        -6,
+        -11,
+        0,
+        11,
+        7
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-80",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        -8,
+        -7,
+        0,
+        -11,
+        3,
+        8,
+        2,
+        -8,
+        -9,
+        -8,
+        3,
+        1,
+        8,
+        -7,
+        -3,
+        11,
+        4,
+        1,
+        0,
+        11,
+        6,
+        10,
+        -5,
+        -4,
+        11
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-81",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        10,
+        9,
+        2,
+        -4,
+        -4,
+        7,
+        0,
+        10,
+        4,
+        3,
+        4,
+        11,
+        6,
+        9,
+        5
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-82",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        -3,
+        -9,
+        10,
+        6,
+        5,
+        7,
+        7,
+        -4,
+        -8,
+        1,
+        0,
+        5,
+        1,
+        2,
+        8,
+        -3,
+        -6,
+        -2,
+        5,
+        1,
+        -1,
+        9,
+        1,
+        -1,
+        1,
+        -4,
+        -6
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-83",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        4,
+        10
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-84",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        11,
+        -7,
+        11,
+        11,
+        -5,
+        -11,
+        0,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-85",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        -5,
+        -3,
+        1,
+        3,
+        -11
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-86",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        6,
+        6,
+        -6,
+        -8,
+        11,
+        6,
+        -2,
+        7,
+        7,
+        -2,
+        -9,
+        6,
+        -9,
+        4,
+        6,
+        9
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-87",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -9,
+        -11,
+        7,
+        -6,
+        -4,
+        0,
+        -9,
+        -3,
+        2,
+        0,
+        11,
+        0,
+        -4,
+        -10,
+        5,
+        -3,
+        -11,
+        7,
+        -1,
+        6,
+        -10,
+        4,
+        8,
+        5,
+        4,
+        0
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-88",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        1,
+        6,
+        -9,
+        6,
+        5
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-89",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        4,
+        -2,
+        -2,
+        1,
+        10,
+        6,
+        7,
+        -2,
+        -3,
+        5,
+        -6
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-90",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        5,
+        2,
+        5,
+        5,
+        -4,
+        11,
+        -10,
+        4,
+        10,
+        -9,
+        -4,
+        2,
+        -6,
+        6,
+        6,
+        5,
+        -3,
+        -6,
+        -5,
+        -7,
+        -11,
+        -11
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-91",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -8,
+        -10,
+        -6,
+        -10,
+        0,
+        5,
+        5
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-92",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -2,
+        -6,
+        0,
+        4,
+        9,
+        0,
+        -1,
+        -8,
+        4,
+        1,
+        6,
+        8,
+        -8,
+        -5
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-93",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        3,
+        1,
+        -10,
+        1,
+        1,
+        -5,
+        2,
+        -4,
+        1,
+        -9,
+        -8,
+        -7,
+        -5
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-94",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -11,
+        -11,
+        -9,
+        4
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-95",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        1,
+        -5,
+        11,
+        0,
+        11,
+        -10,
+        -6,
+        9,
+        -3,
+        1,
+        -4,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-96",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -6,
+        8,
+        -11,
+        -3,
+        10
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-97",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        5,
+        -1,
+        0,
+        -10,
+        6,
+        9,
+        4,
+        11,
+        -5,
+        -9,
+        -6,
+        3,
+        11,
+        -5,
+        -1,
+        4
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-98",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        0,
+        -3,
+        -3,
+        0,
+        -4,
+        -11,
+        8,
+        6,
+        4,
+        -5,
+        2,
+        6,
+        4,
+        -8,
+        -3,
+        -7,
+        -8,
+        2,
+        11,
+        -4,
+        -4,
+        6,
+        10,
+        7,
+        1,
+        0,
+        -10,
+        -7,
+        8,
+        7
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-99",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -4,
+        -3,
+        -11,
+        0,
+        7,
+        -9,
+        9,
+        -8,
+        -6,
+        5,
+        5
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-100",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -5,
+        -11,
+        -2,
+        -2,
+        4,
+        4,
+        -3,
+        4
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-101",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        7,
+        4,
+        3,
+        -4,
+        1,
+        2,
+        -8,
+        4,
+        9,
+        5,
+        6,
+        -7,
+        3,
+        -10,
+        0,
+        -6,
+        -4,
+        6,
+        11,
+        10,
+        11,
+        -11,
+        9,
+        10,
+        9,
+        6,
+        9
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-102",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -8,
+        -1,
+        -7,
+        -2,
+        2,
+        9,
+        11,
+        -5,
+        -4,
+        -11,
+        4,
+        11,
+        -1,
+        7,
+        -9
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-103",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        2,
+        11,
+        -3,
+        8,
+        -11,
+        -9,
+        -1,
+        0,
+        8,
+        1,
+        -1,
+        -9,
+        7,
+        1,
+        5,
+        6,
+        -9,
+        -7,
+        11,
+        -1,
+        6,
+        -10,
+        2,
+        5,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-104",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -10,
+        -4,
+        -6,
+        -2,
+        0,
+        -2,
+        5,
+        -4,
+        -2,
+        8,
+        -3,
+        9,
+        -11,
+        -7,
+        -4,
+        -4,
+        6,
+        -4,
+        5,
+        10,
+        -1,
+        -3,
+        -10,
+        9
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-105",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -8,
+        -7,
+        -10,
+        8,
+        -10,
+        3,
+        -9,
+        3,
+        -11,
+        0,
+        6
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-106",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -10,
+        -3,
+        1,
+        5,
+        10,
+        1,
+        -1,
+        0,
+        0,
+        10
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-107",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        9,
+        -5,
+        -10,
+        0,
+        -5,
+        10,
+        0,
+        -7,
+        -6,
+        4,
+        -11,
+        2,
+        4,
+        8,
+        -6,
+        5,
+        -7,
+        8
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-108",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -10,
+        -5,
+        -8,
+        4,
+        -10,
+        8,
+        -1,
+        -3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-109",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        10,
+        -2,
+        -4,
+        -5,
+        -9,
+        2,
+        3,
+        5,
+        -10
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-110",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        11,
+        -7,
+        -7,
+        4,
+        11,
+        -6,
+        2,
+        -3,
+        -8,
+        -2,
+        1,
+        5,
+        9
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-111",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -10,
+        -8,
+        1,
+        4,
+        11,
+        3,
+        2,
+        6,
+        10,
+        -1,
+        -8,
+        -2,
+        5,
+        -8,
+        -3,
+        -7,
+        5,
+        -9,
+        -2,
+        -7,
+        -9,
+        -7,
+        5,
+        5,
+        -10,
+        -3,
+        11,
+        -10,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-112",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -11,
+        4,
+        6
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-113",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        5,
+        10,
+        -2,
+        -3,
+        -9,
+        6,
+        2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-114",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        5,
+        -10,
+        11,
+        -10,
+        5,
+        -8,
+        0,
+        -4,
+        -11,
+        6,
+        -3,
+        -10,
+        -3,
+        -6,
+        2,
+        8,
+        -8,
+        -8,
+        11,
+        5,
+        0,
+        -2
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-115",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        3,
+        -4,
+        -1,
+        -10,
+        5,
+        -8,
+        -11,
+        10,
+        -7,
+        10,
+        -4,
+        4,
+        -9,
+        4,
+        -3,
+        -3,
+        -8,
+        8,
+        7,
+        11,
+        6,
+        -7,
+        -6,
+        0,
+        11,
+        5
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-116",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -11,
+        -10,
+        -5,
+        9,
+        3,
+        -6,
+        -8,
+        -10,
+        1,
+        -7,
+        -11,
+        8,
+        6,
+        -8,
+        0,
+        11,
+        8,
+        -4
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-117",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        8,
+        -3,
+        9,
+        9,
+        5,
+        8,
+        -9,
+        -6
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-118",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        5,
+        -10,
+        -10,
+        -6,
+        4,
+        3,
+        -11,
+        7,
+        -1,
+        1,
+        2,
+        -2,
+        9,
+        7,
+        -9,
+        -1,
+        7,
+        -2,
+        9,
+        -8,
+        -8,
+        -11,
+        -8,
+        0,
+        10,
+        11,
+        9,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-119",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        8,
+        11,
+        1,
+        -4,
+        -2,
+        -2,
+        -7,
+        -8,
+        3,
+        7,
+        6,
+        -7,
+        0,
+        8,
+        4,
+        9,
+        -6,
+        -10,
+        -5,
+        2,
+        -5,
+        1,
+        -4,
+        7,
+        10,
+        -4,
+        -7,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-120",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -5,
+        -4,
+        3,
+        1,
+        8,
+        -2,
+        6,
+        -7,
+        -3,
+        7,
+        4,
+        -6,
+        -4,
+        7,
+        -3,
+        -1,
+        -5,
+        -9,
+        -6,
+        5,
+        -1,
+        8,
+        11,
+        0,
+        -1,
+        -3,
+        11,
+        1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-121",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        11,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-122",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -3,
+        7,
+        1,
+        9,
+        9,
+        -11,
+        10,
+        -2,
+        -1,
+        0,
+        9,
+        4,
+        11,
+        7,
+        0,
+        -4,
+        1,
+        2,
+        7,
+        -4,
+        -10,
+        -10,
+        2,
+        -3,
+        -7,
+        10,
+        1,
+        9,
+        -5,
+        11
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-123",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        10,
+        -10
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-124",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        9,
+        -8,
+        3,
+        5,
+        -10,
+        -1,
+        -8,
+        2,
+        -4,
+        5,
+        9,
+        -1,
+        2,
+        -4,
+        -1,
+        -5,
+        0,
+        0,
+        -4,
+        -8,
+        -10,
+        1,
+        6,
+        -9,
+        5,
+        -1,
+        -11,
+        1,
+        4,
+        -3,
+        4
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-125",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        6,
+        2,
+        -3,
+        1,
+        5,
+        3,
+        3,
+        1,
+        -10,
+        -10,
+        0,
+        -5,
+        1,
+        8,
+        3,
+        9,
+        -11,
+        -8,
+        9,
+        7,
+        -7,
+        -10,
+        3,
+        9,
+        1,
+        -3,
+        -4,
+        -1,
+        3
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-126",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        -10,
+        -2,
+        -7,
+        9,
+        -2,
+        11,
+        -8,
+        -6,
+        3,
+        8,
+        5,
+        5,
+        -8,
+        -8,
+        -10,
+        9,
+        0,
+        -10,
+        11,
+        -5,
+        -10,
+        -6,
+        1,
+        -3,
+        3,
+        -8,
+        4
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-1-127",
+    "family": "cumulative-state-history",
+    "text": "aplique state-reserve-1 em dados",
+    "bindings": {
+      "dados": [
+        8,
+        -5,
+        4,
+        4,
+        -2,
+        -8,
+        0,
+        -4,
+        8,
+        10,
+        6,
+        5,
+        -1
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-0",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          26,
+          9
+        ],
+        [
+          28,
+          10
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-1",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          27,
+          13
+        ],
+        [
+          24,
+          7
+        ],
+        [
+          22,
+          9
+        ],
+        [
+          5,
+          14
+        ],
+        [
+          2,
+          7
+        ],
+        [
+          30,
+          3
+        ],
+        [
+          22,
+          17
+        ],
+        [
+          12,
+          13
+        ],
+        [
+          26,
+          3
+        ],
+        [
+          31,
+          14
+        ],
+        [
+          29,
+          15
+        ],
+        [
+          31,
+          10
+        ],
+        [
+          25,
+          14
+        ],
+        [
+          11,
+          2
+        ],
+        [
+          23,
+          5
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-2",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          16,
+          17
+        ],
+        [
+          12,
+          14
+        ],
+        [
+          31,
+          8
+        ],
+        [
+          13,
+          6
+        ],
+        [
+          11,
+          10
+        ],
+        [
+          11,
+          3
+        ],
+        [
+          30,
+          14
+        ],
+        [
+          23,
+          15
+        ],
+        [
+          12,
+          10
+        ],
+        [
+          19,
+          4
+        ],
+        [
+          25,
+          9
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-3",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          11,
+          17
+        ],
+        [
+          24,
+          8
+        ],
+        [
+          22,
+          12
+        ],
+        [
+          20,
+          6
+        ],
+        [
+          31,
+          11
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          15,
+          14
+        ],
+        [
+          1,
+          13
+        ],
+        [
+          29,
+          10
+        ],
+        [
+          30,
+          12
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          12,
+          11
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          13,
+          3
+        ],
+        [
+          17,
+          16
+        ],
+        [
+          12,
+          7
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          8,
+          5
+        ],
+        [
+          25,
+          12
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-4",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          14,
+          16
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          18,
+          8
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          17
+        ],
+        [
+          12,
+          16
+        ],
+        [
+          30,
+          15
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          27,
+          15
+        ],
+        [
+          21,
+          8
+        ],
+        [
+          22,
+          6
+        ],
+        [
+          24,
+          16
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-5",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          27,
+          14
+        ],
+        [
+          31,
+          17
+        ],
+        [
+          1,
+          8
+        ],
+        [
+          15,
+          5
+        ],
+        [
+          20,
+          9
+        ],
+        [
+          28,
+          7
+        ],
+        [
+          18,
+          3
+        ],
+        [
+          14,
+          17
+        ],
+        [
+          10,
+          17
+        ],
+        [
+          28,
+          16
+        ],
+        [
+          12,
+          3
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          2,
+          14
+        ],
+        [
+          30,
+          12
+        ],
+        [
+          13,
+          7
+        ],
+        [
+          9,
+          12
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-6",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          22,
+          7
+        ],
+        [
+          22,
+          15
+        ],
+        [
+          9,
+          14
+        ],
+        [
+          29,
+          6
+        ],
+        [
+          13,
+          6
+        ],
+        [
+          3,
+          9
+        ],
+        [
+          23,
+          11
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          2,
+          9
+        ],
+        [
+          7,
+          9
+        ],
+        [
+          19,
+          3
+        ],
+        [
+          10,
+          10
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-7",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          21,
+          11
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          21,
+          6
+        ],
+        [
+          22,
+          9
+        ],
+        [
+          17,
+          14
+        ],
+        [
+          19,
+          9
+        ],
+        [
+          10,
+          3
+        ],
+        [
+          20,
+          2
+        ],
+        [
+          22,
+          8
+        ],
+        [
+          18,
+          10
+        ],
+        [
+          29,
+          12
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-8",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          29,
+          2
+        ],
+        [
+          16,
+          5
+        ],
+        [
+          19,
+          10
+        ],
+        [
+          18,
+          2
+        ],
+        [
+          21,
+          2
+        ],
+        [
+          2,
+          15
+        ],
+        [
+          26,
+          8
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          2,
+          14
+        ],
+        [
+          13,
+          9
+        ],
+        [
+          4,
+          17
+        ],
+        [
+          9,
+          6
+        ],
+        [
+          15,
+          16
+        ],
+        [
+          10,
+          7
+        ],
+        [
+          27,
+          17
+        ],
+        [
+          3,
+          11
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-9",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          22,
+          7
+        ],
+        [
+          9,
+          11
+        ],
+        [
+          13,
+          4
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-10",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          1,
+          12
+        ],
+        [
+          9,
+          5
+        ],
+        [
+          3,
+          17
+        ],
+        [
+          27,
+          4
+        ],
+        [
+          23,
+          3
+        ],
+        [
+          27,
+          14
+        ],
+        [
+          1,
+          8
+        ],
+        [
+          2,
+          14
+        ],
+        [
+          13,
+          3
+        ],
+        [
+          30,
+          14
+        ],
+        [
+          28,
+          12
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-11",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          16,
+          12
+        ],
+        [
+          12,
+          7
+        ],
+        [
+          10,
+          3
+        ],
+        [
+          22,
+          2
+        ],
+        [
+          24,
+          10
+        ],
+        [
+          11,
+          3
+        ],
+        [
+          27,
+          11
+        ],
+        [
+          25,
+          13
+        ],
+        [
+          4,
+          14
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          18,
+          15
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-12",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          17,
+          16
+        ],
+        [
+          7,
+          16
+        ],
+        [
+          17,
+          16
+        ],
+        [
+          5,
+          10
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-13",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          2,
+          13
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          27,
+          3
+        ],
+        [
+          18,
+          10
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          24,
+          17
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          18,
+          5
+        ],
+        [
+          5,
+          16
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          30,
+          12
+        ],
+        [
+          12,
+          6
+        ],
+        [
+          12,
+          7
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          23,
+          13
+        ],
+        [
+          25,
+          4
+        ],
+        [
+          1,
+          9
+        ],
+        [
+          12,
+          5
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-14",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          6,
+          13
+        ],
+        [
+          7,
+          3
+        ],
+        [
+          25,
+          7
+        ],
+        [
+          28,
+          5
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          23,
+          13
+        ],
+        [
+          28,
+          16
+        ],
+        [
+          23,
+          8
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          19,
+          7
+        ],
+        [
+          22,
+          8
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-15",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          3,
+          11
+        ],
+        [
+          17,
+          16
+        ],
+        [
+          29,
+          17
+        ],
+        [
+          31,
+          15
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          8,
+          13
+        ],
+        [
+          4,
+          12
+        ],
+        [
+          13,
+          17
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          23,
+          4
+        ],
+        [
+          28,
+          9
+        ],
+        [
+          9,
+          2
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-16",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          13,
+          5
+        ],
+        [
+          7,
+          15
+        ],
+        [
+          13,
+          8
+        ],
+        [
+          23,
+          8
+        ],
+        [
+          7,
+          12
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-17",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          11,
+          15
+        ],
+        [
+          31,
+          17
+        ],
+        [
+          23,
+          16
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          8,
+          5
+        ],
+        [
+          12,
+          12
+        ],
+        [
+          1,
+          12
+        ],
+        [
+          27,
+          4
+        ],
+        [
+          20,
+          8
+        ],
+        [
+          17,
+          7
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          19,
+          3
+        ],
+        [
+          7,
+          12
+        ],
+        [
+          5,
+          17
+        ],
+        [
+          22,
+          3
+        ],
+        [
+          23,
+          4
+        ],
+        [
+          22,
+          8
+        ],
+        [
+          15,
+          10
+        ],
+        [
+          27,
+          8
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-18",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          19,
+          16
+        ],
+        [
+          10,
+          2
+        ],
+        [
+          5,
+          9
+        ],
+        [
+          8,
+          2
+        ],
+        [
+          24,
+          12
+        ],
+        [
+          15,
+          3
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          17,
+          11
+        ],
+        [
+          5,
+          11
+        ],
+        [
+          10,
+          12
+        ],
+        [
+          13,
+          9
+        ],
+        [
+          19,
+          5
+        ],
+        [
+          24,
+          14
+        ],
+        [
+          25,
+          5
+        ],
+        [
+          7,
+          13
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          26,
+          6
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-19",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          31,
+          4
+        ],
+        [
+          21,
+          14
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-20",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          1,
+          12
+        ],
+        [
+          20,
+          8
+        ],
+        [
+          15,
+          2
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          13,
+          16
+        ],
+        [
+          27,
+          17
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-21",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          7,
+          2
+        ],
+        [
+          28,
+          12
+        ],
+        [
+          16,
+          15
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          6,
+          15
+        ],
+        [
+          4,
+          13
+        ],
+        [
+          27,
+          14
+        ],
+        [
+          29,
+          12
+        ],
+        [
+          31,
+          11
+        ],
+        [
+          30,
+          4
+        ],
+        [
+          9,
+          6
+        ],
+        [
+          30,
+          6
+        ],
+        [
+          28,
+          17
+        ],
+        [
+          30,
+          16
+        ],
+        [
+          26,
+          17
+        ],
+        [
+          16,
+          12
+        ],
+        [
+          21,
+          15
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-22",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          22,
+          16
+        ],
+        [
+          4,
+          14
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          5,
+          17
+        ],
+        [
+          17,
+          8
+        ],
+        [
+          15,
+          5
+        ],
+        [
+          7,
+          17
+        ],
+        [
+          7,
+          2
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-23",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          7,
+          16
+        ],
+        [
+          14,
+          3
+        ],
+        [
+          8,
+          7
+        ],
+        [
+          5,
+          10
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-24",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          30,
+          7
+        ],
+        [
+          18,
+          6
+        ],
+        [
+          2,
+          9
+        ],
+        [
+          16,
+          14
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          21,
+          4
+        ],
+        [
+          16,
+          2
+        ],
+        [
+          2,
+          15
+        ],
+        [
+          14,
+          8
+        ],
+        [
+          7,
+          13
+        ],
+        [
+          27,
+          13
+        ],
+        [
+          14,
+          2
+        ],
+        [
+          20,
+          9
+        ],
+        [
+          7,
+          3
+        ],
+        [
+          5,
+          12
+        ],
+        [
+          2,
+          14
+        ],
+        [
+          30,
+          15
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-25",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          20,
+          13
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          23,
+          2
+        ],
+        [
+          0,
+          14
+        ],
+        [
+          28,
+          6
+        ],
+        [
+          6,
+          2
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          30,
+          5
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          15,
+          17
+        ],
+        [
+          26,
+          5
+        ],
+        [
+          4,
+          16
+        ],
+        [
+          25,
+          16
+        ],
+        [
+          22,
+          6
+        ],
+        [
+          8,
+          12
+        ],
+        [
+          30,
+          8
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-26",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          2,
+          10
+        ],
+        [
+          10,
+          7
+        ],
+        [
+          0,
+          7
+        ],
+        [
+          29,
+          7
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          7,
+          11
+        ],
+        [
+          23,
+          9
+        ],
+        [
+          2,
+          14
+        ],
+        [
+          14,
+          2
+        ],
+        [
+          28,
+          14
+        ],
+        [
+          30,
+          14
+        ],
+        [
+          13,
+          3
+        ],
+        [
+          30,
+          16
+        ],
+        [
+          24,
+          17
+        ],
+        [
+          25,
+          12
+        ],
+        [
+          21,
+          3
+        ],
+        [
+          16,
+          9
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-27",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          1,
+          17
+        ],
+        [
+          20,
+          16
+        ],
+        [
+          30,
+          3
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-28",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          23,
+          13
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          19,
+          17
+        ],
+        [
+          8,
+          10
+        ],
+        [
+          0,
+          10
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-29",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          6,
+          8
+        ],
+        [
+          11,
+          12
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          31,
+          15
+        ],
+        [
+          23,
+          15
+        ],
+        [
+          21,
+          17
+        ],
+        [
+          9,
+          15
+        ],
+        [
+          7,
+          15
+        ],
+        [
+          21,
+          13
+        ],
+        [
+          5,
+          14
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          18,
+          16
+        ],
+        [
+          26,
+          13
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-30",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          1,
+          12
+        ],
+        [
+          21,
+          2
+        ],
+        [
+          15,
+          14
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-31",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          20,
+          14
+        ],
+        [
+          13,
+          7
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          1,
+          12
+        ],
+        [
+          22,
+          8
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          12,
+          3
+        ],
+        [
+          5,
+          12
+        ],
+        [
+          16,
+          13
+        ],
+        [
+          23,
+          3
+        ],
+        [
+          10,
+          14
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-32",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          11,
+          7
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          11,
+          4
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-33",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          15,
+          5
+        ],
+        [
+          17,
+          9
+        ],
+        [
+          13,
+          11
+        ],
+        [
+          20,
+          7
+        ],
+        [
+          26,
+          7
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          1,
+          16
+        ],
+        [
+          27,
+          3
+        ],
+        [
+          1,
+          6
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-34",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          19,
+          9
+        ],
+        [
+          14,
+          12
+        ],
+        [
+          10,
+          12
+        ],
+        [
+          6,
+          13
+        ],
+        [
+          27,
+          11
+        ],
+        [
+          19,
+          8
+        ],
+        [
+          29,
+          11
+        ],
+        [
+          24,
+          11
+        ],
+        [
+          29,
+          10
+        ],
+        [
+          16,
+          4
+        ],
+        [
+          7,
+          5
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-35",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          19,
+          12
+        ],
+        [
+          19,
+          3
+        ],
+        [
+          25,
+          2
+        ],
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          22,
+          3
+        ],
+        [
+          31,
+          3
+        ],
+        [
+          13,
+          4
+        ],
+        [
+          18,
+          11
+        ],
+        [
+          12,
+          5
+        ],
+        [
+          26,
+          14
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          13,
+          6
+        ],
+        [
+          21,
+          5
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          24,
+          12
+        ],
+        [
+          4,
+          14
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-36",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          12,
+          3
+        ],
+        [
+          19,
+          6
+        ],
+        [
+          16,
+          12
+        ],
+        [
+          26,
+          16
+        ],
+        [
+          27,
+          12
+        ],
+        [
+          7,
+          13
+        ],
+        [
+          19,
+          13
+        ],
+        [
+          24,
+          6
+        ],
+        [
+          18,
+          8
+        ],
+        [
+          22,
+          14
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          1,
+          17
+        ],
+        [
+          31,
+          3
+        ],
+        [
+          10,
+          13
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-37",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          10,
+          9
+        ],
+        [
+          2,
+          16
+        ],
+        [
+          8,
+          12
+        ],
+        [
+          23,
+          3
+        ],
+        [
+          30,
+          2
+        ],
+        [
+          10,
+          8
+        ],
+        [
+          3,
+          8
+        ],
+        [
+          14,
+          3
+        ],
+        [
+          15,
+          10
+        ],
+        [
+          20,
+          17
+        ],
+        [
+          20,
+          17
+        ],
+        [
+          5,
+          16
+        ],
+        [
+          20,
+          7
+        ],
+        [
+          29,
+          4
+        ],
+        [
+          8,
+          13
+        ],
+        [
+          19,
+          10
+        ],
+        [
+          26,
+          9
+        ],
+        [
+          2,
+          7
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-38",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          23,
+          3
+        ],
+        [
+          4,
+          15
+        ],
+        [
+          4,
+          5
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-39",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          3,
+          15
+        ],
+        [
+          28,
+          13
+        ],
+        [
+          17,
+          3
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          17,
+          9
+        ],
+        [
+          19,
+          4
+        ],
+        [
+          7,
+          12
+        ],
+        [
+          30,
+          7
+        ],
+        [
+          22,
+          8
+        ],
+        [
+          2,
+          8
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-40",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          14,
+          12
+        ],
+        [
+          18,
+          3
+        ],
+        [
+          13,
+          11
+        ],
+        [
+          16,
+          8
+        ],
+        [
+          26,
+          6
+        ],
+        [
+          20,
+          3
+        ],
+        [
+          29,
+          3
+        ],
+        [
+          30,
+          17
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          17,
+          7
+        ],
+        [
+          18,
+          17
+        ],
+        [
+          19,
+          13
+        ],
+        [
+          24,
+          14
+        ],
+        [
+          15,
+          11
+        ],
+        [
+          9,
+          15
+        ],
+        [
+          3,
+          13
+        ],
+        [
+          7,
+          10
+        ],
+        [
+          9,
+          3
+        ],
+        [
+          31,
+          4
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-41",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          20,
+          12
+        ],
+        [
+          22,
+          11
+        ],
+        [
+          15,
+          6
+        ],
+        [
+          13,
+          15
+        ],
+        [
+          4,
+          17
+        ],
+        [
+          28,
+          16
+        ],
+        [
+          3,
+          5
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-42",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          31,
+          8
+        ],
+        [
+          19,
+          9
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          28,
+          15
+        ],
+        [
+          17,
+          11
+        ],
+        [
+          26,
+          3
+        ],
+        [
+          31,
+          6
+        ],
+        [
+          23,
+          14
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-43",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          12,
+          3
+        ],
+        [
+          24,
+          7
+        ],
+        [
+          25,
+          10
+        ],
+        [
+          31,
+          3
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          20,
+          8
+        ],
+        [
+          6,
+          2
+        ],
+        [
+          11,
+          10
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-44",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          23,
+          9
+        ],
+        [
+          26,
+          15
+        ],
+        [
+          9,
+          4
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-45",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          16,
+          8
+        ],
+        [
+          13,
+          6
+        ],
+        [
+          21,
+          3
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-46",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          26,
+          16
+        ],
+        [
+          4,
+          12
+        ],
+        [
+          17,
+          7
+        ],
+        [
+          19,
+          9
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          1,
+          16
+        ],
+        [
+          21,
+          3
+        ],
+        [
+          12,
+          8
+        ],
+        [
+          12,
+          13
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-47",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          22,
+          14
+        ],
+        [
+          16,
+          4
+        ],
+        [
+          26,
+          7
+        ],
+        [
+          22,
+          13
+        ],
+        [
+          5,
+          14
+        ],
+        [
+          18,
+          7
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          30,
+          16
+        ],
+        [
+          18,
+          2
+        ],
+        [
+          19,
+          11
+        ],
+        [
+          14,
+          13
+        ],
+        [
+          12,
+          4
+        ],
+        [
+          17,
+          12
+        ],
+        [
+          10,
+          12
+        ],
+        [
+          28,
+          11
+        ],
+        [
+          19,
+          7
+        ],
+        [
+          19,
+          12
+        ],
+        [
+          16,
+          4
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-48",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          27,
+          15
+        ],
+        [
+          25,
+          10
+        ],
+        [
+          17,
+          8
+        ],
+        [
+          17,
+          15
+        ],
+        [
+          30,
+          3
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-49",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          30,
+          4
+        ],
+        [
+          8,
+          2
+        ],
+        [
+          28,
+          11
+        ],
+        [
+          31,
+          7
+        ],
+        [
+          2,
+          15
+        ],
+        [
+          16,
+          9
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-50",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          28,
+          3
+        ],
+        [
+          1,
+          14
+        ],
+        [
+          24,
+          16
+        ],
+        [
+          9,
+          6
+        ],
+        [
+          21,
+          17
+        ],
+        [
+          22,
+          6
+        ],
+        [
+          22,
+          11
+        ],
+        [
+          31,
+          7
+        ],
+        [
+          29,
+          10
+        ],
+        [
+          22,
+          17
+        ],
+        [
+          17,
+          8
+        ],
+        [
+          31,
+          12
+        ],
+        [
+          12,
+          12
+        ],
+        [
+          24,
+          2
+        ],
+        [
+          21,
+          11
+        ],
+        [
+          28,
+          2
+        ],
+        [
+          6,
+          12
+        ],
+        [
+          8,
+          7
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-51",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          8,
+          5
+        ],
+        [
+          3,
+          13
+        ],
+        [
+          13,
+          8
+        ],
+        [
+          19,
+          13
+        ],
+        [
+          11,
+          10
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          0,
+          12
+        ],
+        [
+          21,
+          12
+        ],
+        [
+          20,
+          4
+        ],
+        [
+          11,
+          10
+        ],
+        [
+          8,
+          16
+        ],
+        [
+          13,
+          10
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-52",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          1,
+          10
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          18,
+          12
+        ],
+        [
+          17,
+          4
+        ],
+        [
+          10,
+          11
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          13,
+          11
+        ],
+        [
+          20,
+          17
+        ],
+        [
+          16,
+          9
+        ],
+        [
+          31,
+          7
+        ],
+        [
+          16,
+          17
+        ],
+        [
+          10,
+          6
+        ],
+        [
+          10,
+          4
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          9,
+          12
+        ],
+        [
+          30,
+          9
+        ],
+        [
+          0,
+          10
+        ],
+        [
+          29,
+          5
+        ],
+        [
+          10,
+          13
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-53",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          30,
+          8
+        ],
+        [
+          16,
+          13
+        ],
+        [
+          19,
+          13
+        ],
+        [
+          8,
+          13
+        ],
+        [
+          22,
+          10
+        ],
+        [
+          21,
+          15
+        ],
+        [
+          7,
+          12
+        ],
+        [
+          22,
+          12
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          3,
+          9
+        ],
+        [
+          9,
+          17
+        ],
+        [
+          25,
+          10
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          5,
+          16
+        ],
+        [
+          25,
+          9
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-54",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          12,
+          4
+        ],
+        [
+          11,
+          12
+        ],
+        [
+          30,
+          9
+        ],
+        [
+          26,
+          14
+        ],
+        [
+          27,
+          6
+        ],
+        [
+          23,
+          8
+        ],
+        [
+          10,
+          13
+        ],
+        [
+          15,
+          12
+        ],
+        [
+          18,
+          7
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          16,
+          11
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-55",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          1,
+          13
+        ],
+        [
+          16,
+          6
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          10,
+          11
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-56",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          12,
+          12
+        ],
+        [
+          31,
+          2
+        ],
+        [
+          25,
+          12
+        ],
+        [
+          13,
+          10
+        ],
+        [
+          28,
+          5
+        ],
+        [
+          16,
+          2
+        ],
+        [
+          30,
+          6
+        ],
+        [
+          15,
+          14
+        ],
+        [
+          20,
+          7
+        ],
+        [
+          5,
+          15
+        ],
+        [
+          14,
+          16
+        ],
+        [
+          11,
+          4
+        ],
+        [
+          11,
+          10
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          19,
+          17
+        ],
+        [
+          25,
+          7
+        ],
+        [
+          12,
+          11
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-57",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          22,
+          2
+        ],
+        [
+          8,
+          10
+        ],
+        [
+          7,
+          16
+        ],
+        [
+          14,
+          9
+        ],
+        [
+          22,
+          16
+        ],
+        [
+          22,
+          13
+        ],
+        [
+          6,
+          2
+        ],
+        [
+          21,
+          14
+        ],
+        [
+          30,
+          6
+        ],
+        [
+          14,
+          14
+        ],
+        [
+          11,
+          17
+        ],
+        [
+          12,
+          12
+        ],
+        [
+          15,
+          13
+        ],
+        [
+          27,
+          3
+        ],
+        [
+          2,
+          13
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          13,
+          11
+        ],
+        [
+          1,
+          9
+        ],
+        [
+          14,
+          16
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-58",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          0,
+          6
+        ],
+        [
+          26,
+          14
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-59",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          3,
+          12
+        ],
+        [
+          11,
+          5
+        ],
+        [
+          9,
+          7
+        ],
+        [
+          18,
+          8
+        ],
+        [
+          22,
+          12
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          15,
+          13
+        ],
+        [
+          10,
+          4
+        ],
+        [
+          9,
+          4
+        ],
+        [
+          16,
+          11
+        ],
+        [
+          10,
+          10
+        ],
+        [
+          19,
+          6
+        ],
+        [
+          8,
+          13
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-60",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          7,
+          14
+        ],
+        [
+          17,
+          5
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          4,
+          8
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-61",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          1,
+          3
+        ],
+        [
+          25,
+          5
+        ],
+        [
+          22,
+          15
+        ],
+        [
+          19,
+          14
+        ],
+        [
+          9,
+          5
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          4,
+          15
+        ],
+        [
+          14,
+          10
+        ],
+        [
+          9,
+          6
+        ],
+        [
+          9,
+          13
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          23,
+          6
+        ],
+        [
+          26,
+          7
+        ],
+        [
+          17,
+          13
+        ],
+        [
+          14,
+          13
+        ],
+        [
+          15,
+          8
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          16
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-62",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          9,
+          5
+        ],
+        [
+          27,
+          7
+        ],
+        [
+          12,
+          4
+        ],
+        [
+          8,
+          17
+        ],
+        [
+          0,
+          14
+        ],
+        [
+          27,
+          16
+        ],
+        [
+          28,
+          7
+        ],
+        [
+          18,
+          17
+        ],
+        [
+          10,
+          13
+        ],
+        [
+          12,
+          14
+        ],
+        [
+          26,
+          13
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          19,
+          8
+        ],
+        [
+          6,
+          14
+        ],
+        [
+          15,
+          6
+        ],
+        [
+          3,
+          11
+        ],
+        [
+          10,
+          2
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-63",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          0,
+          13
+        ],
+        [
+          7,
+          2
+        ],
+        [
+          24,
+          9
+        ],
+        [
+          7,
+          16
+        ],
+        [
+          11,
+          5
+        ],
+        [
+          23,
+          10
+        ],
+        [
+          8,
+          6
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-64",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          30,
+          16
+        ],
+        [
+          4,
+          17
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          20,
+          4
+        ],
+        [
+          1,
+          17
+        ],
+        [
+          22,
+          4
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-65",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          13,
+          16
+        ],
+        [
+          10,
+          6
+        ],
+        [
+          10,
+          16
+        ],
+        [
+          31,
+          11
+        ],
+        [
+          13,
+          4
+        ],
+        [
+          0,
+          14
+        ],
+        [
+          14,
+          15
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-66",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          12,
+          12
+        ],
+        [
+          22,
+          7
+        ],
+        [
+          12,
+          17
+        ],
+        [
+          19,
+          17
+        ],
+        [
+          30,
+          11
+        ],
+        [
+          10,
+          12
+        ],
+        [
+          14,
+          10
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-67",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          1,
+          17
+        ],
+        [
+          28,
+          13
+        ],
+        [
+          26,
+          4
+        ],
+        [
+          29,
+          12
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-68",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          28,
+          11
+        ],
+        [
+          20,
+          13
+        ],
+        [
+          17,
+          8
+        ],
+        [
+          2,
+          7
+        ],
+        [
+          22,
+          7
+        ],
+        [
+          30,
+          16
+        ],
+        [
+          25,
+          5
+        ],
+        [
+          25,
+          7
+        ],
+        [
+          22,
+          15
+        ],
+        [
+          14,
+          17
+        ],
+        [
+          7,
+          4
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-69",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          21,
+          4
+        ],
+        [
+          27,
+          9
+        ],
+        [
+          0,
+          15
+        ],
+        [
+          27,
+          15
+        ],
+        [
+          21,
+          16
+        ],
+        [
+          22,
+          10
+        ],
+        [
+          31,
+          11
+        ],
+        [
+          9,
+          12
+        ],
+        [
+          26,
+          16
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-70",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          23,
+          6
+        ],
+        [
+          9,
+          12
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          7,
+          3
+        ],
+        [
+          16,
+          8
+        ],
+        [
+          2,
+          11
+        ],
+        [
+          31,
+          8
+        ],
+        [
+          10,
+          7
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          30,
+          13
+        ],
+        [
+          4,
+          2
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-71",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          14,
+          11
+        ],
+        [
+          20,
+          9
+        ],
+        [
+          25,
+          12
+        ],
+        [
+          24,
+          6
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-72",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          10,
+          5
+        ],
+        [
+          30,
+          7
+        ],
+        [
+          12,
+          17
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          30,
+          9
+        ],
+        [
+          24,
+          17
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          20,
+          6
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-73",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          26,
+          3
+        ],
+        [
+          27,
+          10
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-74",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          17,
+          7
+        ],
+        [
+          18,
+          17
+        ],
+        [
+          13,
+          16
+        ],
+        [
+          21,
+          16
+        ],
+        [
+          21,
+          5
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-75",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          23,
+          17
+        ],
+        [
+          29,
+          11
+        ],
+        [
+          25,
+          13
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          13,
+          10
+        ],
+        [
+          23,
+          13
+        ],
+        [
+          2,
+          4
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-76",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          13,
+          17
+        ],
+        [
+          11,
+          2
+        ],
+        [
+          7,
+          2
+        ],
+        [
+          11,
+          3
+        ],
+        [
+          12,
+          8
+        ],
+        [
+          29,
+          2
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-77",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          18,
+          17
+        ],
+        [
+          23,
+          2
+        ],
+        [
+          15,
+          11
+        ],
+        [
+          22,
+          15
+        ],
+        [
+          10,
+          9
+        ],
+        [
+          28,
+          7
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          17,
+          3
+        ],
+        [
+          2,
+          14
+        ],
+        [
+          9,
+          5
+        ],
+        [
+          31,
+          14
+        ],
+        [
+          17,
+          4
+        ],
+        [
+          22,
+          9
+        ],
+        [
+          15,
+          17
+        ],
+        [
+          18,
+          17
+        ],
+        [
+          14,
+          3
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          18,
+          14
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-78",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          26,
+          3
+        ],
+        [
+          23,
+          17
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-79",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          28,
+          15
+        ],
+        [
+          9,
+          11
+        ],
+        [
+          6,
+          16
+        ],
+        [
+          11,
+          2
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          12,
+          13
+        ],
+        [
+          27,
+          11
+        ],
+        [
+          14,
+          7
+        ],
+        [
+          15,
+          17
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-80",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          1,
+          10
+        ],
+        [
+          6,
+          17
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-81",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          17,
+          3
+        ],
+        [
+          22,
+          5
+        ],
+        [
+          23,
+          2
+        ],
+        [
+          31,
+          16
+        ],
+        [
+          29,
+          6
+        ],
+        [
+          29,
+          11
+        ],
+        [
+          18,
+          6
+        ],
+        [
+          8,
+          15
+        ],
+        [
+          13,
+          9
+        ],
+        [
+          18,
+          13
+        ],
+        [
+          29,
+          6
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-82",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          16,
+          14
+        ],
+        [
+          27,
+          3
+        ],
+        [
+          19,
+          2
+        ],
+        [
+          14,
+          12
+        ],
+        [
+          11,
+          11
+        ],
+        [
+          29,
+          8
+        ],
+        [
+          25,
+          6
+        ],
+        [
+          20,
+          2
+        ],
+        [
+          17,
+          10
+        ],
+        [
+          28,
+          13
+        ],
+        [
+          7,
+          2
+        ],
+        [
+          29,
+          13
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          22,
+          17
+        ],
+        [
+          17,
+          5
+        ],
+        [
+          13,
+          17
+        ],
+        [
+          11,
+          9
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-83",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          4,
+          3
+        ],
+        [
+          22,
+          17
+        ],
+        [
+          8,
+          10
+        ],
+        [
+          13,
+          13
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-84",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          1,
+          10
+        ],
+        [
+          24,
+          5
+        ],
+        [
+          23,
+          8
+        ],
+        [
+          15,
+          9
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-85",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          17,
+          12
+        ],
+        [
+          16,
+          17
+        ],
+        [
+          15,
+          15
+        ],
+        [
+          29,
+          16
+        ],
+        [
+          9,
+          15
+        ],
+        [
+          0,
+          10
+        ],
+        [
+          18,
+          10
+        ],
+        [
+          20,
+          8
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          5,
+          16
+        ],
+        [
+          0,
+          13
+        ],
+        [
+          8,
+          2
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          23,
+          3
+        ],
+        [
+          10,
+          17
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          7,
+          15
+        ],
+        [
+          15,
+          3
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-86",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          22,
+          3
+        ],
+        [
+          3,
+          14
+        ],
+        [
+          13,
+          11
+        ],
+        [
+          11,
+          16
+        ],
+        [
+          9,
+          3
+        ],
+        [
+          7,
+          9
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          18,
+          11
+        ],
+        [
+          7,
+          10
+        ],
+        [
+          8,
+          9
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-87",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          10,
+          12
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          16,
+          14
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          18,
+          2
+        ],
+        [
+          16,
+          8
+        ],
+        [
+          31,
+          15
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-88",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          10,
+          10
+        ],
+        [
+          9,
+          7
+        ],
+        [
+          14,
+          6
+        ],
+        [
+          2,
+          14
+        ],
+        [
+          17,
+          15
+        ],
+        [
+          23,
+          2
+        ],
+        [
+          24,
+          4
+        ],
+        [
+          31,
+          3
+        ],
+        [
+          18,
+          3
+        ],
+        [
+          27,
+          3
+        ],
+        [
+          15,
+          11
+        ],
+        [
+          3,
+          12
+        ],
+        [
+          22,
+          6
+        ],
+        [
+          19,
+          17
+        ],
+        [
+          8,
+          16
+        ],
+        [
+          31,
+          9
+        ],
+        [
+          6,
+          17
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-89",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          20,
+          5
+        ],
+        [
+          26,
+          10
+        ],
+        [
+          15,
+          10
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          2,
+          17
+        ],
+        [
+          13,
+          8
+        ],
+        [
+          28,
+          15
+        ],
+        [
+          0,
+          8
+        ],
+        [
+          16,
+          8
+        ],
+        [
+          30,
+          5
+        ],
+        [
+          28,
+          6
+        ],
+        [
+          23,
+          14
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          3,
+          13
+        ],
+        [
+          11,
+          5
+        ],
+        [
+          8,
+          13
+        ],
+        [
+          8,
+          3
+        ],
+        [
+          28,
+          5
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-90",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          28,
+          17
+        ],
+        [
+          22,
+          9
+        ],
+        [
+          22,
+          13
+        ],
+        [
+          23,
+          10
+        ],
+        [
+          31,
+          5
+        ],
+        [
+          19,
+          2
+        ],
+        [
+          11,
+          8
+        ],
+        [
+          13,
+          14
+        ],
+        [
+          29,
+          7
+        ],
+        [
+          8,
+          12
+        ],
+        [
+          17,
+          6
+        ],
+        [
+          21,
+          12
+        ],
+        [
+          16,
+          5
+        ],
+        [
+          11,
+          9
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-91",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          0,
+          3
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          31,
+          10
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          20,
+          3
+        ],
+        [
+          24,
+          5
+        ],
+        [
+          25,
+          9
+        ],
+        [
+          27,
+          12
+        ],
+        [
+          20,
+          13
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          30,
+          8
+        ],
+        [
+          15,
+          16
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          10,
+          13
+        ],
+        [
+          29,
+          6
+        ],
+        [
+          13,
+          12
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-92",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          1,
+          3
+        ],
+        [
+          20,
+          6
+        ],
+        [
+          15,
+          13
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-93",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          22,
+          5
+        ],
+        [
+          31,
+          13
+        ],
+        [
+          18,
+          11
+        ],
+        [
+          12,
+          15
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          27,
+          6
+        ],
+        [
+          31,
+          6
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          24,
+          14
+        ],
+        [
+          31,
+          8
+        ],
+        [
+          13,
+          11
+        ],
+        [
+          0,
+          16
+        ],
+        [
+          17,
+          14
+        ],
+        [
+          27,
+          7
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-94",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          19,
+          10
+        ],
+        [
+          22,
+          3
+        ],
+        [
+          24,
+          14
+        ],
+        [
+          10,
+          14
+        ],
+        [
+          4,
+          12
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          25,
+          15
+        ],
+        [
+          9,
+          16
+        ],
+        [
+          3,
+          12
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          20,
+          10
+        ],
+        [
+          2,
+          13
+        ],
+        [
+          14,
+          15
+        ],
+        [
+          19,
+          7
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-95",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          17,
+          17
+        ],
+        [
+          23,
+          11
+        ],
+        [
+          19,
+          17
+        ],
+        [
+          12,
+          11
+        ],
+        [
+          27,
+          11
+        ],
+        [
+          0,
+          17
+        ],
+        [
+          10,
+          9
+        ],
+        [
+          30,
+          2
+        ],
+        [
+          11,
+          6
+        ],
+        [
+          28,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          28,
+          6
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          13,
+          12
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-96",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          27,
+          12
+        ],
+        [
+          31,
+          12
+        ],
+        [
+          7,
+          16
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          14,
+          2
+        ],
+        [
+          21,
+          10
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-97",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          22,
+          4
+        ],
+        [
+          7,
+          9
+        ],
+        [
+          12,
+          16
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          31,
+          13
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          4,
+          16
+        ],
+        [
+          16,
+          6
+        ],
+        [
+          28,
+          3
+        ],
+        [
+          12,
+          11
+        ],
+        [
+          13,
+          2
+        ],
+        [
+          10,
+          5
+        ],
+        [
+          21,
+          11
+        ],
+        [
+          21,
+          12
+        ],
+        [
+          25,
+          4
+        ],
+        [
+          28,
+          9
+        ],
+        [
+          4,
+          14
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-98",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          6,
+          3
+        ],
+        [
+          18,
+          12
+        ],
+        [
+          27,
+          16
+        ],
+        [
+          12,
+          2
+        ],
+        [
+          3,
+          14
+        ],
+        [
+          13,
+          9
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          13,
+          16
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-99",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          12,
+          13
+        ],
+        [
+          23,
+          2
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          9,
+          16
+        ],
+        [
+          17,
+          3
+        ],
+        [
+          31,
+          3
+        ],
+        [
+          11,
+          2
+        ],
+        [
+          23,
+          6
+        ],
+        [
+          27,
+          15
+        ],
+        [
+          9,
+          11
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          6,
+          13
+        ],
+        [
+          8,
+          15
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-100",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          17,
+          8
+        ],
+        [
+          9,
+          16
+        ],
+        [
+          9,
+          4
+        ],
+        [
+          12,
+          12
+        ],
+        [
+          9,
+          9
+        ],
+        [
+          4,
+          13
+        ],
+        [
+          20,
+          11
+        ],
+        [
+          10,
+          3
+        ],
+        [
+          3,
+          8
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-101",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          9,
+          14
+        ],
+        [
+          23,
+          9
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          18,
+          14
+        ],
+        [
+          26,
+          2
+        ],
+        [
+          14,
+          12
+        ],
+        [
+          8,
+          16
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-102",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          29,
+          16
+        ],
+        [
+          21,
+          8
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-103",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          16,
+          11
+        ],
+        [
+          10,
+          3
+        ],
+        [
+          19,
+          16
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          23,
+          7
+        ],
+        [
+          27,
+          12
+        ],
+        [
+          16,
+          7
+        ],
+        [
+          24,
+          13
+        ],
+        [
+          5,
+          8
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-104",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          7,
+          5
+        ],
+        [
+          19,
+          4
+        ],
+        [
+          23,
+          6
+        ],
+        [
+          0,
+          16
+        ],
+        [
+          10,
+          4
+        ],
+        [
+          27,
+          5
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          19,
+          11
+        ],
+        [
+          6,
+          14
+        ],
+        [
+          18,
+          6
+        ],
+        [
+          23,
+          17
+        ],
+        [
+          23,
+          7
+        ],
+        [
+          16,
+          9
+        ],
+        [
+          10,
+          17
+        ],
+        [
+          27,
+          5
+        ],
+        [
+          14,
+          15
+        ],
+        [
+          13,
+          2
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-105",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          18,
+          7
+        ],
+        [
+          26,
+          5
+        ],
+        [
+          9,
+          2
+        ],
+        [
+          31,
+          16
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          0,
+          9
+        ],
+        [
+          20,
+          4
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-106",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          10,
+          4
+        ],
+        [
+          0,
+          17
+        ],
+        [
+          30,
+          15
+        ],
+        [
+          12,
+          9
+        ],
+        [
+          13,
+          11
+        ],
+        [
+          15,
+          10
+        ],
+        [
+          11,
+          12
+        ],
+        [
+          22,
+          9
+        ],
+        [
+          16,
+          9
+        ],
+        [
+          25,
+          12
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-107",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          0,
+          8
+        ],
+        [
+          8,
+          17
+        ],
+        [
+          29,
+          9
+        ],
+        [
+          0,
+          13
+        ],
+        [
+          15,
+          4
+        ],
+        [
+          22,
+          4
+        ],
+        [
+          16,
+          16
+        ],
+        [
+          21,
+          16
+        ],
+        [
+          1,
+          14
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-108",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          5,
+          5
+        ],
+        [
+          25,
+          9
+        ],
+        [
+          18,
+          6
+        ],
+        [
+          19,
+          2
+        ],
+        [
+          10,
+          4
+        ],
+        [
+          30,
+          11
+        ],
+        [
+          21,
+          10
+        ],
+        [
+          9,
+          6
+        ],
+        [
+          7,
+          10
+        ],
+        [
+          24,
+          12
+        ],
+        [
+          7,
+          17
+        ],
+        [
+          3,
+          14
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-109",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          25,
+          4
+        ],
+        [
+          3,
+          8
+        ],
+        [
+          2,
+          11
+        ],
+        [
+          7,
+          11
+        ],
+        [
+          24,
+          4
+        ],
+        [
+          8,
+          2
+        ],
+        [
+          25,
+          17
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          16,
+          5
+        ],
+        [
+          27,
+          17
+        ],
+        [
+          26,
+          16
+        ],
+        [
+          16,
+          7
+        ],
+        [
+          31,
+          7
+        ],
+        [
+          27,
+          6
+        ],
+        [
+          14,
+          2
+        ],
+        [
+          11,
+          15
+        ],
+        [
+          15,
+          8
+        ],
+        [
+          22,
+          13
+        ],
+        [
+          16,
+          15
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-110",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          15,
+          14
+        ],
+        [
+          25,
+          10
+        ],
+        [
+          7,
+          15
+        ],
+        [
+          2,
+          12
+        ],
+        [
+          4,
+          14
+        ],
+        [
+          14,
+          16
+        ],
+        [
+          16,
+          5
+        ],
+        [
+          18,
+          5
+        ],
+        [
+          24,
+          14
+        ],
+        [
+          29,
+          5
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-111",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          0,
+          16
+        ],
+        [
+          17,
+          16
+        ],
+        [
+          9,
+          2
+        ],
+        [
+          12,
+          4
+        ],
+        [
+          19,
+          10
+        ],
+        [
+          4,
+          17
+        ],
+        [
+          30,
+          10
+        ],
+        [
+          29,
+          2
+        ],
+        [
+          11,
+          2
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-112",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          10,
+          15
+        ],
+        [
+          16,
+          7
+        ],
+        [
+          29,
+          4
+        ],
+        [
+          30,
+          4
+        ],
+        [
+          0,
+          14
+        ],
+        [
+          31,
+          3
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          10,
+          2
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          14,
+          5
+        ],
+        [
+          5,
+          11
+        ],
+        [
+          12,
+          9
+        ],
+        [
+          10,
+          15
+        ],
+        [
+          8,
+          7
+        ],
+        [
+          12,
+          9
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-113",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          26,
+          3
+        ],
+        [
+          12,
+          11
+        ],
+        [
+          22,
+          12
+        ],
+        [
+          27,
+          8
+        ],
+        [
+          22,
+          6
+        ],
+        [
+          17,
+          14
+        ],
+        [
+          31,
+          6
+        ],
+        [
+          29,
+          16
+        ],
+        [
+          18,
+          14
+        ],
+        [
+          26,
+          15
+        ],
+        [
+          14,
+          14
+        ],
+        [
+          30,
+          5
+        ],
+        [
+          15,
+          3
+        ],
+        [
+          23,
+          3
+        ],
+        [
+          30,
+          12
+        ],
+        [
+          11,
+          17
+        ],
+        [
+          15,
+          3
+        ],
+        [
+          10,
+          6
+        ],
+        [
+          11,
+          14
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-114",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          4,
+          9
+        ],
+        [
+          0,
+          11
+        ],
+        [
+          2,
+          15
+        ],
+        [
+          13,
+          13
+        ],
+        [
+          10,
+          12
+        ],
+        [
+          27,
+          4
+        ],
+        [
+          14,
+          17
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-115",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          6,
+          4
+        ],
+        [
+          12,
+          12
+        ],
+        [
+          12,
+          9
+        ],
+        [
+          14,
+          13
+        ],
+        [
+          16,
+          8
+        ],
+        [
+          13,
+          8
+        ],
+        [
+          4,
+          12
+        ],
+        [
+          12,
+          6
+        ],
+        [
+          23,
+          9
+        ],
+        [
+          4,
+          12
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-116",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          2,
+          12
+        ],
+        [
+          25,
+          2
+        ],
+        [
+          11,
+          5
+        ],
+        [
+          14,
+          13
+        ],
+        [
+          25,
+          13
+        ],
+        [
+          11,
+          2
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-117",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          1,
+          2
+        ],
+        [
+          23,
+          9
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-118",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          17,
+          15
+        ],
+        [
+          19,
+          12
+        ],
+        [
+          13,
+          7
+        ],
+        [
+          25,
+          16
+        ],
+        [
+          24,
+          11
+        ],
+        [
+          28,
+          10
+        ],
+        [
+          0,
+          2
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-119",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          28,
+          3
+        ],
+        [
+          16,
+          9
+        ],
+        [
+          9,
+          7
+        ],
+        [
+          28,
+          5
+        ],
+        [
+          30,
+          8
+        ],
+        [
+          28,
+          2
+        ],
+        [
+          18,
+          9
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-120",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          23,
+          11
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          1,
+          8
+        ],
+        [
+          18,
+          13
+        ],
+        [
+          26,
+          3
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          29,
+          8
+        ],
+        [
+          28,
+          2
+        ],
+        [
+          3,
+          9
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-121",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          26,
+          5
+        ],
+        [
+          20,
+          10
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          14,
+          9
+        ],
+        [
+          6,
+          14
+        ],
+        [
+          13,
+          10
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          18,
+          8
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-122",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          12,
+          10
+        ],
+        [
+          21,
+          12
+        ],
+        [
+          1,
+          9
+        ],
+        [
+          4,
+          9
+        ],
+        [
+          24,
+          16
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          18,
+          6
+        ],
+        [
+          11,
+          16
+        ],
+        [
+          22,
+          7
+        ],
+        [
+          17,
+          5
+        ],
+        [
+          25,
+          3
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-123",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          26,
+          5
+        ],
+        [
+          28,
+          13
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          13,
+          11
+        ],
+        [
+          11,
+          3
+        ],
+        [
+          15,
+          12
+        ],
+        [
+          9,
+          6
+        ],
+        [
+          24,
+          8
+        ],
+        [
+          13,
+          3
+        ],
+        [
+          20,
+          5
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          27,
+          5
+        ],
+        [
+          0,
+          14
+        ],
+        [
+          28,
+          5
+        ],
+        [
+          10,
+          3
+        ],
+        [
+          1,
+          12
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-124",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          18,
+          3
+        ],
+        [
+          21,
+          17
+        ],
+        [
+          17,
+          11
+        ],
+        [
+          31,
+          2
+        ],
+        [
+          25,
+          9
+        ],
+        [
+          20,
+          4
+        ],
+        [
+          22,
+          8
+        ],
+        [
+          28,
+          15
+        ],
+        [
+          22,
+          6
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-125",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          14,
+          15
+        ],
+        [
+          21,
+          2
+        ],
+        [
+          0,
+          14
+        ],
+        [
+          19,
+          16
+        ],
+        [
+          22,
+          11
+        ],
+        [
+          15,
+          10
+        ],
+        [
+          12,
+          12
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          2,
+          13
+        ],
+        [
+          28,
+          6
+        ],
+        [
+          31,
+          11
+        ],
+        [
+          31,
+          10
+        ],
+        [
+          14,
+          6
+        ],
+        [
+          20,
+          12
+        ],
+        [
+          30,
+          8
+        ],
+        [
+          6,
+          3
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-126",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          11,
+          2
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          11,
+          10
+        ],
+        [
+          26,
+          12
+        ],
+        [
+          20,
+          9
+        ],
+        [
+          8,
+          16
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          25,
+          10
+        ]
+      ]
+    },
+    "expected": null
+  },
+  {
+    "id": "state-portable-2-127",
+    "family": "modulus-changing-state",
+    "text": "aplique state-reserve-2 em dados",
+    "bindings": {
+      "dados": [
+        [
+          1,
+          3
+        ],
+        [
+          0,
+          16
+        ],
+        [
+          25,
+          4
+        ],
+        [
+          30,
+          12
+        ],
+        [
+          11,
+          6
+        ]
+      ]
+    },
+    "expected": null
+  }
+]

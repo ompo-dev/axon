@@ -1,0 +1,27 @@
+{
+  "schema":"axon-public-ordered-context/v1",
+  "source":"MASSIVE 1.1 pt-PT, allowed train/development only",
+  "source_sha256":"af89ce740b98e8fe73a0fb3ba69a296837910f037e954b87409ef41d467d3da0",
+  "learner":"lexical-encoder-v1",
+  "training_timeout_ms":1800000,
+  "policies":[
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true,"mean_token_loss":true},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":0,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true,"mean_token_loss":true},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":0,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true,"mean_token_loss":true,"ordered_context":true,"freeze_ordered_context":true},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":0,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true,"mean_token_loss":true,"ordered_context":true},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true,"mean_token_loss":true,"ordered_context":true,"freeze_ordered_context":true},
+    {"seed":19374611,"vocabulary":4096,"characters":0,"dimensions":16,"hidden":64,"epochs":32,"learning_rate":0.04,"balanced":true,"minimum_margin":1,"input_dropout":0.3,"relative_regions":true,"mean_token_loss":true,"ordered_context":true}
+  ],
+  "control_number_sha256":"824abdd1360511a06060e57aafc3e6529697120b9075efdf1318e16ce01b5c17",
+  "expected_numbers":{"0":"824abdd1360511a06060e57aafc3e6529697120b9075efdf1318e16ce01b5c17"},
+  "representation":"AXSQ0011: two width-D Elman recurrences over learned word vectors, tanh(x+Rh+b), summed with 1/sqrt(2). Intent reads one contextual endpoint per seven regions plus ordinary lexical sets. Existing token context/head remains. Adds 2D^2 coefficients and 2D biases. No LSTM, attention, full semantic parser or pretrained weights.",
+  "training":"Context input word vectors held fixed during each sentence, direct and BPTT gradients accumulated before their update. Softmax/mixing heads are online. Optional mean-token loss divides main BIO and auxiliary POS rates by sentence length; intent/BIO context step averaged as two objectives. Shared recurrent/input step clipped together before bounded updates. Frozen recurrence keeps R/b fixed but backpropagates into lexical vectors. Initialization RNG independent of primary shuffle/dropout; changing hidden depth changes the ordinary initialization RNG history, explicitly not a paired same-order comparison across depths.",
+  "controls":"0 versus 1 isolates mean-token objective weighting. 1 versus 2 changes mixing depth. 2/3/4 and 1/5/6 compare ordinary versus contextual encoders at fixed depth; contextual readout and sentence input update schedule also differ from ordinary. Frozen/learned recurrence shares all other rules within depth. No auxiliary corpus or labels enter these seven fits. Record all failures; do not tune after development scores.",
+  "preflight":"Synthetic 28-word within-region permutation plus copied unseen value initially failed with an extra hidden layer, including after loss/readout/input-schedule changes; linear readout with 32-word lexicon, trained UNK, passed. Those negative logs stay evidence; synthetic success is not an external language score or proof that one change alone caused success. Gradient tests cover input/R/b and combined direct/recurrent word gradients, plus frozen weights, numeric birth and repaired payload flags.",
+  "selection":"Consumed-development exact count, then deployed matrix coefficient count, then index. Reserved workers and original test untouched. No result in this study substitutes any of the seven M1 gates.",
+  "scope":"Bounded established recurrent representation adapted to the existing engine. No new page/genome/receipt/work limits. Contextual prediction chunks32 versus ordinary128; process timings from those batches are not directly comparable. Training has bounded data,32 epochs,30-minute child timeout. No energy/RSS assumption, tool authority or M1/M2 promotion.",
+  "method_source":"https://aclanthology.org/N18-2050/",
+  "promotion":false,
+  "m1_complete":false
+}
