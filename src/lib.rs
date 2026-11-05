@@ -6,12 +6,12 @@ mod behavior_cli;
 pub mod behavior_lab;
 pub mod benchmark;
 pub mod capability;
-#[cfg(feature = "curriculum")]
-pub mod cognitive_cycle;
 #[cfg(feature = "text-workflows")]
 pub mod casework;
 pub mod change;
 pub mod cli;
+#[cfg(feature = "curriculum")]
+pub mod cognitive_cycle;
 #[cfg(feature = "text-workflows")]
 pub mod constructive_lab;
 pub mod cumulative;
@@ -26,6 +26,8 @@ pub mod delta_forge;
 pub mod demand;
 #[cfg(feature = "text-workflows")]
 mod demand_cli;
+#[cfg(feature = "curriculum")]
+pub mod development;
 pub mod episodic;
 mod episodic_cli;
 pub mod experience;
@@ -83,12 +85,12 @@ pub use benchmark::{
     BreakEven, LiveBenchContract,
 };
 pub use capability::{Authority, Capability, CapabilityGate, Effect, Feasibility, GateFailure};
-#[cfg(feature = "curriculum")]
-pub use cognitive_cycle::{CognitiveCycle, CognitiveCycleError, CognitiveReceipt, ReplayReceipt};
 pub use change::{
     ChangeError, ChangeStructure, IncrementalOp, ModularU64, Replace, ReplaceDelta, SumFold,
     VectorU64,
 };
+#[cfg(feature = "curriculum")]
+pub use cognitive_cycle::{CognitiveCycle, CognitiveCycleError, CognitiveReceipt, ReplayReceipt};
 pub use delta::{
     ChangeSupport, CostEstimate, DeltaClass, ExecutionStrategy, IncrementalizabilityAnalyzer,
     ObservationFrontier, OperatorKind, PointUpdate, SumState, coalesce_adjacent_at_frontier,
@@ -103,6 +105,11 @@ pub use delta_forge::{
     RebuildPolicy, RuntimeGuardError, RuntimeGuards, SEMANTIC_ARTIFACT_VERSION, SemanticArtifact,
     SemanticArtifactError, SemanticArtifactHash, SynthesisBudget, SynthesisTrace, UpdateRule,
     VarianceCache,
+};
+#[cfg(feature = "curriculum")]
+pub use development::{
+    DevelopmentBudget, DevelopmentError, DevelopmentReport, DevelopmentRun, DevelopmentStop,
+    DevelopmentTask, run_development,
 };
 pub use episodic::{
     ActionSummary, BeliefResult, BeliefStatus, Episode, EpisodeData, EpisodeError, EpisodeLimits,

@@ -1,13 +1,14 @@
 # AXON: Documento Mestre
 
-Versao documental: 64. Auditoria de fechamento do M1, reserva publica e
+Versao documental: 65. Controlador de desenvolvimento, reserva independente e
 pesquisa arquitetural implementável
 implementável.
 clarificacao estrutural confirmado: 2026-11-04.
 A secao14.54 registra24 funcoes aprendidas,384 entradas novas e heranca por seed,
 com contraexemplos, limites de classe e comparacao ao motor anterior.
 A campanha BDH anterior continua em14.52; pesquisa primaria ETH em14.53.
-M1 permanece aberto; nao houve novo treino de linguagem nem inicio de M2.
+M1 permanece aberto; a rodada 14.63 adiciona treino plastico com reserva
+independente, mas nao inicia M2.
 Referencia funcional documentada: v20 (consolidacao lexical e arquivos no M1); M0 v17 validado no escopo prospectivo v2.
 Estado: visao atual, inventario do prototipo, historia e plano de pesquisa.
 Este e o documento canonico do projeto. README e ui/README sao apenas entradas.
@@ -90,7 +91,8 @@ nao melhoram a compreensao publica. Colisoes de estados medidas; M1 REPROVADO.
 Secao14.51 pesquisa BDH/BDH-CQ e distingue artigo, codigo aberto e sistema privado.
 14.13.24 revisa o caminho M0--M10: memoria contextual plastica, trabalho latente,
 consolidacao e evolucao com controles. Propostas, nao capacidades ja entregues.
-Treinos/implementacao pausados a pedido em2026-10-28; esta rodada altera so este documento.
+14.63 registra o controlador de desenvolvimento e campanhas completas de matematica
+e relacoes; os negativos continuam vinculantes e nenhum resultado parcial fecha M1.
 
 Nao confundir intencao, implementacao, resultado historico e capacidade ainda
 nao demonstrada. O anexo preserva os documentos substituidos integralmente,
@@ -169,6 +171,7 @@ execucao. Uma mudanca neste texto nao cria uma capacidade no AXON.
 - [14.51 Pesquisa BDH e decisao de arquitetura](#pesquisa-bdh)
 - [14.61 Campanha AXSQ0016: sinais de fronteira](#campanha-axsq0016)
 - [14.62 Ciclo cognitivo causal: experiencia e plasticidade](#cognitive-cycle)
+- [14.63 Controlador de desenvolvimento e campanhas independentes](#development-controller)
 - [15. Pesquisa e referencias](#pesquisa)
 - [16. Manutencao desta fonte de verdade](#manutencao)
 - [17. Consolidacao, recuperacao e limites](#consolidacao)
@@ -10312,6 +10315,48 @@ benchmark online ainda repete a mesma chave e alvo; nao mede generalizacao para
 uma entrada nova nem compreensao de linguagem/matematica. O replay persiste os
 vetores sob limite e reconstroi somente outcomes validados do mesmo contexto;
 nao e ainda um armazenamento semantico geral.
+
+<a id="development-controller"></a>
+#### 14.63 Controlador De Desenvolvimento E Campanhas Independentes (2026-11-05)
+
+Esta rodada transformou o ciclo plastico em uma fronteira reutilizavel de
+treinamento, em `src/development.rs`. `run_development` recebe tarefas em bytes
+vetorizados, ordena cada passagem pelo maior erro atual, aprende apenas com o
+alvo fornecido pelo avaliador e mede uma reserva que nunca entra no treino.
+IDs repetidos, chaves duplicadas, sobreposicao treino/reserva, dimensoes erradas,
+valores nao finitos e cotas excessivas falham antes de qualquer mutacao. O
+controlador nao usa a propria previsao como verdade: sem oraculo independente,
+nao existe autoaprendizado confiavel, apenas auto-confirmacao.
+
+O contrato `tests/development_contracts.rs` passou **3/3**: convergencia em uma
+invariancia de escala sem vazamento, parada honesta em plateau e recusas de
+duplicatas antes de gravar episodios. Os contratos anteriores continuam
+passando: ciclo cognitivo **6/6** e sessao estrutural **11/11**; Clippy com
+`-D warnings` tambem passou.
+
+Campanha matematica real, usando `axon-uic-evolution-lab`, seed fixa
+`82641973`, modo `balanced`, sete familias e 1.000 casos de admissao por
+familia: **7/7** admitidas e **7.000/7.000** corretas. O resultado aprendeu
+programas compostos para quadrado, produto, hipotenusa, raiz da formula
+quadratica, selecao de raiz e distancia 3D. A campanha forneceu operadores,
+gramatica, leitura, busca local e criterio de admissao; portanto demonstra
+inducao/programacao numerica delimitada, nao matematica aberta nem autonomia.
+Recibo em `.axon-memory/development-20261105-math/summary.txt`.
+
+Campanha relacional com `axon-uic-nursery-lab`: 32.768 seeds unicas, sem
+repeticao, ate exaurir o espaco de 15 loci da biblioteca fixa. O melhor chegou
+a **119/124**, mas nao houve vencedor. O primeiro lote deu 36/124, a
+continuacao chegou a 119/124 e mais geracoes nao moveram o resultado. Isso
+fecha um diagnostico: gerar/mutar mais DNA nao cria a representacao semantica
+que falta nos cinco casos. Recibo final em
+`.axon-memory/development-20261105-relational-cap/result.txt`.
+
+Decisao: nao aumentar população, limites ou tamanho da seed para mascarar o
+plateau. O proximo experimento deve identificar os cinco contraexemplos,
+aprender uma representacao relacional composicional com exemplos independentes,
+ligar essa representacao ao `DevelopmentTask`/verificador e reexecutar a mesma
+reserva. So depois de superar 124/124, com novos autores e templates, a
+capacidade pode ser promovida. M1 continua **ABERTO E NAO CERTIFICADO**.
 
 <a id="pesquisa"></a>
 ## 15. Pesquisa E Referencias
