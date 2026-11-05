@@ -270,6 +270,9 @@ fn zero(n: &usize) -> bool {
 fn disabled(flag: &bool) -> bool {
     !*flag
 }
+// shortcut: these feature flags are part of the encoded format identity;
+// bundling them would obscure the one-to-one mapping used by the decoder.
+#[allow(clippy::too_many_arguments)]
 fn format_magic(
     word_grams: bool,
     split_heads: bool,

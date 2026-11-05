@@ -382,6 +382,8 @@ impl Session {
             emit,
         )
     }
+    // shortcut: preserve the public session API used by the observer and UI.
+    #[allow(clippy::too_many_arguments)]
     pub fn turn_with_data_alternative(
         &mut self,
         text: &str,
@@ -402,6 +404,7 @@ impl Session {
             emit,
         )
     }
+    #[allow(clippy::too_many_arguments)]
     fn turn_with_data_inner(
         &mut self,
         text: &str,

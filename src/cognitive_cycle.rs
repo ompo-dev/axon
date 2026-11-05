@@ -144,6 +144,9 @@ impl CognitiveCycle {
     /// is first applied to a clone, then the outcome is appended to the journal;
     /// only after that append succeeds does the plastic state become visible.
     /// Rejected observations remain evidence but do not train the state.
+    // shortcut: preserve the stable transactional API; refactoring these fields would break
+    // existing observers and journals without improving the trust boundary.
+    #[allow(clippy::too_many_arguments)]
     pub fn observe(
         &mut self,
         episodes: &mut EpisodeStore,
@@ -252,10 +255,12 @@ fn encode_vector(values: &[f32]) -> String {
         .collect()
 }
 
+type ReplayVectors = Option<(Vec<f32>, Vec<f32>)>;
+
 fn replay_vectors(
     episode: &Episode,
     context: &str,
-) -> Result<Option<(Vec<f32>, Vec<f32>)>, CognitiveCycleError> {
+) -> Result<ReplayVectors, CognitiveCycleError> {
     let EpisodeData::Outcome {
         context: episode_context,
         action,
@@ -284,6 +289,8 @@ fn decode_field(detail: &str, name: &str) -> Result<Vec<f32>, CognitiveCycleErro
         return Err(CognitiveCycleError::Invalid("replay vector bounds"));
     }
     let mut result = Vec::with_capacity(value.len() / 8);
+    // Keep compatibility with the minimum supported Rust toolchain.
+    #[allow(clippy::chunks_exact_to_as_chunks)]
     for word in value.as_bytes().chunks_exact(8) {
         let word = std::str::from_utf8(word)
             .map_err(|_| CognitiveCycleError::Invalid("replay vector encoding"))?;

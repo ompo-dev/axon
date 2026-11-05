@@ -136,7 +136,7 @@ fn duplicate_keys_and_ids_are_rejected_before_training() {
         "development-scope",
         "development/rejects",
         &mut episodes,
-        &[same_key.clone()],
+        std::slice::from_ref(&same_key),
         &[duplicate_id],
         DevelopmentBudget::default(),
     ) {
