@@ -1,8 +1,7 @@
 # AXON: Documento Mestre
 
-Versao documental: 65. Controlador de desenvolvimento, reserva independente e
-pesquisa arquitetural implementável
-implementável.
+Versao documental: 66. Controlador de desenvolvimento, reserva independente e
+pesquisa arquitetural implementável.
 clarificacao estrutural confirmado: 2026-11-04.
 A secao14.54 registra24 funcoes aprendidas,384 entradas novas e heranca por seed,
 com contraexemplos, limites de classe e comparacao ao motor anterior.
@@ -93,6 +92,8 @@ Secao14.51 pesquisa BDH/BDH-CQ e distingue artigo, codigo aberto e sistema priva
 consolidacao e evolucao com controles. Propostas, nao capacidades ja entregues.
 14.63 registra o controlador de desenvolvimento e campanhas completas de matematica
 e relacoes; os negativos continuam vinculantes e nenhum resultado parcial fecha M1.
+14.64 torna o controlador reproduzivel por plano JSON, atualiza a entrada
+operacional e adiciona Docker/CI sem alterar os limites de capacidade.
 
 Nao confundir intencao, implementacao, resultado historico e capacidade ainda
 nao demonstrada. O anexo preserva os documentos substituidos integralmente,
@@ -172,6 +173,7 @@ execucao. Uma mudanca neste texto nao cria uma capacidade no AXON.
 - [14.61 Campanha AXSQ0016: sinais de fronteira](#campanha-axsq0016)
 - [14.62 Ciclo cognitivo causal: experiencia e plasticidade](#cognitive-cycle)
 - [14.63 Controlador de desenvolvimento e campanhas independentes](#development-controller)
+- [14.64 Campanhas JSON, Docker e CI](#development-operations)
 - [15. Pesquisa e referencias](#pesquisa)
 - [16. Manutencao desta fonte de verdade](#manutencao)
 - [17. Consolidacao, recuperacao e limites](#consolidacao)
@@ -10357,6 +10359,32 @@ aprender uma representacao relacional composicional com exemplos independentes,
 ligar essa representacao ao `DevelopmentTask`/verificador e reexecutar a mesma
 reserva. So depois de superar 124/124, com novos autores e templates, a
 capacidade pode ser promovida. M1 continua **ABERTO E NAO CERTIFICADO**.
+
+<a id="development-operations"></a>
+#### 14.64 Campanhas JSON, Docker E CI (2026-11-05)
+
+O controlador de desenvolvimento agora possui uma fronteira operacional
+reutilizavel. `DevelopmentPlan`/`run_plan` e o binario
+`axon-uic-development-lab` leem um plano `axon-development/v1` com genes,
+orcamento, tarefas de treino e reserva. O plano pode ser alterado sem editar o
+motor, enquanto o journal continua separado e persistente. O relatorio em JSON
+preserva parada, passes, passos de treino, erros inicial/final e acertos da
+reserva.
+
+O contrato continua o mesmo: IDs/chaves duplicados, sobreposicao treino-reserva,
+dimensoes erradas, valores nao finitos e cotas excessivas falham antes da
+primeira mutacao. A reserva nunca e professora e a previsao nunca vira rotulo.
+O fixture executavel e `evals/fixtures/development-scale-v1.json`.
+
+O README foi ampliado para explicar seed, motor, estado, journal, matematica,
+decisoes sobre tokens, comparacoes e limites sem promover capacidades nao
+medidas. `Dockerfile` empacota o core Rust, a UI Bun e o servidor do observatorio.
+`.github/workflows/ci.yml` verifica o core, contratos, Clippy, UI e build da
+imagem; deploy nao e automatico. `LICENSE` e metadados de palavras-chave foram
+adicionados para tornar o repositorio distribuivel.
+
+Isso melhora reproducibilidade e engenharia, nao cria AGI. O platô relacional
+119/124 continua vigente e M1 permanece aberto.
 
 <a id="pesquisa"></a>
 ## 15. Pesquisa E Referencias

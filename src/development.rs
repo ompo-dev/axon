@@ -6,6 +6,7 @@
 
 use crate::structural::sequence::lexical_encoder::synaptic::Model;
 use crate::{CognitiveCycle, CognitiveCycleError, EpisodeStore};
+use serde::{Deserialize, Serialize};
 use std::{collections::BTreeSet, fmt};
 
 const MAX_TASKS: usize = 8_192;
@@ -41,7 +42,8 @@ impl From<CognitiveCycleError> for DevelopmentError {
     }
 }
 
-#[derive(Clone, Debug, PartialEq)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct DevelopmentTask {
     id: String,
     key: Vec<f32>,
@@ -81,7 +83,8 @@ impl DevelopmentTask {
     }
 }
 
-#[derive(Clone, Copy, Debug, PartialEq)]
+#[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct DevelopmentBudget {
     pub max_passes: usize,
     pub tolerance: f32,
@@ -114,13 +117,15 @@ impl DevelopmentBudget {
     }
 }
 
-#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "kebab-case")]
 pub enum DevelopmentStop {
     Converged,
     PassLimit,
 }
 
-#[derive(Clone, Debug, PartialEq)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct DevelopmentReport {
     pub stop: DevelopmentStop,
     pub converged: bool,
@@ -139,6 +144,36 @@ pub struct DevelopmentReport {
 pub struct DevelopmentRun {
     cycle: CognitiveCycle,
     report: DevelopmentReport,
+}
+
+/// A portable, auditable developmental campaign.
+///
+/// The JSON is a curriculum description, not a model checkpoint: it contains
+/// the hereditary synaptic genes, oracle-labelled training tasks and an
+/// independent reserve. Personal episodes stay in the journal supplied to
+/// `run_plan` and are never embedded in the plan.
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct DevelopmentPlan {
+    pub schema: String,
+    pub scope: String,
+    pub context: String,
+    pub genes: crate::structural::sequence::lexical_encoder::synaptic::Genes,
+    pub budget: DevelopmentBudget,
+    pub training: Vec<DevelopmentTask>,
+    pub reserve: Vec<DevelopmentTask>,
+}
+
+impl DevelopmentPlan {
+    pub fn validate(&self) -> Result<(), DevelopmentError> {
+        if self.schema != "axon-development/v1" {
+            return Err(DevelopmentError::Invalid("development plan schema"));
+        }
+        if self.scope.is_empty() || self.context.is_empty() {
+            return Err(DevelopmentError::Invalid("development plan scope/context"));
+        }
+        Ok(())
+    }
 }
 
 impl DevelopmentRun {
@@ -258,6 +293,27 @@ pub fn run_development(
         state_position: cycle.state_position(),
     };
     Ok(DevelopmentRun { cycle, report })
+}
+
+/// Execute a JSON campaign against a fresh or resumable episode journal.
+pub fn run_plan(
+    plan: &DevelopmentPlan,
+    journal: impl AsRef<std::path::Path>,
+) -> Result<DevelopmentRun, DevelopmentError> {
+    plan.validate()?;
+    let model = Model::new(plan.genes).map_err(CognitiveCycleError::from)?;
+    let (mut episodes, _) = EpisodeStore::open(journal)
+        .map_err(CognitiveCycleError::from)
+        .map_err(DevelopmentError::Cycle)?;
+    run_development(
+        model,
+        &plan.scope,
+        &plan.context,
+        &mut episodes,
+        &plan.training,
+        &plan.reserve,
+        plan.budget,
+    )
 }
 
 fn validate_tasks(

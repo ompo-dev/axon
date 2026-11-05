@@ -6,6 +6,8 @@ rust-version = "1.89"
 autobins = false
 description = "AXON Universal Intelligence Calculus — certified adaptive cognition"
 license = "MIT"
+keywords = ["adaptive-ai", "continual-learning", "episodic-memory", "neuro-symbolic", "program-synthesis"]
+categories = ["algorithms", "science"]
 
 [[bin]]
 name = "axon-uic"
@@ -85,6 +87,11 @@ curriculum = ["text-workflows", "dep:serde", "dep:serde_json"]
 [[bin]]
 name = "axon-uic-curriculum-lab"
 path = "src/bin/axon_uic_curriculum_lab.rs"
+required-features = ["curriculum"]
+
+[[bin]]
+name = "axon-uic-development-lab"
+path = "src/bin/axon_uic_development_lab.rs"
 required-features = ["curriculum"]
 
 [[bin]]

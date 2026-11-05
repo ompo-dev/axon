@@ -2,8 +2,8 @@
 
 use axon_uic::structural::sequence::lexical_encoder::synaptic::{Genes, Model, Position, Rule};
 use axon_uic::{
-    DevelopmentBudget, DevelopmentError, DevelopmentStop, DevelopmentTask, EpisodeStore,
-    run_development,
+    DevelopmentBudget, DevelopmentError, DevelopmentPlan, DevelopmentStop, DevelopmentTask,
+    EpisodeStore, run_development, run_plan,
 };
 use std::{
     fs,
@@ -167,5 +167,30 @@ fn duplicate_keys_and_ids_are_rejected_before_training() {
         DevelopmentError::Invalid("training/reserve key overlap")
     ));
     assert_eq!(episodes.len(), 0);
+    cleanup(&file);
+}
+
+#[test]
+fn json_plan_keeps_genes_and_reserve_boundary_explicit() {
+    let file = path("plan");
+    let plan = DevelopmentPlan {
+        schema: "axon-development/v1".into(),
+        scope: "development-scope".into(),
+        context: "development/plan".into(),
+        genes: model().genes(),
+        budget: DevelopmentBudget {
+            max_passes: 16,
+            tolerance: 1e-4,
+            ..DevelopmentBudget::default()
+        },
+        training: vec![task("train", 1.0, 0.8)],
+        reserve: vec![task("heldout", 3.0, 0.8)],
+    };
+    let encoded = serde_json::to_vec(&plan).unwrap();
+    let decoded: DevelopmentPlan = serde_json::from_slice(&encoded).unwrap();
+    assert_eq!(decoded, plan);
+    let run = run_plan(&decoded, &file).unwrap();
+    assert_eq!(run.report().stop, DevelopmentStop::Converged);
+    assert_eq!(run.report().final_reserve_correct, 1);
     cleanup(&file);
 }

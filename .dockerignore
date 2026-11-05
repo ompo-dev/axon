@@ -1,0 +1,13 @@
+.git
+.github
+.axon-memory
+.axon-artifacts
+.ecc
+target
+ui/node_modules
+ui/dist
+ui/test-results
+evals/fixtures/**/*.zip
+*.log
+*.tmp
+axon-legacy-artifacts-*

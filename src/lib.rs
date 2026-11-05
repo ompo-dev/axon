@@ -108,8 +108,8 @@ pub use delta_forge::{
 };
 #[cfg(feature = "curriculum")]
 pub use development::{
-    DevelopmentBudget, DevelopmentError, DevelopmentReport, DevelopmentRun, DevelopmentStop,
-    DevelopmentTask, run_development,
+    DevelopmentBudget, DevelopmentError, DevelopmentPlan, DevelopmentReport, DevelopmentRun,
+    DevelopmentStop, DevelopmentTask, run_development, run_plan,
 };
 pub use episodic::{
     ActionSummary, BeliefResult, BeliefStatus, Episode, EpisodeData, EpisodeError, EpisodeLimits,
