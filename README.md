@@ -195,6 +195,17 @@ de passes/trabalho/memória e parada `converged` ou `pass-limit`.
 
 Plano atual: `evals/fixtures/development-scale-v1.json`.
 
+### Superfície natural delimitada (rodada atual)
+
+`src/semantic.rs` agora possui um codificador de superfície limitado para
+português: normaliza acentos e delimitadores, reconhece números escritos,
+separa cláusulas narrativas, resolve pronomes apenas quando o contexto mantém
+uma referência auditável e traduz variações como `guardava`, `possuía`,
+`entregou`, `gastou` e `ficou` para as mesmas regras relacionais aprendidas.
+Isso não adiciona respostas prontas nem transforma o núcleo em uma LLM: a seed
+continua fornecendo as regras, o estado continua separado da seed e entradas
+fora do contrato continuam sendo recusadas.
+
 ## 9. Resultados experimentais
 
 ### Matemática composta
@@ -233,6 +244,22 @@ Não comprova linguagem, raciocínio geral ou aprendizado sem supervisão.
 
 O negativo é vinculante: mais população não resolveu os cinco contraexemplos.
 
+### Auditoria independente da superfície
+
+O fixture público `evals/fixtures/relational-v2-independent.tsv` contém 28
+linhas (15 positivas e 13 negativas). Com a biblioteca relacional aprendida e
+o novo front-end limitado, a suíte passou **28/28**: respostas positivas
+corretas e recusas negativas com o motivo esperado. A suíte de contratos
+semânticos passou **15/15**. Esse número mede um contrato fechado, não
+compreensão livre, fluência em português ou os 124 desafios da campanha
+evolutiva anterior; os 119/124 continuam sendo o melhor resultado dessa
+campanha de seleção de seeds.
+
+O front-end também passou cinco probes naturais de português envolvendo
+transferências, pronomes, hipotenusa, equação linear e preço por unidade. A
+normalização é intencionalmente conservadora: não inventa fatos, não aceita
+unidades desconhecidas e não resolve referências que permaneçam ambíguas.
+
 ### Linguagem histórica
 
 | Avaliação documentada | Respostas exatas | Intenções corretas | Cobertura |
@@ -247,7 +274,9 @@ significa saída ou recusa registrada, não acerto total.
 
 - CognitiveCycle: 6/6;
 - desenvolvimento: 4/4;
-- bindings relacionais: 3/3;
+- contratos semânticos: 15/15, incluindo a auditoria independente 28/28;
+- bindings relacionais: 2/2;
+- nursery: 11/11;
 - sessão estrutural: 11/11;
 - UI: 23/23;
 - Clippy com `-D warnings`: aprovado localmente.
@@ -312,7 +341,7 @@ Uma capacidade só pode ser promovida quando demonstrar:
 | Marco | Meta | Estado |
 | --- | --- | --- |
 | M0 | Seed, runtime, memória e integridade | Validado no escopo delimitado |
-| M1 | Texto, matemática, composição e transferência | Aberto; 119/124 |
+| M1 | Texto, matemática, composição e transferência | Aberto; superfície 28/28; evolução 119/124 |
 | M2 | Representações composicionais novas | Próximo após M1 |
 | M3 | Transferência entre domínios | Planejado |
 | M4 | Currículo adaptativo e aquisição ativa | Planejado |
@@ -416,6 +445,5 @@ Tags: `adaptive-ai`, `artificial-intelligence`, `cognitive-architecture`,
 Distribuído sob [MIT](LICENSE). O documento mestre preserva referências a JEPA,
 Mamba, BDH, programação por síntese, evolução, currículos e memória episódica.
 Resultados de outros sistemas não são atribuídos ao AXON.
-
 Para histórico completo, erros conhecidos, contratos e decisões de pesquisa,
 leia [docs/AXON.md](docs/AXON.md).
